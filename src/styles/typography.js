@@ -1,26 +1,20 @@
 import * as mq from './mediaQueries'
 
 import {
-	MaterialIcons,
-	DinProLight,
-	DinProRegular,
-	DinProMedium,
-	DinProBold,
-	DinProBlack,
-	ProximaNovaRegular,
-	ProximaNovaBold
+	MaterialIcons, // TODO
+	SuisseIntlLight,
+	SuisseIntlRegular,
+	SuisseIntlSemiBold,
+	LyonDisplayLight
 } from './fonts'
 
 // Place global Typography in this file
-export const titleFontFamily = `${ DinProRegular }, -apple-system, Helvetica, sans-serif`
-export const titleFontFamilyBold = `${ DinProBold }, -apple-system, Helvetica, sans-serif`
+export const titleFontFamily = `${ LyonDisplayLight }, -apple-system, Helvetica, sans-serif`
 
 // supply a different font family if necessary
-export const bodyFontFamily = `${ DinProRegular }, -apple-system, Helvetica, sans-serif`
-export const bodyFontFamilyBold = `${ DinProBold }, -apple-system, Helvetica, sans-serif`
-
-export const smallFontFamily = `${ ProximaNovaRegular }, -apple-system, Helvetica, sans-serif`
-export const smallFontFamilyBold = `${ ProximaNovaBold }, -apple-system, Helvetica, sans-serif`
+export const bodyFontFamilyLight = `${ SuisseIntlLight }, -apple-system, Helvetica, sans-serif`
+export const bodyFontFamilyRegular = `${ SuisseIntlRegular }, -apple-system, Helvetica, sans-serif`
+export const bodyFontFamilyBold = `${ SuisseIntlSemiBold }, -apple-system, Helvetica, sans-serif`
 
 export const linearInterpolation = (maxInput, minInput, maxWidth, minWidth) => {
 	let slope = (maxInput - minInput) / (maxWidth - minWidth)
@@ -44,18 +38,25 @@ export const body = `
 	${ responsiveStyles('font-size', 22, 18, 18, 16) }
 	letter-spacing: 0.33px;
 	line-height: 1.6;
-	font-family: ${ bodyFontFamily };
+	font-family: ${ bodyFontFamilyRegular };
 `
-export const bodySmall = `
+export const bodyLight = `
 	${ responsiveStyles('font-size', 18, 14, 12, 12) }
 	letter-spacing: 0.33px;
 	line-height: 1.6;
-	font-family: ${ smallFontFamily };
+	font-family: ${ bodyFontFamilyLight };
+`
+
+export const bodyBold = `
+	${ responsiveStyles('font-size', 13, 13, 13, 13) }
+	font-family: ${ bodyFontFamilyBold };
+	line-height: ${ 26 / 14 };
+	letter-spacing: ${ 0.33 / 14 }em;
 `
 
 export const h1 = `
 	${ responsiveStyles('font-size', 66, 60, 30, 30) }
-	font-family: ${ titleFontFamilyBold };
+	font-family: ${ titleFontFamily };
 	font-weight: normal;
 	letter-spacing: 0.33px;
 	line-height: 1.2;
@@ -63,7 +64,7 @@ export const h1 = `
 
 export const h2 = `
 	${ responsiveStyles('font-size', 50, 50, 30, 30) }
-	font-family: ${ titleFontFamilyBold };
+	font-family: ${ titleFontFamily };
 	font-weight: normal;
 	line-height: 1.125;
 	letter-spacing: 0.33px;
@@ -71,7 +72,7 @@ export const h2 = `
 
 export const h3 = `
 	${ responsiveStyles('font-size', 40, 40, 20, 20) }
-	font-family: ${ titleFontFamilyBold };
+	font-family: ${ titleFontFamily };
 	font-weight: normal;
 	line-height: 1.16667;
 	letter-spacing: 0.33px;
@@ -79,7 +80,7 @@ export const h3 = `
 
 export const h4 = `
 	${ responsiveStyles('font-size', 26, 26, 18, 18) }
-	font-family: ${ titleFontFamilyBold };
+	font-family: ${ titleFontFamily };
 	font-weight: 500;
 	line-height: 1.25;
 	letter-spacing: 0.33px;
@@ -87,14 +88,14 @@ export const h4 = `
 
 export const h5 = `
 	${ responsiveStyles('font-size', 20, 20, 16, 16) }
-	font-family: ${ titleFontFamilyBold };
+	font-family: ${ titleFontFamily };
 	font-weight: 500;
 	line-height: 1.3333;
 	letter-spacing: 0.33px;
 `
 export const h6 = `
 	${ responsiveStyles('font-size', 13, 13, 13, 13) }
-	font-family: ${ titleFontFamilyBold };
+	font-family: ${ titleFontFamily };
 	font-weight: bold;
 	line-height: 1.1482;
 	letter-spacing: 1.75px;
@@ -109,16 +110,9 @@ export const caption = `
 
 export const button = `
 	${ responsiveStyles('font-size', 18, 14, 14, 14) }
-	font-family: ${ bodyFontFamilyBold };
+	font-family: ${ bodyFontFamilyRegular };
 	font-weight: bold;
 	line-height: ${ 16 / 14 };
 	letter-spacing: ${ 1.75 / 14 }em;
 	text-transform: uppercase;
-`
-
-export const small = `
-	${ responsiveStyles('font-size', 13, 13, 13, 13) }
-	font-family: ${ smallFontFamily };
-	line-height: ${ 26 / 14 };
-	letter-spacing: ${ 0.33 / 14 }em;
 `
