@@ -54,4 +54,3 @@ export const ProximaNovaRegularFont = fontFace(ProximaNovaRegular, ProximaNovaRe
 
 export const ProximaNovaBold = 'ProximaNovaBold'
 export const ProximaNovaBoldFont = fontFace(ProximaNovaBold, ProximaNovaBoldWoff, ProximaNovaBoldWoff2)
-

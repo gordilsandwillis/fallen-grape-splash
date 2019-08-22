@@ -20,138 +20,138 @@ const Hr = styled.hr`
 `
 
 storiesOf('Styleguide', module)
-  .add('Typography', () => (
-    <div>
-      <h1>
+	.add('Typography', () => (
+		<div>
+			<h1>
         H1 {qbf}
-      </h1>
+			</h1>
 
-      <Hr />
+			<Hr />
 
-      <h2>
+			<h2>
         H2 {qbf}
-      </h2>
+			</h2>
 
-      <Hr />
+			<Hr />
 
-      <h3>
+			<h3>
         H3 {qbf}
-      </h3>
+			</h3>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         H4 {qbf}
-      </h4>
+			</h4>
 
-      <Hr />
+			<Hr />
 
-      <h5>
+			<h5>
         H5 {qbf}
-      </h5>
+			</h5>
 
-      <Hr />
+			<Hr />
 
-      <h6>
+			<h6>
         H6 {qbf}
-      </h6>
+			</h6>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         Body copy
-      </h4>
+			</h4>
 
-      <p>
-        {lorem}
-      </p>
+			<p>
+				{lorem}
+			</p>
 
-      <p>
-        {longLorem}
-      </p>
+			<p>
+				{longLorem}
+			</p>
 
-      <h4>
+			<h4>
         Body copy with inline styles
-      </h4>
+			</h4>
 
-      <p>
+			<p>
         Here is some <strong>bold text</strong>.
-      </p>
+			</p>
 
-      <p>
+			<p>
         Here is some <em>italic text</em>.
-      </p>
+			</p>
 
-      <p>
+			<p>
         Here is some <strong><em>bold and italic</em></strong> text.
-      </p>
+			</p>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         Caption
-      </h4>
+			</h4>
 
-      <figcaption>
+			<figcaption>
         Caption: {qbf}
-      </figcaption>
+			</figcaption>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         Button
-      </h4>
+			</h4>
 
-      <Button>
+			<Button>
         Button: {qbf}
-      </Button>
+			</Button>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         Text Link
-      </h4>
+			</h4>
 
-      <a href="http://ginlane.com">Text Link</a>
+			<a href="http://ginlane.com">Text Link</a>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         Unordered List
-      </h4>
+			</h4>
 
-      <ul>
-        <li>
+			<ul>
+				<li>
           Foo lorem ipsum
-        </li>
-        <li>
+				</li>
+				<li>
           Bar dolor sit amet
-        </li>
-      </ul>
+				</li>
+			</ul>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         Ordered List
-      </h4>
+			</h4>
 
-      <ol>
-        <li>
+			<ol>
+				<li>
           Foo lorem ipsum
-        </li>
-        <li>
+				</li>
+				<li>
           Bar dolor sit amet
-        </li>
-      </ol>
+				</li>
+			</ol>
 
-      <Hr />
+			<Hr />
 
-      <h4>
+			<h4>
         Block Quote
-      </h4>
+			</h4>
 
-      <blockquote>
-        {longLorem}
-      </blockquote>
-    </div>
-  ))
+			<blockquote>
+				{longLorem}
+			</blockquote>
+		</div>
+	))
