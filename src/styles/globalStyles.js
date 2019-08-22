@@ -112,7 +112,7 @@ export default `
   hr {
     margin: 2em auto;
     border: 0;
-    border-bottom: 1px solid ${ colors.lightGrey };
+    border-bottom: 1px solid ${ colors.grey };
   }
 
   a {
@@ -121,7 +121,7 @@ export default `
     text-decoration: none;
     .notouch &:hover,
     .pointerevents &:hover {
-      color: ${ colors.mainColor };
+      color: ${ colors.black };
     }
     &.text-link {
       font-size: 14px;
@@ -146,7 +146,7 @@ export default `
   }
 
   time {
-    color: ${ colors.lightGrey };
+    color: ${ colors.grey };
   }
 
   .material-icons {
