@@ -1,4 +1,4 @@
-import * as mq from 'styles/mediaQueries'
+import * as mq from './mediaQueries'
 
 export const responsiveStyles = (style, large, medium, small) => `
   ${ mq.largerAndUp } {

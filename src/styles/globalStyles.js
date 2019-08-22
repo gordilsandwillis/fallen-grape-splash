@@ -41,7 +41,7 @@ export default `
 
   body {
     ${ typography.body }
-    color: ${ colors.black };
+    color: ${ colors.primaryColor };
   }
 
   b, strong {

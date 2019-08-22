@@ -27,3 +27,5 @@ export const lightPurple = '#D4BDFF'
 
 // util
 export const link = darkBlue
+export const alert = darkRed
+export const primaryColor = white
