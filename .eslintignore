@@ -1,0 +1,6 @@
+node_modules
+public
+.cache
+coverage/lcov-report/**
+automation
+wdio.*
