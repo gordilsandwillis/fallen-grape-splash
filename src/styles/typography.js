@@ -55,7 +55,7 @@ export const bodyBold = `
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 66, 60, 30, 30) }
+	${ responsiveStyles('font-size', 60, 60, 30, 30) }
 	font-family: ${ titleFontFamily };
 	font-weight: normal;
 	letter-spacing: 0.33px;
@@ -63,7 +63,7 @@ export const h1 = `
 `
 
 export const h2 = `
-	${ responsiveStyles('font-size', 50, 50, 30, 30) }
+	${ responsiveStyles('font-size', 65, 50, 30, 30) }
 	font-family: ${ titleFontFamily };
 	font-weight: normal;
 	line-height: 1.125;
@@ -109,10 +109,10 @@ export const caption = `
 `
 
 export const button = `
-	${ responsiveStyles('font-size', 18, 14, 14, 14) }
+	${ responsiveStyles('font-size', 20, 18, 16, 14) }
 	font-family: ${ bodyFontFamilyRegular };
-	font-weight: bold;
 	line-height: ${ 16 / 14 };
-	letter-spacing: ${ 1.75 / 14 }em;
-	text-transform: uppercase;
+	letter-spacing: ${ 1.5 / 14 }em;
+  text-transform: uppercase;
+  padding: 0 2em 1px;
 `

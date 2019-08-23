@@ -25,14 +25,14 @@ export const fontFace = (fontName, woff, woff2, fontWeight = 'normal') => `
 export const MaterialIcons = 'Material Icons'
 export const MaterialIconsFont = fontFace(MaterialIcons, MaterialIconsWoff, MaterialIconsWoff2)
 
-export const SuisseIntlLight = 'SwissIntlLight'
+export const SuisseIntlLight = 'SuisseIntlLight'
 export const SuisseIntlLightFont = fontFace(SuisseIntlLight, SuisseIntlLightWoff, SuisseIntlLightWoff2)
 
-export const SuisseIntlRegular = 'SwissIntlRegular'
+export const SuisseIntlRegular = 'SuisseIntlRegular'
 export const SuisseIntlRegularFont = fontFace(SuisseIntlRegular, SuisseIntlRegularWoff, SuisseIntlRegularWoff2)
 
-export const SuisseIntlSemiBold = 'SwissIntlRegular'
+export const SuisseIntlSemiBold = 'SuisseIntlRegular'
 export const SuisseIntlSemiBoldFont = fontFace(SuisseIntlSemiBold, SuisseIntlSemiBoldWoff, SuisseIntlSemiBoldWoff2)
 
-export const LyonDisplayLight = 'SwissIntlRegular'
+export const LyonDisplayLight = 'LyonDisplayLight'
 export const LyonDisplayLightFont = fontFace(LyonDisplayLight, LyonDisplayLightWoff, LyonDisplayLightWoff2)
