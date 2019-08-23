@@ -1,11 +1,14 @@
+export const containerLargeMargins = '5vw'
+export const containerMediumMargins = '5vw'
+export const containerSmallMargins = '20px'
 
 const colSpacingSmall = '1.25rem'
-const colSpacingMedium = '.75rem'
+const colSpacingMedium = '1.5rem'
 const colSpacingLarge = '2rem'
 
-const rowSpacingSmall = null
-const rowSpacingMedium = null
-const rowSpacingLarge = null
+const rowSpacingSmall = colSpacingSmall
+const rowSpacingMedium = colSpacingMedium
+const rowSpacingLarge = colSpacingLarge
 
 const gridSettings = {
 	baseColCount: 12,

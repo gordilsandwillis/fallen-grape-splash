@@ -5,19 +5,17 @@ import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
 import gridSettings from 'src/styles/gridSettings'
-import * as mediaQueries from 'src/styles/mediaQueries'
-import * as colors from 'src/styles/colors'
+import { mediaQueries, colors } from 'src/styles'
 
 // Calculate how many columns the grid has
 const numberOfCols = gridSettings => {
 	let myString = gridSettings.replace(/\D/g, ' ')
 
 	let sum = (text, regex) => {
-		let match
-		return text.match(regex || /\d+/g)
-			? match.reduce(function (prev, curr) {
-				return +prev + +curr
-			}) : 0
+		let match = text.match(regex || /\d+/g)
+		return match ? match.reduce(function (prev, curr) {
+			return +prev + +curr
+		}) : 0
 	}
 
 	return (sum(myString))

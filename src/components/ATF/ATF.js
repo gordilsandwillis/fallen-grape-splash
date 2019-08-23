@@ -51,6 +51,7 @@ const BgImage = styled(Image)`
 	bottom: 0;
 	left: 0;
 	right: 0;
+	${ typography.responsiveStyles('top', 140, 130, 110, 100) }
 	${ mq.largerAndUp } {
 		top: 0;
 	}
@@ -78,7 +79,7 @@ const ShortHr = styled.hr`
 
 class ATF extends Component {
 	render () {
-		const { headline, hr, text, image, winHeight } = this.props
+		const { headline, text, image, winHeight, showHr } = this.props
 
 		return (
 			<Fragment>
@@ -98,13 +99,14 @@ class ATF extends Component {
 							>
 								<ScrollEntrance>
 									<h1>{headline}</h1>
-									{hr && <ShortHr />}
+									{showHr && <ShortHr />}
 									<p>{text}</p>
 								</ScrollEntrance>
 							</Grid>
 						</Content>
 					</CenteredContainer>
 				</Block>
+
 			</Fragment>
 		)
 	}
