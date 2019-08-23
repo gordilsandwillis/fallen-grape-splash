@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
+import { animations, colors, typography } from 'src/styles'
 import { Link as GatsbyLink } from 'gatsby'
 
 const LinkStyles = `
 	font-size: inherit;
-	text-decoration: none;
+  text-decoration: none;
+  transition: color ${ animations.mediumSpeed } ease-in-out;
 `
 
 const StyledLinkElement = styled.a`
-	${ LinkStyles }
+  ${ LinkStyles }
+  color: ${ colors.brightBlue };
+  &:hover {
+    color: ${ colors.darkBlue };
+  }
 `
 
 const StyledGatsbyLink = styled(GatsbyLink)`
-	${ LinkStyles }
+  ${ LinkStyles }
+  color: ${ colors.white };
+  &:hover {
+    color: ${ colors.unofficialLightGrey };
+  }
 `
 
 class Link extends Component {

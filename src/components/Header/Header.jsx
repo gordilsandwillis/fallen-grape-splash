@@ -4,8 +4,8 @@ import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import Image from 'src/components/Image'
-import Logo from 'src/assets/images/mosaic_m-logo_white.svg' // TODO
-// import Container from 'src/components/Container'
+import Logo from 'src/assets/images/mosaic_wordmark_white.svg' // TODO
+import MaterialIcon from 'src/components/MaterialIcon'
 // import LogoLockup from 'src/components/LogoLockup'
 // import SidebarNavigation from 'src/components/SidebarNavigation'
 // import Button from 'src/components/Button'
@@ -38,9 +38,24 @@ const HeaderContainer = styled(Container)`
 	color: ${ colors.primaryColor };
 `
 
+const NavContainer = styled(HeaderContainer)`
+	${ typography.bodyLight }
+	${ typography.responsiveStyles('font-size', 40, 40, 40, 40) }
+  display: flex;
+	flex-direction: row;
+`
+
+const MobileNavLinkContainer = styled(HeaderContainer)`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: 0;
+`
+
 const LogoContainer = styled.div`
-	height: 70px;
-	width: 70px;
+	${ typography.responsiveStyles('height', 100, 90, 80, 60) }
+	${ typography.responsiveStyles('width', 100, 90, 80, 60) }
 `
 
 const NavItemsContainer = styled.div`
@@ -52,10 +67,62 @@ const NavLink = styled(Link)`
 	padding-left: 40px;
 `
 
+const MobileNav = styled.div`
+	z-index: 5;
+`
+
+const MobileNavLink = styled(Link)`
+	z-index: 5;
+	padding: 30px 0px;
+`
+
+const DesktopDetect = styled.div`
+	${ mq.mediumAndBelow } {
+		display: none;
+	}
+`
+
+const MobileDetect = styled.div`
+	${ mq.largeAndUp } {
+		display: none;
+	}
+	align-self: flex-start;
+`
+
+const HamburgerContainer = styled.div`
+	justify-self: flex-end;
+	cursor: pointer;
+`
+
+const Overlay = styled.div`
+	background: black;
+	opacity: 0.95;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+`
+
 class Header extends Component {
-	state = {}
+	constructor (props) {
+		super(props)
+		this.state = {
+			mobileNavOpen: false,
+		}
+	}
+
+	toggleNav = () => {
+		console.log('toggled')
+		this.setState(state => ({
+			mobileNavOpen: !state.mobileNavOpen,
+		}))
+	}
+
 	render () {
-		const { logo } = this.props
+		const { logo, winHeight } = this.props
+		const { mobileNavOpen } = this.state
 		return (
 			<Fragment>
 				<Wrapper>
@@ -70,11 +137,39 @@ class Header extends Component {
 								<Logo />
 							</LogoContainer>
 							<NavItemsContainer>
-								{navPages.map(page => (
-									<NavLink key={page.name} to={page.slug}>
-										{page.name}
-									</NavLink>
-								))}
+								<DesktopDetect>
+									{navPages.map(page => (
+										<NavLink key={page.name} to={page.slug}>
+											{page.name}
+										</NavLink>
+									))}
+								</DesktopDetect>
+								<MobileDetect>
+									{mobileNavOpen ? (
+										<Fragment>
+											<MobileNav>
+												<Overlay>
+													<NavContainer>
+														<MobileNavLinkContainer>
+															{navPages.map(page => (
+																<MobileNavLink key={page.name} to={page.slug}>
+																	{page.name}
+																</MobileNavLink>
+															))}
+														</MobileNavLinkContainer>
+														<HamburgerContainer onClick={this.toggleNav}>
+															<MaterialIcon size="40px">close</MaterialIcon>
+														</HamburgerContainer>
+													</NavContainer>
+												</Overlay>
+											</MobileNav>
+										</Fragment>
+									) : (
+										<HamburgerContainer onClick={this.toggleNav}>
+											<MaterialIcon size="40px">menu</MaterialIcon>
+										</HamburgerContainer>
+									)}
+								</MobileDetect>
 							</NavItemsContainer>
 						</Grid>
 					</HeaderContainer>

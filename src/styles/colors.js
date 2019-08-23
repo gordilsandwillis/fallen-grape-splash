@@ -1,8 +1,9 @@
 // greyscale
 export const black = '#000'
+export const unofficialLightGrey = '#bbb'
 export const grey = '#6E6E6C'
 export const white = '#FFF'
-export const whiteLowOpacity = 'rgba(255, 255, 255, .2)'
+export const whiteLowOpacity = 'rgba(255, 255, 255, .3)'
 export const offwhite = '#F9F9EF'
 
 // secondary

@@ -12,14 +12,14 @@ import withSizes from 'react-sizes'
 const CenteredContainer = styled(Container)`
 	display: flex;
   align-items: center;
-	${ typography.responsiveStyles('padding-top', 100, 100, 100, 100)}
+	${ typography.responsiveStyles('padding-top', 100, 100, 100, 100) }
 `
 
 const Content = styled.div`
 	width: 100%;
-  /* ${ typography.h1} */
+  /* ${ typography.h1 } */
 	p {
-		/* ${ typography.h4} */
+		/* ${ typography.h4 } */
 		margin-top: 0;
 	}
 `
@@ -28,24 +28,24 @@ const CenteredText = styled.div`
   text-align: center;
   p {
     text-align: center;
-  ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10)}
+  ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10) }
   }
 `
 
 const Block = styled.div`
   display: block;
-  ${ typography.responsiveStyles('bottom', 100, 100, 100, 100)}
+  ${ typography.responsiveStyles('bottom', 100, 100, 100, 100) }
 	width: 100%;
-	height: ${ ({ winHeight }) => winHeight + 'px'};
-	max-height: ${ ({ winHeight }) => winHeight + 'px'};
+	height: ${ ({ winHeight }) => winHeight + 'px' };
+	max-height: ${ ({ winHeight }) => winHeight + 'px' };
 	position: relative;
-	color: ${ colors.bgColor};
+	color: ${ colors.bgColor };
 
 	${ ({ background }) => background && `
 		position: absolute;
 		overflow: hidden;
 		z-index: 1;
-		background: ${ colors.textColor};
+		background: ${ colors.textColor };
 	` }
 
 	${ ({ content }) => content && `
@@ -72,57 +72,57 @@ const Overlay = styled.div`
 `
 
 const ShortHr = styled.hr`
-	${ typography.responsiveStyles('width', 80, 70, 50, 36)}
+	${ typography.responsiveStyles('width', 80, 70, 50, 36) }
 	border-width: 3px;
-	border-color: ${ colors.bgColor};
-	${ typography.responsiveStyles('margin-top', 18, 18, 18, 8)}
-	${ typography.responsiveStyles('margin-bottom', 34, 30, 26, 16)}
+	border-color: ${ colors.bgColor };
+	${ typography.responsiveStyles('margin-top', 18, 18, 18, 8) }
+	${ typography.responsiveStyles('margin-bottom', 34, 30, 26, 16) }
 	display: inline-block;
 `
 
 class ATF extends Component {
-  render() {
-    const { headline, text, image, winHeight, showHr, buttonText } = this.props
-    return (
-      <Fragment>
-        <Block background winHeight={winHeight}>
-          <BgImage
-            image={image}
-          />
-          <Overlay />
-        </Block>
-        <Block content="true" winHeight={winHeight}>
-          <CenteredContainer>
-            <Content>
-              <Grid
-                showOverlay={true}
-                small="[6]"
-                medium="1 [10] 1"
-                large="1 [10] 1"
-              >
-                <ScrollEntrance>
-                  <CenteredText>
-                    <h1>{headline}</h1>
-                    {showHr && <ShortHr />}
-                    <p>{text}</p>
-                    <Button size="medium">
-                      {buttonText}
-                    </Button>
-                  </CenteredText>
-                </ScrollEntrance>
-              </Grid>
-            </Content>
-          </CenteredContainer>
-        </Block>
+	render () {
+		const { headline, text, image, winHeight, showHr, buttonText } = this.props
+		return (
+			<Fragment>
+				<Block background winHeight={winHeight}>
+					<BgImage
+						image={image}
+					/>
+					<Overlay />
+				</Block>
+				<Block content="true" winHeight={winHeight}>
+					<CenteredContainer>
+						<Content>
+							<Grid
+								showOverlay={true}
+								small="[6]"
+								medium="1 [10] 1"
+								large="1 [10] 1"
+							>
+								<ScrollEntrance>
+									<CenteredText>
+										<h1>{headline}</h1>
+										{showHr && <ShortHr />}
+										<p>{text}</p>
+										<Button size="medium">
+											{buttonText}
+										</Button>
+									</CenteredText>
+								</ScrollEntrance>
+							</Grid>
+						</Content>
+					</CenteredContainer>
+				</Block>
 
-      </Fragment>
-    )
-  }
+			</Fragment>
+		)
+	}
 }
 
 const sizesToProps = ({ width, height }) => ({
-  winWidth: width,
-  winHeight: height
+	winWidth: width,
+	winHeight: height
 })
 
 export default withSizes(sizesToProps)(ATF)
