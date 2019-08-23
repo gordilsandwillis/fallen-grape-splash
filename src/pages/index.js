@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import ATF from 'src/components/ATF'
 import styled from '@emotion/styled'
-import { mediaQueries as mq } from 'src/styles'
+import { mediaQueries, colors, typography } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
+import Footer from 'src/components/Footer'
+import { pages } from 'src/mockData'
 
 const PageWrap = styled.div`
-	${ ({ hasATF }) => hasATF === false ? `
+  ${ ({ hasATF }) => hasATF === false ? `
 		padding-top: 100px;
-		${ mq.largerAndUp } {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 3rem;
 		}
 	` : `
 		padding-top: 0;
-		${ mq.largerAndUp } {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 0;
 		}
 	` }
@@ -22,16 +24,18 @@ const PageWrap = styled.div`
 class Home extends Component {
 	render () {
 		const { data, location } = this.props
-
+		const { Home: { components: { ATF: { headline }, Button: { buttonText, buttonLink } } } } = pages
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />
-				<Header location={location} />
+				<Header logo={data.Logo} location={location} />
 				<ATF
-					headline="Headline Text"
-					text="Example descriptive text"
+					headline={headline}
 					image={data.ATFimage}
+					buttonText={buttonText}
+					buttonLink={buttonLink}
 				/>
+				<Footer />
 			</PageWrap>
 		)
 	}

@@ -38,7 +38,8 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-intersection-observer": "^8.24.1",
-    "react-sizes": "^2.0.0"
+    "react-sizes": "^2.0.0",
+    "react-svg-loader": "^3.0.3"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.1.5",

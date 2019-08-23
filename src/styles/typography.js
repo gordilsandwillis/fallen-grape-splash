@@ -55,7 +55,7 @@ export const bodyBold = `
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 60, 60, 30, 30) }
+	${ responsiveStyles('font-size', 60, 60, 42, 42) }
 	font-family: ${ titleFontFamily };
 	font-weight: normal;
 	letter-spacing: 0.33px;
@@ -115,4 +115,11 @@ export const button = `
 	letter-spacing: ${ 1.5 / 14 }em;
   text-transform: uppercase;
   padding: 0 2em 1px;
+`
+
+export const footer = `
+	${ responsiveStyles('font-size', 14, 14, 14, 14) }
+	letter-spacing: 0.33px;
+	line-height: 1.6;
+	font-family: ${ bodyFontFamilyRegular };
 `
