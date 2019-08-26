@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" 
+  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+  <defs>
+    <style>.cls-1,.cls-3{fill:none;}.cls-2{clip-path:url(#clip-path);}.cls-3{stroke:#fff;stroke-width:1.5px;}</style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" y="0.08" width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <title>Close</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g class="cls-2">
+        <line class="cls-3" x1="0.61" y1="0.53" x2="23.39" y2="23.63"/>
+        <line class="cls-3" x1="23.47" y1="0.61" x2="0.53" y2="23.55"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -5,6 +5,7 @@ import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import Image from 'src/components/Image'
 import Button from 'src/components/Button'
+import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import { colors, typography } from 'src/styles'
 import withSizes from 'react-sizes'
@@ -12,7 +13,7 @@ import withSizes from 'react-sizes'
 const CenteredContainer = styled(Container)`
 	display: flex;
   align-items: center;
-	${ typography.responsiveStyles('padding-top', 100, 100, 100, 100) }
+	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80) }
 `
 
 const Content = styled.div`
@@ -34,7 +35,7 @@ const CenteredText = styled.div`
 
 const Block = styled.div`
   display: block;
-  ${ typography.responsiveStyles('bottom', 100, 100, 100, 100) }
+  ${ typography.responsiveStyles('bottom', 100, 100, 80, 80) }
 	width: 100%;
 	height: ${ ({ winHeight }) => winHeight + 'px' };
 	max-height: ${ ({ winHeight }) => winHeight + 'px' };
@@ -68,7 +69,7 @@ const Overlay = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 3;
+	z-index: 6;
 `
 
 const ShortHr = styled.hr`
@@ -82,7 +83,7 @@ const ShortHr = styled.hr`
 
 class ATF extends Component {
 	render () {
-		const { headline, text, image, winHeight, showHr, buttonText } = this.props
+		const { headline, text, image, winHeight, showHr, buttonText, buttonLink } = this.props
 		return (
 			<Fragment>
 				<Block background winHeight={winHeight}>
@@ -105,9 +106,11 @@ class ATF extends Component {
 										<h1>{headline}</h1>
 										{showHr && <ShortHr />}
 										<p>{text}</p>
-										<Button size="medium">
-											{buttonText}
-										</Button>
+										<Link to={buttonLink}>
+											<Button size="medium">
+												{buttonText}
+											</Button>
+										</Link>
 									</CenteredText>
 								</ScrollEntrance>
 							</Grid>

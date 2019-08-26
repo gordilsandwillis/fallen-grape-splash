@@ -5,11 +5,12 @@ import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import Image from 'src/components/Image'
 import Logo from 'src/assets/images/mosaic_wordmark_white.svg' // TODO
+import MenuIcon from 'src/assets/images/menu.svg'
+import CloseIcon from 'src/assets/images/close.svg'
 import MaterialIcon from 'src/components/MaterialIcon'
 // import LogoLockup from 'src/components/LogoLockup'
 // import SidebarNavigation from 'src/components/SidebarNavigation'
 // import Button from 'src/components/Button'
-// import MenuIcon from 'assets/images/icon-menu.svg'
 // import AudioIcon from 'assets/images/icon-audio.svg'
 import {
 	colors,
@@ -42,7 +43,7 @@ const NavContainer = styled(HeaderContainer)`
 	${ typography.bodyLight }
 	${ typography.responsiveStyles('font-size', 40, 40, 40, 40) }
   display: flex;
-	flex-direction: row;
+	flex-direction: column;
 `
 
 const MobileNavLinkContainer = styled(HeaderContainer)`
@@ -51,11 +52,21 @@ const MobileNavLinkContainer = styled(HeaderContainer)`
 	align-items: center;
 	justify-content: center;
 	padding-top: 0;
+	padding-bottom: 30px;
+	z-index: 5;
 `
 
 const LogoContainer = styled.div`
 	${ typography.responsiveStyles('height', 100, 90, 80, 60) }
 	${ typography.responsiveStyles('width', 100, 90, 80, 60) }
+`
+
+const MenuIconContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	${ typography.responsiveStyles('height', 40, 36, 32, 24) }
+	${ typography.responsiveStyles('width', 40, 36, 32, 24) }
 `
 
 const NavItemsContainer = styled.div`
@@ -67,13 +78,9 @@ const NavLink = styled(Link)`
 	padding-left: 40px;
 `
 
-const MobileNav = styled.div`
-	z-index: 5;
-`
-
 const MobileNavLink = styled(Link)`
 	z-index: 5;
-	padding: 30px 0px;
+	padding-bottom: 25px;
 `
 
 const DesktopDetect = styled.div`
@@ -87,11 +94,16 @@ const MobileDetect = styled.div`
 		display: none;
 	}
 	align-self: flex-start;
+	z-index: 4;
 `
 
 const HamburgerContainer = styled.div`
 	justify-self: flex-end;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 	cursor: pointer;
+	${ typography.responsiveStyles('height', 40, 36, 32, 24) }
 `
 
 const Overlay = styled.div`
@@ -145,29 +157,29 @@ class Header extends Component {
 									))}
 								</DesktopDetect>
 								<MobileDetect>
-									{mobileNavOpen ? (
-										<Fragment>
-											<MobileNav>
-												<Overlay>
-													<NavContainer>
-														<MobileNavLinkContainer>
-															{navPages.map(page => (
-																<MobileNavLink key={page.name} to={page.slug}>
-																	{page.name}
-																</MobileNavLink>
-															))}
-														</MobileNavLinkContainer>
-														<HamburgerContainer onClick={this.toggleNav}>
-															<MaterialIcon size="40px">close</MaterialIcon>
-														</HamburgerContainer>
-													</NavContainer>
-												</Overlay>
-											</MobileNav>
-										</Fragment>
-									) : (
+									{!mobileNavOpen ? (
 										<HamburgerContainer onClick={this.toggleNav}>
-											<MaterialIcon size="40px">menu</MaterialIcon>
+											<MenuIconContainer>
+												<MenuIcon />
+											</MenuIconContainer>
 										</HamburgerContainer>
+									) : (
+										<Overlay>
+											<NavContainer>
+												<HamburgerContainer onClick={this.toggleNav}>
+													<MenuIconContainer>
+														<CloseIcon />
+													</MenuIconContainer>
+												</HamburgerContainer>
+												<MobileNavLinkContainer>
+													{navPages.map(page => (
+														<MobileNavLink key={page.name} to={page.slug}>
+															{page.name}
+														</MobileNavLink>
+													))}
+												</MobileNavLinkContainer>
+											</NavContainer>
+										</Overlay>
 									)}
 								</MobileDetect>
 							</NavItemsContainer>

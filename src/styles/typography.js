@@ -118,7 +118,7 @@ export const button = `
 `
 
 export const footer = `
-	${ responsiveStyles('font-size', 14, 14, 14, 14) }
+	${ responsiveStyles('font-size', 14, 14, 12, 11) }
 	letter-spacing: 0.33px;
 	line-height: 1.6;
 	font-family: ${ bodyFontFamilyRegular };

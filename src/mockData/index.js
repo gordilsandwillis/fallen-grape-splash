@@ -6,7 +6,9 @@ export const pages = {
 			Header: {},
 			Footer: {
 				footerTextLeft: `© 2019 Mosaic Group. All Rights Reserved.`,
-				footerTextRight: 'Mosaic Group is an IAC company.'
+				footerTextLeftLineTwo: 'Mosaic Group is an IAC company.',
+				footerTextRight: 'Press',
+				footerTextRightLink: '/press'
 			},
 			ATF: {
 				headline: 'Mosaic Group is where life-enhancing digital brands grow together.'

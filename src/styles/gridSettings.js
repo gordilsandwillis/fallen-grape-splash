@@ -1,6 +1,6 @@
 export const containerLargeMargins = '5vw'
 export const containerMediumMargins = '5vw'
-export const containerSmallMargins = '20px'
+export const containerSmallMargins = '30px'
 
 const colSpacingSmall = '1.25rem'
 const colSpacingMedium = '1.5rem'

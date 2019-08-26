@@ -21,8 +21,8 @@ const Wrapper = styled.footer`
 	left: 0;
 	right: 0;
 	color: ${ colors.black };
-	z-index: 4;
-	${ typography.responsiveStyles('height', 100, 100, 100, 100) }
+	z-index: 3;
+	${ typography.responsiveStyles('height', 100, 100, 80, 80) }
 `
 
 const FooterContainer = styled(Container)`
@@ -38,9 +38,20 @@ const FooterText = styled.div`
 	height: 100%;
 `
 
+const FooterTextGrey = styled(FooterText)`
+	color: ${ colors.grey };
+`
+
 const FooterTextRightAlign = styled(FooterText)`
 	text-align: right;
 	justify-content: flex-end;
+`
+
+const FooterLink = styled(Link)`
+	color: ${ colors.black };
+	&:hover {
+		color: ${ colors.grey };
+	}
 `
 
 class Footer extends Component {
@@ -48,7 +59,12 @@ class Footer extends Component {
 		const {
 			Home: {
 				components: {
-					Footer: { footerTextLeft, footerTextRight },
+					Footer: {
+						footerTextLeft,
+						footerTextLeftLineTwo,
+						footerTextRight,
+						footerTextRightLink,
+					},
 				},
 			},
 		} = pages
@@ -63,9 +79,13 @@ class Footer extends Component {
 					>
 						<div>
 							<FooterText>{footerTextLeft}</FooterText>
-							<FooterText>{footerTextRight}</FooterText>
+							<FooterTextGrey>{footerTextLeftLineTwo}</FooterTextGrey>
 						</div>
-						<FooterTextRightAlign>Press</FooterTextRightAlign>
+						<FooterTextRightAlign>
+							<FooterLink to={footerTextRightLink}>
+								{footerTextRight}
+							</FooterLink>
+						</FooterTextRightAlign>
 					</Grid>
 				</FooterContainer>
 			</Wrapper>
