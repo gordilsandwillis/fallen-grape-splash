@@ -55,32 +55,29 @@ export const bodyBold = `
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 60, 60, 42, 42) }
+	${ responsiveStyles('font-size', 60, 60, 42, 34) }
 	font-family: ${ titleFontFamily };
-	font-weight: normal;
 	letter-spacing: 0.33px;
 	line-height: 1.2;
 `
 
 export const h2 = `
-	${ responsiveStyles('font-size', 65, 50, 30, 30) }
-	font-family: ${ titleFontFamily };
-	font-weight: normal;
+	${ responsiveStyles('font-size', 28, 28, 28, 22) }
+	font-family: ${ bodyFontFamilyLight };
 	line-height: 1.125;
 	letter-spacing: 0.33px;
 `
 
 export const h3 = `
 	${ responsiveStyles('font-size', 40, 40, 20, 20) }
-	font-family: ${ titleFontFamily };
-	font-weight: normal;
+	font-family: ${ bodyFontFamilyLight };
 	line-height: 1.16667;
 	letter-spacing: 0.33px;
 `
 
 export const h4 = `
 	${ responsiveStyles('font-size', 26, 26, 18, 18) }
-	font-family: ${ titleFontFamily };
+	font-family: ${ bodyFontFamilyLight };
 	font-weight: 500;
 	line-height: 1.25;
 	letter-spacing: 0.33px;

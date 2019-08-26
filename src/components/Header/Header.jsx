@@ -126,7 +126,6 @@ class Header extends Component {
 	}
 
 	toggleNav = () => {
-		console.log('toggled')
 		this.setState(state => ({
 			mobileNavOpen: !state.mobileNavOpen,
 		}))
@@ -146,7 +145,9 @@ class Header extends Component {
 							large="[6] [6]"
 						>
 							<LogoContainer>
-								<Logo />
+								<Link to={'/'}>
+									<Logo />
+								</Link>
 							</LogoContainer>
 							<NavItemsContainer>
 								<DesktopDetect>

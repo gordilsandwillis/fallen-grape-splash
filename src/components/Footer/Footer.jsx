@@ -13,10 +13,9 @@ import {
 	mediaQueries
 } from 'src/styles'
 
-import { pages } from 'src/mockData'
-
 const Wrapper = styled.footer`
-	position: fixed;
+	position: ${ ({ fixed }) => (fixed ? 'inherit' : 'fixed') };
+	background: ${ colors.offwhite };
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -57,19 +56,14 @@ const FooterLink = styled(Link)`
 class Footer extends Component {
 	render () {
 		const {
-			Home: {
-				components: {
-					Footer: {
-						footerTextLeft,
-						footerTextLeftLineTwo,
-						footerTextRight,
-						footerTextRightLink,
-					},
-				},
-			},
-		} = pages
+			footerTextLeft,
+			footerTextLeftLineTwo,
+			footerTextRight,
+			footerTextRightLink,
+			fixed,
+		} = this.props
 		return (
-			<Wrapper>
+			<Wrapper fixed={fixed}>
 				<FooterContainer>
 					<Grid
 						showOverlay={true}

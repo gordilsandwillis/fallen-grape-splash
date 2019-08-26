@@ -5,7 +5,7 @@ import { mediaQueries, colors, typography } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
 import Footer from 'src/components/Footer'
-import { pages } from 'src/mockData'
+import { pages, shared } from 'src/mockData'
 
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `
@@ -24,18 +24,25 @@ const PageWrap = styled.div`
 class Home extends Component {
 	render () {
 		const { data, location } = this.props
-		const { Home: { components: { ATF: { headline }, Button: { buttonText, buttonLink } } } } = pages
+		const { Home: { components: { atfData, buttonData } } } = pages
+		const { footerData } = shared
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />
 				<Header logo={data.Logo} location={location} />
 				<ATF
-					headline={headline}
+					{...buttonData}
+					{...atfData}
 					image={data.ATFimage}
-					buttonText={buttonText}
-					buttonLink={buttonLink}
+					hasFooter={true}
+					align='center'
+					gridConfig={{
+						small: '1 [10] 1',
+						medium: '1 [10] 1',
+						large: '[6]'
+					}}
 				/>
-				<Footer />
+				<Footer {...footerData} />
 			</PageWrap>
 		)
 	}

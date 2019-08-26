@@ -4,40 +4,41 @@ import * as mq from 'src/styles/mediaQueries'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import Image from 'src/components/Image'
+import Hr from 'src/components/Hr'
 import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import { colors, typography } from 'src/styles'
+import { colors, gridSettings, typography } from 'src/styles'
 import withSizes from 'react-sizes'
 
-const CenteredContainer = styled(Container)`
+const AlignmentContainer = styled.div`
+height: 100%;
 	display: flex;
-  align-items: center;
+  align-items: ${ props => props.verticalAlign };
 	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80) }
 `
 
-const Content = styled.div`
-	width: 100%;
-  /* ${ typography.h1 } */
+const Content = styled(Container)`
+  ${ typography.h1 }
 	p {
-		/* ${ typography.h4 } */
+		${ typography.h2 }
 		margin-top: 0;
 	}
 `
 
-const CenteredText = styled.div`
-  text-align: center;
+const AlignedText = styled.div`
+  text-align: ${ props => props.align };
   p {
-    text-align: center;
+    text-align: ${ props => props.align };
   ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10) }
   }
 `
 
 const Block = styled.div`
   display: block;
-  ${ typography.responsiveStyles('bottom', 100, 100, 80, 80) }
+  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 100, 100, 80, 80) }
+	height: ${ ({ winHeight }) => (winHeight) + 'px' };
 	width: 100%;
-	height: ${ ({ winHeight }) => winHeight + 'px' };
 	max-height: ${ ({ winHeight }) => winHeight + 'px' };
 	position: relative;
 	color: ${ colors.bgColor };
@@ -72,18 +73,24 @@ const Overlay = styled.div`
 	z-index: 6;
 `
 
-const ShortHr = styled.hr`
-	${ typography.responsiveStyles('width', 80, 70, 50, 36) }
-	border-width: 3px;
-	border-color: ${ colors.bgColor };
-	${ typography.responsiveStyles('margin-top', 18, 18, 18, 8) }
-	${ typography.responsiveStyles('margin-bottom', 34, 30, 26, 16) }
-	display: inline-block;
+const MainContent = styled(ScrollEntrance)`
+  padding: ${ gridSettings.containerLargeMargins } 0;
+  ${ mq.largeAndBelow } {
+		padding: ${ gridSettings.containerMediumMargins } 0;
+	}
+
+	${ mq.mediumAndBelow } {
+		padding: ${ gridSettings.containerMediumMargins } 0;
+	}
+
+	${ mq.smallAndBelow } {
+    padding: ${ gridSettings.containerSmallMargins } 0;
+	}
 `
 
 class ATF extends Component {
 	render () {
-		const { headline, text, image, winHeight, showHr, buttonText, buttonLink } = this.props
+		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, buttonText, buttonLink, hasFooter, gridConfig } = this.props
 		return (
 			<Fragment>
 				<Block background winHeight={winHeight}>
@@ -92,33 +99,41 @@ class ATF extends Component {
 					/>
 					<Overlay />
 				</Block>
-				<Block content="true" winHeight={winHeight}>
-					<CenteredContainer>
-						<Content>
-							<Grid
-								showOverlay={true}
-								small="[6]"
-								medium="1 [10] 1"
-								large="1 [10] 1"
-							>
-								<ScrollEntrance>
-									<CenteredText>
+				<Block content="true" hasFooter={hasFooter} winHeight={winHeight}>
+					<AlignmentContainer verticalAlign={verticalAlign}>
+						<MainContent>
+							<Content>
+								<Grid
+									showOverlay={true}
+									{...gridConfig}
+								>
+									<AlignedText align={align}>
 										<h1>{headline}</h1>
-										{showHr && <ShortHr />}
-										<p>{text}</p>
-										<Link to={buttonLink}>
-											<Button size="medium">
-												{buttonText}
-											</Button>
-										</Link>
-									</CenteredText>
-								</ScrollEntrance>
-							</Grid>
-						</Content>
-					</CenteredContainer>
+										{buttonText &&
+                      < Link to={buttonLink}>
+                      	<Button size="medium">
+                      		{buttonText}
+                      	</Button>
+                      </Link>}
+									</AlignedText>
+								</Grid>
+							</Content>
+							{showHr && <Hr />}
+							<Content>
+								{text && <Grid
+									showOverlay={true}
+									small="[6]"
+									medium="[7] 2"
+									large="[7] 2"
+								>
+									<p>{text}</p>
+								</Grid>}
+							</Content>
+						</MainContent>
+					</AlignmentContainer>
 				</Block>
 
-			</Fragment>
+			</Fragment >
 		)
 	}
 }
