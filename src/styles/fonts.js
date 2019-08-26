@@ -31,7 +31,7 @@ export const SuisseIntlLightFont = fontFace(SuisseIntlLight, SuisseIntlLightWoff
 export const SuisseIntlRegular = 'SuisseIntlRegular'
 export const SuisseIntlRegularFont = fontFace(SuisseIntlRegular, SuisseIntlRegularWoff, SuisseIntlRegularWoff2)
 
-export const SuisseIntlSemiBold = 'SuisseIntlRegular'
+export const SuisseIntlSemiBold = 'SuisseIntlSemiBold'
 export const SuisseIntlSemiBoldFont = fontFace(SuisseIntlSemiBold, SuisseIntlSemiBoldWoff, SuisseIntlSemiBoldWoff2)
 
 export const LyonDisplayLight = 'LyonDisplayLight'
