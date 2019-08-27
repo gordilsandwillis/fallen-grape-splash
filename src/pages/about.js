@@ -8,6 +8,7 @@ import Footer from 'src/components/Footer'
 import List from 'src/components/List'
 import ThreeUp from 'src/components/ThreeUp'
 import FourUp from 'src/components/FourUp'
+import Slider from 'src/components/Slider'
 import { pages, shared } from 'src/mockData'
 
 const PageWrap = styled.div`
@@ -27,8 +28,8 @@ const PageWrap = styled.div`
 class About extends Component {
 	render () {
 		const { data, location } = this.props
-		const { About: { components: { atfData, conceptsData, leadershipData } } } = pages
-		const { footerData, companyData } = shared
+		const { About: { components: { atfData, conceptsData, leadershipData, companyData, awardsData } } } = pages
+		const { footerData } = shared
 
 		return (
 			<PageWrap>
@@ -49,6 +50,7 @@ class About extends Component {
 				<ThreeUp {...conceptsData} />
 				<FourUp {...leadershipData} />
 				<List {...companyData} />
+				<Slider {...awardsData} collapseToArrows={true} />
 				<Footer
 					fixed={true}
 					{...footerData}

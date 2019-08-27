@@ -1,10 +1,10 @@
-export const containerLargeMargins = '5vw'
-export const containerMediumMargins = '5vw'
-export const containerSmallMargins = '30px'
+export const containerLargeMargins = '36px'
+export const containerMediumMargins = '36px'
+export const containerSmallMargins = '36px'
 
-const colSpacingSmall = '1.25rem'
-const colSpacingMedium = '1.5rem'
-const colSpacingLarge = '2rem'
+const colSpacingSmall = '12px'
+const colSpacingMedium = '12px'
+const colSpacingLarge = '12px'
 
 const rowSpacingSmall = colSpacingSmall
 const rowSpacingMedium = colSpacingMedium

@@ -88,6 +88,10 @@ const MainContent = styled(ScrollEntrance)`
 	}
 `
 
+const Margin = styled.div`
+  margin: 40px 0;
+`
+
 class ATF extends Component {
 	render () {
 		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, buttonText, buttonLink, hasFooter, gridConfig } = this.props
@@ -118,7 +122,7 @@ class ATF extends Component {
 									</AlignedText>
 								</Grid>
 							</Content>
-							{showHr && <Hr />}
+							{showHr && <Margin><Hr /></Margin>}
 							<Content>
 								{text && <Grid
 									showOverlay={true}

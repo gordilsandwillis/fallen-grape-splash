@@ -4,10 +4,10 @@ import styled from '@emotion/styled'
 import { mediaQueries, colors, typography } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
+import Slider from 'src/components/Slider'
+import ProductGrid from 'src/components/ProductGrid'
+import Hr from 'src/components/Hr'
 import Footer from 'src/components/Footer'
-import List from 'src/components/List'
-import ThreeUp from 'src/components/ThreeUp'
-import FourUp from 'src/components/FourUp'
 import { pages, shared } from 'src/mockData'
 
 const PageWrap = styled.div`
@@ -27,16 +27,20 @@ const PageWrap = styled.div`
 class Products extends Component {
 	render () {
 		const { data, location } = this.props
-		// const { Products: { components: { atfData, conceptsData, leadershipData } } } = pages
-		const { footerData, companyData } = shared
+		const { Products: { components: { productData } } } = pages
+		const { footerData } = shared
 
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />
 				<Header logo={data.Logo} theme='light' location={location} />
-				{/* <ThreeUp {...conceptsData} /> */}
-				{/* <FourUp {...leadershipData} /> */}
-				<List {...companyData} />
+				<Slider
+					items={productData.items.filter(item => item.slideshow)}
+					collapseToArrows={true}
+					centered={false}
+				/>
+				<ProductGrid {...productData} />
+				<Hr color={colors.black} />
 				<Footer
 					fixed={true}
 					{...footerData}

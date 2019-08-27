@@ -12,15 +12,15 @@ const LinkStyles = `
 
 const StyledLinkElement = styled.a`
   ${ LinkStyles }
-  color: ${ colors.brightBlue };
+  color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
   span {
-    border-bottom: 2px solid ${ colors.brightBlue };
+    border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
     transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out;
   }
   &:hover {
-    color: ${ colors.darkBlue };
+    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
     span {
-      border-color: ${ colors.darkBlue };
+      border-color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
     }
   }
 
@@ -46,7 +46,7 @@ const StyledGatsbyLink = styled(GatsbyLink)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, theme, underlined } = this.props
+		const { to, external, white, target, children, className, theme, underlined } = this.props
 
 		if (external) {
 			return (
@@ -54,6 +54,7 @@ class Link extends Component {
 					className={className}
 					href={to}
 					target={target}
+					white={white}
 				>
 					<span>{children}</span>
 				</StyledLinkElement >

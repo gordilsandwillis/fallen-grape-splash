@@ -27,8 +27,7 @@ const LogoContainer = styled.div`
 const List = ({ title, items }) => (
 	<Wrapper>
 		<ItemsContainer>
-			<ContentBlock>
-				{title && <h3>{title}</h3>}
+			<ContentBlock title={title}>
 				<Grid
 					showOverlay={true}
 					large="[4] 1 [7]"

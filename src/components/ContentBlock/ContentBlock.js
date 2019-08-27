@@ -18,11 +18,17 @@ const ContentBlockStyles = styled.div`
 	${ mq.smallAndBelow } {
     padding: ${ gridSettings.containerSmallMargins } 0;
 	}
-
 `
 
-const ContentBlock = ({ className, ...rest }) => (
-	<ContentBlockStyles className={className} {...rest} />
+const H3Styled = styled.h3`
+  margin-bottom: 50px;
+`
+
+const ContentBlock = ({ title, children }) => (
+	<ContentBlockStyles>
+		{title && <H3Styled>{title}</H3Styled>}
+		{children}
+	</ContentBlockStyles>
 )
 
 export default ContentBlock

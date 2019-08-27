@@ -24,7 +24,7 @@ export default `
 
   html {
     font-display: block;
-    background: ${ colors.white };
+    background: ${ colors.offwhite };
     &.page-lock {
       position: relative;
       overflow: hidden;
