@@ -29,6 +29,7 @@ class About extends Component {
 		const { data, location } = this.props
 		const { About: { components: { atfData, conceptsData, leadershipData } } } = pages
 		const { footerData, companyData } = shared
+
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />

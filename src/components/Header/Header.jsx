@@ -75,7 +75,10 @@ const NavItemsContainer = styled.div`
 	justify-content: flex-end;
 `
 const NavLink = styled(Link)`
-	padding-left: 40px;
+	margin-left: 40px;
+`
+const NavLinkUnderlined = styled(NavLink)`
+	border-bottom: 2px solid ${ colors.white };
 `
 
 const MobileNavLink = styled(Link)`
@@ -132,7 +135,11 @@ class Header extends Component {
 	}
 
 	render () {
-		const { logo, winHeight } = this.props
+		const {
+			logo,
+			winHeight,
+			location: { pathname },
+		} = this.props
 		const { mobileNavOpen } = this.state
 		return (
 			<Fragment>
@@ -151,11 +158,18 @@ class Header extends Component {
 							</LogoContainer>
 							<NavItemsContainer>
 								<DesktopDetect>
-									{navPages.map(page => (
-										<NavLink key={page.name} to={page.slug}>
-											{page.name}
-										</NavLink>
-									))}
+									{navPages.map(page => {
+										console.log(page.slug, pathname)
+										return page.slug === pathname ? (
+											<NavLinkUnderlined key={page.name} to={page.slug}>
+												{page.name}
+											</NavLinkUnderlined>
+										) : (
+											<NavLink key={page.name} to={page.slug}>
+												{page.name}
+											</NavLink>
+										)
+									})}
 								</DesktopDetect>
 								<MobileDetect>
 									{!mobileNavOpen ? (

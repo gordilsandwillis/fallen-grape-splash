@@ -36,8 +36,10 @@ const StyledLinkElement = styled.a`
 const StyledGatsbyLink = styled(GatsbyLink)`
   ${ LinkStyles }
   color: ${ colors.white };
+  transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
     color: ${ colors.unofficialLightGrey };
+    border-bottom-color: ${ colors.unofficialLightGrey };
   }
 `
 

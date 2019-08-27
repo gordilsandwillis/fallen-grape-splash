@@ -38,8 +38,8 @@ const List = ({ title, items }) => (
 					{items &&
             items.map(item => (
             	<React.Fragment>
-            		<LogoContainer><div><img src={item.logo} /></div></LogoContainer>
-            		<div>
+            		<LogoContainer key={item.id}><div><img src={item.logo} /></div></LogoContainer>
+            		<div key={item.id + '_div'}>
             			{item.text}
             			<p>
             				<Link external to={item.link}>LEARN MORE</Link>
