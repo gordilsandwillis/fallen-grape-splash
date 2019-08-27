@@ -49,7 +49,7 @@ storiesOf('Styleguide', module)
 			<SpaceOut>
 				<Link to="/">Internal Link</Link>
 				<Link to="/" shape="square">Square Button</Link>
-				<Link to="http://gdubs.nyc/" external>External Link</Link>
+				<Link to="http://gdubs.nyc/" external>EXTERNAL LINK</Link>
 			</SpaceOut>
 		</div>
 	))

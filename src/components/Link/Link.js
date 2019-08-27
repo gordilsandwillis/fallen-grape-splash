@@ -13,8 +13,23 @@ const LinkStyles = `
 const StyledLinkElement = styled.a`
   ${ LinkStyles }
   color: ${ colors.brightBlue };
+  span {
+    border-bottom: 2px solid ${ colors.brightBlue };
+    transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out;
+  }
   &:hover {
     color: ${ colors.darkBlue };
+    span {
+      border-color: ${ colors.darkBlue };
+    }
+  }
+
+  &::after {
+    content: '↗';
+    margin-left: 2px;
+    line-height: 1em;
+    font-size: 1.25em;
+    display: inline-block
   }
 `
 
@@ -37,7 +52,7 @@ class Link extends Component {
 					href={to}
 					target={target}
 				>
-					{children}
+					<span>{children}</span>
 				</StyledLinkElement>
 			)
 		} else {
