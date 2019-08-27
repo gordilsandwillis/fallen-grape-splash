@@ -26,7 +26,6 @@ class Home extends Component {
 		const { data, location } = this.props
 		const { Home: { components: { atfData, buttonData } } } = pages
 		const { footerData } = shared
-		console.log(location)
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />

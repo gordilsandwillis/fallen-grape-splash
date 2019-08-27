@@ -4,7 +4,8 @@ import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import Image from 'src/components/Image'
-import Logo from 'src/assets/images/mosaic_wordmark_white.svg' // TODO
+import LogoLight from 'src/assets/images/mosaic_wordmark_white.svg' // TODO
+import LogoDark from 'src/assets/images/mosaic_wordmark_black.svg' // TODO
 import MenuIcon from 'src/assets/images/menu.svg'
 import CloseIcon from 'src/assets/images/close.svg'
 import MaterialIcon from 'src/components/MaterialIcon'
@@ -21,9 +22,21 @@ import {
 } from 'src/styles'
 import { navPages } from 'src/mockData'
 
+const lightStyles = `
+  position: static;
+  background-color: ${ colors.offwhite };
+  color: ${ colors.black }
+`
+
+const transparentStyles = `
+  position: absolute;
+  background-color: transparent;
+  top: 0;
+  color: ${ colors.primaryColor };
+`
+
 const Wrapper = styled.footer`
-	position: absolute;
-	top: 0;
+	${ ({ theme }) => (theme === 'light' ? lightStyles : transparentStyles) };
 	left: 0;
 	right: 0;
 	color: ${ colors.black };
@@ -35,8 +48,6 @@ const HeaderContainer = styled(Container)`
 	display: flex;
 	flex-direction: column;
 	padding-top: 40px;
-	/* justify-content: center; */
-	color: ${ colors.primaryColor };
 `
 
 const NavContainer = styled(HeaderContainer)`
@@ -74,11 +85,8 @@ const NavItemsContainer = styled.div`
 	align-items: center;
 	justify-content: flex-end;
 `
-const NavLink = styled(Link)`
+const LinkContainer = styled.span`
 	margin-left: 40px;
-`
-const NavLinkUnderlined = styled(NavLink)`
-	border-bottom: 2px solid ${ colors.white };
 `
 
 const MobileNavLink = styled(Link)`
@@ -138,12 +146,13 @@ class Header extends Component {
 		const {
 			logo,
 			winHeight,
+			theme = 'transparent',
 			location: { pathname },
 		} = this.props
 		const { mobileNavOpen } = this.state
 		return (
 			<Fragment>
-				<Wrapper>
+				<Wrapper theme={theme}>
 					<HeaderContainer>
 						<Grid
 							showOverlay={true}
@@ -153,21 +162,29 @@ class Header extends Component {
 						>
 							<LogoContainer>
 								<Link to={'/'}>
-									<Logo />
+									{theme === 'light' ? <LogoDark /> : <LogoLight />}
 								</Link>
 							</LogoContainer>
 							<NavItemsContainer>
 								<DesktopDetect>
 									{navPages.map(page => {
-										console.log(page.slug, pathname)
 										return page.slug === pathname ? (
-											<NavLinkUnderlined key={page.name} to={page.slug}>
-												{page.name}
-											</NavLinkUnderlined>
+											<LinkContainer>
+												<Link
+													underlined={true}
+													theme={theme}
+													key={page.name}
+													to={page.slug}
+												>
+													{page.name}
+												</Link>
+											</LinkContainer>
 										) : (
-											<NavLink key={page.name} to={page.slug}>
-												{page.name}
-											</NavLink>
+											<LinkContainer>
+												<Link theme={theme} key={page.name} to={page.slug}>
+													{page.name}
+												</Link>
+											</LinkContainer>
 										)
 									})}
 								</DesktopDetect>
