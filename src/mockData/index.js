@@ -171,7 +171,25 @@ export const pages = {
 	},
 	Contact: {
 		name: 'Contact',
-		slug: '/contact'
+		slug: '/contact',
+		components: {
+			contactData: {
+				headline: 'Mosaic Group is a global brand headquartered in NYC with offices in Ireland, Austria, and Belarus. For any questions please use our contact email.',
+				title: 'EMAIL',
+				items: [
+					{
+						pretext: 'For general inquiries:',
+						linkText: 'CONTACT@MOSAIC.CO',
+						linkHref: 'https://google.com'
+					},
+					{
+						pretext: 'For press inquiries:',
+						linkText: 'PRESS@MOSAIC.CO',
+						linkHref: 'https://google.com'
+					}
+				]
+			}
+		}
 	},
 	Press: {
 		name: 'Press',

@@ -11,6 +11,8 @@ const HrContainer = styled.div`
 
 const ShortHr = styled.div`
   width: ${ gridSettings.containerLargeMargins };
+  height: 2px;
+	background-color: ${ ({ color = colors.primaryColor }) => color };
   ${ mq.largeAndBelow } {
 		width: ${ gridSettings.containerMediumMargins };
 	}
@@ -22,10 +24,6 @@ const ShortHr = styled.div`
 	${ mq.smallAndBelow } {
 		width: ${ gridSettings.containerSmallMargins }};
   }
-	height: 2px;
-	background-color: ${ ({ color = colors.primaryColor }) => color };
-	${ typography.responsiveStyles('margin-top', 18, 18, 18, 8) }
-	${ typography.responsiveStyles('margin-bottom', 34, 30, 26, 16) }
 `
 
 const Hr = ({ color }) => (
