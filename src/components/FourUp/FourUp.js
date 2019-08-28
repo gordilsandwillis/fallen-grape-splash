@@ -7,10 +7,7 @@ import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
   background-color: ${ colors.black };
-`
-
-const ItemsContainer = styled(Container)`
-  color: ${ colors.white };
+color: ${ colors.white };
 `
 
 const GreyText = styled.div`
@@ -20,7 +17,7 @@ const GreyText = styled.div`
 const FourUp = ({ items, title }) => (
 	<Wrapper>
 		<ContentBlock>
-			<ItemsContainer>
+			<Container>
 				<Grid
 					showOverlay={true}
 					large="[3] [3] [3] [3]"
@@ -28,18 +25,18 @@ const FourUp = ({ items, title }) => (
 					small="[6]"
 				>
 					{items &&
-            items.map(item => (
-            	<div>
-            		<h4>
-            			{item.title}
-            		</h4>
-            		<GreyText>{item.subtitle}</GreyText>
-            		<div>{item.description}</div>
-            	</div>
-            ))
+						items.map(item => (
+							<div>
+								<h4>
+									{item.title}
+								</h4>
+								<GreyText>{item.subtitle}</GreyText>
+								<div>{item.description}</div>
+							</div>
+						))
 					}
 				</Grid>
-			</ItemsContainer>
+			</Container>
 		</ContentBlock>
 	</Wrapper>
 )

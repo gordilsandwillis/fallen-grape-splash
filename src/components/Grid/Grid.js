@@ -109,13 +109,13 @@ const StyledGrid = styled.div`
 	${ props => ({ 'columnGap': gridGapToCss(props.colGap, 0) }) }
 	${ props => ({ 'rowGap': gridGapToCss(props.rowGap, 0) }) }
 
-	${ mediaQueries.largerAndUp } {
+	${ mediaQueries.largeAndUp } {
 		${ props => gridDefToCss(props.medium) }
 		${ props => ({ 'columnGap': gridGapToCss(props.colGap, 1) }) }
 		${ props => ({ 'rowGap': gridGapToCss(props.rowGap, 1) }) }
 	}
 
-	${ mediaQueries.extraLargeAndUp } {
+	${ mediaQueries.largerAndUp } {
 		${ props => gridDefToCss(props.large) }
 		${ props => ({ 'columnGap': gridGapToCss(props.colGap, 2) }) }
 		${ props => ({ 'rowGap': gridGapToCss(props.rowGap, 2) }) }
@@ -147,87 +147,87 @@ const GridOverlay = styled(StyledGrid)`
 `
 
 class Grid extends Component {
-  state = {
-  	windowWidth: null
-  }
+	state = {
+		windowWidth: null
+	}
 
-  componentDidMount () {
-  	if (this.props.showOverlay) {
-  		this.handleResize()
-  		window.addEventListener('resize', this.handleResize)
-  	}
-  }
+	componentDidMount () {
+		if (this.props.showOverlay) {
+			this.handleResize()
+			window.addEventListener('resize', this.handleResize)
+		}
+	}
 
-  componentWillUnmount () {
-  	if (this.props.showOverlay) {
-  		window.removeEventListener('resize', this.handleResize)
-  	}
-  }
+	componentWillUnmount () {
+		if (this.props.showOverlay) {
+			window.removeEventListener('resize', this.handleResize)
+		}
+	}
 
-  handleResize = event => {
-  	const width = window.innerWidth
-  	this.setState({ windowWidth: width })
-  }
+	handleResize = event => {
+		const width = window.innerWidth
+		this.setState({ windowWidth: width })
+	}
 
-  render () {
-  	const { small, medium, large, colGap, rowGap, showOverlay, children } = this.props
-  	const { windowWidth } = this.state
+	render () {
+		const { small, medium, large, colGap, rowGap, showOverlay, children } = this.props
+		const { windowWidth } = this.state
 
-  	if (showOverlay) {
-  		const OverlayColumnsSmall = _.range(numberOfCols(small)).map(() => { return '[1]' }).join(' ')
-  		const OverlayColumnsMedium = _.range(numberOfCols(medium)).map(() => { return '[1]' }).join(' ')
-  		const OverlayColumnsLarge = _.range(numberOfCols(large)).map(() => { return '[1]' }).join(' ')
+		if (showOverlay) {
+			const OverlayColumnsSmall = _.range(numberOfCols(small)).map(() => { return '[1]' }).join(' ')
+			const OverlayColumnsMedium = _.range(numberOfCols(medium)).map(() => { return '[1]' }).join(' ')
+			const OverlayColumnsLarge = _.range(numberOfCols(large)).map(() => { return '[1]' }).join(' ')
 
-  		return (
-  			<div style={{ position: 'relative', width: '100%' }}>
-  				<StyledGrid
-  					small={small}
-  					medium={medium}
-  					large={large}
-  					colGap={colGap}
-  					rowGap={rowGap}
-  				>
-  					{children}
-  				</StyledGrid>
-  				<GridOverlay
-  					small={OverlayColumnsSmall}
-  					medium={OverlayColumnsMedium}
-  					large={OverlayColumnsLarge}
-  					colGap={colGap}
-  					rowGap={rowGap}
-  				>
-  					{_.range(numberOfCols(small)).map((item, index) => {
-  						if (windowWidth < mediaQueries.largeBreakpoint) {
-  							return (<div key={'overlay-col-' + index} />)
-  						}
-  					})}
-  					{_.range(numberOfCols(medium)).map((item, index) => {
-  						if (windowWidth > mediaQueries.largeBreakpoint && windowWidth < mediaQueries.largerBreakpoint) {
-  							return (<div key={'overlay-col-' + index} />)
-  						}
-  					})}
-  					{_.range(numberOfCols(large)).map((item, index) => {
-  						if (windowWidth > mediaQueries.largerBreakpoint) {
-  							return (<div key={'overlay-col-' + index} />)
-  						}
-  					})}
-  				</GridOverlay>
-  			</div>
-  		)
-  	}
+			return (
+				<div style={{ position: 'relative', width: '100%' }}>
+					<StyledGrid
+						small={small}
+						medium={medium}
+						large={large}
+						colGap={colGap}
+						rowGap={rowGap}
+					>
+						{children}
+					</StyledGrid>
+					<GridOverlay
+						small={OverlayColumnsSmall}
+						medium={OverlayColumnsMedium}
+						large={OverlayColumnsLarge}
+						colGap={colGap}
+						rowGap={rowGap}
+					>
+						{_.range(numberOfCols(small)).map((item, index) => {
+							if (windowWidth < mediaQueries.mediumBreakpoint) {
+								return (<div key={'overlay-col-' + index} />)
+							}
+						})}
+						{_.range(numberOfCols(medium)).map((item, index) => {
+							if (windowWidth > mediaQueries.mediumBreakpoint && windowWidth < mediaQueries.largeBreakpoint) {
+								return (<div key={'overlay-col-' + index} />)
+							}
+						})}
+						{_.range(numberOfCols(large)).map((item, index) => {
+							if (windowWidth > mediaQueries.largeBreakpoint) {
+								return (<div key={'overlay-col-' + index} />)
+							}
+						})}
+					</GridOverlay>
+				</div>
+			)
+		}
 
-  	return (
-  		<StyledGrid
-  			small={small}
-  			medium={medium}
-  			large={large}
-  			colGap={colGap}
-  			rowGap={rowGap}
-  		>
-  			{children}
-  		</StyledGrid>
-  	)
-  }
+		return (
+			<StyledGrid
+				small={small}
+				medium={medium}
+				large={large}
+				colGap={colGap}
+				rowGap={rowGap}
+			>
+				{children}
+			</StyledGrid>
+		)
+	}
 }
 
 Grid.propTypes = {

@@ -8,10 +8,7 @@ import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
   background-color: ${ colors.offwhite };
-`
-
-const ItemsContainer = styled(Container)`
-  color: ${ colors.black };
+color: ${ colors.black };
 `
 
 const ProductContainer = styled.div`
@@ -53,8 +50,9 @@ const LinkStyled = styled(Link)`
 
 const ProductGrid = ({ title, items }) => (
 	<Wrapper>
-		<ItemsContainer>
-			<ContentBlock title={title}>
+		<Container>
+			<ContentBlock>
+				<h3>{title}</h3>
 				<Grid
 					showOverlay={true}
 					large="[1] [1] [1] [1]"
@@ -62,30 +60,30 @@ const ProductGrid = ({ title, items }) => (
 					small="[1] [1]"
 				>
 					{items &&
-            items.map(({ name, byline, company, icon, links }) => (
-            	<ProductContainer>
-            		<Grid
-            			showOverlay={true}
-            			large="[2] 1"
-            			medium="[2] 1"
-            			small="[2] 1"
-            		>
-            			<LogoContainer key={name}>
-            				<img src={icon} />
-            			</LogoContainer>
-            		</Grid>
-            		<div>
-            			<Name>{name}</Name>
-            			<Byline>{byline}</Byline>
-            			<Company>{company}</Company>
-            			{links.map(link => <LinkStyled external to={link.href}>{link.name}</LinkStyled>)}
-            		</div>
-            	</ProductContainer>
-            ))
+						items.map(({ name, byline, company, icon, links }) => (
+							<ProductContainer>
+								<Grid
+									showOverlay={true}
+									large="[2] 1"
+									medium="[2] 1"
+									small="[2] 1"
+								>
+									<LogoContainer key={name}>
+										<img src={icon} />
+									</LogoContainer>
+								</Grid>
+								<div>
+									<Name>{name}</Name>
+									<Byline>{byline}</Byline>
+									<Company>{company}</Company>
+									{links.map(link => <LinkStyled external to={link.href}>{link.name}</LinkStyled>)}
+								</div>
+							</ProductContainer>
+						))
 					}
 				</Grid>
 			</ContentBlock>
-		</ItemsContainer>
+		</Container>
 	</Wrapper>
 )
 

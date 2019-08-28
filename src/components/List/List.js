@@ -5,13 +5,12 @@ import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
+import Hr from 'src/components/Hr'
+import VideoEmbed from 'src/components/VideoEmbed'
 
 const Wrapper = styled.div`
   background-color: ${ colors.offwhite };
-`
-
-const ItemsContainer = styled(Container)`
-  color: ${ colors.black };
+color: ${ colors.black };
 `
 
 const LogoContainer = styled.div`
@@ -24,33 +23,70 @@ const LogoContainer = styled.div`
   };
 `
 
-const List = ({ title, items }) => (
+const Title = styled.h3``
+
+const ContainerRow = styled(Container)`
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: space-between;
+`
+
+const Padding = styled.div`
+	padding: 36px 0;
+	width: 100%;
+`
+
+const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, externalLink }) => (
 	<Wrapper>
-		<ItemsContainer>
-			<ContentBlock title={title}>
-				<Grid
-					showOverlay={true}
-					large="[4] 1 [7]"
-					medium="[4] 1 [7]"
-					small="[6]"
-				>
-					{items &&
-            items.map(item => (
-            	<React.Fragment>
-            		<LogoContainer key={item.id}><div><img src={item.logo} /></div></LogoContainer>
-            		<div key={item.id + '_div'}>
-            			{item.text}
-            			<p>
-            				<Link external to={item.link}>LEARN MORE</Link>
-            			</p>
-            		</div>
-            	</React.Fragment>
-            ))
-					}
-				</Grid>
-			</ContentBlock>
-		</ItemsContainer>
-	</Wrapper>
+		<ContentBlock>
+			<ContainerRow>
+				<h3>{title}</h3>
+				{externalLink && <Link external to={externalLink.href}>{externalLink.name}</Link>}
+			</ContainerRow>
+			{showTitleHr && <Hr full color={colors.black} />}
+			{items &&
+				items.map(({ id, logo, title, text, link, image, video }, index) => (
+					<React.Fragment>
+						{(showHr && index !== 0) && <Hr color={colors.black} />}
+						<Container>
+							<Padding>
+								<Grid
+									showOverlay={true}
+									{...gridSettings}
+								>
+									<LogoContainer key={id}><div><img src={logo} /></div></LogoContainer>
+									<div key={id + '_div'}>
+										<Title>{title}</Title>
+										{text}
+										<p>
+											<Link external to={link}>{linkText}</Link>
+										</p>
+										{image && <Padding>
+											<Grid
+												showOverlay={true}
+												small='[6]'
+												medium='[4] 4'
+												large='[4] 4'
+											>
+												<img src={image} />
+											</Grid>
+										</Padding>}
+										{video && <Padding>
+											<VideoEmbed
+												gridSettings={{ small: '[6]', medium: '[4] 4', large: '[4] 4' }}
+												{...video}
+											/>
+										</Padding>}
+									</div>
+								</Grid>
+							</Padding>
+						</Container>
+					</React.Fragment>
+				))
+			}
+		</ContentBlock>
+	</Wrapper >
 )
 
 export default List

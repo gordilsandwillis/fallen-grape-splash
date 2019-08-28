@@ -38,6 +38,7 @@ export const pages = {
 			},
 			companyData: {
 				title: 'Our Companies',
+				linkText: 'LEARN MORE',
 				items: [
 					{
 						id: 'dailyburn',
@@ -167,7 +168,7 @@ export const pages = {
 	},
 	Careers: {
 		name: 'Careers',
-		slug: '/careers'
+		slug: '/careers',
 	},
 	Contact: {
 		name: 'Contact',
@@ -193,7 +194,51 @@ export const pages = {
 	},
 	Press: {
 		name: 'Press',
-		slug: '/press'
+		slug: '/press',
+		components: {
+			pressData: {
+				title: 'The Latest',
+				linkText: 'READ MORE',
+				externalLink: {
+					name: 'PRESS@MOSAIC.CO',
+					href: 'https://google.com'
+				},
+				items: [
+					{
+						title: `New app released can help stop 'robo-calls'`,
+						text: 'The app-based service instantly protects people from more than 200,000 numbers.',
+						link: 'https://abc.com',
+						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_nbc.png?raw=true'
+					},
+					{
+						title: 'Inside the effort to stop robocalls',
+						text: 'NBC News Investigative Correspondent Jeff Rossen meets the minds behind RoboKiller, an app that wants to stop annoying robocalls.',
+						link: 'https://nbc.com',
+						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_theverge.png?raw=true',
+						video: {
+							coverImage: 'https://d7hftxdivxxvm.cloudfront.net/?resize_to=fit&width=400&height=303&quality=80&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2FAGvAJBGTlt6AGKiMPhzCXA%2Flarge.jpg',
+							url: 'https://www.youtube.com/watch?v=_wUIexMVG9k',
+						}
+					},
+					{
+						title: `iTranslate's new app gets us one step closer to simple, real-time...`,
+						text: `There's a new app out from iTranslate that teases the idea of real-time, universal translation better than almost anything before it.`,
+						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_nbc.png?raw=true',
+						image: 'https://media.pri.org/s3fs-public/styles/story_main/public/images/2019/08/robot_lead_crop.jpg?itok=Uc4umkLW'
+					},
+					{
+						title: 'Second video example title',
+						text: 'Google News example correspondent reports information about product.',
+						link: 'https://google.com',
+						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_theverge.png?raw=true',
+						video: {
+							coverImage: 'https://artillerymag.com/wp-content/uploads/2019/03/Cortright_Petra_-_TBI_PC18.08e.12_-_BETTY_CROCKER_BioAss_chickensroosters_-_Res300framed_1.jpg',
+							url: 'https://www.youtube.com/watch?v=0wZpheK98Gc',
+						}
+					},
+				]
+			}
+		}
 	}
 }
 

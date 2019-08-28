@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { mediaQueries as mq, gridSettings } from 'src/styles'
+import Container from 'src/components/Container'
+import Link from 'src/components/Link'
 
 const ContentBlockStyles = styled.div`
 	max-width: 2500px;
@@ -18,15 +20,21 @@ const ContentBlockStyles = styled.div`
 	${ mq.smallAndBelow } {
     padding: ${ gridSettings.containerSmallMargins } 0;
 	}
+	h3 {
+	margin-bottom: 50px;
+		flex: 1;
+	}
 `
 
-const H3Styled = styled.h3`
-  margin-bottom: 50px;
+const TitleRow = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
 `
 
-const ContentBlock = ({ title, children }) => (
+const ContentBlock = ({ children }) => (
 	<ContentBlockStyles>
-		{title && <H3Styled>{title}</H3Styled>}
 		{children}
 	</ContentBlockStyles>
 )

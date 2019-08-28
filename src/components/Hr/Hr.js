@@ -9,10 +9,17 @@ const HrContainer = styled.div`
   left: 0;
 `
 
-const ShortHr = styled.div`
-  width: ${ gridSettings.containerLargeMargins };
+const HrStyles = styled.div`
   height: 2px;
 	background-color: ${ ({ color = colors.primaryColor }) => color };
+`
+
+const FullHr = styled(HrStyles)`
+	width: 100%;
+`
+
+const ShortHr = styled(HrStyles)`
+  width: ${ gridSettings.containerLargeMargins };
   ${ mq.largeAndBelow } {
 		width: ${ gridSettings.containerMediumMargins };
 	}
@@ -26,10 +33,15 @@ const ShortHr = styled.div`
   }
 `
 
-const Hr = ({ color }) => (
+const Hr = ({ color, full }) => (
 	<HrContainer>
-		<ShortHr color={color} />
-		<ShortHr color={color} />
+		{full
+			? <FullHr color={color} />
+			: <React.Fragment>
+				<ShortHr color={color} />
+				<ShortHr color={color} />
+			</React.Fragment>
+		}
 	</HrContainer>
 )
 

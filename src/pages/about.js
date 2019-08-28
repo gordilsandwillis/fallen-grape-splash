@@ -30,18 +30,17 @@ class About extends Component {
 		const { data, location } = this.props
 		const { About: { components: { atfData, conceptsData, leadershipData, companyData, awardsData } } } = pages
 		const { footerData } = shared
-
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />
-				<Header logo={data.Logo} location={location} />
+				<Header location={location} />
 				<ATF
 					{...atfData}
 					image={data.ATFimage}
 					align='left'
 					showHr={true}
 					verticalAlign='flex-end'
-					gridConfig={{
+					gridSettings={{
 						small: '[6]',
 						medium: '[9] 3',
 						large: '[9] 3'
@@ -49,7 +48,13 @@ class About extends Component {
 				/>
 				<ThreeUp {...conceptsData} />
 				<FourUp {...leadershipData} />
-				<List {...companyData} />
+				<List {...companyData}
+					gridSettings={{
+						large: '[4] 1 [7]',
+						medium: '[4] 1 [7]',
+						small: '[6]'
+					}}
+				/>
 				<Slider {...awardsData} collapseToArrows={true} />
 				<Footer
 					fixed={true}

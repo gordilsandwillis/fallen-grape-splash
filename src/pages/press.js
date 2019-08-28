@@ -4,8 +4,7 @@ import styled from '@emotion/styled'
 import { mediaQueries, colors, typography } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
-import Slider from 'src/components/Slider'
-import ProductGrid from 'src/components/ProductGrid'
+import List from 'src/components/List'
 import Hr from 'src/components/Hr'
 import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
@@ -13,36 +12,38 @@ import { pages, shared } from 'src/mockData'
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `
 		padding-top: 100px;
-		${ mediaQueries.largerAndUp} {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 3rem;
 		}
 	` : `
 		padding-top: 0;
-		${ mediaQueries.largerAndUp} {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 0;
 		}
 	` }
 `
 
-class Products extends Component {
-	render() {
+class Press extends Component {
+	render () {
 		const { data, location } = this.props
-		const { Products: { components: { productData } } } = pages
+		const { Press: { components: { pressData } } } = pages
 		const { footerData } = shared
-
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />
 				<Header theme='light' location={location} />
-				<Slider
-					items={productData.items.filter(item => item.slideshow)}
-					collapseToArrows={true}
-					centered={false}
+				<List {...pressData}
+					showHr
+					showTitleHr
+					gridSettings={{
+						large: '[2] 1 [8] 1',
+						medium: '[3] 1 [9]',
+						small: '[6]'
+					}}
 				/>
-				<ProductGrid {...productData} />
-				<Hr color={colors.black} />
 				<Footer
 					fixed={true}
+					showHr={true}
 					{...footerData}
 				/>
 			</PageWrap>
@@ -50,16 +51,4 @@ class Products extends Component {
 	}
 }
 
-export default Products
-
-export const PlaceholderQuery = graphql`
-	query {
-		ATFimage: file(relativePath: { eq: "images/aboutATF.jpg" }) {
-			childImageSharp {
-				fluid {
-					...GatsbyImageSharpFluid_noBase64
-				}
-			}
-		}
-	}
-`
+export default Press

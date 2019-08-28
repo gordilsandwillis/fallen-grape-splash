@@ -7,9 +7,6 @@ import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
   background-color: ${ colors.offwhite };
-`
-
-const ItemsContainer = styled(Container)`
   color: ${ colors.black };
 `
 
@@ -19,7 +16,7 @@ const GreyText = styled.div`
 
 const ThreeUp = ({ items }) => (
 	<Wrapper>
-		<ItemsContainer>
+		<Container>
 			<ContentBlock>
 				<Grid
 					showOverlay={true}
@@ -28,19 +25,19 @@ const ThreeUp = ({ items }) => (
 					small="[6]"
 				>
 					{items &&
-            items.map(item => (
-            	<div>
-            		<h4>
-            			{item.title}
-            		</h4>
-            		<GreyText>{item.tags && mapTags(item.tags)}</GreyText>
-            		<div>{item.description}</div>
-            	</div>
-            ))
+						items.map(item => (
+							<div>
+								<h4>
+									{item.title}
+								</h4>
+								<GreyText>{item.tags && mapTags(item.tags)}</GreyText>
+								<div>{item.description}</div>
+							</div>
+						))
 					}
 				</Grid>
 			</ContentBlock>
-		</ItemsContainer>
+		</Container>
 	</Wrapper>
 )
 
