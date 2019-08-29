@@ -83,6 +83,13 @@ const IconContainer = styled.div`
   height: 24px;
   svg {
     stroke: ${ ({ theme }) => (theme === 'light' ? colors.black : colors.white) };
+    transition: stroke ${ animations.mediumSpeed } ease-in-out;
+  }
+  &:hover {
+    svg {
+      stroke: ${ ({ theme }) =>
+		theme === 'light' ? colors.grey : colors.unofficialLightGrey };
+    }
   }
 `
 
@@ -202,7 +209,7 @@ class Header extends Component {
   												<CloseIcon />
   											</IconContainer>
   										</HamburgerContainer>
-  										<MobileNavLinkContainer>
+  										<MobileNavLinkContainer mobileNavOpen={mobileNavOpen}>
   											{navPages.map(({ name, slug }) => (
   												<MobileNavLink key={name} to={slug}>
   													{name}
