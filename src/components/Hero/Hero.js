@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Image from 'src/components/Image'
+import { typography } from 'src/styles'
 
 const Block = styled.div`
   display: flex;
   align-items: center;
-  height: 400px;
+  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }
   width: 100%;
   position: relative;
   overflow: hidden;

@@ -9,6 +9,7 @@ import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import { colors, gridSettings, typography, mediaQueries as mq } from 'src/styles'
 import withSizes from 'react-sizes'
+import MobileDetect from 'mobile-detect'
 
 const AlignmentContainer = styled.div`
 height: 100%;
@@ -37,8 +38,8 @@ const Block = styled.div`
   display: block;
   /* ${ ({ hasFooter }) => hasFooter && `bottom: 75px;` } */
 	height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
-	width: 100%;
 	max-height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
+	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };
 
@@ -103,6 +104,15 @@ const PaddedParagraph = styled.p`
 	${ typography.responsiveStyles('padding-bottom', 50, 30, 0, 0) }
 `
 class ATF extends Component {
+	shouldComponentUpdate (prevProps, prevState) {
+		const md = new MobileDetect(window.navigator.userAgent)
+		if (md.is('iPhone') && prevProps.winHeight !== this.props.winHeight) {
+			return false
+		}
+
+		return true
+	}
+
 	render () {
 		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, buttonText, buttonLink, hasFooter, gridSettings } = this.props
 		return (
