@@ -161,7 +161,7 @@ const Slider = ({ items, windowWidth, windowHeight, title, dots = true, arrows =
 			<SlickSliderDark accessibility centered={centered} {...settings}>
 				{items && items.map(({ name, announcement, byline, links, icon, slideshow }) => (
 					centered ? (
-						<ContainerStyled centered={centered}>
+						<ContainerStyled key={name + announcement} centered={centered}>
 							<CenteredText>
 								<Name>{name}</Name>
 								<Announcement>{announcement}</Announcement>

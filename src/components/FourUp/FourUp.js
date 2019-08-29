@@ -25,13 +25,13 @@ const FourUp = ({ items, title }) => (
 					small="[6]"
 				>
 					{items &&
-						items.map(item => (
-							<div>
+						items.map(({ title, subtitle, description }, index) => (
+							<div key={title + index}>
 								<h4>
-									{item.title}
+									{title}
 								</h4>
-								<GreyText>{item.subtitle}</GreyText>
-								<div>{item.description}</div>
+								<GreyText>{subtitle}</GreyText>
+								<div>{description}</div>
 							</div>
 						))
 					}

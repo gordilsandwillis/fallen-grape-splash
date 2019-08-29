@@ -47,16 +47,16 @@ const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, exter
 			{showTitleHr && <Hr full color={colors.black} />}
 			{items &&
 				items.map(({ id, logo, title, text, link, image, video }, index) => (
-					<React.Fragment>
-						{(showHr && index !== 0) && <Hr color={colors.black} />}
-						<Container>
+					<React.Fragment key={index + '_fragment'}>
+						{(showHr && index !== 0) && <Hr key={index + '_hr'} color={colors.black} />}
+						<Container key={index + '_container'}>
 							<Padding>
 								<Grid
 									showOverlay={false}
 									{...gridSettings}
 								>
-									<LogoContainer key={id}><div><img src={logo} /></div></LogoContainer>
-									<div key={id + '_div'}>
+									<LogoContainer><div><img src={logo} /></div></LogoContainer>
+									<div>
 										<Title>{title}</Title>
 										{text}
 										<p>

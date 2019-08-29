@@ -7,10 +7,10 @@ const transitionSpeed = '.65s'
 const transitionDelay = 0.075
 
 const EnteranceWrap = styled.div`
-	> * {
-		transition: transform ${ transitionSpeed } ${ transitionTiming },
-			opacity ${ transitionSpeed } ${ transitionTiming };
-		${ ({ 'data-in-view': inView, transform }) =>
+  > * {
+    transition: transform ${ transitionSpeed } ${ transitionTiming },
+      opacity ${ transitionSpeed } ${ transitionTiming };
+    ${ ({ 'data-in-view': inView, transform }) =>
 		inView
 			? `
 			transform: none;
@@ -21,19 +21,19 @@ const EnteranceWrap = styled.div`
 			opacity: 0;
 		` }
 
-		${ ({ children }) =>
+    ${ ({ children }) =>
 		Array.isArray(children)
 			? `
 			${ children.map(
 		(item, index) => `
-				&:nth-child(${ index + 1 }) {
+				&:nth-of-type(${ index + 1 }) {
 					transition-delay: ${ transitionDelay * (index + 1) }s;
 				}
 			`
 	) }
 		`
 			: `` }
-	}
+  }
 `
 
 const ScrollEntrance = ({ children, className, transform }) => {

@@ -78,7 +78,7 @@ const IconContainer = styled.div`
   align-items: flex-end;
   width: 24px;
   height: 24px;
-	svg {
+  svg {
     stroke: ${ ({ theme }) => (theme === 'light' ? colors.black : colors.white) };
   }
 `
@@ -171,9 +171,9 @@ class Header extends Component {
   					<NavItemsContainer>
   						<DesktopDetect>
   							{navPages.map(({ name, slug }) => (
-  								<LinkContainer>
+  								<LinkContainer key={name + slug}>
   									<Link
-  										underlined={slug === pathname}
+  										underlined={slug === pathname ? 'true' : undefined}
   										theme={theme}
   										key={name}
   										to={slug}

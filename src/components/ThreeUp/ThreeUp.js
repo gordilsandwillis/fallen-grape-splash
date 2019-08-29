@@ -25,13 +25,13 @@ const ThreeUp = ({ items }) => (
 					small="[6]"
 				>
 					{items &&
-						items.map(item => (
-							<div>
+						items.map(({ title, tags, description }, index) => (
+							<div key={title + index}>
 								<h4>
-									{item.title}
+									{title}
 								</h4>
-								<GreyText>{item.tags && mapTags(item.tags)}</GreyText>
-								<div>{item.description}</div>
+								<GreyText>{tags && mapTags(tags)}</GreyText>
+								<div>{description}</div>
 							</div>
 						))
 					}

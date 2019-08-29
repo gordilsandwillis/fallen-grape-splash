@@ -140,7 +140,7 @@ const GridOverlay = styled(StyledGrid)`
 		height: 100%;
 		background: ${ colors.alert };
 		opacity: .6;
-		&:nth-child(odd) {
+		&:nth-of-type(odd) {
 			opacity: .4;
 		}
 	}
