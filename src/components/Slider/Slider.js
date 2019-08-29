@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import SlickSlider from 'react-slick'
+import withSizes from 'react-sizes'
 
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
@@ -60,6 +61,32 @@ const SlickSliderDark = styled(SlickSlider)`
 
 ` }
   }
+
+  .slick-arrow.slick-next, .slick-arrow.slick-prev {
+    ::before {
+      content: '';
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 10px;
+      bottom: 30px;
+    }
+    z-index: 2;
+  }
+  .slick-list {
+    z-index: 0;
+  }
+
+  .slick-next {
+    right: 25px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  .slick-prev {
+    left: 25px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
 `
 
 const CenteredText = styled.div`
@@ -110,9 +137,14 @@ const Block = styled.div`
   padding: 40px 0;
 `
 
-const Slider = ({ items, title, dots = true, centered = true }) => {
+const Slider = ({ items, windowWidth, windowHeight, title, dots = true, arrows = false, collapseToArrows = false, centered = true }) => {
+	if (collapseToArrows && windowWidth < mq.mediumBreakpoint) {
+		dots = false
+		arrows = true
+	}
 	const settings = {
 		dots,
+		arrows,
 		infinite: true,
 		speed: 500,
 		slidesToShow: 1,
@@ -126,7 +158,7 @@ const Slider = ({ items, title, dots = true, centered = true }) => {
 					<Title>{title}</Title>
 				</Container>
 			)}
-			<SlickSliderDark centered={centered} {...settings}>
+			<SlickSliderDark accessibility centered={centered} {...settings}>
 				{items && items.map(({ name, announcement, byline, links, icon, slideshow }) => (
 					centered ? (
 						<ContainerStyled centered={centered}>
@@ -151,4 +183,4 @@ const Slider = ({ items, title, dots = true, centered = true }) => {
 	)
 }
 
-export { Slider as default }
+export default withSizes(({ width, height }) => ({ windowWidth: width, windowHeight: height }))(Slider)

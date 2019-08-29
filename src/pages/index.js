@@ -37,7 +37,7 @@ class Home extends Component {
 					hasFooter={true}
 					align='center'
 					gridSettings={{
-						small: '1 [10] 1',
+						small: '[12]',
 						medium: '1 [10] 1',
 						large: '[6]'
 					}}

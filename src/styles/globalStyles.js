@@ -23,6 +23,7 @@ export default `
   }
 
   html {
+    -webkit-font-smoothing: antialiased;
     font-display: block;
     background: ${ colors.offwhite };
     &.page-lock {

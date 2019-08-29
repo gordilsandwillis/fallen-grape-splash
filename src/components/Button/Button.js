@@ -10,7 +10,7 @@ import Link from 'src/components/Link'
 
 const buttonSizes = {
 	tiny: '24px',
-	small: '48px',
+	small: '30px',
 	medium: '50px',
 	large: '66px',
 }
@@ -31,7 +31,8 @@ const getState = (loading, error, success, disabled) => {
 }
 
 const ButtonStyles = (state, shape, size) => (`
-  appearance: none;
+	padding: 30px 0;
+	appearance: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-touch-callout: none;
   outline: none;
@@ -39,7 +40,8 @@ const ButtonStyles = (state, shape, size) => (`
   vertical-align: middle;
   background: transparent;
   border: 2px solid ${ colors.white };
-  height: ${ buttonSizes.small };
+	${ typography.responsiveStyles('height', 30, 30, 30, 45) }
+	height: ${ buttonSizes.small };
   cursor: pointer;
   line-height: 1em;
   text-transform: none;
@@ -104,6 +106,7 @@ const ButtonStyles = (state, shape, size) => (`
 
 const ButtonContent = styled.div`
 	display: flex;
+	padding-top: 1px;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
@@ -123,82 +126,82 @@ const StyledButtonElement = styled.button`
 `
 
 class Button extends Component {
-  renderIcon = icon => {
-  	let renderedIcon = false
-  	if (typeof icon === 'string') {
-  		renderedIcon = <MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon>
-  	} else {
-  		renderedIcon = icon
-  	}
-  	return renderedIcon
-  }
+	renderIcon = icon => {
+		let renderedIcon = false
+		if (typeof icon === 'string') {
+			renderedIcon = <MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon>
+		} else {
+			renderedIcon = icon
+		}
+		return renderedIcon
+	}
 
-  render () {
-  	const { to,
-  		external,
-  		target,
-  		children,
-  		icon,
-  		iconPosition,
-  		loading,
-  		error,
-  		success,
-  		disabled,
-  		onClick,
-  		theme,
-  		className,
-  		shape,
-  		size
-  	} = this.props
+	render () {
+		const { to,
+			external,
+			target,
+			children,
+			icon,
+			iconPosition,
+			loading,
+			error,
+			success,
+			disabled,
+			onClick,
+			theme,
+			className,
+			shape,
+			size
+		} = this.props
 
-  	if (to) {
-  		return (
-  			<StyledButtonLink
-  				className={className}
-  				href={to}
-  				target={target}
-  				external={external}
-  				icon={icon}
-  				iconPosition={iconPosition}
-  				loading={loading}
-  				error={error}
-  				success={success}
-  				disabled={disabled}
-  				onClick={onClick}
-  				theme={theme}
-  				shape={shape}
-  				size={size}
-  			>
-  				<ButtonContent>
-  					{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
-  					{children}
-  					{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
-  				</ButtonContent>
-  			</StyledButtonLink>
-  		)
-  	} else {
-  		return (
-  			<StyledButtonElement
-  				className={className}
-  				icon={icon}
-  				iconPosition={iconPosition}
-  				loading={loading}
-  				error={error}
-  				success={success}
-  				disabled={disabled}
-  				onClick={onClick}
-  				theme={theme}
-  				shape={shape}
-  				size={size}
-  			>
-  				<ButtonContent>
-  					{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
-  					{children}
-  					{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
-  				</ButtonContent>
-  			</StyledButtonElement>
-  		)
-  	}
-  }
+		if (to) {
+			return (
+				<StyledButtonLink
+					className={className}
+					href={to}
+					target={target}
+					external={external}
+					icon={icon}
+					iconPosition={iconPosition}
+					loading={loading}
+					error={error}
+					success={success}
+					disabled={disabled}
+					onClick={onClick}
+					theme={theme}
+					shape={shape}
+					size={size}
+				>
+					<ButtonContent>
+						{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
+						{children}
+						{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
+					</ButtonContent>
+				</StyledButtonLink>
+			)
+		} else {
+			return (
+				<StyledButtonElement
+					className={className}
+					icon={icon}
+					iconPosition={iconPosition}
+					loading={loading}
+					error={error}
+					success={success}
+					disabled={disabled}
+					onClick={onClick}
+					theme={theme}
+					shape={shape}
+					size={size}
+				>
+					<ButtonContent>
+						{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
+						{children}
+						{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
+					</ButtonContent>
+				</StyledButtonElement>
+			)
+		}
+	}
 }
 export default Button

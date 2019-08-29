@@ -19,7 +19,7 @@ const FourUp = ({ items, title }) => (
 		<ContentBlock>
 			<Container>
 				<Grid
-					showOverlay={true}
+					showOverlay={false}
 					large="[3] [3] [3] [3]"
 					medium="[3] [3] [3] [3]"
 					small="[6]"

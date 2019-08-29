@@ -54,7 +54,7 @@ const ProductGrid = ({ title, items }) => (
 			<ContentBlock>
 				<h3>{title}</h3>
 				<Grid
-					showOverlay={true}
+					showOverlay={false}
 					large="[1] [1] [1] [1]"
 					medium="[1] [1] [1] [1]"
 					small="[1] [1]"
@@ -63,7 +63,7 @@ const ProductGrid = ({ title, items }) => (
 						items.map(({ name, byline, company, icon, links }) => (
 							<ProductContainer>
 								<Grid
-									showOverlay={true}
+									showOverlay={false}
 									large="[2] 1"
 									medium="[2] 1"
 									small="[2] 1"

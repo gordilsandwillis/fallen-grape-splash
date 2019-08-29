@@ -26,7 +26,7 @@ const Pretext = styled.div`
 const ContactCopy = ({ headline, title, items }) => (
 	<ContainerStyled>
 		<Grid
-			showOverlay={true}
+			showOverlay={false}
 			small={'[6]'}
 			medium={'[6] 2 [4]'}
 			large={'[6] 2 [4]'}

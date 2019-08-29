@@ -52,7 +52,7 @@ const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, exter
 						<Container>
 							<Padding>
 								<Grid
-									showOverlay={true}
+									showOverlay={false}
 									{...gridSettings}
 								>
 									<LogoContainer key={id}><div><img src={logo} /></div></LogoContainer>
@@ -64,7 +64,7 @@ const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, exter
 										</p>
 										{image && <Padding>
 											<Grid
-												showOverlay={true}
+												showOverlay={false}
 												small='[6]'
 												medium='[4] 4'
 												large='[4] 4'

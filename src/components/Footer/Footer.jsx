@@ -65,7 +65,12 @@ const Footer = ({
 	<Wrapper fixed={fixed}>
 		{showHr && <Hr color={colors.black} />}
 		<FooterContainer>
-			<Grid showOverlay={true} small="[5] [1]" medium="[6] [6]" large="[6] [6]">
+			<Grid
+				showOverlay={false}
+				small="[5] [1]"
+				medium="[6] [6]"
+				large="[6] [6]"
+			>
 				<div>
 					<FooterText>{footerTextLeft}</FooterText>
 					<FooterTextGrey>{footerTextLeftLineTwo}</FooterTextGrey>

@@ -75,7 +75,7 @@ class VideoEmbed extends Component {
 		const { video } = this.state
 		return (
 			<Grid
-				showOverlay={true}
+				showOverlay={false}
 				{...gridSettings}
 			>
 				<Wrapper onClick={() => this.setState({ video: true })}>

@@ -22,6 +22,16 @@ import {
 } from 'src/styles'
 import { navPages } from 'src/mockData'
 
+const Wrapper = styled.header`
+  ${ ({ theme }) => (theme === 'light' ? lightStyles : transparentStyles) };
+  color: ${ colors.black };
+  ${ typography.body }
+  left: 0;
+  right: 0;
+  z-index: 4;
+  height: 150px;
+`
+
 const lightStyles = `
   position: static;
   background-color: ${ colors.offwhite };
@@ -35,15 +45,6 @@ const transparentStyles = `
   color: ${ colors.primaryColor };
 `
 
-const Wrapper = styled.footer`
-  ${ ({ theme }) => (theme === 'light' ? lightStyles : transparentStyles) };
-  left: 0;
-  right: 0;
-  color: ${ colors.black };
-  z-index: 4;
-  height: 150px;
-`
-
 const HeaderContainer = styled(Container)`
   display: flex;
   flex-direction: column;
@@ -52,7 +53,6 @@ const HeaderContainer = styled(Container)`
 
 const NavContainer = styled(HeaderContainer)`
   ${ typography.bodyLight }
-  ${ typography.responsiveStyles('font-size', 40, 40, 40, 40) }
   display: flex;
   flex-direction: column;
 `
@@ -76,8 +76,8 @@ const IconContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  ${ typography.responsiveStyles('height', 40, 36, 32, 24) }
-  ${ typography.responsiveStyles('width', 40, 36, 32, 24) }
+  width: 24px;
+  height: 24px;
 	svg {
     stroke: ${ ({ theme }) => (theme === 'light' ? colors.black : colors.white) };
   }
@@ -93,8 +93,9 @@ const LinkContainer = styled.span`
 `
 
 const MobileNavLink = styled(Link)`
+  font-size: 44px;
   z-index: 5;
-  padding-bottom: 25px;
+  line-height: 100px;
 `
 
 const DesktopDetect = styled.div`
@@ -154,74 +155,64 @@ class Header extends Component {
   	} = this.props
   	const { mobileNavOpen } = this.state
   	return (
-  		<Fragment>
-  			<Wrapper theme={theme}>
-  				<HeaderContainer>
-  					<Grid
-  						showOverlay={true}
-  						small="[5] [1]"
-  						medium="[6] [6]"
-  						large="[6] [6]"
-  					>
-  						<LogoContainer>
-  							<Link to={'/'}>
-  								{theme === 'light' ? <LogoDark /> : <LogoLight />}
-  							</Link>
-  						</LogoContainer>
-  						<NavItemsContainer>
-  							<DesktopDetect>
-  								{navPages.map(page => {
-  									return page.slug === pathname ? (
-  										<LinkContainer>
-  											<Link
-  												underlined={true}
-  												theme={theme}
-  												key={page.name}
-  												to={page.slug}
-  											>
-  												{page.name}
-  											</Link>
-  										</LinkContainer>
-  									) : (
-  										<LinkContainer>
-  											<Link theme={theme} key={page.name} to={page.slug}>
-  												{page.name}
-  											</Link>
-  										</LinkContainer>
-  									)
-  								})}
-  							</DesktopDetect>
-  							<MobileDetect>
-  								{!mobileNavOpen ? (
-  									<HamburgerContainer onClick={this.toggleNav}>
-  										<IconContainer theme={theme}>
-  											<MenuIcon />
-  										</IconContainer>
-  									</HamburgerContainer>
-  								) : (
-  									<Overlay>
-  										<NavContainer>
-  											<HamburgerContainer onClick={this.toggleNav}>
-  												<IconContainer>
-  													<CloseIcon />
-  												</IconContainer>
-  											</HamburgerContainer>
-  											<MobileNavLinkContainer>
-  												{navPages.map(page => (
-  													<MobileNavLink key={page.name} to={page.slug}>
-  														{page.name}
-  													</MobileNavLink>
-  												))}
-  											</MobileNavLinkContainer>
-  										</NavContainer>
-  									</Overlay>
-  								)}
-  							</MobileDetect>
-  						</NavItemsContainer>
-  					</Grid>
-  				</HeaderContainer>
-  			</Wrapper>
-  		</Fragment>
+  		<Wrapper theme={theme}>
+  			<HeaderContainer>
+  				<Grid
+  					showOverlay={false}
+  					small="[5] [1]"
+  					medium="[6] [6]"
+  					large="[6] [6]"
+  				>
+  					<LogoContainer>
+  						<Link to={'/'}>
+  							{theme === 'light' ? <LogoDark /> : <LogoLight />}
+  						</Link>
+  					</LogoContainer>
+  					<NavItemsContainer>
+  						<DesktopDetect>
+  							{navPages.map(({ name, slug }) => (
+  								<LinkContainer>
+  									<Link
+  										underlined={slug === pathname}
+  										theme={theme}
+  										key={name}
+  										to={slug}
+  									>
+  										{name}
+  									</Link>
+  								</LinkContainer>
+  							))}
+  						</DesktopDetect>
+  						<MobileDetect>
+  							{!mobileNavOpen ? (
+  								<HamburgerContainer onClick={this.toggleNav}>
+  									<IconContainer theme={theme}>
+  										<MenuIcon />
+  									</IconContainer>
+  								</HamburgerContainer>
+  							) : (
+  								<Overlay>
+  									<NavContainer>
+  										<HamburgerContainer onClick={this.toggleNav}>
+  											<IconContainer>
+  												<CloseIcon />
+  											</IconContainer>
+  										</HamburgerContainer>
+  										<MobileNavLinkContainer>
+  											{navPages.map(({ name, slug }) => (
+  												<MobileNavLink key={name} to={slug}>
+  													{name}
+  												</MobileNavLink>
+  											))}
+  										</MobileNavLinkContainer>
+  									</NavContainer>
+  								</Overlay>
+  							)}
+  						</MobileDetect>
+  					</NavItemsContainer>
+  				</Grid>
+  			</HeaderContainer>
+  		</Wrapper>
   	)
   }
 }

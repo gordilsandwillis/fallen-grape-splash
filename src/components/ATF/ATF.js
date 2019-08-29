@@ -14,40 +14,40 @@ import withSizes from 'react-sizes'
 const AlignmentContainer = styled.div`
 height: 100%;
 	display: flex;
-  align-items: ${ props => props.verticalAlign};
-	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80)}
+  align-items: ${ props => props.verticalAlign };
+	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80) }
 `
 
 const Content = styled(Container)`
-  ${ typography.h1}
+  ${ typography.h1 }
 	p {
-		${ typography.h2}
+		${ typography.h2 }
 		margin-top: 0;
 	}
 `
 
 const AlignedText = styled.div`
-  text-align: ${ props => props.align};
+  text-align: ${ props => props.align };
   p {
-    text-align: ${ props => props.align};
-  ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10)}
+    text-align: ${ props => props.align };
+  ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10) }
   }
 `
 
 const Block = styled.div`
   display: block;
-  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 100, 100, 80, 80)}
-	height: ${ ({ winHeight }) => (winHeight) + 'px'};
+  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 100, 100, 80, 80) }
+	height: ${ ({ winHeight }) => (winHeight) + 'px' };
 	width: 100%;
-	max-height: ${ ({ winHeight }) => winHeight + 'px'};
+	max-height: ${ ({ winHeight }) => winHeight + 'px' };
 	position: relative;
-	color: ${ colors.bgColor};
+	color: ${ colors.bgColor };
 
 	${ ({ background }) => background && `
 		position: absolute;
 		overflow: hidden;
 		z-index: 1;
-		background: ${ colors.textColor};
+		background: ${ colors.textColor };
 	` }
 
 	${ ({ content }) => content && `
@@ -74,17 +74,17 @@ const Overlay = styled.div`
 `
 
 const MainContent = styled(ScrollEntrance)`
-  padding: ${ gridSettings.containerLargeMargins} 0;
-  ${ mq.largeAndBelow} {
-		padding: ${ gridSettings.containerMediumMargins} 0;
+  padding: ${ gridSettings.containerLargeMargins } 0;
+  ${ mq.largeAndBelow } {
+		padding: ${ gridSettings.containerMediumMargins } 0;
 	}
 
-	${ mq.mediumAndBelow} {
-		padding: ${ gridSettings.containerMediumMargins} 0;
+	${ mq.mediumAndBelow } {
+		padding: ${ gridSettings.containerMediumMargins } 0;
 	}
 
-	${ mq.smallAndBelow} {
-    padding: ${ gridSettings.containerSmallMargins} 0;
+	${ mq.smallAndBelow } {
+    padding: ${ gridSettings.containerSmallMargins } 0;
 	}
 `
 
@@ -93,7 +93,7 @@ const Margin = styled.div`
 `
 
 class ATF extends Component {
-	render() {
+	render () {
 		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, buttonText, buttonLink, hasFooter, gridSettings } = this.props
 		return (
 			<Fragment>
@@ -114,8 +114,8 @@ class ATF extends Component {
 									<AlignedText align={align}>
 										<h1>{headline}</h1>
 										{buttonText &&
-											< Link to={buttonLink}>
-												<Button size="medium">
+											<Link to={buttonLink}>
+												<Button>
 													{buttonText}
 												</Button>
 											</Link>}
@@ -125,7 +125,7 @@ class ATF extends Component {
 							{showHr && <Margin><Hr /></Margin>}
 							<Content>
 								{text && <Grid
-									showOverlay={true}
+									showOverlay={false}
 									small="[6]"
 									medium="[7] 2"
 									large="[7] 2"

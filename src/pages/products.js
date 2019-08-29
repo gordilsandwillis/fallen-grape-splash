@@ -13,19 +13,19 @@ import { pages, shared } from 'src/mockData'
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `
 		padding-top: 100px;
-		${ mediaQueries.largerAndUp} {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 3rem;
 		}
 	` : `
 		padding-top: 0;
-		${ mediaQueries.largerAndUp} {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 0;
 		}
 	` }
 `
 
 class Products extends Component {
-	render() {
+	render () {
 		const { data, location } = this.props
 		const { Products: { components: { productData } } } = pages
 		const { footerData } = shared

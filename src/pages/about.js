@@ -55,7 +55,7 @@ class About extends Component {
 						small: '[6]'
 					}}
 				/>
-				<Slider {...awardsData} collapseToArrows={true} />
+				<Slider {...awardsData} />
 				<Footer
 					fixed={true}
 					{...footerData}

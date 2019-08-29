@@ -36,8 +36,6 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 
 export const body = `
 	${ responsiveStyles('font-size', 14, 14, 14, 18) }
-	letter-spacing: 0.33px;
-	line-height: 1.6;
 	font-family: ${ bodyFontFamilyRegular };
 `
 export const bodyLight = `
@@ -55,9 +53,10 @@ export const bodyBold = `
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 60, 60, 42, 34) }
+	${ responsiveStyles('font-size', 48, 48, 44, 44) }
 	font-family: ${ titleFontFamily };
-	letter-spacing: 0.33px;
+	font-weight: lighter;
+	letter-spacing: ${ -10 / 1000 }em;
 	line-height: 1.2;
 `
 
@@ -105,17 +104,17 @@ export const caption = `
 `
 
 export const button = `
-	${ responsiveStyles('font-size', 20, 18, 16, 14) }
+	${ responsiveStyles('font-size', 14, 14, 14, 18) }
 	font-family: ${ bodyFontFamilyRegular };
 	line-height: ${ 16 / 14 };
-	letter-spacing: ${ 1.5 / 14 }em;
+	letter-spacing: ${ 20 / 1000 }em;
   text-transform: uppercase;
   padding: 0 2em 1px;
 `
 
 export const footer = `
-	${ responsiveStyles('font-size', 10, 10, 10, 11) }
-	letter-spacing: 0.33px;
-	line-height: 1.6;
+	${ responsiveStyles('font-size', 10, 10, 10, 12) }
+	${ responsiveStyles('line-height', 12, 12, 12, 14) }
+	letter-spacing: ${ 20 / 1000 }em;
 	font-family: ${ bodyFontFamilyRegular };
 `
