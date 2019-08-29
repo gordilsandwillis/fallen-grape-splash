@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'
 import Grid from 'src/components/Grid'
-import { typography, colors, animations, gridSettings, mediaQueries as mq } from 'src/styles'
+import { colors, animations } from 'src/styles'
 import PlayIcon from 'src/assets/images/play.svg'
 const Wrapper = styled.div`
   position: relative;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   &:hover {
     svg {
       background-color: transparent;
-      stroke: ${ colors.unofficialLightGrey};
+      stroke: ${ colors.unofficialLightGrey };
     }
   }
 
@@ -28,7 +28,7 @@ const Overlay = styled.div`
 `
 
 const CoverImageContainer = styled.div`
-${ ({ video }) => !video ? `z-index: 1; padding-bottom: 56.25%;` : `display: none;`}
+${ ({ video }) => !video ? `z-index: 1; padding-bottom: 56.25%;` : `display: none;` }
 position: relative;
 display: flex;
 width: 100%;
@@ -44,7 +44,7 @@ const CoverImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url(${ ({ image }) => image}) no-repeat center center;
+  background: url(${ ({ image }) => image }) no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -54,7 +54,7 @@ const CoverImage = styled.div`
 const ReactPlayerStyled = styled(ReactPlayer)`
   div {
   position: relative;
-  ${ ({ video }) => video && `padding-bottom: 56.25%;`}
+  ${ ({ video }) => video && `padding-bottom: 56.25%;` }
   height: 0;
   iframe {
   position: absolute;
@@ -70,35 +70,35 @@ const PlayIconStyled = styled(PlayIcon)`
   height: 50px;
   width: 50px;
   stroke: white;
-  transition: stroke ${ animations.mediumSpeed} ease-in-out;
+  transition: stroke ${ animations.mediumSpeed } ease-in-out;
   z-index: 6;
 `
 
 class VideoEmbed extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { video: false }
-  }
-  render() {
-    const { url, gridSettings, coverImage } = this.props
-    const { video } = this.state
-    return (
-      <Grid
-        showOverlay={false}
-        {...gridSettings}
-      >
-        <Wrapper onClick={() => this.setState({ video: true })}>
-          <CoverImageContainer video={video} >
-            <CoverImage image={coverImage}>
-              <Overlay />
-              <PlayIconStyled />
-            </CoverImage>
-          </CoverImageContainer>
-          <ReactPlayerStyled controls playing={video} video={video} width={'100%'} height={'100%'} url={url} />
-        </Wrapper>
-      </Grid >
-    )
-  }
+	constructor (props) {
+		super(props)
+		this.state = { video: false }
+	}
+	render () {
+		const { url, gridSettings, coverImage } = this.props
+		const { video } = this.state
+		return (
+			<Grid
+				showOverlay={false}
+				{...gridSettings}
+			>
+				<Wrapper onClick={() => this.setState({ video: true })}>
+					<CoverImageContainer video={video} >
+						<CoverImage image={coverImage}>
+							<Overlay />
+							<PlayIconStyled />
+						</CoverImage>
+					</CoverImageContainer>
+					<ReactPlayerStyled controls playing={video} video={video} width={'100%'} height={'100%'} url={url} />
+				</Wrapper>
+			</Grid >
+		)
+	}
 }
 
 export { VideoEmbed as default }

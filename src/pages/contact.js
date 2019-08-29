@@ -6,7 +6,7 @@ import Hero from 'src/components/Hero'
 import ContactCopy from 'src/components/ContactCopy'
 import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
-import { mediaQueries, colors, typography } from 'src/styles'
+import { mediaQueries } from 'src/styles'
 
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `

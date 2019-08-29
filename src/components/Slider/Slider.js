@@ -5,7 +5,6 @@ import withSizes from 'react-sizes'
 
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
-import ContentBlock from 'src/components/ContentBlock'
 import { typography, colors, gridSettings, mediaQueries as mq } from 'src/styles'
 
 import 'slick-carousel/slick/slick.css'
@@ -92,15 +91,6 @@ const CenteredText = styled.div`
   text-align: center;
   align-self: center;
   justify-self: center;
-`
-
-const CoverImage = styled.div`
-  width: 100%;
-  z-index: -4;
-  display: flex;
-    img {
-    position: absolute;
-  }
 `
 
 const Name = styled.p`

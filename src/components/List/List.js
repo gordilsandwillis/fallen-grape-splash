@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
-import Image from 'src/components/Image'
-import { mediaQueries as mq, colors, typography } from 'src/styles'
+import { colors, typography } from 'src/styles'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
 import Hr from 'src/components/Hr'
 import VideoEmbed from 'src/components/VideoEmbed'
-import { StaticQuery, graphql } from 'gatsby' // TODO
 
 const Wrapper = styled.div`
   background-color: ${ colors.offwhite };

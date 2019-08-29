@@ -1,7 +1,6 @@
 import * as mq from './mediaQueries'
 
 import {
-	MaterialIcons, // TODO
 	SuisseIntlLight,
 	SuisseIntlRegular,
 	SuisseIntlSemiBold,

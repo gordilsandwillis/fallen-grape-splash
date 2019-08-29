@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import ATF from 'src/components/ATF'
 import styled from '@emotion/styled'
-import { mediaQueries, colors, typography } from 'src/styles'
+import { mediaQueries } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
 import List from 'src/components/List'
-import Hr from 'src/components/Hr'
 import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
 
@@ -25,7 +23,7 @@ const PageWrap = styled.div`
 
 class Press extends Component {
 	render () {
-		const { data, location } = this.props
+		const { location } = this.props
 		const { Press: { components: { pressData } } } = pages
 		const { footerData } = shared
 		return (

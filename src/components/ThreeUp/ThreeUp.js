@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
-import { mediaQueries, colors, typography } from 'src/styles'
+import { colors, typography } from 'src/styles'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import ContentBlock from 'src/components/ContentBlock'

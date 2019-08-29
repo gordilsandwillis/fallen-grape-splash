@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { mediaQueries as mq, gridSettings } from 'src/styles'
-import Container from 'src/components/Container'
-import Link from 'src/components/Link'
 
 const ContentBlockStyles = styled.div`
 	max-width: 2500px;

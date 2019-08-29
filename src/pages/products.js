@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import ATF from 'src/components/ATF'
 import styled from '@emotion/styled'
-import { mediaQueries, colors, typography } from 'src/styles'
+import { mediaQueries, colors } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
 import Slider from 'src/components/Slider'
@@ -26,7 +25,10 @@ const PageWrap = styled.div`
 
 class Products extends Component {
 	render () {
-		const { data, location } = this.props
+		const {
+			/* data, */
+			location
+		} = this.props
 		const { Products: { components: { productData } } } = pages
 		const { footerData } = shared
 

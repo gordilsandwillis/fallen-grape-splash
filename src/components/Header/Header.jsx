@@ -1,25 +1,17 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
-import Image from 'src/components/Image'
 import LogoLight from 'src/assets/images/mosaic_wordmark_white.svg' // TODO
 import LogoDark from 'src/assets/images/mosaic_wordmark_black.svg' // TODO
 import MenuIcon from 'src/assets/images/menu.svg'
 import CloseIcon from 'src/assets/images/close.svg'
-import MaterialIcon from 'src/components/MaterialIcon'
 // import LogoLockup from 'src/components/LogoLockup'
 // import SidebarNavigation from 'src/components/SidebarNavigation'
 // import Button from 'src/components/Button'
 // import AudioIcon from 'assets/images/icon-audio.svg'
-import {
-	colors,
-	typography,
-	animations,
-	mediaQueries as mq,
-	gridSettings
-} from 'src/styles'
+import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
 import { navPages } from 'src/mockData'
 
 const Wrapper = styled.header`
@@ -159,8 +151,8 @@ class Header extends Component {
 
   render () {
   	const {
-  		logo,
-  		winHeight,
+  		// logo,
+  		// winHeight,
   		theme = 'transparent',
   		location: { pathname },
   	} = this.props
