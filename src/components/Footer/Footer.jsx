@@ -1,86 +1,80 @@
-import React, { Component } from 'react'
-import styled from '@emotion/styled'
+import React, { Component } from "react"
+import styled from "@emotion/styled"
 
-import Link from 'src/components/Link'
-import Grid from 'src/components/Grid'
-import Container from 'src/components/Container'
-import Hr from 'src/components/Hr'
+import Link from "src/components/Link"
+import Grid from "src/components/Grid"
+import Container from "src/components/Container"
+import Hr from "src/components/Hr"
 
 import {
-	globals,
-	animations,
-	colors,
-	typography,
-	mediaQueries
-} from 'src/styles'
+  globals,
+  animations,
+  colors,
+  typography,
+  mediaQueries,
+} from "src/styles"
 
 const Wrapper = styled.footer`
-  position: ${ ({ fixed }) => (fixed ? 'inherit' : 'fixed') };
-  background: ${ colors.offwhite };
+  position: ${({ position = "static" }) => position};
+  background: ${colors.offwhite};
   bottom: 0;
   left: 0;
   right: 0;
-  color: ${ colors.black };
+  color: ${colors.black};
   z-index: 3;
-  ${ typography.responsiveStyles('height', 100, 100, 80, 80) }
+  ${typography.responsiveStyles("height", 70, 70, 70, 75)}
 `
 
 const FooterContainer = styled(Container)`
-  ${ typography.footer }
+  ${typography.footer}
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 
-const FooterText = styled.div`
-  display: flex;
-  align-items: flex-start;
-  height: 100%;
+const FooterTextGrey = styled.div`
+  color: ${colors.grey};
 `
 
-const FooterTextGrey = styled(FooterText)`
-  color: ${ colors.grey };
-`
-
-const FooterTextRightAlign = styled(FooterText)`
+const FooterTextRightAlign = styled.div`
   text-align: right;
   justify-content: flex-end;
 `
 
 const FooterLink = styled(Link)`
-  color: ${ colors.black };
+  color: ${colors.black};
   &:hover {
-    color: ${ colors.grey };
+    color: ${colors.grey};
   }
 `
 
 const Footer = ({
-	showHr,
-	footerTextLeft,
-	footerTextLeftLineTwo,
-	footerTextRight,
-	footerTextRightLink,
-	fixed,
+  showHr,
+  footerTextLeft,
+  footerTextLeftLineTwo,
+  footerTextRight,
+  footerTextRightLink,
+  position,
 }) => (
-	<Wrapper fixed={fixed}>
-		{showHr && <Hr color={colors.black} />}
-		<FooterContainer>
-			<Grid
-				showOverlay={false}
-				small="[5] [1]"
-				medium="[6] [6]"
-				large="[6] [6]"
-			>
-				<div>
-					<FooterText>{footerTextLeft}</FooterText>
-					<FooterTextGrey>{footerTextLeftLineTwo}</FooterTextGrey>
-				</div>
-				<FooterTextRightAlign>
-					<FooterLink to={footerTextRightLink}>{footerTextRight}</FooterLink>
-				</FooterTextRightAlign>
-			</Grid>
-		</FooterContainer>
-	</Wrapper>
+  <Wrapper position={position}>
+    {showHr && <Hr color={colors.black} />}
+    <FooterContainer>
+      <Grid
+        showOverlay={false}
+        small="[5] [1]"
+        medium="[6] [6]"
+        large="[6] [6]"
+      >
+        <div>
+          <div>{footerTextLeft}</div>
+          <FooterTextGrey>{footerTextLeftLineTwo}</FooterTextGrey>
+        </div>
+        <FooterTextRightAlign>
+          <FooterLink to={footerTextRightLink}>{footerTextRight}</FooterLink>
+        </FooterTextRightAlign>
+      </Grid>
+    </FooterContainer>
+  </Wrapper>
 )
 
 export default Footer

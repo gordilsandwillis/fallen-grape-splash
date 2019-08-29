@@ -10,7 +10,7 @@ const Block = styled.div`
   position: relative;
   overflow: hidden;
   z-index: 1;
-  padding: 36px 0;
+  margin-bottom: 36px;
 `
 
 const BgImage = styled(Image)`

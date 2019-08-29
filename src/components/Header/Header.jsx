@@ -48,28 +48,31 @@ const transparentStyles = `
 const HeaderContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
+  padding-top: 36px;
 `
 
 const NavContainer = styled(HeaderContainer)`
   ${ typography.bodyLight }
   display: flex;
   flex-direction: column;
+  align-items: center;
 `
 
-const MobileNavLinkContainer = styled(HeaderContainer)`
+const MobileNavLinkContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 0;
-  padding-bottom: 30px;
+  height: 100%;
   z-index: 5;
 `
 
 const LogoContainer = styled.div`
-  ${ typography.responsiveStyles('height', 100, 90, 80, 60) }
-  ${ typography.responsiveStyles('width', 100, 90, 80, 60) }
+  height: 72px;
+  width: 72px;
 `
 
 const IconContainer = styled.div`
@@ -89,7 +92,7 @@ const NavItemsContainer = styled.div`
   justify-content: flex-end;
 `
 const LinkContainer = styled.span`
-  margin-left: 40px;
+  margin-left: 45px;
 `
 
 const MobileNavLink = styled(Link)`
@@ -113,6 +116,7 @@ const MobileDetect = styled.div`
 `
 
 const HamburgerContainer = styled.div`
+  align-self: flex-end;
   justify-self: flex-end;
   display: flex;
   flex-direction: row;

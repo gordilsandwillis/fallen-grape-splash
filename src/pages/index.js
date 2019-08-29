@@ -10,19 +10,19 @@ import { pages, shared } from 'src/mockData'
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `
 		padding-top: 100px;
-		${ mediaQueries.largerAndUp} {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 3rem;
 		}
 	` : `
 		padding-top: 0;
-		${ mediaQueries.largerAndUp} {
+		${ mediaQueries.largerAndUp } {
 			padding-top: 0;
 		}
 	` }
 `
 
 class Home extends Component {
-	render() {
+	render () {
 		const { data, location } = this.props
 		const { Home: { components: { atfData, buttonData } } } = pages
 		const { footerData } = shared
@@ -39,10 +39,10 @@ class Home extends Component {
 					gridSettings={{
 						small: '[12]',
 						medium: '1 [10] 1',
-						large: '[6]'
+						large: '[12]'
 					}}
 				/>
-				<Footer {...footerData} />
+				<Footer position='absolute' hasFooter {...footerData} />
 			</PageWrap>
 		)
 	}

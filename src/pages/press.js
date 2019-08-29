@@ -37,12 +37,11 @@ class Press extends Component {
 					showTitleHr
 					gridSettings={{
 						large: '[2] 1 [8] 1',
-						medium: '[3] 1 [9]',
-						small: '[6]'
+						medium: '[2] 1 [9]',
+						small: '[2] [4]'
 					}}
 				/>
 				<Footer
-					fixed={true}
 					showHr={true}
 					{...footerData}
 				/>

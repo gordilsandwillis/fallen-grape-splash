@@ -36,7 +36,6 @@ class Contact extends Component {
 				<ContactCopy {...contactData} />
 				<Footer
 					showHr
-					fixed={true}
 					{...footerData}
 				/>
 			</PageWrap>

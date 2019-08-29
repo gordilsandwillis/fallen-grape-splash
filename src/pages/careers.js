@@ -33,7 +33,6 @@ class Careers extends Component {
 				<SEO title="Mosaic" />
 				<Header theme='light' location={location} />
 				<Footer
-					fixed={true}
 					showHr={true}
 					{...footerData}
 				/>

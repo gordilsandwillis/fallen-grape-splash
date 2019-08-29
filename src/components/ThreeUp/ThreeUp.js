@@ -6,14 +6,26 @@ import Grid from 'src/components/Grid'
 import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
-  background-color: ${ colors.offwhite };
-  color: ${ colors.black };
+  ${ typography.body }
+	background-color: ${ colors.offwhite };
+	color: ${ colors.black };
 `
 
-const GreyText = styled.div`
-  color: ${ colors.grey };
+const GreyText = styled.p`
+	color: ${ colors.grey };
+	${ typography.body }
+${ typography.responsiveStyles('padding-bottom', 0, 0, 0, 8) }
 `
 
+const Title = styled.p`
+	text-transform: uppercase;
+	${ typography.body }
+${ typography.responsiveStyles('padding-bottom', 0, 0, 0, 12) }
+`
+
+const Item = styled.div`
+	padding-bottom: 13px;
+`
 const ThreeUp = ({ items }) => (
 	<Wrapper>
 		<Container>
@@ -26,13 +38,11 @@ const ThreeUp = ({ items }) => (
 				>
 					{items &&
 						items.map(({ title, tags, description }, index) => (
-							<div key={title + index}>
-								<h4>
-									{title}
-								</h4>
-								<GreyText>{tags && mapTags(tags)}</GreyText>
-								<div>{description}</div>
-							</div>
+							<Item key={title + index}>
+								{title && <Title>{title}</Title>}
+								{tags && <GreyText>{tags && mapTags(tags)}</GreyText>}
+								{description && <p>{description}</p>}
+							</Item>
 						))
 					}
 				</Grid>

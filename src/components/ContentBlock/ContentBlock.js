@@ -20,17 +20,10 @@ const ContentBlockStyles = styled.div`
 	${ mq.smallAndBelow } {
     padding: ${ gridSettings.containerSmallMargins } 0;
 	}
-	h3 {
+	h2 {
 	margin-bottom: 50px;
 		flex: 1;
 	}
-`
-
-const TitleRow = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: baseline;
 `
 
 const ContentBlock = ({ children }) => (

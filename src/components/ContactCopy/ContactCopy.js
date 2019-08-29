@@ -10,17 +10,18 @@ const ContainerStyled = styled(Container)`
   padding-bottom: 65px;
 `
 
-const Headline = styled.div`
-  ${ typography.h3 }
-`
-
 const Title = styled.div`
   ${ typography.body }
-  margin-bottom: 36px;
+  margin-bottom: 25px;
 `
 
 const Pretext = styled.div`
   ${ typography.body }
+`
+
+const Headline = styled.div`
+	${ typography.h2 }
+	padding-bottom:40px;
 `
 
 const ContactCopy = ({ headline, title, items }) => (
@@ -31,14 +32,14 @@ const ContactCopy = ({ headline, title, items }) => (
 			medium={'[6] 2 [4]'}
 			large={'[6] 2 [4]'}
 		>
-			<Headline>{headline}</Headline>
+			{headline && <Headline>{headline}</Headline>}
 			<div>
 				<Title>{title}</Title>
 				{items && items.map(({ pretext, linkText, linkHref }, i) => (
-					<div key={pretext || i}>
+					<p key={pretext || i}>
 						<Pretext>{pretext}</Pretext>
 						<Link external to={linkHref}>{linkText}</Link>
-					</div>
+					</p>
 				))}
 			</div>
 		</Grid>

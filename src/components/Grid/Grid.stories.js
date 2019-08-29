@@ -16,48 +16,46 @@ const Column = styled.div`
 `
 
 class GridStory extends React.Component {
-  state = {
-  	showOverlay: false
-  }
+	state = {
+		showOverlay: false
+	}
 
-  render () {
-  	const { title, ...rest } = this.props
-  	const { showOverlay } = this.state
-  	return (
-  		<div>
-  			<header
-  				style={{
-  					display: 'flex',
-  					justifyContent: 'space-between',
-  				}}
-  			>
-  				<h4>
-  					{title}
-  				</h4>
+	render () {
+		const { title, ...rest } = this.props
+		const { showOverlay } = this.state
+		return (
+			<div>
+				<header
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+					}}
+				>
+					<p>{title}</p>
 
-  				<label>
-  					<input
-  						type="checkbox"
-  						checked={showOverlay}
-  						onClick={e =>
-  							this.setState({ showOverlay: e.target.checked })
-  						}
-  					/>
-            Show Overlay
+					<label>
+						<input
+							type="checkbox"
+							checked={showOverlay}
+							onClick={e =>
+								this.setState({ showOverlay: e.target.checked })
+							}
+						/>
+						Show Overlay
   				</label>
-  			</header>
+				</header>
 
-  			<Grid
-  				showOverlay={showOverlay}
-  				{...rest}
-  			/>
+				<Grid
+					showOverlay={showOverlay}
+					{...rest}
+				/>
 
-  			<br />
-  			<hr />
-  			<br />
-  		</div>
-  	)
-  }
+				<br />
+				<hr />
+				<br />
+			</div>
+		)
+	}
 }
 
 storiesOf(`Styleguide`, module).add(`Grid`, () => (
@@ -84,16 +82,16 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			large="[6] [6] [6] [6]"
 		>
 			<Column>
-        1
+				1
 			</Column>
 			<Column>
-        2
+				2
 			</Column>
 			<Column>
-        3
+				3
 			</Column>
 			<Column>
-        4
+				4
 			</Column>
 		</GridStory>
 
@@ -104,11 +102,11 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			large="[8] 8 [8]"
 		>
 			<Column>
-        large 8
+				large 8
 			</Column>
 
 			<Column>
-        large 8
+				large 8
 			</Column>
 		</GridStory>
 
@@ -119,11 +117,11 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			large="6 [6] 6 [6]"
 		>
 			<Column>
-        large 6
+				large 6
 			</Column>
 
 			<Column>
-        large 6
+				large 6
 			</Column>
 		</GridStory>
 
@@ -134,7 +132,7 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			large="6 [12] 6"
 		>
 			<Column>
-        large 12
+				large 12
 			</Column>
 		</GridStory>
 
@@ -147,10 +145,10 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			rowGap={['0.5rem']}
 		>
 			<Column>
-        12 columns
+				12 columns
 			</Column>
 			<Column>
-        12 columns
+				12 columns
 			</Column>
 		</GridStory>
 

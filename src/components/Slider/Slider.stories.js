@@ -14,6 +14,7 @@ stories.add(`default`, props => (
 		<Slider collapseToArrows={true} {...exampleDataOne} />
 		<Spacer />
 		<Slider
+			height={400}
 			centered={false}
 			{...exampleDataTwo} />
 	</React.Fragment>

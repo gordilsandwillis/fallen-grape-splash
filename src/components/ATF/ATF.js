@@ -14,7 +14,7 @@ import withSizes from 'react-sizes'
 const AlignmentContainer = styled.div`
 height: 100%;
 	display: flex;
-  align-items: ${ props => props.verticalAlign };
+	align-items: ${ props => props.verticalAlign };
 	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80) }
 `
 
@@ -36,10 +36,10 @@ const AlignedText = styled.div`
 
 const Block = styled.div`
   display: block;
-  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 100, 100, 80, 80) }
-	height: ${ ({ winHeight }) => (winHeight) + 'px' };
+  /* ${ ({ hasFooter }) => hasFooter && `bottom: 75px;` } */
+	height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
 	width: 100%;
-	max-height: ${ ({ winHeight }) => winHeight + 'px' };
+	max-height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
 	position: relative;
 	color: ${ colors.bgColor };
 
@@ -57,6 +57,7 @@ const Block = styled.div`
 
 const BgImage = styled(Image)`
 	height: 100%;
+  ${ ({ hasFooter }) => hasFooter && `bottom: 75px;` }
 	position: absolute;
 	left: 0;
   right: 0;
@@ -65,6 +66,7 @@ const BgImage = styled(Image)`
 const Overlay = styled.div`
 	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
 	opacity: .1;
+	${ ({ hasFooter }) => hasFooter && `bottom: 75px;` }
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -74,6 +76,7 @@ const Overlay = styled.div`
 `
 
 const MainContent = styled(ScrollEntrance)`
+margin-bottom: 45px;
   padding: ${ gridSettings.containerLargeMargins } 0;
   ${ mq.largeAndBelow } {
 		padding: ${ gridSettings.containerMediumMargins } 0;
@@ -92,33 +95,44 @@ const Margin = styled.div`
   margin: 40px 0;
 `
 
+const ButtonContainer = styled.div`
+	margin-top: 36px;
+`
+
+const PaddedParagraph = styled.p`
+	padding-top: 15px;
+`
 class ATF extends Component {
 	render () {
 		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, buttonText, buttonLink, hasFooter, gridSettings } = this.props
 		return (
 			<Fragment>
-				<Block background winHeight={winHeight}>
+				<Block background hasFooter={hasFooter} winHeight={winHeight}>
 					<BgImage
+						hasFooter={hasFooter}
 						image={image}
 					/>
-					<Overlay />
+					<Overlay hasFooter={hasFooter} />
 				</Block>
 				<Block content="true" hasFooter={hasFooter} winHeight={winHeight}>
 					<AlignmentContainer verticalAlign={verticalAlign}>
 						<MainContent>
 							<Content>
 								<Grid
-									showOverlay={true}
+									showOverlay={false}
 									{...gridSettings}
 								>
 									<AlignedText align={align}>
 										<h1>{headline}</h1>
 										{buttonText &&
-											<Link to={buttonLink}>
-												<Button>
-													{buttonText}
-												</Button>
-											</Link>}
+											<ButtonContainer>
+												<Link to={buttonLink}>
+													<Button>
+														{buttonText}
+													</Button>
+												</Link>
+											</ButtonContainer>
+										}
 									</AlignedText>
 								</Grid>
 							</Content>
@@ -130,7 +144,7 @@ class ATF extends Component {
 									medium="[7] 2"
 									large="[7] 2"
 								>
-									<p>{text}</p>
+									<PaddedParagraph>{text}</PaddedParagraph>
 								</Grid>}
 							</Content>
 						</MainContent>

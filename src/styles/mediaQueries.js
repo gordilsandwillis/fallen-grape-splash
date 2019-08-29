@@ -12,6 +12,7 @@ const extraExtraLargeBreakpoint = 2559
 const maxWidth = breakpoint => `@media (max-width: ${ breakpoint }px)`
 const minWidth = breakpoint => `@media (min-width: ${ breakpoint }px)`
 
+const tinyAndBelow = maxWidth(tinyBreakpoint)
 const smallAndBelow = maxWidth(smallBreakpoint)
 const mediumAndBelow = maxWidth(mediumBreakpoint)
 const largeAndBelow = maxWidth(largeBreakpoint)
@@ -81,6 +82,7 @@ export {
 	extraExtraLargeBreakpoint,
 	maxWidth,
 	minWidth,
+	tinyAndBelow,
 	smallAndBelow,
 	mediumAndBelow,
 	largeAndBelow,

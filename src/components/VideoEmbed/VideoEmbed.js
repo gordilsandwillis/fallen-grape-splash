@@ -17,6 +17,17 @@ const Wrapper = styled.div`
 
 `
 
+const Overlay = styled.div`
+	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+	opacity: .3;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+`
+
 const CoverImageContainer = styled.div`
 ${ ({ video }) => !video ? `z-index: 1; padding-bottom: 56.25%;` : `display: none;` }
 position: relative;
@@ -56,13 +67,12 @@ const ReactPlayerStyled = styled(ReactPlayer)`
   }
 `
 
-const PlayButton = styled.div`
+const PlayIconStyled = styled(PlayIcon)`
   height: 50px;
   width: 50px;
-  svg {
-    stroke: white;
-    transition: stroke ${ animations.mediumSpeed } ease-in-out;
-  }
+  stroke: white;
+  transition: stroke ${ animations.mediumSpeed } ease-in-out;
+  z-index: 6;
 `
 
 class VideoEmbed extends Component {
@@ -81,7 +91,8 @@ class VideoEmbed extends Component {
 				<Wrapper onClick={() => this.setState({ video: true })}>
 					<CoverImageContainer video={video} >
 						<CoverImage image={coverImage}>
-							<PlayButton><PlayIcon /></PlayButton>
+							<Overlay />
+							<PlayIconStyled />
 						</CoverImage>
 					</CoverImageContainer>
 					<ReactPlayerStyled controls playing={video} video={video} width={'100%'} height={'100%'} url={url} />

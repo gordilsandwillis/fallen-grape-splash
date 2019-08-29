@@ -35,6 +35,7 @@ class Products extends Component {
 				<SEO title="Mosaic" />
 				<Header theme='light' location={location} />
 				<Slider
+					height={400}
 					items={productData.items.filter(item => item.slideshow)}
 					collapseToArrows={true}
 					centered={false}
@@ -42,7 +43,6 @@ class Products extends Component {
 				<ProductGrid {...productData} />
 				<Hr color={colors.black} />
 				<Footer
-					fixed={true}
 					{...footerData}
 				/>
 			</PageWrap>
