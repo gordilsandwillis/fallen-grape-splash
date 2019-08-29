@@ -53,7 +53,7 @@ font-family: ${ bodyFontFamilyBold };
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 48, 48, 44, 44) }
+	${ responsiveStyles('font-size', 48, 48, 44, 42) }
 	font-family: ${ titleFontFamily };
 	font-weight: lighter;
 	letter-spacing: ${ -10 / 1000 }em;
@@ -117,4 +117,11 @@ export const footer = `
 	${ responsiveStyles('line-height', 12, 12, 12, 14) }
 	letter-spacing: ${ 20 / 1000 }em;
 	font-family: ${ bodyFontFamilyRegular };
+`
+
+export const h2Special = `
+	${ responsiveStyles('font-size', 24, 24, 24, 22) }
+	${ responsiveStyles('line-height', 30, 30, 30, 30) }
+	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
+	font-family: ${ bodyFontFamilyLight };
 `

@@ -7,8 +7,8 @@ import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
-  background-color: ${ colors.offwhite};
-color: ${ colors.black};
+  background-color: ${ colors.offwhite };
+color: ${ colors.black };
 `
 
 const ProductContainer = styled.div`
@@ -23,7 +23,7 @@ const LogoContainer = styled.div`
 	min-height: 150px;
 	max-width: 215px;
 	max-height: 215px;
-	border: 1px solid ${ colors.unofficialLightGrey};
+	border: 1px solid ${ colors.unofficialLightGrey };
 	overflow: hidden;
 	display: flex;
 	flex-direction: row;
@@ -37,11 +37,11 @@ const LogoContainer = styled.div`
 `
 
 const Name = styled.div`
-  ${ typography.bodyBold}
+  ${ typography.bodyBold }
 `
 const Byline = styled.div`
-  ${ typography.body}
-  color: ${ colors.grey};
+  ${ typography.body }
+  color: ${ colors.grey };
 `
 
 const LinkStyled = styled(Link)`

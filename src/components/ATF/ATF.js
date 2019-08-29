@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
-import * as mq from 'src/styles/mediaQueries'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import Image from 'src/components/Image'
@@ -8,7 +7,7 @@ import Hr from 'src/components/Hr'
 import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import { colors, gridSettings, typography } from 'src/styles'
+import { colors, gridSettings, typography, mediaQueries as mq } from 'src/styles'
 import withSizes from 'react-sizes'
 
 const AlignmentContainer = styled.div`
@@ -19,9 +18,9 @@ height: 100%;
 `
 
 const Content = styled(Container)`
-  ${ typography.h1 }
+	${ typography.h1 }
 	p {
-		${ typography.h2 }
+		${ typography.h2Special }
 		margin-top: 0;
 	}
 `
@@ -57,7 +56,7 @@ const Block = styled.div`
 
 const BgImage = styled(Image)`
 	height: 100%;
-  ${ ({ hasFooter }) => hasFooter && `bottom: 75px;` }
+  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 70, 70, 70, 75) }
 	position: absolute;
 	left: 0;
   right: 0;
@@ -76,23 +75,23 @@ const Overlay = styled.div`
 `
 
 const MainContent = styled(ScrollEntrance)`
-margin-bottom: 45px;
-  padding: ${ gridSettings.containerLargeMargins } 0;
-  ${ mq.largeAndBelow } {
-		padding: ${ gridSettings.containerMediumMargins } 0;
-	}
+	${ ({ verticalAlign }) => verticalAlign === 'flex-end' || typography.responsiveStyles('margin-bottom', 45, 45, 0, 0) }
+padding: ${ gridSettings.containerLargeMargins } 0;
+${ mq.largeAndBelow } {
+	padding: ${ gridSettings.containerMediumMargins } 0;
+}
 
-	${ mq.mediumAndBelow } {
-		padding: ${ gridSettings.containerMediumMargins } 0;
-	}
+${ mq.mediumAndBelow } {
+	padding: ${ gridSettings.containerMediumMargins } 0;
+}
 
-	${ mq.smallAndBelow } {
-    padding: ${ gridSettings.containerSmallMargins } 0;
-	}
+${ mq.smallAndBelow } {
+	padding: ${ gridSettings.containerSmallMargins } 0;
+}
 `
 
 const Margin = styled.div`
-  margin: 40px 0;
+margin: 40px 0;
 `
 
 const ButtonContainer = styled.div`
@@ -101,6 +100,7 @@ const ButtonContainer = styled.div`
 
 const PaddedParagraph = styled.p`
 	padding-top: 15px;
+	${ typography.responsiveStyles('padding-bottom', 50, 30, 0, 0) }
 `
 class ATF extends Component {
 	render () {
@@ -116,7 +116,7 @@ class ATF extends Component {
 				</Block>
 				<Block content="true" hasFooter={hasFooter} winHeight={winHeight}>
 					<AlignmentContainer verticalAlign={verticalAlign}>
-						<MainContent>
+						<MainContent verticalAlign={verticalAlign}>
 							<Content>
 								<Grid
 									showOverlay={false}
