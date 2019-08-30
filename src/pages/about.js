@@ -35,6 +35,8 @@ class About extends Component {
 				<SEO title="Mosaic" />
 				<Header location={location} />
 				<ATF
+					maxWidth='14em'
+					maxWidthText='25em'
 					{...atfData}
 					image={data.ATFimage}
 					align='left'
