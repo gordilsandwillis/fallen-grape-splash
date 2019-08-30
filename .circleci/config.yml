@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.9.0
+      - image: circleci/node:10.16.0
     working_directory: ~/repo
     steps:
       - checkout
@@ -15,10 +15,10 @@ jobs:
           name: Install
           command: npm install
 
-      # - save_cache:
-      #     paths:
-      #       - node_modules
-      #     key: v1-dependencies-{{ checksum "package.json" }}
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: Lint
@@ -28,26 +28,26 @@ jobs:
           name: Build
           command: npm run build
 
-  # deploy:
-  #   machine:
-  #       enabled: true
-  #   working_directory: ~/repo
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Add Dokku to known_hosts
-  #         command: ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
-  #     - run: git remote add staging dokku@mgnt.work:mosaic
-  #     - run: git push staging master
+  deploy:
+    machine:
+        enabled: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Add Dokku to known_hosts
+          command: ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
+      - run: git remote add staging dokku@mgnt.work:mosaic
+      - run: git push staging master
 
-# workflows:
-#   version: 2
-#   build_and_deploy:
-#     jobs:
-#       - build
-#       - deploy:
-#           requires:
-#               - build
-#           filters:
-#             branches:
-#               only: master
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+              - build
+          filters:
+            branches:
+              only: master
