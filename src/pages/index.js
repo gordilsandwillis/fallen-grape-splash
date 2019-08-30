@@ -29,7 +29,7 @@ class Home extends Component {
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />
-				<Header location={location} />
+				<Header hasAtf location={location} />
 				<ATF
 					maxWidth='17em'
 					{...buttonData}

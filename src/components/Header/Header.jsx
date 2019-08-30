@@ -3,10 +3,9 @@ import styled from '@emotion/styled'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
-import LogoLight from 'src/assets/images/mosaic_wordmark_white.svg' // TODO
-import LogoDark from 'src/assets/images/mosaic_wordmark_black.svg' // TODO
 import MenuIcon from 'src/assets/images/menu.svg'
 import CloseIcon from 'src/assets/images/close.svg'
+import LogoCollapse from 'src/components/LogoCollapse'
 // import LogoLockup from 'src/components/LogoLockup'
 // import SidebarNavigation from 'src/components/SidebarNavigation'
 // import Button from 'src/components/Button'
@@ -14,14 +13,24 @@ import CloseIcon from 'src/assets/images/close.svg'
 import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
 import { navPages } from 'src/mockData'
 
+const PageCheat = styled.div`
+  position: static;
+  height: ${ ({ hasAtf }) => (hasAtf ? '0' : '150px') };
+`
+
 const Wrapper = styled.header`
-  ${ ({ theme }) => (theme === 'light' ? lightStyles : transparentStyles) };
-  color: ${ colors.black };
+  ${ ({ theme, scrolled }) =>
+		theme === 'light' || scrolled ? lightStyles : transparentStyles };
   ${ typography.body }
   left: 0;
+  transition: height ${ animations.mediumSpeed } ease-in-out;
   right: 0;
   z-index: 4;
   height: 150px;
+  position: fixed;
+  &.scrolled {
+    height: 110px;
+  }
 `
 
 const lightStyles = `
@@ -34,7 +43,7 @@ const transparentStyles = `
   position: absolute;
   background-color: transparent;
   top: 0;
-  color: ${ colors.primaryColor };
+  color: ${ colors.white };
 `
 
 const HeaderContainer = styled(Container)`
@@ -62,11 +71,6 @@ const MobileNavLinkContainer = styled.div`
   z-index: 5;
 `
 
-const LogoContainer = styled.div`
-  ${ typography.responsiveStyles('height', 85, 72, 72, 72) }
-  ${ typography.responsiveStyles('width', 85, 72, 72, 72) }
-`
-
 const IconContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -74,13 +78,16 @@ const IconContainer = styled.div`
   width: 24px;
   height: 24px;
   svg {
-    stroke: ${ ({ theme }) => (theme === 'light' ? colors.black : colors.white) };
+    stroke: ${ ({ theme, scrolled }) =>
+		theme === 'light' || scrolled ? colors.black : colors.white };
     transition: stroke ${ animations.mediumSpeed } ease-in-out;
   }
   &:hover {
     svg {
-      stroke: ${ ({ theme }) =>
-		theme === 'light' ? colors.grey : colors.unofficialLightGrey };
+      stroke: ${ ({ theme, scrolled }) =>
+		theme === 'light' || scrolled
+			? colors.grey
+			: colors.unofficialLightGrey };
     }
   }
 `
@@ -135,14 +142,54 @@ const Overlay = styled.div`
   z-index: 3;
 `
 
+const LinkStyled = styled(Link)`
+  vertical-align: top;
+  display: inline-block;
+  color: currentColor;
+  &:hover {
+    color: currentColor;
+  }
+`
+
 class Header extends Component {
 	constructor (props) {
 		super(props)
 		this.state = {
+			scrolled: false,
 			mobileNavOpen: false,
 		}
 	}
 
+	componentDidMount () {
+		if (this.props.scrolled && !this.state.scrolled) {
+			this.setState({ scrolled: true })
+		} else {
+			this.handleScroll()
+			window.addEventListener('scroll', this.handleScroll)
+		}
+	}
+
+	componentWillUnmount () {
+		if (this.props.scrolled && !this.state.scrolled) {
+			return false
+		} else {
+			window.removeEventListener('scroll', this.handleScroll)
+		}
+	}
+
+  handleScroll = event => {
+  	let scrollTop =
+      document.body.scrollTop || document.documentElement.scrollTop
+  	if (scrollTop > 10) {
+  		if (!this.state.scrolled) {
+  			this.setState({ scrolled: true })
+  		}
+  	} else {
+  		if (this.state.scrolled) {
+  			this.setState({ scrolled: false })
+  		}
+  	}
+  }
   toggleNav = () => {
   	this.setState(state => ({
   		mobileNavOpen: !state.mobileNavOpen,
@@ -155,69 +202,72 @@ class Header extends Component {
   		// winHeight,
   		theme = 'transparent',
   		location: { pathname },
+  		hasAtf = false,
   	} = this.props
-  	const { mobileNavOpen } = this.state
+  	const { mobileNavOpen, scrolled } = this.state
   	return (
-  		<Wrapper theme={theme}>
-  			<HeaderContainer>
-  				<Grid
-  					showOverlay={false}
-  					small="[5] [1]"
-  					medium="[6] [6]"
-  					large="[6] [6]"
-  				>
-  					<LogoContainer>
-  						<Link to={'/'}>
-  							{theme === 'light' ? <LogoDark /> : <LogoLight />}
-  						</Link>
-  					</LogoContainer>
-  					<NavItemsContainer>
-  						<DesktopDetect>
-  							{navPages.map(({ name, slug }) => (
-  								<LinkContainer key={name + slug}>
-  									<Link
-  										underlined={
-  											checkSlug({ slug, pathname }) ? 'true' : undefined
-  										}
-  										theme={theme}
-  										key={name}
-  										to={slug}
-  									>
-  										{name}
-  									</Link>
-  								</LinkContainer>
-  							))}
-  						</DesktopDetect>
-  						<MobileDetect>
-  							{!mobileNavOpen ? (
-  								<HamburgerContainer onClick={this.toggleNav}>
-  									<IconContainer theme={theme}>
-  										<MenuIcon />
-  									</IconContainer>
-  								</HamburgerContainer>
-  							) : (
-  								<Overlay>
-  									<NavContainer>
-  										<HamburgerContainer onClick={this.toggleNav}>
-  											<IconContainer>
-  												<CloseIcon />
-  											</IconContainer>
-  										</HamburgerContainer>
-  										<MobileNavLinkContainer mobileNavOpen={mobileNavOpen}>
-  											{navPages.map(({ name, slug }) => (
-  												<MobileNavLink key={name} to={slug}>
-  													{name}
-  												</MobileNavLink>
-  											))}
-  										</MobileNavLinkContainer>
-  									</NavContainer>
-  								</Overlay>
-  							)}
-  						</MobileDetect>
-  					</NavItemsContainer>
-  				</Grid>
-  			</HeaderContainer>
-  		</Wrapper>
+  		<PageCheat className={scrolled ? 'scrolled' : ''} hasAtf={hasAtf}>
+  			<Wrapper className={scrolled ? 'scrolled' : ''} theme={theme}>
+  				<HeaderContainer>
+  					<Grid
+  						showOverlay={false}
+  						small="[5] [1]"
+  						medium="[6] [6]"
+  						large="[6] [6]"
+  					>
+  						<div>
+  							<LinkStyled to={'/'}>
+  								<LogoCollapse scrolled={scrolled} theme={theme} />
+  							</LinkStyled>
+  						</div>
+  						<NavItemsContainer>
+  							<DesktopDetect>
+  								{navPages.map(({ name, slug }) => (
+  									<LinkContainer key={name + slug}>
+  										<Link
+  											underlined={
+  												checkSlug({ slug, pathname }) ? 'true' : undefined
+  											}
+  											theme={theme}
+  											key={name}
+  											to={slug}
+  										>
+  											{name}
+  										</Link>
+  									</LinkContainer>
+  								))}
+  							</DesktopDetect>
+  							<MobileDetect>
+  								{!mobileNavOpen ? (
+  									<HamburgerContainer onClick={this.toggleNav}>
+  										<IconContainer scrolled={scrolled} theme={theme}>
+  											<MenuIcon />
+  										</IconContainer>
+  									</HamburgerContainer>
+  								) : (
+  									<Overlay>
+  										<NavContainer>
+  											<HamburgerContainer onClick={this.toggleNav}>
+  												<IconContainer scrolled={scrolled}>
+  													<CloseIcon />
+  												</IconContainer>
+  											</HamburgerContainer>
+  											<MobileNavLinkContainer mobileNavOpen={mobileNavOpen}>
+  												{navPages.map(({ name, slug }) => (
+  													<MobileNavLink key={name} to={slug}>
+  														{name}
+  													</MobileNavLink>
+  												))}
+  											</MobileNavLinkContainer>
+  										</NavContainer>
+  									</Overlay>
+  								)}
+  							</MobileDetect>
+  						</NavItemsContainer>
+  					</Grid>
+  				</HeaderContainer>
+  			</Wrapper>
+  		</PageCheat>
   	)
   }
 }
