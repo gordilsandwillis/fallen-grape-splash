@@ -31,6 +31,7 @@ class Home extends Component {
 				<SEO title="Mosaic" />
 				<Header location={location} />
 				<ATF
+					maxWidth='17em'
 					{...buttonData}
 					{...atfData}
 					image={data.ATFimage}
@@ -38,8 +39,8 @@ class Home extends Component {
 					align='center'
 					gridSettings={{
 						small: '[12]',
-						medium: '1 [10] 1',
-						large: '[12]'
+						medium: '[12]',
+						large: '1 [10] 1'
 					}}
 				/>
 				<Footer position='absolute' hasFooter {...footerData} />

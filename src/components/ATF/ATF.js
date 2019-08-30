@@ -14,40 +14,47 @@ import MobileDetect from 'mobile-detect'
 const AlignmentContainer = styled.div`
 height: 100%;
 	display: flex;
-	align-items: ${ props => props.verticalAlign };
-	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80) }
+	justify-content: center;
+	align-items: ${ props => props.verticalAlign};
+	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80)}
 `
 
 const Content = styled(Container)`
-	${ typography.h1 }
+	flex: 1;
+	${ typography.h1}
 	p {
-		${ typography.h2Special }
+		${ typography.h2Special}
 		margin-top: 0;
 	}
 `
 
 const AlignedText = styled.div`
-  text-align: ${ props => props.align };
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: ${ ({ align }) => align};
+  text-align: ${ ({ align }) => align};
   p {
-    text-align: ${ props => props.align };
-  ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10) }
+    text-align: ${ ({ align }) => align};
+
+  ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10)}
   }
 `
 
 const Block = styled.div`
   display: block;
-  /* ${ ({ hasFooter }) => hasFooter && `bottom: 75px;` } */
-	height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
-	max-height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
+  /* ${ ({ hasFooter }) => hasFooter && `bottom: 75px;`} */
+	height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px'};
+	max-height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px'};
 	width: 100%;
 	position: relative;
-	color: ${ colors.bgColor };
+	color: ${ colors.bgColor};
 
 	${ ({ background }) => background && `
 		position: absolute;
 		overflow: hidden;
 		z-index: 1;
-		background: ${ colors.textColor };
+		background: ${ colors.textColor};
 	` }
 
 	${ ({ content }) => content && `
@@ -57,7 +64,7 @@ const Block = styled.div`
 
 const BgImage = styled(Image)`
 	height: 100%;
-  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 70, 70, 70, 75) }
+  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 70, 70, 70, 75)}
 	position: absolute;
 	left: 0;
   right: 0;
@@ -66,7 +73,7 @@ const BgImage = styled(Image)`
 const Overlay = styled.div`
 	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
 	opacity: .1;
-	${ ({ hasFooter }) => hasFooter && `bottom: 75px;` }
+	${ ({ hasFooter }) => hasFooter && `bottom: 75px;`}
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -76,18 +83,19 @@ const Overlay = styled.div`
 `
 
 const MainContent = styled(ScrollEntrance)`
-	${ ({ verticalAlign }) => verticalAlign === 'flex-end' || typography.responsiveStyles('margin-bottom', 45, 45, 0, 0) }
-padding: ${ gridSettings.containerLargeMargins } 0;
-${ mq.largeAndBelow } {
-	padding: ${ gridSettings.containerMediumMargins } 0;
+	${ ({ verticalAlign }) => verticalAlign === 'flex-end' || typography.responsiveStyles('margin-bottom', 45, 45, 0, 0)}
+padding: ${ gridSettings.containerLargeMargins} 0;
+width: 100%;
+${ mq.largeAndBelow} {
+	padding: ${ gridSettings.containerMediumMargins} 0;
 }
 
-${ mq.mediumAndBelow } {
-	padding: ${ gridSettings.containerMediumMargins } 0;
+${ mq.mediumAndBelow} {
+	padding: ${ gridSettings.containerMediumMargins} 0;
 }
 
-${ mq.smallAndBelow } {
-	padding: ${ gridSettings.containerSmallMargins } 0;
+${ mq.smallAndBelow} {
+	padding: ${ gridSettings.containerSmallMargins} 0;
 }
 `
 
@@ -101,10 +109,16 @@ const ButtonContainer = styled.div`
 
 const PaddedParagraph = styled.p`
 	padding-top: 15px;
-	${ typography.responsiveStyles('padding-bottom', 50, 30, 0, 0) }
+	max-width: ${ ({ maxWidthText }) => maxWidthText || 'auto'};
+	${ typography.responsiveStyles('padding-bottom', 50, 30, 0, 0)}
 `
+
+const H1 = styled.h1`
+	max-width: ${ ({ maxWidth }) => maxWidth || 'auto'};
+`
+
 class ATF extends Component {
-	shouldComponentUpdate (prevProps, prevState) {
+	shouldComponentUpdate(prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
 		if (md.is('iPhone') && prevProps.winHeight !== this.props.winHeight) {
 			return false
@@ -113,8 +127,8 @@ class ATF extends Component {
 		return true
 	}
 
-	render () {
-		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, buttonText, buttonLink, hasFooter, gridSettings } = this.props
+	render() {
+		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, maxWidth, maxWidthText, buttonText, buttonLink, hasFooter, gridSettings } = this.props
 		return (
 			<Fragment>
 				<Block background hasFooter={hasFooter} winHeight={winHeight}>
@@ -133,7 +147,7 @@ class ATF extends Component {
 									{...gridSettings}
 								>
 									<AlignedText align={align}>
-										<h1>{headline}</h1>
+										<H1 maxWidth={maxWidth}>{headline}</H1>
 										{buttonText &&
 											<ButtonContainer>
 												<Link to={buttonLink}>
@@ -154,7 +168,7 @@ class ATF extends Component {
 									medium="[7] 2"
 									large="[7] 2"
 								>
-									<PaddedParagraph>{text}</PaddedParagraph>
+									<PaddedParagraph maxWidthText={maxWidthText}>{text}</PaddedParagraph>
 								</Grid>}
 							</Content>
 						</MainContent>

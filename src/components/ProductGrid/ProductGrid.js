@@ -7,8 +7,8 @@ import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
-  background-color: ${ colors.offwhite };
-color: ${ colors.black };
+  background-color: ${ colors.offwhite};
+color: ${ colors.black};
 `
 
 const ProductContainer = styled.div`
@@ -17,35 +17,33 @@ const ProductContainer = styled.div`
 
 const LogoContainer = styled.div`
 	margin-bottom: 35px;
-	width: 100%;
 	border-radius: 20%;
-	min-width: 150px;
-	min-height: 150px;
-	max-width: 215px;
-	max-height: 215px;
-	border: 1px solid ${ colors.unofficialLightGrey };
+	width: 150px;
+	height: 150px;
+	max-width: 150px;
+	max-height: 150px;
+	border: 1px solid ${ colors.unofficialLightGrey};
 	overflow: hidden;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-content: center;
-	height: 0; /* 1:1 Aspect Ratio */
-  div {
-		padding-top: 100%; /* 1:1 Aspect Ratio */
-    max-width: 300px;
-  };
 `
 
 const Name = styled.div`
-  ${ typography.bodyBold }
+  ${ typography.bodyBold}
 `
 const Byline = styled.div`
-  ${ typography.body }
-  color: ${ colors.grey };
+  ${ typography.body}
+  color: ${ colors.grey};
 `
 
 const LinkStyled = styled(Link)`
   padding-right: 5px;
+`
+
+const MaxWidth = styled.div`
+	max-width: 1100px;
 `
 
 const ProductGrid = ({ title, items }) => (
@@ -53,11 +51,12 @@ const ProductGrid = ({ title, items }) => (
 		<Container>
 			<ContentBlock>
 				<h2>{title}</h2>
+				{/* <MaxWidth> */}
 				<Grid
 					showOverlay={false}
-					large="[1] [1] [1] [1]"
-					medium="[1] [1] [1] [1]"
-					small="[1] [1]"
+					large="[3] [3] [3] [3]"
+					medium="[3] [3] [3] [3]"
+					small="[3] [3]"
 				>
 					{items &&
 						items.map(({ name, byline, company, icon, links }) => (
@@ -82,6 +81,7 @@ const ProductGrid = ({ title, items }) => (
 						))
 					}
 				</Grid>
+				{/* </MaxWidth> */}
 			</ContentBlock>
 		</Container>
 	</Wrapper>
