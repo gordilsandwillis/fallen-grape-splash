@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors, typography, animations } from 'src/styles'
+import { typography, animations } from 'src/styles'
 import LogoText from 'src/assets/images/mosaic-logo-text.svg' // TODO
 import TopLeft from 'src/assets/images/mosaic-logo-corner-topleft.svg'
 import TopRight from 'src/assets/images/mosaic-logo-corner-topright.svg'
@@ -76,14 +76,3 @@ const LogoCollapse = ({ scrolled, theme = 'light' }) => (
 )
 
 export default LogoCollapse
-
-const placeBorders = ({ i }) => {
-	console.log(i)
-	const css = [
-		'top: 0; left: 0;',
-		'top: 0; right: 0;',
-		'bottom: 0; right: 0;',
-		'bottom: 0; left: 0;',
-	]
-	return css[i]
-}

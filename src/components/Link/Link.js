@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
-import { animations, colors, typography } from 'src/styles'
+import { animations, colors } from 'src/styles'
 import { Link as GatsbyLink } from 'gatsby'
 
 const LinkStyles = `

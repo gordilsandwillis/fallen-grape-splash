@@ -42,10 +42,6 @@ const LinkStyled = styled(Link)`
   padding-right: 5px;
 `
 
-const MaxWidth = styled.div`
-	max-width: 1100px;
-`
-
 const ProductGrid = ({ title, items }) => (
 	<Wrapper>
 		<Container>

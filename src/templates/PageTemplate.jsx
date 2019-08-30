@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { graphql } from 'gatsby'
+// import { graphql } from 'gatsby'
 
 class PageTemplate extends React.Component {
 	render () {

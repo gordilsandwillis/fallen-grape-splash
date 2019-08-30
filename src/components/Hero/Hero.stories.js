@@ -1,6 +1,5 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import styled from '@emotion/styled'
 import Hero from './Hero'
 
 const stories = storiesOf(`Components/Hero`, module)

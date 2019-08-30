@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { typography, colors, gridSettings, mediaQueries as mq } from 'src/styles'
+import { colors, gridSettings, mediaQueries as mq } from 'src/styles'
 
 const HrContainer = styled.div`
   display: flex;
