@@ -1,4 +1,4 @@
-import * as mq from 'styles/mediaQueries'
+import * as mq from 'src/styles/mediaQueries'
 
 export const responsiveStyles = (style, large, medium, small) => `
   ${ mq.largerAndUp } {
@@ -10,4 +10,10 @@ export const responsiveStyles = (style, large, medium, small) => `
   ${ mq.mediumAndBelow } {
     ${ style }: ${ small };
   }
+`
+
+export const fontSmoothing = `
+	-webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
 `

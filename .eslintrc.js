@@ -15,6 +15,7 @@ module.exports = {
     "arrow-spacing": ["error", { before: true, after: true }], // recommended
     indent: [2, "tab"],
     "no-tabs": 0,
+    "no-mixed-spaces-and-tabs": 0,
     "comma-dangle": [
       "error",
       {

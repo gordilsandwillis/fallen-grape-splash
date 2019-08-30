@@ -1,26 +1,19 @@
 import * as mq from './mediaQueries'
 
 import {
-	MaterialIcons,
-	DinProLight,
-	DinProRegular,
-	DinProMedium,
-	DinProBold,
-	DinProBlack,
-	ProximaNovaRegular,
-	ProximaNovaBold
+	SuisseIntlLight,
+	SuisseIntlRegular,
+	SuisseIntlSemiBold,
+	LyonDisplayLight
 } from './fonts'
 
 // Place global Typography in this file
-export const titleFontFamily = `${ DinProRegular }, -apple-system, Helvetica, sans-serif`
-export const titleFontFamilyBold = `${ DinProBold }, -apple-system, Helvetica, sans-serif`
+export const titleFontFamily = `${ LyonDisplayLight }, -apple-system, Helvetica, sans-serif`
 
 // supply a different font family if necessary
-export const bodyFontFamily = `${ DinProRegular }, -apple-system, Helvetica, sans-serif`
-export const bodyFontFamilyBold = `${ DinProBold }, -apple-system, Helvetica, sans-serif`
-
-export const smallFontFamily = `${ ProximaNovaRegular }, -apple-system, Helvetica, sans-serif`
-export const smallFontFamilyBold = `${ ProximaNovaBold }, -apple-system, Helvetica, sans-serif`
+export const bodyFontFamilyLight = `${ SuisseIntlLight }, -apple-system, Helvetica, sans-serif`
+export const bodyFontFamilyRegular = `${ SuisseIntlRegular }, -apple-system, Helvetica, sans-serif`
+export const bodyFontFamilyBold = `${ SuisseIntlSemiBold }, -apple-system, Helvetica, sans-serif`
 
 export const linearInterpolation = (maxInput, minInput, maxWidth, minWidth) => {
 	let slope = (maxInput - minInput) / (maxWidth - minWidth)
@@ -41,60 +34,62 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 `
 
 export const body = `
-	${ responsiveStyles('font-size', 22, 18, 18, 16) }
-	letter-spacing: 0.33px;
-	line-height: 1.6;
-	font-family: ${ bodyFontFamily };
+	${ responsiveStyles('font-size', 14, 14, 14, 18) }
+	${ responsiveStyles('line-height', 21, 21, 21, 24) }
+	font-family: ${ bodyFontFamilyRegular };
 `
-export const bodySmall = `
-	${ responsiveStyles('font-size', 18, 14, 12, 12) }
+export const bodyLight = `
+	${ responsiveStyles('font-size', 14, 14, 14, 18) }
 	letter-spacing: 0.33px;
 	line-height: 1.6;
-	font-family: ${ smallFontFamily };
+	font-family: ${ bodyFontFamilyLight };
+`
+
+export const bodyBold = `
+${ responsiveStyles('font-size', 14, 14, 14, 18) }
+${ responsiveStyles('line-height', 21, 21, 21, 24) }
+font-family: ${ bodyFontFamilyBold };
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 66, 60, 30, 30) }
-	font-family: ${ titleFontFamilyBold };
-	font-weight: normal;
-	letter-spacing: 0.33px;
+	${ responsiveStyles('font-size', 48, 48, 44, 38) }
+	font-family: ${ titleFontFamily };
+	font-weight: lighter;
+	letter-spacing: ${ -10 / 1000 }em;
 	line-height: 1.2;
 `
 
 export const h2 = `
-	${ responsiveStyles('font-size', 50, 50, 30, 30) }
-	font-family: ${ titleFontFamilyBold };
-	font-weight: normal;
-	line-height: 1.125;
-	letter-spacing: 0.33px;
+	${ responsiveStyles('font-size', 24, 24, 24, 28) }
+	${ responsiveStyles('line-height', 30, 30, 30, 36) }
+	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
+	font-family: ${ bodyFontFamilyLight };
 `
 
 export const h3 = `
-	${ responsiveStyles('font-size', 40, 40, 20, 20) }
-	font-family: ${ titleFontFamilyBold };
-	font-weight: normal;
-	line-height: 1.16667;
-	letter-spacing: 0.33px;
+	${ responsiveStyles('font-size', 14, 14, 14, 18) }
+	letter-spacing: ${ 20 / 1000 }em;
+	font-family: ${ bodyFontFamilyRegular };
+	font-weight: 500;
 `
 
 export const h4 = `
-	${ responsiveStyles('font-size', 26, 26, 18, 18) }
-	font-family: ${ titleFontFamilyBold };
-	font-weight: 500;
-	line-height: 1.25;
-	letter-spacing: 0.33px;
+${ responsiveStyles('font-size', 20, 20, 18, 18) }
+font-family: ${ bodyFontFamilyRegular };
+line-height: 1.3333;
+letter-spacing: 0.33px;
+
 `
 
 export const h5 = `
-	${ responsiveStyles('font-size', 20, 20, 16, 16) }
-	font-family: ${ titleFontFamilyBold };
-	font-weight: 500;
+	${ responsiveStyles('font-size', 20, 20, 18, 18) }
+	font-family: ${ bodyFontFamilyRegular };
 	line-height: 1.3333;
 	letter-spacing: 0.33px;
 `
 export const h6 = `
 	${ responsiveStyles('font-size', 13, 13, 13, 13) }
-	font-family: ${ titleFontFamilyBold };
+	font-family: ${ titleFontFamily };
 	font-weight: bold;
 	line-height: 1.1482;
 	letter-spacing: 1.75px;
@@ -108,17 +103,24 @@ export const caption = `
 `
 
 export const button = `
-	${ responsiveStyles('font-size', 18, 14, 14, 14) }
-	font-family: ${ bodyFontFamilyBold };
-	font-weight: bold;
+	${ responsiveStyles('font-size', 14, 14, 14, 18) }
+	font-family: ${ bodyFontFamilyRegular };
 	line-height: ${ 16 / 14 };
-	letter-spacing: ${ 1.75 / 14 }em;
-	text-transform: uppercase;
+	letter-spacing: ${ 20 / 1000 }em;
+  text-transform: uppercase;
+  padding: 0 2em 1px;
 `
 
-export const small = `
-	${ responsiveStyles('font-size', 13, 13, 13, 13) }
-	font-family: ${ smallFontFamily };
-	line-height: ${ 26 / 14 };
-	letter-spacing: ${ 0.33 / 14 }em;
+export const footer = `
+	${ responsiveStyles('font-size', 10, 10, 10, 12) }
+	${ responsiveStyles('line-height', 12, 12, 12, 14) }
+	letter-spacing: ${ 20 / 1000 }em;
+	font-family: ${ bodyFontFamilyRegular };
+`
+
+export const h2Special = `
+	${ responsiveStyles('font-size', 24, 24, 24, 22) }
+	${ responsiveStyles('line-height', 30, 30, 30, 30) }
+	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
+	font-family: ${ bodyFontFamilyLight };
 `

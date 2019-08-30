@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 // these define the maximum size for a breakpoint
 const tinyBreakpoint = 360
 const smallBreakpoint = 480
-const mediumBreakpoint = 767
+const mediumBreakpoint = 767 // breakpoint
 const largeBreakpoint = 1023
 const largerBreakpoint = 1439
 const extraLargeBreakpoint = 1919
@@ -12,6 +12,7 @@ const extraExtraLargeBreakpoint = 2559
 const maxWidth = breakpoint => `@media (max-width: ${ breakpoint }px)`
 const minWidth = breakpoint => `@media (min-width: ${ breakpoint }px)`
 
+const tinyAndBelow = maxWidth(tinyBreakpoint)
 const smallAndBelow = maxWidth(smallBreakpoint)
 const mediumAndBelow = maxWidth(mediumBreakpoint)
 const largeAndBelow = maxWidth(largeBreakpoint)
@@ -81,6 +82,7 @@ export {
 	extraExtraLargeBreakpoint,
 	maxWidth,
 	minWidth,
+	tinyAndBelow,
 	smallAndBelow,
 	mediumAndBelow,
 	largeAndBelow,

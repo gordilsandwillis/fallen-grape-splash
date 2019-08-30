@@ -13,21 +13,19 @@ export default `
 
   ${ fonts.MaterialIconsFont }
 
-  ${ fonts.DinProLightFont }
-  ${ fonts.DinProRegularFont }
-  ${ fonts.DinProMediumFont }
-  ${ fonts.DinProBoldFont }
-  ${ fonts.DinProBlackFont }
-  ${ fonts.ProximaNovaRegularFont }
-  ${ fonts.ProximaNovaBoldFont }
+  ${ fonts.SuisseIntlLightFont }
+  ${ fonts.SuisseIntlRegularFont }
+  ${ fonts.SuisseIntlSemiBoldFont }
+  ${ fonts.LyonDisplayLightFont }
 
   * {
     box-sizing: border-box;
   }
 
   html {
+    -webkit-font-smoothing: antialiased;
     font-display: block;
-    background: ${ colors.white };
+    background: ${ colors.offwhite };
     &.page-lock {
       position: relative;
       overflow: hidden;
@@ -44,7 +42,7 @@ export default `
 
   body {
     ${ typography.body }
-    color: ${ colors.black };
+    color: ${ colors.primaryColor };
   }
 
   b, strong {
@@ -57,21 +55,10 @@ export default `
     margin: 0 0 0.5em;
   }
 
-  h1, h2, h3, h4, h5, h6, blockquote {
-    b, strong {
-      font-family: ${ typography.titleFontFamilyBold };
-      font-weight: bold;
-    }
-  }
-
   p {
     ${ typography.body }
     ${ responsiveStyles('margin-top', 24, 16, 14, 8) }
     ${ responsiveStyles('margin-bottom', 8, 8, 6, 8) }
-    &.small {
-      ${ typography.bodySmall }
-      color: ${ colors.lightGrey }
-    }
   }
 
   h1, .h1 {
@@ -126,7 +113,7 @@ export default `
   hr {
     margin: 2em auto;
     border: 0;
-    border-bottom: 1px solid ${ colors.lightGrey };
+    border-bottom: 1px solid ${ colors.grey };
   }
 
   a {
@@ -135,7 +122,7 @@ export default `
     text-decoration: none;
     .notouch &:hover,
     .pointerevents &:hover {
-      color: ${ colors.mainColor };
+      color: ${ colors.black };
     }
     &.text-link {
       font-size: 14px;
@@ -160,8 +147,7 @@ export default `
   }
 
   time {
-    ${ typography.small };
-    color: ${ colors.lightGrey };
+    color: ${ colors.grey };
   }
 
   .material-icons {
