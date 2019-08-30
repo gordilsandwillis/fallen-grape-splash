@@ -7,8 +7,8 @@ import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
-  background-color: ${ colors.offwhite};
-color: ${ colors.black};
+  background-color: ${ colors.offwhite };
+color: ${ colors.black };
 `
 
 const ProductContainer = styled.div`
@@ -22,7 +22,7 @@ const LogoContainer = styled.div`
 	height: 150px;
 	max-width: 150px;
 	max-height: 150px;
-	border: 1px solid ${ colors.unofficialLightGrey};
+	border: 1px solid ${ colors.unofficialLightGrey };
 	overflow: hidden;
 	display: flex;
 	flex-direction: row;
@@ -31,11 +31,11 @@ const LogoContainer = styled.div`
 `
 
 const Name = styled.div`
-  ${ typography.bodyBold}
+  ${ typography.bodyBold }
 `
 const Byline = styled.div`
-  ${ typography.body}
-  color: ${ colors.grey};
+  ${ typography.body }
+  color: ${ colors.grey };
 `
 
 const LinkStyled = styled(Link)`
@@ -51,7 +51,6 @@ const ProductGrid = ({ title, items }) => (
 		<Container>
 			<ContentBlock>
 				<h2>{title}</h2>
-				{/* <MaxWidth> */}
 				<Grid
 					showOverlay={false}
 					large="[3] [3] [3] [3]"
@@ -81,7 +80,6 @@ const ProductGrid = ({ title, items }) => (
 						))
 					}
 				</Grid>
-				{/* </MaxWidth> */}
 			</ContentBlock>
 		</Container>
 	</Wrapper>
