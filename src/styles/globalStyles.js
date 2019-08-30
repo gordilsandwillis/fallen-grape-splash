@@ -173,4 +173,11 @@ export default `
   .material-icons.md-36 { font-size: 36px; }
   .material-icons.md-48 { font-size: 48px; }
 
+
+ em {
+   border: 1px solid currentColor;
+   padding: 0 .28em;
+   font-style: normal !important;
+ }
+  
 `
