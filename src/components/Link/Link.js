@@ -46,8 +46,7 @@ const StyledGatsbyLink = styled(GatsbyLink)`
 
 class Link extends Component {
 	render () {
-		const { to, external, white, target, children, className, theme, underlined } = this.props
-
+		let { to, external, white, target, children, className, theme, underlined } = this.props
 		if (external) {
 			return (
 				<StyledLinkElement

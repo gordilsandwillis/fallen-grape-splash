@@ -58,8 +58,8 @@ const ProductGrid = ({ title, items }) => (
 					small="[3] [3]"
 				>
 					{items &&
-						items.map(({ name, byline, company, icon, links }) => (
-							<ProductContainer>
+						items.map(({ name, byline, company, icon, links }, index) => (
+							<ProductContainer key={name + company + index + '_productcontainer'}>
 								<Grid
 									showOverlay={false}
 									large="[2] 1"
@@ -74,7 +74,7 @@ const ProductGrid = ({ title, items }) => (
 									<Name>{name}</Name>
 									<Byline>{byline}</Byline>
 									<div>{company}</div>
-									<p>{links.map(link => <LinkStyled external to={link.href}>{link.name}</LinkStyled>)}</p>
+									<p>{links.map((link, index) => <LinkStyled key={link.href + index} external to={link.href}>{link.name}</LinkStyled>)}</p>
 								</div>
 							</ProductContainer>
 						))

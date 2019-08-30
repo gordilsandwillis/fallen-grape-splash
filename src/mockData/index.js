@@ -8,7 +8,7 @@ export const pages = {
 			},
 			buttonData: {
 				buttonText: 'LEARN MORE',
-				buttonLink: 'about'
+				buttonLink: '/about'
 			}
 		}
 	},
@@ -255,7 +255,7 @@ export const shared = {
 		footerTextLeft: `© 2019 Mosaic Group. All Rights Reserved.`,
 		footerTextLeftLineTwo: 'Mosaic Group is an IAC company.',
 		footerTextRight: 'Press',
-		footerTextRightLink: 'press'
+		footerTextRightLink: '/press'
 	},
 
 }
