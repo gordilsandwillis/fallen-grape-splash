@@ -63,8 +63,8 @@ const MobileNavLinkContainer = styled.div`
 `
 
 const LogoContainer = styled.div`
-  height: 72px;
-  width: 72px;
+  ${ typography.responsiveStyles('height', 85, 72, 72, 72) }
+  ${ typography.responsiveStyles('width', 85, 72, 72, 72) }
 `
 
 const IconContainer = styled.div`
@@ -176,7 +176,9 @@ class Header extends Component {
   							{navPages.map(({ name, slug }) => (
   								<LinkContainer key={name + slug}>
   									<Link
-  										underlined={slug === pathname ? 'true' : undefined}
+  										underlined={
+  											checkSlug({ slug, pathname }) ? 'true' : undefined
+  										}
   										theme={theme}
   										key={name}
   										to={slug}
@@ -221,3 +223,6 @@ class Header extends Component {
 }
 
 export default Header
+
+const checkSlug = ({ slug, pathname }) =>
+	'/' + pathname.split(/([$&+,/:;=?@#><%])/g)[2] === slug
