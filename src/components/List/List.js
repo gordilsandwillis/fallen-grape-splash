@@ -29,7 +29,7 @@ const ContainerRow = styled(Container)`
 	align-items: baseline;
 	justify-content: space-between;
 	@media (max-width: 400px) {
-		flex-direction:column-reverse;
+		flex-direction:column;
 	}
 `
 
@@ -53,13 +53,18 @@ const ImgStyled = styled.img`
 
 const Title = styled.div`
 ${ typography.h2 }
-padding-bottom:10px;
+padding-bottom: 10px;
+`
+
+const H2 = styled.div`
+	${ typography.h2 }
+	padding-bottom: 30px;
 `
 const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, externalLink, data }) => (
 	<Wrapper>
 		<ContentBlock>
 			<ContainerRow>
-				{showTitleHr ? <Title>{title}</Title> : <h2>{title}</h2>}
+				{showTitleHr ? <Title>{title}</Title> : <H2>{title}</H2>}
 				{externalLink && <LinkContainer><Link external to={externalLink.href}>{externalLink.name}</Link></LinkContainer>}
 			</ContainerRow>
 			{showTitleHr && <HrFullContainer><Hr full color={colors.black} /></HrFullContainer>}
@@ -76,7 +81,7 @@ const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, exter
 									<LogoContainer><div>{logo && <ImgStyled src={logo} />}</div></LogoContainer>
 									<div>
 										{title && <Title>{title}</Title>}
-										{text && <div>{text}</div>}
+										{text && <p>{text}</p>}
 										{link && <p><Link external to={link}>{linkText}</Link></p>}
 									</div>
 								</Grid>
