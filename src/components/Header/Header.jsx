@@ -23,13 +23,16 @@ const Wrapper = styled.header`
 		theme === 'light' || scrolled ? lightStyles : transparentStyles };
   ${ typography.body }
   left: 0;
-  transition: height ${ animations.mediumSpeed } ease-in-out;
+  transition: height ${ animations.mediumSpeed } ease-in-out,
+    background-color ${ animations.mediumSpeed } ease-in-out;
   right: 0;
   z-index: 4;
   height: 150px;
   position: fixed;
   &.scrolled {
     height: 110px;
+    background-color: ${ colors.offwhite };
+    color: ${ colors.black };
   }
 `
 
@@ -228,7 +231,7 @@ class Header extends Component {
   											underlined={
   												checkSlug({ slug, pathname }) ? 'true' : undefined
   											}
-  											theme={theme}
+  											theme={scrolled ? 'light' : theme}
   											key={name}
   											to={slug}
   										>
