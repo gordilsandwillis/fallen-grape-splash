@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { colors, animations } from 'src/styles'
 // import MenuSvg from 'src/assets/images/menu.svg'
-import Link from 'src/components/Link'
 
 // TODO ACCESSIBILITY OF MENU LINK
 const MenuLink = styled.div`

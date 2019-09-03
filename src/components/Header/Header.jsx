@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
-import CloseIcon from 'src/assets/images/close.svg'
 import LogoCollapse from 'src/components/LogoCollapse'
 import HamburgerIcon from 'src/components/HamburgerIcon'
 import {
@@ -79,6 +78,8 @@ const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: visibility ${ animations.mediumSpeed } ease-in-out;
+  visibility: ${ ({ mobileNavOpen }) => (mobileNavOpen ? 'visibile' : 'hidden') };
 `
 
 const MobileNavLinkContainer = styled.div`
@@ -138,8 +139,8 @@ const MobileNavLink = styled(Link)`
 		transform ${ animations.mediumSpeed } ${ orderNumber / 20 }s ease-in-out` };
   ${ ({ mobileNavOpen }) =>
 		mobileNavOpen
-			? `opacity: 1; transform: none;`
-			: `opacity: 0; transform: translate3d(0,50px,0); ` }
+			? `opacity: 1; transform: none; visibility: visibile;`
+			: `opacity: 0; transform: translate3d(0,50px,0); visibility: hidden;` }
 `
 
 const DesktopDetect = styled.div`
@@ -167,7 +168,9 @@ const HamburgerContainer = styled.div`
 `
 
 const Overlay = styled.div`
-  transition: background-color ${ animations.mediumSpeed } ease-in-out;
+  transition: background-color ${ animations.mediumSpeed } ease-in-out,
+    visibility ${ animations.mediumSpeed } ease-in-out;
+  visibility: ${ ({ mobileNavOpen }) => (mobileNavOpen ? 'visibile' : 'hidden') };
   background: rgba(0, 0, 0, 0);
   position: fixed;
   top: 0;
@@ -286,7 +289,10 @@ class Header extends Component {
   								))}
   							</DesktopDetect>
   							<MobileDetect>
-  								<Overlay className={mobileNavOpen ? 'open' : 'closed'}>
+  								<Overlay
+  									mobileNavOpen={mobileNavOpen}
+  									className={mobileNavOpen ? 'open' : 'closed'}
+  								>
   									<NavContainer mobileNavOpen={mobileNavOpen}>
   										<MobileNavLinkContainer mobileNavOpen={mobileNavOpen}>
   											{navPages.map(({ name, slug }, index) => (
