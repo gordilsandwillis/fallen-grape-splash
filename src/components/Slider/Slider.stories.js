@@ -48,8 +48,8 @@ const exampleDataTwo = {
 			name: 'HIIT Workouts by Daily Burn',
 			byline: 'Workout plans for weight loss',
 			company: 'Daily Burn',
-			icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_hiit.png?raw=true',
-			slideshow: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/products-header.jpg?raw=true',
+			icon: 'https://i.imgur.com/tt9d9zU.png',
+			slideshow: 'https://i.imgur.com/C9C3c1z.jpg',
 			links: [
 				{
 					name: 'iOS',
@@ -61,8 +61,7 @@ const exampleDataTwo = {
 			name: 'iTranslate Translator',
 			byline: 'Translate App with Dictionary',
 			company: 'iTranslate',
-			icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_itranslate_translator.jpg?raw=true',
-			slideshow: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/products-header.jpg?raw=true',
+			slideshow: 'https://i.imgur.com/C9C3c1z.jpg',
 			links: [
 				{
 					name: 'iOS',
@@ -78,8 +77,7 @@ const exampleDataTwo = {
 			name: 'iTranslate Converse',
 			byline: 'Translate Voice in Real Time',
 			company: 'iTranslate',
-			icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_itranslate_converse.jpg?raw=true',
-			slideshow: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/products-header.jpg?raw=true',
+			slideshow: 'https://i.imgur.com/C9C3c1z.jpg',
 			links: [
 				{
 					name: 'iOS',
