@@ -20,11 +20,11 @@ const StyledLinkElement = styled.a`
   &:hover {
     color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
     span {
-      border-color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
+      border-color: ${ ({ white, noHoverColor }) => noHoverColor ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
     }
   }
 
-  &::after {
+&::after {
     content: '↗';
     margin-left: 2px;
     line-height: 1em;
@@ -35,18 +35,18 @@ const StyledLinkElement = styled.a`
 
 const StyledGatsbyLink = styled(GatsbyLink)`
   ${ LinkStyles }
-  ${ ({ underlined, theme }) => underlined && `border-bottom: 2px solid ${ theme === 'light' ? colors.black : colors.white };` }
+  ${ ({ underlined, theme }) => underlined && `border-bottom: 1px solid ${ theme === 'light' ? colors.black : colors.white };` }
   color: ${ ({ theme }) => theme === 'light' ? colors.black : colors.white };
   transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
-    color: ${ colors.unofficialLightGrey };
+    color: ${ ({ noHoverColor }) => !noHoverColor ? colors.unofficialLightGrey : 'inherit' };
     border-bottom-color: ${ colors.unofficialLightGrey };
   }
 `
 
 class Link extends Component {
 	render () {
-		let { to, external, white, target, children, className, theme, underlined } = this.props
+		let { to, external, white, noHoverColor, target, children, className, theme, underlined } = this.props
 		if (external) {
 			return (
 				<StyledLinkElement
@@ -54,6 +54,7 @@ class Link extends Component {
 					href={to}
 					target={target}
 					white={white}
+					noHoverColor={noHoverColor}
 				>
 					<span>{children}</span>
 				</StyledLinkElement >
@@ -61,6 +62,7 @@ class Link extends Component {
 		} else {
 			return (
 				<StyledGatsbyLink
+					noHoverColor={noHoverColor}
 					className={className}
 					to={to}
 					theme={theme}

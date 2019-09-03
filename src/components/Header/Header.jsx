@@ -3,10 +3,16 @@ import styled from '@emotion/styled'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
-import MenuIcon from 'src/assets/images/menu.svg'
 import CloseIcon from 'src/assets/images/close.svg'
 import LogoCollapse from 'src/components/LogoCollapse'
-import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
+import HamburgerIcon from 'src/components/HamburgerIcon'
+import {
+	colors,
+	typography,
+	animations,
+	mediaQueries as mq,
+	gridSettings
+} from 'src/styles'
 import { navPages } from 'src/mockData'
 
 const PageCheat = styled.div`
@@ -15,8 +21,7 @@ const PageCheat = styled.div`
 `
 
 const Wrapper = styled.header`
-  ${ ({ theme, scrolled }) =>
-		theme === 'light' || scrolled ? lightStyles : transparentStyles };
+  ${ ({ theme }) => (theme === 'light' ? lightStyles : transparentStyles) };
   ${ typography.body }
   left: 0;
   transition: height ${ animations.mediumSpeed } ease-in-out,
@@ -51,14 +56,33 @@ const HeaderContainer = styled(Container)`
   padding-top: 36px;
 `
 
-const NavContainer = styled(HeaderContainer)`
+const NavContainer = styled.div`
+  max-width: 2500px;
+  width: calc(100% - ${ gridSettings.containerLargeMargins } * 2);
+  margin: 0 auto;
+  height: 100%;
+
+  ${ mq.largeAndBelow } {
+    width: calc(100% - ${ gridSettings.containerMediumMargins } * 2);
+  }
+
+  ${ mq.mediumAndBelow } {
+    width: calc(100% - ${ gridSettings.containerMediumMargins } * 2);
+  }
+
+  ${ mq.smallAndBelow } {
+    width: calc(100% - ${ gridSettings.containerSmallMargins } * 2);
+  }
   ${ typography.bodyLight }
+  display: flex;
+  padding-top: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
 const MobileNavLinkContainer = styled.div`
+  user-select: none;
   position: absolute;
   bottom: 0;
   margin: auto;
@@ -70,40 +94,49 @@ const MobileNavLinkContainer = styled.div`
   z-index: 5;
 `
 
-const IconContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 24px;
-  height: 24px;
-  svg {
-    stroke: ${ ({ theme, scrolled }) =>
-		theme === 'light' || scrolled ? colors.black : colors.white };
-    transition: stroke ${ animations.mediumSpeed } ease-in-out;
-  }
-  &:hover {
-    svg {
-      stroke: ${ ({ theme, scrolled }) =>
-		theme === 'light' || scrolled
-			? colors.grey
-			: colors.unofficialLightGrey };
-    }
-  }
-`
-
 const NavItemsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
 `
-const LinkContainer = styled.span`
+const DesktopLinkContainer = styled.span`
   margin-left: 45px;
+  position: relative;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: ${ colors.white };
+    bottom: -5px;
+    opacity: 0;
+    transition: bottom ${ animations.mediumSpeed } ease-in-out,
+      opacity ${ animations.mediumSpeed } ease-in-out;
+  }
+  &:hover {
+    &:after {
+      ${ ({ underlined }) =>
+		!underlined &&
+        ` bottom: -1px;
+			 		opacity: 1;
+			 ` }
+    }
+  }
 `
 
 const MobileNavLink = styled(Link)`
   font-size: 44px;
   z-index: 5;
   line-height: 100px;
+  transition: ${ ({ orderNumber }) =>
+		`opacity ${ animations.mediumSpeed } ${ orderNumber / 20 }s ease-in-out,
+		transform ${ animations.mediumSpeed } ${ orderNumber / 20 }s ease-in-out` };
+  ${ ({ mobileNavOpen }) =>
+		mobileNavOpen
+			? `opacity: 1; transform: none;`
+			: `opacity: 0; transform: translate3d(0,50px,0); ` }
 `
 
 const DesktopDetect = styled.div`
@@ -131,14 +164,17 @@ const HamburgerContainer = styled.div`
 `
 
 const Overlay = styled.div`
-  background: black;
-  opacity: 0.95;
+  transition: background-color ${ animations.mediumSpeed } ease-in-out;
+  background: rgba(0, 0, 0, 0);
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 3;
   width: 100%;
   height: 100%;
-  z-index: 3;
+  &.open {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
 `
 
 const LinkStyled = styled(Link)`
@@ -206,7 +242,10 @@ class Header extends Component {
   	const { mobileNavOpen, scrolled } = this.state
   	return (
   		<PageCheat className={scrolled ? 'scrolled' : ''} hasAtf={hasAtf}>
-  			<Wrapper className={scrolled ? 'scrolled' : ''} theme={theme}>
+  			<Wrapper
+  				className={scrolled ? 'scrolled' : ''}
+  				theme={scrolled ? 'light' : theme}
+  			>
   				<HeaderContainer>
   					<Grid
   						showOverlay={false}
@@ -216,51 +255,58 @@ class Header extends Component {
   					>
   						<div>
   							<LinkStyled to={'/'}>
-  								<LogoCollapse scrolled={scrolled} theme={theme} />
+  								<LogoCollapse
+  									scrolled={scrolled}
+  									theme={scrolled ? 'light' : theme}
+  								/>
   							</LinkStyled>
   						</div>
   						<NavItemsContainer>
   							<DesktopDetect>
   								{navPages.map(({ name, slug }) => (
-  									<LinkContainer key={name + slug}>
+  									<DesktopLinkContainer
+  										underlined={checkSlug({ slug, pathname })}
+  										key={name + slug}
+  										theme={scrolled ? 'light' : theme}
+  									>
   										<Link
-  											underlined={
-  												checkSlug({ slug, pathname }) ? 'true' : undefined
-  											}
+  											underlined={checkSlug({ slug, pathname })}
   											theme={scrolled ? 'light' : theme}
   											key={name}
   											to={slug}
+  											noHoverColor
   										>
   											{name}
   										</Link>
-  									</LinkContainer>
+  									</DesktopLinkContainer>
   								))}
   							</DesktopDetect>
   							<MobileDetect>
-  								{!mobileNavOpen ? (
-  									<HamburgerContainer onClick={this.toggleNav}>
-  										<IconContainer scrolled={scrolled} theme={theme}>
-  											<MenuIcon />
-  										</IconContainer>
-  									</HamburgerContainer>
-  								) : (
-  									<Overlay>
-  										<NavContainer>
-  											<HamburgerContainer onClick={this.toggleNav}>
-  												<IconContainer scrolled={scrolled}>
-  													<CloseIcon />
-  												</IconContainer>
-  											</HamburgerContainer>
-  											<MobileNavLinkContainer mobileNavOpen={mobileNavOpen}>
-  												{navPages.map(({ name, slug }) => (
-  													<MobileNavLink key={name} to={slug}>
-  														{name}
-  													</MobileNavLink>
-  												))}
-  											</MobileNavLinkContainer>
-  										</NavContainer>
-  									</Overlay>
-  								)}
+  								<Overlay className={mobileNavOpen ? 'open' : 'closed'}>
+  									<NavContainer mobileNavOpen={mobileNavOpen}>
+  										<MobileNavLinkContainer mobileNavOpen={mobileNavOpen}>
+  											{navPages.map(({ name, slug }, index) => (
+  												<MobileNavLink
+  													key={name}
+  													to={slug}
+  													orderNumber={index}
+  													mobileNavOpen={mobileNavOpen}
+  												>
+  													{name}
+  												</MobileNavLink>
+  											))}
+  										</MobileNavLinkContainer>
+  									</NavContainer>
+  								</Overlay>
+  							</MobileDetect>
+  							<MobileDetect>
+  								<HamburgerContainer onClick={this.toggleNav}>
+  									<HamburgerIcon
+  										clicked={mobileNavOpen}
+  										scrolled={scrolled}
+  										theme={scrolled ? 'light' : theme}
+  									/>
+  								</HamburgerContainer>
   							</MobileDetect>
   						</NavItemsContainer>
   					</Grid>
