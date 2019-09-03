@@ -103,19 +103,22 @@ const DesktopLinkContainer = styled.span`
   margin-left: 45px;
   position: relative;
   &:after {
+    background: currentColor;
     content: "";
     display: block;
     position: absolute;
     left: 0;
     right: 0;
     height: 1px;
-    background: ${ colors.white };
     bottom: -5px;
     opacity: 0;
     transition: bottom ${ animations.mediumSpeed } ease-in-out,
       opacity ${ animations.mediumSpeed } ease-in-out;
   }
   &:hover {
+    a {
+      border-bottom-color: currentColor;
+    }
     &:after {
       ${ ({ underlined }) =>
 		!underlined &&
@@ -265,6 +268,7 @@ class Header extends Component {
   							<DesktopDetect>
   								{navPages.map(({ name, slug }) => (
   									<DesktopLinkContainer
+  										theme={scrolled ? 'light' : theme}
   										underlined={checkSlug({ slug, pathname })}
   										key={name + slug}
   										theme={scrolled ? 'light' : theme}
