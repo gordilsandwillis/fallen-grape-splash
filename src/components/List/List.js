@@ -7,6 +7,7 @@ import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
 import Hr from 'src/components/Hr'
 import VideoEmbed from 'src/components/VideoEmbed'
+import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const Wrapper = styled.div`
   background-color: ${ colors.offwhite };
@@ -63,45 +64,47 @@ const H2 = styled.div`
 const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, externalLink, data }) => (
 	<Wrapper>
 		<ContentBlock>
-			<ContainerRow>
-				{showTitleHr ? <Title>{title}</Title> : <H2>{title}</H2>}
-				{externalLink && <LinkContainer><Link external to={externalLink.href}>{externalLink.name}</Link></LinkContainer>}
-			</ContainerRow>
-			{showTitleHr && <HrFullContainer><Hr full color={colors.black} /></HrFullContainer>}
-			{items &&
-				items.map(({ id, logo, title, text, link, image, video }, index) => (
-					<React.Fragment key={index + '_fragment'}>
-						{(showHr && index !== 0) && <Hr key={index + '_hr'} color={colors.black} />}
-						<Container key={index + '_container'}>
-							<Padding notFirst={index} notLast={index !== items.length - 1}>
-								<Grid
-									showOverlay={false}
-									{...gridSettings}
-								>
-									<LogoContainer><div>{logo && <ImgStyled src={logo} />}</div></LogoContainer>
-									<div>
-										{title && <Title>{title}</Title>}
-										{text && <p>{text}</p>}
-										{link && <p><Link external to={link}>{linkText}</Link></p>}
-									</div>
-								</Grid>
-								{(image || video) && <Padding>
+			<ScrollEntrance>
+				<ContainerRow>
+					{showTitleHr ? <Title>{title}</Title> : <H2>{title}</H2>}
+					{externalLink && <LinkContainer><Link external to={externalLink.href}>{externalLink.name}</Link></LinkContainer>}
+				</ContainerRow>
+				{showTitleHr && <HrFullContainer><Hr full color={colors.black} /></HrFullContainer>}
+				{items &&
+					items.map(({ id, logo, title, text, link, image, video }, index) => (
+						<React.Fragment key={index + '_fragment'}>
+							{(showHr && index !== 0) && <Hr key={index + '_hr'} color={colors.black} />}
+							<Container key={index + '_container'}>
+								<Padding notFirst={index} notLast={index !== items.length - 1}>
 									<Grid
 										showOverlay={false}
-										large='3 [4] 5'
-										medium='3 [5] 4'
-										small='[6]'
+										{...gridSettings}
 									>
-										{image && <ImgStyled src={image} />}
-										{video && <VideoEmbed gridSettings={{ small: '[6]', medium: '[6]', large: '[6]' }} {...video} />}
+										<LogoContainer><div>{logo && <ImgStyled src={logo} />}</div></LogoContainer>
+										<div>
+											{title && <Title>{title}</Title>}
+											{text && <p>{text}</p>}
+											{link && <p><Link external to={link}>{linkText}</Link></p>}
+										</div>
 									</Grid>
-								</Padding>}
-							</Padding>
+									{(image || video) && <Padding>
+										<Grid
+											showOverlay={false}
+											large='3 [4] 5'
+											medium='3 [5] 4'
+											small='[6]'
+										>
+											{image && <ImgStyled src={image} />}
+											{video && <VideoEmbed gridSettings={{ small: '[6]', medium: '[6]', large: '[6]' }} {...video} />}
+										</Grid>
+									</Padding>}
+								</Padding>
 
-						</Container>
-					</React.Fragment>
-				))
-			}
+							</Container>
+						</React.Fragment>
+					))
+				}
+			</ScrollEntrance>
 		</ContentBlock>
 	</Wrapper >
 )

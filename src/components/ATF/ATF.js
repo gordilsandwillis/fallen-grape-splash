@@ -82,7 +82,7 @@ const Overlay = styled.div`
 	z-index: 6;
 `
 
-const MainContent = styled(ScrollEntrance)`
+const MainContent = styled.div`
 	${ ({ verticalAlign }) => verticalAlign === 'flex-end' || typography.responsiveStyles('margin-bottom', 45, 45, 0, 0) }
 padding: ${ gridSettings.containerLargeMargins } 0;
 width: 100%;
@@ -141,36 +141,45 @@ class ATF extends Component {
 				<Block content="true" hasFooter={hasFooter} winHeight={winHeight}>
 					<AlignmentContainer verticalAlign={verticalAlign}>
 						<MainContent verticalAlign={verticalAlign}>
-							<Content>
-								<Grid
-									showOverlay={false}
-									{...gridSettings}
-								>
-									<AlignedText align={align}>
-										<H1 maxWidth={maxWidth}>{headline}</H1>
-										{buttonText &&
-											<ButtonContainer>
-												<Link to={buttonLink}>
-													<Button>
-														{buttonText}
-													</Button>
-												</Link>
-											</ButtonContainer>
-										}
-									</AlignedText>
-								</Grid>
-							</Content>
-							{showHr && <Margin><Hr /></Margin>}
-							<Content>
-								{text && <Grid
-									showOverlay={false}
-									small="[6]"
-									medium="[7] 2"
-									large="[7] 2"
-								>
-									<PaddedParagraph maxWidthText={maxWidthText}>{text}</PaddedParagraph>
-								</Grid>}
-							</Content>
+							<ScrollEntrance>
+								<Content>
+									<Grid
+										showOverlay={false}
+										{...gridSettings}
+									>
+										<AlignedText align={align}>
+											<H1 maxWidth={maxWidth}>{headline}</H1>
+										</AlignedText>
+									</Grid>
+								</Content>
+								<Content>
+									<Grid showOverlay={false}
+										{...gridSettings}>
+										<AlignedText align={align}>
+											{buttonText &&
+												<ButtonContainer>
+													<Link to={buttonLink}>
+														<Button>
+															{buttonText}
+														</Button>
+													</Link>
+												</ButtonContainer>
+											}
+										</AlignedText>
+									</Grid>
+								</Content>
+								{showHr && <Margin><Hr /></Margin>}
+								<Content>
+									{text && <Grid
+										showOverlay={false}
+										small="[6]"
+										medium="[7] 2"
+										large="[7] 2"
+									>
+										<PaddedParagraph maxWidthText={maxWidthText}>{text}</PaddedParagraph>
+									</Grid>}
+								</Content>
+							</ScrollEntrance>
 						</MainContent>
 					</AlignmentContainer>
 				</Block>
