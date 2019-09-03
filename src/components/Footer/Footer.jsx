@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
 import Link from 'src/components/Link'
@@ -6,13 +6,7 @@ import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import Hr from 'src/components/Hr'
 
-import {
-	globals,
-	animations,
-	colors,
-	typography,
-	mediaQueries
-} from 'src/styles'
+import { colors, typography } from 'src/styles'
 
 const Wrapper = styled.footer`
   position: ${ ({ position = 'static' }) => position };

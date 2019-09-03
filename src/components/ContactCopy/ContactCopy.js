@@ -24,6 +24,11 @@ const Headline = styled.div`
 	padding-bottom:40px;
 `
 
+const Paragraph = styled.div`
+	padding-top: 5px;
+	padding-bottom: 8px;
+`
+
 const ContactCopy = ({ headline, title, items }) => (
 	<ContainerStyled>
 		<Grid
@@ -36,10 +41,10 @@ const ContactCopy = ({ headline, title, items }) => (
 			<div>
 				<Title>{title}</Title>
 				{items && items.map(({ pretext, linkText, linkHref }, i) => (
-					<p key={pretext || i}>
+					<Paragraph key={pretext || i}>
 						<Pretext>{pretext}</Pretext>
 						<Link external to={linkHref}>{linkText}</Link>
-					</p>
+					</Paragraph>
 				))}
 			</div>
 		</Grid>

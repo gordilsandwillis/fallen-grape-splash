@@ -8,7 +8,7 @@ export const pages = {
 			},
 			buttonData: {
 				buttonText: 'LEARN MORE',
-				buttonLink: 'about'
+				buttonLink: '/about'
 			}
 		}
 	},
@@ -133,7 +133,7 @@ export const pages = {
 						]
 					},
 					{
-						name: 'iTranslate Translator',
+						name: 'iTranslate Translator for Apple Watch',
 						byline: 'Translate App with Dictionary',
 						company: 'iTranslate',
 						icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_itranslate_translator.jpg?raw=true',
@@ -255,7 +255,7 @@ export const shared = {
 		footerTextLeft: `© 2019 Mosaic Group. All Rights Reserved.`,
 		footerTextLeftLineTwo: 'Mosaic Group is an IAC company.',
 		footerTextRight: 'Press',
-		footerTextRightLink: 'press'
+		footerTextRightLink: '/press'
 	},
 
 }

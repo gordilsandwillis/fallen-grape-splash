@@ -5,6 +5,7 @@ import withSizes from 'react-sizes'
 
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
+import Grid from 'src/components/Grid'
 import { typography, colors, gridSettings, mediaQueries as mq } from 'src/styles'
 
 import 'slick-carousel/slick/slick.css'
@@ -97,9 +98,6 @@ const Name = styled.p`
   ${ typography.body };
   color: ${ colors.grey };
 `
-const LinkContainer = styled.div`
-margin-top: 25px;
-`
 
 const LinkStyled = styled(Link)`
   ${ typography.responsiveStyles('font-size', 14, 14, 14, 18) };
@@ -117,6 +115,11 @@ const ContainerStyled = styled(Container)`
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
     background-size: cover;
+`
+
+const LargeName = styled.div`
+  ${ typography.h2 }
+  padding-bottom: 10px;
 `
 
 const Slider = ({ items, windowWidth, windowHeight, height, title, dots = true, arrows = false, collapseToArrows = false, centered = true }) => {
@@ -141,22 +144,25 @@ const Slider = ({ items, windowWidth, windowHeight, height, title, dots = true, 
 				</Container>
 			)}
 			<SlickSliderDark accessibility centered={centered} {...settings}>
-				{items && items.map(({ name, announcement, byline, links, icon, slideshow }) => (
+				{items && items.map(({ name, announcement, byline, links, icon, slideshow }, index) => (
 					centered ? (
-						<ContainerStyled height={height} key={name + announcement} centered={centered}>
+						<ContainerStyled key={name + announcement + index + '_containerstyled'} height={height} key={name + announcement} centered={centered}>
 							<CenteredText>
 								{name && <Name>{name}</Name>}
 								{announcement && <h2>{announcement}</h2>}
 							</CenteredText>
 						</ContainerStyled>
 					) : (
-						<ContainerStyled height={height} src={slideshow}>
-							<div>
-								{name && <h2>{name}</h2>}
-								<LinkContainer>
-									<LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>
-								</LinkContainer>
-							</div>
+						<ContainerStyled key={name + announcement + index + '_containerstyled'} height={height} src={slideshow}>
+							<Grid
+								showOverlay={true}
+								small="[4] 2"
+								medium="[12]"
+								large="[12]"
+							>
+								{name && <LargeName>{name}</LargeName>}
+								<LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>
+							</Grid>
 						</ContainerStyled>
 					)
 				))}

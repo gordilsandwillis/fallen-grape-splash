@@ -17,23 +17,17 @@ const ProductContainer = styled.div`
 
 const LogoContainer = styled.div`
 	margin-bottom: 35px;
-	width: 100%;
 	border-radius: 20%;
-	min-width: 150px;
-	min-height: 150px;
-	max-width: 215px;
-	max-height: 215px;
+	width: 150px;
+	height: 150px;
+	max-width: 150px;
+	max-height: 150px;
 	border: 1px solid ${ colors.unofficialLightGrey };
 	overflow: hidden;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-content: center;
-	height: 0; /* 1:1 Aspect Ratio */
-  div {
-		padding-top: 100%; /* 1:1 Aspect Ratio */
-    max-width: 300px;
-  };
 `
 
 const Name = styled.div`
@@ -55,13 +49,13 @@ const ProductGrid = ({ title, items }) => (
 				<h2>{title}</h2>
 				<Grid
 					showOverlay={false}
-					large="[1] [1] [1] [1]"
-					medium="[1] [1] [1] [1]"
-					small="[1] [1]"
+					large="[3] [3] [3] [3]"
+					medium="[3] [3] [3] [3]"
+					small="[3] [3]"
 				>
 					{items &&
-						items.map(({ name, byline, company, icon, links }) => (
-							<ProductContainer>
+						items.map(({ name, byline, company, icon, links }, index) => (
+							<ProductContainer key={name + company + index + '_productcontainer'}>
 								<Grid
 									showOverlay={false}
 									large="[2] 1"
@@ -76,7 +70,7 @@ const ProductGrid = ({ title, items }) => (
 									<Name>{name}</Name>
 									<Byline>{byline}</Byline>
 									<div>{company}</div>
-									<p>{links.map(link => <LinkStyled external to={link.href}>{link.name}</LinkStyled>)}</p>
+									<p>{links.map((link, index) => <LinkStyled key={link.href + index} external to={link.href}>{link.name}</LinkStyled>)}</p>
 								</div>
 							</ProductContainer>
 						))

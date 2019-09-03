@@ -33,8 +33,10 @@ class About extends Component {
 		return (
 			<PageWrap>
 				<SEO title="Mosaic" />
-				<Header location={location} />
+				<Header hasAtf location={location} />
 				<ATF
+					maxWidth='14em'
+					maxWidthText='25em'
 					{...atfData}
 					image={data.ATFimage}
 					align='left'

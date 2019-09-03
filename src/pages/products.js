@@ -8,6 +8,7 @@ import ProductGrid from 'src/components/ProductGrid'
 import Hr from 'src/components/Hr'
 import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
+import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `
@@ -36,14 +37,16 @@ class Products extends Component {
 			<PageWrap>
 				<SEO title="Mosaic" />
 				<Header theme='light' location={location} />
-				<Slider
-					height={400}
-					items={productData.items.filter(item => item.slideshow)}
-					collapseToArrows={true}
-					centered={false}
-				/>
-				<ProductGrid {...productData} />
-				<Hr color={colors.black} />
+				<ScrollEntrance>
+					<Slider
+						height={400}
+						items={productData.items.filter(item => item.slideshow)}
+						collapseToArrows={true}
+						centered={false}
+					/>
+					<ProductGrid {...productData} />
+					<Hr color={colors.black} />
+				</ScrollEntrance>
 				<Footer
 					{...footerData}
 				/>

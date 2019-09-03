@@ -34,25 +34,25 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 `
 
 export const body = `
-	${ responsiveStyles('font-size', 14, 14, 14, 18) }
+	${ responsiveStyles('font-size', 18, 14, 14, 18) }
 	${ responsiveStyles('line-height', 21, 21, 21, 24) }
 	font-family: ${ bodyFontFamilyRegular };
 `
 export const bodyLight = `
-	${ responsiveStyles('font-size', 14, 14, 14, 18) }
+	${ responsiveStyles('font-size', 18, 14, 14, 18) }
 	letter-spacing: 0.33px;
 	line-height: 1.6;
 	font-family: ${ bodyFontFamilyLight };
 `
 
 export const bodyBold = `
-${ responsiveStyles('font-size', 14, 14, 14, 18) }
+${ responsiveStyles('font-size', 18, 14, 14, 18) }
 ${ responsiveStyles('line-height', 21, 21, 21, 24) }
 font-family: ${ bodyFontFamilyBold };
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 48, 48, 44, 38) }
+	${ responsiveStyles('font-size', 60, 48, 44, 38) }
 	font-family: ${ titleFontFamily };
 	font-weight: lighter;
 	letter-spacing: ${ -10 / 1000 }em;
@@ -60,7 +60,7 @@ export const h1 = `
 `
 
 export const h2 = `
-	${ responsiveStyles('font-size', 24, 24, 24, 28) }
+	${ responsiveStyles('font-size', 30, 24, 24, 28) }
 	${ responsiveStyles('line-height', 30, 30, 30, 36) }
 	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
 	font-family: ${ bodyFontFamilyLight };
@@ -103,7 +103,7 @@ export const caption = `
 `
 
 export const button = `
-	${ responsiveStyles('font-size', 14, 14, 14, 18) }
+	${ responsiveStyles('font-size', 18, 14, 14, 18) }
 	font-family: ${ bodyFontFamilyRegular };
 	line-height: ${ 16 / 14 };
 	letter-spacing: ${ 20 / 1000 }em;
@@ -112,14 +112,14 @@ export const button = `
 `
 
 export const footer = `
-	${ responsiveStyles('font-size', 10, 10, 10, 12) }
-	${ responsiveStyles('line-height', 12, 12, 12, 14) }
+	${ responsiveStyles('font-size', 14, 10, 10, 12) }
+	${ responsiveStyles('line-height', 18, 12, 12, 14) }
 	letter-spacing: ${ 20 / 1000 }em;
 	font-family: ${ bodyFontFamilyRegular };
 `
 
 export const h2Special = `
-	${ responsiveStyles('font-size', 24, 24, 24, 22) }
+	${ responsiveStyles('font-size', 30, 24, 24, 22) }
 	${ responsiveStyles('line-height', 30, 30, 30, 30) }
 	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
 	font-family: ${ bodyFontFamilyLight };

@@ -23,43 +23,43 @@ storiesOf('Styleguide', module)
 	.add('Typography', () => (
 		<div>
 			<h1>
-        H1 {qbf}
+				H1 {qbf}
 			</h1>
 
 			<Hr />
 
 			<h2>
-        H2 {qbf}
+				H2 {qbf} and some <em>italicized</em> text.
 			</h2>
 
 			<Hr />
 
 			<h3>
-        H3 {qbf}
+				H3 {qbf}
 			</h3>
 
 			<Hr />
 
 			<h4>
-        H4 {qbf}
+				H4 {qbf}
 			</h4>
 
 			<Hr />
 
 			<h5>
-        H5 {qbf}
+				H5 {qbf}
 			</h5>
 
 			<Hr />
 
 			<h6>
-        H6 {qbf}
+				H6 {qbf}
 			</h6>
 
 			<Hr />
 
 			<h4>
-        Body copy
+				Body copy
 			</h4>
 
 			<p>
@@ -71,45 +71,45 @@ storiesOf('Styleguide', module)
 			</p>
 
 			<h4>
-        Body copy with inline styles
+				Body copy with inline styles
 			</h4>
 
 			<p>
-        Here is some <strong>bold text</strong>.
+				Here is some <strong>bold text</strong>.
 			</p>
 
 			<p>
-        Here is some <em>italic text</em>.
+				Here is some <em>italic text</em>.
 			</p>
 
 			<p>
-        Here is some <strong><em>bold and italic</em></strong> text.
+				Here is some <strong><em>bold and italic</em></strong> text.
 			</p>
 
 			<Hr />
 
 			<h4>
-        Caption
+				Caption
 			</h4>
 
 			<figcaption>
-        Caption: {qbf}
+				Caption: {qbf}
 			</figcaption>
 
 			<Hr />
 
 			<h4>
-        Button
+				Button
 			</h4>
 
 			<Button>
-        Button: {qbf}
+				Button: {qbf}
 			</Button>
 
 			<Hr />
 
 			<h4>
-        Text Link
+				Text Link
 			</h4>
 
 			<a href="http://ginlane.com">Text Link</a>
@@ -117,37 +117,37 @@ storiesOf('Styleguide', module)
 			<Hr />
 
 			<h4>
-        Unordered List
+				Unordered List
 			</h4>
 
 			<ul>
 				<li>
-          Foo lorem ipsum
+					Foo lorem ipsum
 				</li>
 				<li>
-          Bar dolor sit amet
+					Bar dolor sit amet
 				</li>
 			</ul>
 
 			<Hr />
 
 			<h4>
-        Ordered List
+				Ordered List
 			</h4>
 
 			<ol>
 				<li>
-          Foo lorem ipsum
+					Foo lorem ipsum
 				</li>
 				<li>
-          Bar dolor sit amet
+					Bar dolor sit amet
 				</li>
 			</ol>
 
 			<Hr />
 
 			<h4>
-        Block Quote
+				Block Quote
 			</h4>
 
 			<blockquote>
