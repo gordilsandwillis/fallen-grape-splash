@@ -16,7 +16,8 @@ height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: ${ props => props.verticalAlign };
-	${ typography.responsiveStyles('padding-top', 100, 100, 80, 80) }
+	${ typography.responsiveStyles('padding-top', 70, 70, 70, 75) }
+	${ typography.responsiveStyles('padding-bottom', 70, 70, 70, 75) }
 `
 
 const Content = styled(Container)`
@@ -83,7 +84,7 @@ const Overlay = styled.div`
 `
 
 const MainContent = styled.div`
-	${ ({ verticalAlign }) => verticalAlign === 'flex-end' || typography.responsiveStyles('margin-bottom', 45, 45, 0, 0) }
+	/* ${ ({ verticalAlign }) => verticalAlign === 'flex-end' || typography.responsiveStyles('margin-bottom', 45, 45, 0, 0) } */
 padding: ${ gridSettings.containerLargeMargins } 0;
 width: 100%;
 ${ mq.largeAndBelow } {
