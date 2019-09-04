@@ -5,8 +5,6 @@ import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
-import Hr from 'src/components/Hr'
-import VideoEmbed from 'src/components/VideoEmbed'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const Wrapper = styled.div`
