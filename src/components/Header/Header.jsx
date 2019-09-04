@@ -239,8 +239,6 @@ class Header extends Component {
 
   render () {
   	const {
-  		// logo,
-  		// winHeight,
   		theme = 'transparent',
   		location: { pathname },
   		hasAtf = false,

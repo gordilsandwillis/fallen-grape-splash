@@ -31,19 +31,13 @@ class Home extends Component {
 				<SEO title="Mosaic" />
 				<Header hasAtf location={location} />
 				<ATF
-					maxWidth='17em'
 					{...buttonData}
 					{...atfData}
 					image={data.ATFimage}
-					hasFooter={true}
-					align='center'
-					gridSettings={{
-						small: '[12]',
-						medium: '[12]',
-						large: '1 [10] 1'
-					}}
+					horizontalAlignCenter={true}
+					verticalAlignCenter={true}
 				/>
-				<Footer position='absolute' hasFooter {...footerData} />
+				<Footer position='absolute' {...footerData} />
 			</PageWrap>
 		)
 	}
