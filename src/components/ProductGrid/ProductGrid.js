@@ -19,8 +19,8 @@ const ProductContainer = styled.div`
 const LogoContainer = styled.div`
 	margin-bottom: 35px;
 	border-radius: 20%;
-	width: 150px;
-	height: 150px;
+	min-width: 100px;
+	min-height: 100px;
 	max-width: 150px;
 	max-height: 150px;
 	border: 1px solid ${ colors.unofficialLightGrey };

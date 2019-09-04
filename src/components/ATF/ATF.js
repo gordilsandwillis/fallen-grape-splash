@@ -45,7 +45,7 @@ const AlignedText = styled.div`
 const Block = styled.div`
   display: block;
 	height: 100vh;
-	min-height: ${ ({ full }) => full ? 700 : 500 }px;
+	min-height: ${ ({ full }) => full ? 750 : 500 }px;
 	max-height: 100vh;
 	width: 100%;
 	position: relative;

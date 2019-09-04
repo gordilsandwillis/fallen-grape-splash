@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import LogoCollapse from 'src/components/LogoCollapse'
@@ -16,7 +15,7 @@ import { navPages } from 'src/mockData'
 
 const PageCheat = styled.div`
   position: static;
-  height: ${ ({ hasAtf }) => (hasAtf ? '0' : '150px') };
+  ${ ({ hasAtf }) => (hasAtf ? 'height: 0' : typography.responsiveStyles('height', 150, 150, 150, 110)) }
 `
 
 const Wrapper = styled.header`
@@ -27,10 +26,10 @@ const Wrapper = styled.header`
     background-color ${ animations.mediumSpeed } ease-in-out;
   right: 0;
   z-index: 4;
-  height: 150px;
+  ${ typography.responsiveStyles('height', 150, 150, 150, 110) }
   position: fixed;
   &.scrolled {
-    height: 110px;
+    ${ typography.responsiveStyles('height', 110, 110, 110, 70) }
     background-color: ${ colors.offwhite };
     color: ${ colors.black };
   }
@@ -49,10 +48,27 @@ const transparentStyles = `
   color: ${ colors.white };
 `
 
-const HeaderContainer = styled(Container)`
+const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 36px;
+	align-items: center;
+	justify-content: center;
+	max-width: 2500px;
+	width: calc(100% - ${ gridSettings.containerLargeMargins } * 2);
+	margin: 0 auto;
+  height: 100%;
+
+	${ mq.largeAndBelow } {
+		width: calc(100% - ${ gridSettings.containerMediumMargins } * 2);
+	}
+
+	${ mq.mediumAndBelow } {
+		width: calc(100% - ${ gridSettings.containerMediumMargins } * 2);
+	}
+
+	${ mq.smallAndBelow } {
+		width: calc(100% - ${ gridSettings.containerSmallMargins } * 2);
+	}
 `
 
 const NavContainer = styled.div`
@@ -158,7 +174,8 @@ const MobileDetect = styled.div`
 `
 
 const HamburgerContainer = styled.div`
-  align-self: flex-end;
+  margin-top:2px;
+	align-self: flex-end;
   justify-self: flex-end;
   display: flex;
   flex-direction: row;
