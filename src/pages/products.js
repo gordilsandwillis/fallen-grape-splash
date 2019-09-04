@@ -8,6 +8,7 @@ import ProductGrid from 'src/components/ProductGrid'
 import Hr from 'src/components/Hr'
 import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
+import { graphql } from 'gatsby'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const PageWrap = styled.div`

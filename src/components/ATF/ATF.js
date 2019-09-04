@@ -130,6 +130,7 @@ class ATF extends Component {
 
 	render () {
 		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, maxWidth, maxWidthText, buttonText, buttonLink, hasFooter, gridSettings } = this.props
+		console.log(this.props)
 		return (
 			<Fragment>
 				<Block background hasFooter={hasFooter} winHeight={winHeight}>
