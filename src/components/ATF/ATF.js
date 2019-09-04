@@ -45,6 +45,7 @@ const AlignedText = styled.div`
 const Block = styled.div`
   display: block;
 	height: 100vh;
+	min-height: ${ ({ full }) => full ? 700 : 500 }px;
 	max-height: 100vh;
 	width: 100%;
 	position: relative;
@@ -140,11 +141,11 @@ class ATF extends Component {
 		} = this.props
 		return (
 			<Fragment>
-				<Block background winHeight={winHeight}>
+				<Block full={text && headline} background winHeight={winHeight}>
 					<BgImage image={image} />
 					<Overlay />
 				</Block>
-				<Block content="true" winHeight={winHeight}>
+				<Block full={text && headline} content="true" winHeight={winHeight}>
 					<AlignmentContainer verticalAlignCenter={verticalAlignCenter}>
 						<MainContent>
 							<ScrollEntrance>

@@ -7,7 +7,6 @@ import ContactCopy from 'src/components/ContactCopy'
 import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
 import { mediaQueries } from 'src/styles'
-import ScrollEntrance from 'src/components/ScrollEntrance'
 import { graphql } from 'gatsby'
 
 const PageWrap = styled.div`
@@ -34,10 +33,8 @@ class Contact extends Component {
 			<PageWrap>
 				<SEO title="Mosaic" />
 				<Header theme='light' location={location} />
-				<ScrollEntrance>
-					<Hero image={data.HeroImage} />
-					<ContactCopy {...contactData} />
-				</ScrollEntrance>
+				<Hero image={data.HeroImage} />
+				<ContactCopy {...contactData} />
 				<Footer
 					showHr
 					{...footerData}

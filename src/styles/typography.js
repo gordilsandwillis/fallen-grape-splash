@@ -52,7 +52,7 @@ font-family: ${ bodyFontFamilyBold };
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 60, 48, 44, 38) }
+	${ responsiveStyles('font-size', 60, 48, 44, 32) }
 	font-family: ${ titleFontFamily };
 	font-weight: lighter;
 	letter-spacing: ${ -10 / 1000 }em;

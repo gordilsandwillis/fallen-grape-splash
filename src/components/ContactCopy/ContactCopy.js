@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
+import ScrollEntrance from 'src/components/ScrollEntrance'
 import { colors, typography } from 'src/styles'
 
 const ContainerStyled = styled(Container)`
@@ -37,15 +38,19 @@ const ContactCopy = ({ headline, title, items }) => (
 			medium={'[6] 2 [4]'}
 			large={'[6] 2 [4]'}
 		>
-			{headline && <Headline>{headline}</Headline>}
+			<ScrollEntrance>
+				{headline && <Headline>{headline}</Headline>}
+			</ScrollEntrance>
 			<div>
-				<Title>{title}</Title>
-				{items && items.map(({ pretext, linkText, linkHref }, i) => (
-					<Paragraph key={pretext || i}>
-						<Pretext>{pretext}</Pretext>
-						<Link external to={linkHref}>{linkText}</Link>
-					</Paragraph>
-				))}
+				<ScrollEntrance>
+					<Title>{title}</Title>
+					{items && items.map(({ pretext, linkText, linkHref }, i) => (
+						<Paragraph key={pretext || i}>
+							<Pretext>{pretext}</Pretext>
+							<Link external to={linkHref}>{linkText}</Link>
+						</Paragraph>
+					))}
+				</ScrollEntrance>
 			</div>
 		</Grid>
 	</ContainerStyled>
