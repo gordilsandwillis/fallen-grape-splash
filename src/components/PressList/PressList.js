@@ -57,29 +57,22 @@ ${ typography.h2 }
 padding-bottom: 10px;
 `
 
-const H2 = styled.div`
-	${ typography.h2 }
-	padding-bottom: 30px;
-`
-const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, externalLink, data }) => (
+const PressList = ({ title, items, linkText, externalLink }) => (
 	<Wrapper>
 		<ContentBlock>
 			<ScrollEntrance>
 				<ContainerRow>
-					{showTitleHr ? <Title>{title}</Title> : <H2>{title}</H2>}
-					{externalLink && <LinkContainer><Link external to={externalLink.href}>{externalLink.name}</Link></LinkContainer>}
+					<Title>{title}</Title>
+					<LinkContainer><Link external to={externalLink.href}>{externalLink.name}</Link></LinkContainer>
 				</ContainerRow>
-				{showTitleHr && <HrFullContainer><Hr full color={colors.black} /></HrFullContainer>}
+				<HrFullContainer><Hr full color={colors.black} /></HrFullContainer>
 				{items &&
-					items.map(({ id, logo, title, text, link, image, video }, index) => (
+					items.map(({ logo, title, text, link, image, video }, index) => (
 						<React.Fragment key={index + '_fragment'}>
-							{(showHr && index !== 0) && <Hr key={index + '_hr'} color={colors.black} />}
+							{(index !== 0) && <Hr key={index + '_hr'} color={colors.black} />}
 							<Container key={index + '_container'}>
 								<Padding notFirst={index} notLast={index !== items.length - 1}>
-									<Grid
-										showOverlay={false}
-										{...gridSettings}
-									>
+									<Grid large='[2] 1 [8] 1' medium='[2] 1 [9]' small='[2] [4]'>
 										<LogoContainer><div>{logo && <ImgStyled src={logo} />}</div></LogoContainer>
 										<div>
 											{title && <Title>{title}</Title>}
@@ -88,14 +81,9 @@ const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, exter
 										</div>
 									</Grid>
 									{(image || video) && <Padding>
-										<Grid
-											showOverlay={false}
-											large='3 [4] 5'
-											medium='3 [5] 4'
-											small='[6]'
-										>
+										<Grid large='3 [4] 5' medium='3 [5] 4' small='[6]'>
 											{image && <ImgStyled src={image} />}
-											{video && <VideoEmbed gridSettings={{ small: '[6]', medium: '[6]', large: '[6]' }} {...video} />}
+											{video && <VideoEmbed {...video} />}
 										</Grid>
 									</Padding>}
 								</Padding>
@@ -108,4 +96,4 @@ const List = ({ title, gridSettings, items, linkText, showHr, showTitleHr, exter
 		</ContentBlock>
 	</Wrapper >
 )
-export default List
+export default PressList

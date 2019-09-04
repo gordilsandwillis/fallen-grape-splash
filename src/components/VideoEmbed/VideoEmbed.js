@@ -80,21 +80,18 @@ class VideoEmbed extends Component {
 		this.state = { video: false }
 	}
 	render () {
-		const { url, gridSettings, coverImage } = this.props
+		const { url, coverImage } = this.props
 		const { video } = this.state
 		return (
-			<Grid
-				showOverlay={false}
-				{...gridSettings}
-			>
+			<Grid small='[6]' medium='[6]' large='[6]'>
 				<Wrapper onClick={() => this.setState({ video: true })}>
-					<CoverImageContainer video={video} >
+					<CoverImageContainer video={(video || '').toString()} >
 						<CoverImage image={coverImage}>
 							<Overlay />
 							<PlayIconStyled />
 						</CoverImage>
 					</CoverImageContainer>
-					<ReactPlayerStyled controls playing={video} video={video} width={'100%'} height={'100%'} url={url} />
+					<ReactPlayerStyled controls playing={video} video={(video || '').toString()} width={'100%'} height={'100%'} url={url} />
 				</Wrapper>
 			</Grid >
 		)

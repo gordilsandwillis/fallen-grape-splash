@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import { animations, colors } from 'src/styles'
 import { Link as GatsbyLink } from 'gatsby'
+import PropTypes from 'prop-types'
 
 const LinkStyles = `
 	font-size: inherit;
@@ -20,7 +21,7 @@ const StyledLinkElement = styled.a`
   &:hover {
     color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
     span {
-      border-color: ${ ({ white, noHoverColor }) => noHoverColor ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
+      border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
     }
   }
 
@@ -39,7 +40,7 @@ const StyledGatsbyLink = styled(GatsbyLink)`
   color: ${ ({ theme }) => theme === 'light' ? colors.black : colors.white };
   transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
-    color: ${ ({ noHoverColor }) => !noHoverColor ? colors.unofficialLightGrey : 'inherit' };
+    color: ${ ({ nohover }) => !nohover ? colors.unofficialLightGrey : 'inherit' };
     border-bottom-color: ${ colors.unofficialLightGrey };
   }
 `
@@ -54,7 +55,7 @@ class Link extends Component {
 					href={to}
 					target={target}
 					white={white}
-					noHoverColor={noHoverColor}
+					nohover={(noHoverColor || '').toString()}
 				>
 					<span>{children}</span>
 				</StyledLinkElement >
@@ -62,11 +63,11 @@ class Link extends Component {
 		} else {
 			return (
 				<StyledGatsbyLink
-					noHoverColor={noHoverColor}
+					nohover={(noHoverColor || '').toString()}
 					className={className}
 					to={to}
 					theme={theme}
-					underlined={underlined}
+					underlined={(underlined || '').toString()}
 				>
 					{children}
 				</ StyledGatsbyLink>
@@ -79,6 +80,12 @@ Link.defaultProps = {
 	to: '#',
 	external: false,
 	target: ''
+}
+
+Link.propTypes = {
+	to: PropTypes.string.isRequired,
+	external: PropTypes.bool.isRequired,
+	target: PropTypes.string.isRequired
 }
 
 export default Link

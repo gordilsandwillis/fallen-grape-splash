@@ -7,9 +7,14 @@ import TopRight from 'src/assets/images/mosaic-logo-corner-topright.svg'
 import BottomLeft from 'src/assets/images/mosaic-logo-corner-bottomleft.svg'
 import BottomRight from 'src/assets/images/mosaic-logo-corner-bottomright.svg'
 
+const XLARGE = 85
+const LARGE = 72
+const MEDIUM = 72
+const SMALL = 72
+
 const Wrapper = styled.div`
-  ${ typography.responsiveStyles('height', 85, 72, 72, 72) }
-  ${ typography.responsiveStyles('width', 85, 72, 72, 72) }
+  ${ typography.responsiveStyles('height', XLARGE, LARGE, MEDIUM, SMALL) }
+  ${ typography.responsiveStyles('width', XLARGE, LARGE, MEDIUM, SMALL) }
   position: relative;
   overflow: hidden;
   display: flex;
@@ -27,11 +32,11 @@ const Wrapper = styled.div`
   transition: width ${ animations.mediumSpeed } ease-in-out,
               height ${ animations.mediumSpeed } ease-in-out;
   &.scrolled {
-    ${ typography.responsiveStyles('height', 42.5, 36, 36, 36) }
-    ${ typography.responsiveStyles('width', 42.5, 36, 36, 36) }
+    ${ typography.responsiveStyles('height', XLARGE / 2, LARGE / 2, MEDIUM / 2, SMALL / 2) }
+    ${ typography.responsiveStyles('width', XLARGE / 2, LARGE / 2, MEDIUM / 2, SMALL / 2) }
     #text-container {
-    ${ typography.responsiveStyles('height', 14, 12, 12, 12) }
-    ${ typography.responsiveStyles('width', 14, 12, 12, 12) }
+    ${ typography.responsiveStyles('height', XLARGE / 6, LARGE / 6, MEDIUM / 6, SMALL / 6) }
+    ${ typography.responsiveStyles('width', XLARGE / 6, LARGE / 6, MEDIUM / 6, SMALL / 6) }
     #logo-svg {
       transform: translate3d(-.4%, -9%, 0);
     }
@@ -41,8 +46,8 @@ const Wrapper = styled.div`
 
 const Corner = styled.div`
   position: absolute;
-  ${ typography.responsiveStyles('height', 14, 12, 12, 12) }
-  ${ typography.responsiveStyles('width', 14, 12, 12, 12) }
+  ${ typography.responsiveStyles('height', XLARGE / 6, LARGE / 6, MEDIUM / 6, SMALL / 6) }
+  ${ typography.responsiveStyles('width', XLARGE / 6, LARGE / 6, MEDIUM / 6, SMALL / 6) }
   width: 100%;
   height: auto;
 
@@ -51,10 +56,10 @@ const Corner = styled.div`
 const TextContainer = styled.div`
   position: absolute;
   overflow: hidden;
-  ${ typography.responsiveStyles('width', 56, 47.5, 47.5, 47.5) }
+  ${ typography.responsiveStyles('width', XLARGE / 1.517857143, LARGE / 1.517857143, MEDIUM / 1.517857143, SMALL / 1.517857143) }
   transition: width ${ animations.mediumSpeed } ease-in-out,
               height ${ animations.mediumSpeed } ease-in-out;
-  ${ typography.responsiveStyles('height', 0.458333333 * 85, 0.458333333 * 72, 0.458333333 * 72, 0.458333333 * 72) }
+  ${ typography.responsiveStyles('height', XLARGE * 0.458333333, LARGE * 0.458333333, MEDIUM * 0.458333333, SMALL * 0.458333333) }
 
 `
 

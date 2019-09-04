@@ -41,24 +41,20 @@ export const pages = {
 				linkText: 'LEARN MORE',
 				items: [
 					{
-						id: 'dailyburn',
 						text: 'Daily Burn is a membership-based fitness collective that offers on- demand workouts, personal fitness guidance, and motivation to help those from all levels and lifestyles achieve everyday victories. Daily Burn’s ever evolving offerinces currently include At Home, HIIT and Yoga. Members can stream from their TV, computer, or mobile app.',
 						logo: 'https://i.imgur.com/CaE9VlH.png',
 						link: 'https://google.com'
 					},
 					{
-						id: 'itranslate',
 						text: 'iTranslate is the leading translation and dictionary app. With over 100 million downloads, users can easily translate text, websites (even objects), or start voice-to-voice conversations in over 100 languages, and with the PRO version they can even take translation off-line.',
 						logo: 'https://i.imgur.com/ai74QJK.jpg',
 						link: 'https://google.com'
 					},
 					{
-						id: 'teltech',
 						text: 'Teltech is a telecommunications company delivering forward-thinking solutions for the future of mobile. With a focus on security, practicality, and innovation, Teltech is paving the way for user-friendly technology that works for everyone.',
 						logo: 'https://i.imgur.com/DY72W5I.png'
 					},
 					{
-						id: 'apalon',
 						text: 'Apalon is a leading developer of iOS and Android mobile applications for consumers and businesses around the world. With one of the world’s largest app portfolios and over 1 million subscribers, Apalon’s products reach more than 20 million monthly active users and include well-known titles such as Productive, Weather Live, NOAA Radar, Scanner for Me and many more. A unique blend of passion and skills are at the core of our company’s DNA, driving our team to produce top-rated, award-winning mobile experiences for millions of people around the world every year.',
 						logo: 'https://i.imgur.com/t3zJ7J1.png',
 						link: 'https://google.com'

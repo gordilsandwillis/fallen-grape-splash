@@ -8,14 +8,14 @@ import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import { colors, gridSettings, typography, mediaQueries as mq } from 'src/styles'
-import withSizes from 'react-sizes'
 import MobileDetect from 'mobile-detect'
+import PropTypes from 'prop-types'
 
 const AlignmentContainer = styled.div`
 height: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: ${ props => props.verticalAlign };
+	align-items: ${ ({ verticalAlignCenter }) => verticalAlignCenter ? 'center' : 'flex-end' };
 	${ typography.responsiveStyles('padding-top', 70, 70, 70, 75) }
 	${ typography.responsiveStyles('padding-bottom', 70, 70, 70, 75) }
 `
@@ -33,10 +33,10 @@ const AlignedText = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	align-items: ${ ({ align }) => align };
-  text-align: ${ ({ align }) => align };
+	align-items: ${ ({ horizontalAlignCenter }) => horizontalAlignCenter ? 'center' : 'left' };
+  text-align: ${ ({ horizontalAlignCenter }) => horizontalAlignCenter ? 'center' : 'left' };
   p {
-    text-align: ${ ({ align }) => align };
+    text-align: ${ ({ horizontalAlignCenter }) => horizontalAlignCenter ? 'center' : 'left' };
 
   ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10) }
   }
@@ -44,9 +44,9 @@ const AlignedText = styled.div`
 
 const Block = styled.div`
   display: block;
-  /* ${ ({ hasFooter }) => hasFooter && `bottom: 75px;` } */
-	height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
+	height: ${ ({ winHeight, isMobile }) => winHeight ? winHeight + 'px' : isMobile ? '80vh' : '100vh' };
 	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
+	min-height: ${ ({ full }) => full ? 750 : 500 }px;
 	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };
@@ -65,7 +65,7 @@ const Block = styled.div`
 
 const BgImage = styled(Image)`
 	height: 100%;
-  ${ ({ hasFooter }) => hasFooter && typography.responsiveStyles('bottom', 70, 70, 70, 75) }
+
 	position: absolute;
 	left: 0;
   right: 0;
@@ -74,7 +74,7 @@ const BgImage = styled(Image)`
 const Overlay = styled.div`
 	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
 	opacity: .1;
-	${ ({ hasFooter }) => hasFooter && `bottom: 75px;` }
+	
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -84,7 +84,6 @@ const Overlay = styled.div`
 `
 
 const MainContent = styled.div`
-	/* ${ ({ verticalAlign }) => verticalAlign === 'flex-end' || typography.responsiveStyles('margin-bottom', 45, 45, 0, 0) } */
 padding: ${ gridSettings.containerLargeMargins } 0;
 width: 100%;
 ${ mq.largeAndBelow } {
@@ -110,53 +109,68 @@ const ButtonContainer = styled.div`
 
 const PaddedParagraph = styled.p`
 	padding-top: 15px;
-	max-width: ${ ({ maxWidthText }) => maxWidthText || 'auto' };
+	max-width: 25em;
 	${ typography.responsiveStyles('padding-bottom', 50, 30, 0, 0) }
 `
 
 const H1 = styled.h1`
-	max-width: ${ ({ maxWidth }) => maxWidth || 'auto' };
+	max-width: 15em;
 `
 
 class ATF extends Component {
+	constructor (props) {
+		super(props)
+		this.state = { isMobile: false }
+	}
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
-		if (md.is('iPhone') && prevProps.winHeight !== this.props.winHeight) {
+		const isMobile = md.is('iPhone')
+		if (isMobile && prevProps.winHeight !== this.props.winHeight) {
 			return false
 		}
 
 		return true
 	}
 
+	componentDidMount () {
+		const md = new MobileDetect(window.navigator.userAgent)
+		const isMobile = md.is('iPhone')
+		this.setState({ isMobile })
+	}
+
 	render () {
-		const { align, verticalAlign = 'center', headline, text, image, winHeight, showHr, maxWidth, maxWidthText, buttonText, buttonLink, hasFooter, gridSettings } = this.props
+		const {
+			image,
+			horizontalAlignCenter,
+			verticalAlignCenter,
+			headline,
+			text,
+			winHeight,
+			showHr,
+			buttonText,
+			buttonLink,
+		} = this.props
+		const { isMobile } = this.state
 		return (
 			<Fragment>
-				<Block background hasFooter={hasFooter} winHeight={winHeight}>
-					<BgImage
-						hasFooter={hasFooter}
-						image={image}
-					/>
-					<Overlay hasFooter={hasFooter} />
+				<Block isMobile={isMobile} full={text && headline} background winHeight={winHeight}>
+					<BgImage image={image} />
+					<Overlay />
 				</Block>
-				<Block content="true" hasFooter={hasFooter} winHeight={winHeight}>
-					<AlignmentContainer verticalAlign={verticalAlign}>
-						<MainContent verticalAlign={verticalAlign}>
+				<Block isMobile={isMobile} full={text && headline} content="true" winHeight={winHeight}>
+					<AlignmentContainer verticalAlignCenter={verticalAlignCenter}>
+						<MainContent>
 							<ScrollEntrance>
 								<Content>
-									<Grid
-										showOverlay={false}
-										{...gridSettings}
-									>
-										<AlignedText align={align}>
-											<H1 maxWidth={maxWidth}>{headline}</H1>
+									<Grid small='[6]' medium='[12]' large='[12]' >
+										<AlignedText horizontalAlignCenter={horizontalAlignCenter}>
+											<H1>{headline}</H1>
 										</AlignedText>
 									</Grid>
 								</Content>
 								<Content>
-									<Grid showOverlay={false}
-										{...gridSettings}>
-										<AlignedText align={align}>
+									<Grid small='[6]' medium='[12]' large='[12]' >
+										<AlignedText horizontalAlignCenter={horizontalAlignCenter}>
 											{buttonText &&
 												<ButtonContainer>
 													<Link to={buttonLink}>
@@ -170,16 +184,13 @@ class ATF extends Component {
 									</Grid>
 								</Content>
 								{showHr && <Margin><Hr /></Margin>}
+								{text &&
 								<Content>
-									{text && <Grid
-										showOverlay={false}
-										small="[6]"
-										medium="[7] 2"
-										large="[7] 2"
-									>
-										<PaddedParagraph maxWidthText={maxWidthText}>{text}</PaddedParagraph>
-									</Grid>}
+									<Grid small="[6]" medium="[7] 2" large="[7] 2">
+										<PaddedParagraph>{text}</PaddedParagraph>
+									</Grid>
 								</Content>
+								}
 							</ScrollEntrance>
 						</MainContent>
 					</AlignmentContainer>
@@ -190,9 +201,26 @@ class ATF extends Component {
 	}
 }
 
-const sizesToProps = ({ width, height }) => ({
-	winWidth: width,
-	winHeight: height
-})
+ATF.defaultProps = {
+	horizontalAlignCenter: false,
+	verticalAlignCenter: false,
+	image: {},
+	headline: 'Headline',
+	showHr: false,
+	// text,
+	// buttonText,
+	// buttonLink,
+}
 
-export default withSizes(sizesToProps)(ATF)
+ATF.propTypes = {
+	horizontalAlignCenter: PropTypes.bool.isRequired,
+	verticalAlignCenter: PropTypes.bool.isRequired,
+	image: PropTypes.object.isRequired,
+	headline: PropTypes.string.isRequired,
+	showHr: PropTypes.bool.isRequired,
+	text: PropTypes.string,
+	buttonText: PropTypes.any,
+	buttonLink: PropTypes.any,
+}
+
+export default ATF

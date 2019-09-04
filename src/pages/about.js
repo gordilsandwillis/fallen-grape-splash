@@ -5,7 +5,7 @@ import { mediaQueries } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
 import Footer from 'src/components/Footer'
-import List from 'src/components/List'
+import Companies from 'src/components/Companies'
 import ThreeUp from 'src/components/ThreeUp'
 import FourUp from 'src/components/FourUp'
 import Slider from 'src/components/Slider'
@@ -36,28 +36,15 @@ class About extends Component {
 				<SEO title="Mosaic" />
 				<Header hasAtf location={location} />
 				<ATF
-					maxWidth='14em'
-					maxWidthText='25em'
 					{...atfData}
 					image={data.ATFimage}
-					align='left'
+					horizontalAlignCenter={false}
 					showHr={true}
-					verticalAlign='flex-end'
-					gridSettings={{
-						small: '[6]',
-						medium: '[9] 3',
-						large: '[9] 3'
-					}}
+					verticalAlignCenter={false}
 				/>
 				<ThreeUp {...conceptsData} />
 				<FourUp {...leadershipData} />
-				<List {...companyData}
-					gridSettings={{
-						large: '[4] 1 [7]',
-						medium: '[4] 1 [7]',
-						small: '[6]'
-					}}
-				/>
+				<Companies {...companyData} />
 				<Slider {...awardsData} />
 				<Footer
 					fixed={true}
