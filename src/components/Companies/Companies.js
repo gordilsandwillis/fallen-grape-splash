@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import PropTypes from 'prop-types'
 import { colors, typography } from 'src/styles'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
@@ -42,7 +43,7 @@ const Companies = ({ title, items, linkText }) => (
 		<ContentBlock>
 			<ScrollEntrance>
 				<Container>
-					<H2>{title}</H2>
+					{title && <H2>{title}</H2>}
 				</Container>
 				{items && items.map(({ logo, text, link }, index) => (
 					<Container key={index + '_container'}>
@@ -62,3 +63,15 @@ const Companies = ({ title, items, linkText }) => (
 	</Wrapper >
 )
 export default Companies
+
+Companies.defaultProps = {
+	// title,
+	// items
+	// linkText
+}
+
+Companies.propTypes = {
+	title: PropTypes.string,
+	items: PropTypes.array,
+	linkText: PropTypes.string
+}

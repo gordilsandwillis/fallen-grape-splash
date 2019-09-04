@@ -17,7 +17,7 @@ const GreyText = styled.p`
 ${ typography.responsiveStyles('padding-bottom', 0, 0, 0, 8) }
 `
 
-const Title = styled.p`
+const ItemTitle = styled.p`
 	text-transform: uppercase;
 	${ typography.body }
 ${ typography.responsiveStyles('padding-bottom', 0, 0, 0, 12) }
@@ -26,10 +26,17 @@ ${ typography.responsiveStyles('padding-bottom', 0, 0, 0, 12) }
 const Item = styled.div`
 	padding-bottom: 13px;
 `
-const ThreeUp = ({ items }) => (
+
+const Title = styled.div`
+	padding-bottom: 35px;
+	${ typography.h2 }
+`
+
+const ThreeUp = ({ items, title }) => (
 	<Wrapper>
 		<Container>
 			<ContentBlock>
+				{title && <Title>{title}</Title>}
 				<Grid
 					showOverlay={false}
 					large="[4] [4] [4]"
@@ -39,7 +46,7 @@ const ThreeUp = ({ items }) => (
 					{items &&
 						items.map(({ title, tags, description }, index) => (
 							<Item key={title + index}>
-								{title && <Title>{title}</Title>}
+								{title && <ItemTitle>{title}</ItemTitle>}
 								{tags && <GreyText>{tags && mapTags(tags)}</GreyText>}
 								{description && <p>{description}</p>}
 							</Item>
