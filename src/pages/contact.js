@@ -8,6 +8,7 @@ import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
 import { mediaQueries } from 'src/styles'
 import ScrollEntrance from 'src/components/ScrollEntrance'
+import { graphql } from 'gatsby'
 
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `

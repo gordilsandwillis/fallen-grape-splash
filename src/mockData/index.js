@@ -43,24 +43,24 @@ export const pages = {
 					{
 						id: 'dailyburn',
 						text: 'Daily Burn is a membership-based fitness collective that offers on- demand workouts, personal fitness guidance, and motivation to help those from all levels and lifestyles achieve everyday victories. Daily Burn’s ever evolving offerinces currently include At Home, HIIT and Yoga. Members can stream from their TV, computer, or mobile app.',
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_dailyburn.png?raw=true',
+						logo: 'https://i.imgur.com/CaE9VlH.png',
 						link: 'https://google.com'
 					},
 					{
 						id: 'itranslate',
 						text: 'iTranslate is the leading translation and dictionary app. With over 100 million downloads, users can easily translate text, websites (even objects), or start voice-to-voice conversations in over 100 languages, and with the PRO version they can even take translation off-line.',
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_itranslate.jpg?raw=true',
+						logo: 'https://i.imgur.com/ai74QJK.jpg',
 						link: 'https://google.com'
 					},
 					{
 						id: 'teltech',
 						text: 'Teltech is a telecommunications company delivering forward-thinking solutions for the future of mobile. With a focus on security, practicality, and innovation, Teltech is paving the way for user-friendly technology that works for everyone.',
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_teltech.png?raw=true'
+						logo: 'https://i.imgur.com/DY72W5I.png'
 					},
 					{
 						id: 'apalon',
 						text: 'Apalon is a leading developer of iOS and Android mobile applications for consumers and businesses around the world. With one of the world’s largest app portfolios and over 1 million subscribers, Apalon’s products reach more than 20 million monthly active users and include well-known titles such as Productive, Weather Live, NOAA Radar, Scanner for Me and many more. A unique blend of passion and skills are at the core of our company’s DNA, driving our team to produce top-rated, award-winning mobile experiences for millions of people around the world every year.',
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_apalon.png?raw=true',
+						logo: 'https://i.imgur.com/t3zJ7J1.png',
 						link: 'https://google.com'
 					}
 				]
@@ -99,7 +99,7 @@ export const pages = {
 						name: 'Daily Burn Trainer Workouts',
 						byline: 'Get Fit & Lose Weight',
 						company: 'Daily Burn',
-						icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_dailyburn.jpg?raw=true',
+						icon: 'https://i.imgur.com/0cPWBcU.jpg',
 						links: [
 							{
 								name: 'iOS',
@@ -111,7 +111,7 @@ export const pages = {
 						name: 'Yoga Workouts by Daily Burn',
 						byline: 'Stretching. Flexibility.',
 						company: 'Daily Burn',
-						icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_yoga.png?raw=true',
+						icon: 'https://i.imgur.com/k4gASDq.png',
 						links: [
 							{
 								name: 'iOS',
@@ -123,8 +123,8 @@ export const pages = {
 						name: 'HIIT Workouts by Daily Burn',
 						byline: 'Workout plans for weight loss',
 						company: 'Daily Burn',
-						icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_hiit.png?raw=true',
-						slideshow: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/products-header.jpg?raw=true',
+						icon: 'https://i.imgur.com/tt9d9zU.png',
+						slideshow: 'https://i.imgur.com/C9C3c1z.jpg',
 						links: [
 							{
 								name: 'iOS',
@@ -136,8 +136,8 @@ export const pages = {
 						name: 'iTranslate Translator for Apple Watch',
 						byline: 'Translate App with Dictionary',
 						company: 'iTranslate',
-						icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_itranslate_translator.jpg?raw=true',
-						slideshow: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/products-header.jpg?raw=true',
+						icon: 'https://i.imgur.com/8oEPZgR.jpg',
+						slideshow: 'https://i.imgur.com/C9C3c1z.jpg',
 						links: [
 							{
 								name: 'iOS',
@@ -153,8 +153,8 @@ export const pages = {
 						name: 'iTranslate Converse',
 						byline: 'Translate Voice in Real Time',
 						company: 'iTranslate',
-						icon: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/icon_itranslate_converse.jpg?raw=true',
-						slideshow: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/products-header.jpg?raw=true',
+						icon: 'https://i.imgur.com/y02ASX4.jpg',
+						slideshow: 'https://i.imgur.com/C9C3c1z.jpg',
 						links: [
 							{
 								name: 'iOS',
@@ -208,13 +208,13 @@ export const pages = {
 						title: `New app released can help stop 'robo-calls'`,
 						text: 'The app-based service instantly protects people from more than 200,000 numbers.',
 						link: 'https://abc.com',
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_nbc.png?raw=true'
+						logo: 'https://i.imgur.com/TJ4tP5Z.png'
 					},
 					{
 						title: 'Inside the effort to stop robocalls',
 						text: 'NBC News Investigative Correspondent Jeff Rossen meets the minds behind RoboKiller, an app that wants to stop annoying robocalls.',
 						link: 'https://nbc.com',
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_theverge.png?raw=true',
+						logo: 'https://i.imgur.com/zuSViXw.png',
 						video: {
 							coverImage: 'https://d7hftxdivxxvm.cloudfront.net/?resize_to=fit&width=400&height=303&quality=80&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2FAGvAJBGTlt6AGKiMPhzCXA%2Flarge.jpg',
 							url: 'https://www.youtube.com/watch?v=_wUIexMVG9k',
@@ -223,14 +223,14 @@ export const pages = {
 					{
 						title: `iTranslate's new app gets us one step closer to simple, real-time...`,
 						text: `There's a new app out from iTranslate that teases the idea of real-time, universal translation better than almost anything before it.`,
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_nbc.png?raw=true',
+						logo: 'https://i.imgur.com/TJ4tP5Z.png',
 						image: 'https://media.pri.org/s3fs-public/styles/story_main/public/images/2019/08/robot_lead_crop.jpg?itok=Uc4umkLW'
 					},
 					{
 						title: 'Second video example title',
 						text: 'Google News example correspondent reports information about product.',
 						link: 'https://google.com',
-						logo: 'https://github.com/gordilsandwillis/mosaic/blob/develop/src/assets/images/logo_theverge.png?raw=true',
+						logo: 'https://i.imgur.com/TJ4tP5Z.png',
 						video: {
 							coverImage: 'https://artillerymag.com/wp-content/uploads/2019/03/Cortright_Petra_-_TBI_PC18.08e.12_-_BETTY_CROCKER_BioAss_chickensroosters_-_Res300framed_1.jpg',
 							url: 'https://www.youtube.com/watch?v=0wZpheK98Gc',

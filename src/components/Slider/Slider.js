@@ -155,7 +155,7 @@ const Slider = ({ items, windowWidth, windowHeight, height, title, dots = true, 
 					) : (
 						<ContainerStyled key={name + announcement + index + '_containerstyled'} height={height} src={slideshow}>
 							<Grid
-								showOverlay={true}
+								showOverlay={false}
 								small="[4] 2"
 								medium="[12]"
 								large="[12]"

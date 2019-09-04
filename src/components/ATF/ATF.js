@@ -45,8 +45,8 @@ const AlignedText = styled.div`
 const Block = styled.div`
   display: block;
   /* ${ ({ hasFooter }) => hasFooter && `bottom: 75px;` } */
-	height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
-	max-height: ${ ({ winHeight, hasFooter }) => (winHeight - (hasFooter || 0)) + 'px' };
+	height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
+	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
 	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };

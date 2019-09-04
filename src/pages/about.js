@@ -10,6 +10,7 @@ import ThreeUp from 'src/components/ThreeUp'
 import FourUp from 'src/components/FourUp'
 import Slider from 'src/components/Slider'
 import { pages, shared } from 'src/mockData'
+import { graphql } from 'gatsby'
 
 const PageWrap = styled.div`
   ${ ({ hasATF }) => hasATF === false ? `
