@@ -16,7 +16,6 @@ const Wrapper = styled.div`
   ${ typography.responsiveStyles('height', XLARGE, LARGE, MEDIUM, SMALL) }
   ${ typography.responsiveStyles('width', XLARGE, LARGE, MEDIUM, SMALL) }
   position: relative;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
