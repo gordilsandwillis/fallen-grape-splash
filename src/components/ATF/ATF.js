@@ -44,9 +44,9 @@ const AlignedText = styled.div`
 
 const Block = styled.div`
   display: block;
-	height: 100vh;
+	height: ${ ({ winHeight, isMobile }) => winHeight ? winHeight + 'px' : isMobile ? '80vh' : '100vh' };
+	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
 	min-height: ${ ({ full }) => full ? 750 : 500 }px;
-	max-height: 100vh;
 	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };
@@ -118,13 +118,24 @@ const H1 = styled.h1`
 `
 
 class ATF extends Component {
+	constructor (props) {
+		super(props)
+		this.state = { isMobile: false }
+	}
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
-		if (md.is('iPhone') && prevProps.winHeight !== this.props.winHeight) {
+		const isMobile = md.is('iPhone')
+		if (isMobile && prevProps.winHeight !== this.props.winHeight) {
 			return false
 		}
 
 		return true
+	}
+
+	componentDidMount () {
+		const md = new MobileDetect(window.navigator.userAgent)
+		const isMobile = md.is('iPhone')
+		this.setState({ isMobile })
 	}
 
 	render () {
@@ -139,13 +150,14 @@ class ATF extends Component {
 			buttonText,
 			buttonLink,
 		} = this.props
+		const { isMobile } = this.state
 		return (
 			<Fragment>
-				<Block full={text && headline} background winHeight={winHeight}>
+				<Block isMobile={isMobile} full={text && headline} background winHeight={winHeight}>
 					<BgImage image={image} />
 					<Overlay />
 				</Block>
-				<Block full={text && headline} content="true" winHeight={winHeight}>
+				<Block isMobile={isMobile} full={text && headline} content="true" winHeight={winHeight}>
 					<AlignmentContainer verticalAlignCenter={verticalAlignCenter}>
 						<MainContent>
 							<ScrollEntrance>
