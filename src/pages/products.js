@@ -4,7 +4,7 @@ import { mediaQueries, colors } from 'src/styles'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
 import Slider from 'src/components/Slider'
-import ProductGrid from 'src/components/ProductGrid'
+import ProductsGrid from 'src/components/ProductsGrid'
 import Hr from 'src/components/Hr'
 import Footer from 'src/components/Footer'
 import { pages, shared } from 'src/mockData'
@@ -43,7 +43,7 @@ class Products extends Component {
 					collapseToArrows={true}
 					centered={false}
 				/>
-				<ProductGrid {...productData} />
+				<ProductsGrid {...productData} />
 				<Hr color={colors.black} />
 				<Footer
 					{...footerData}

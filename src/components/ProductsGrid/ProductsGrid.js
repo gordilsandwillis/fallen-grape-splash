@@ -43,7 +43,7 @@ const LinkStyled = styled(Link)`
   padding-right: 5px;
 `
 
-const ProductGrid = ({ title, items }) => (
+const ProductsGrid = ({ title, items }) => (
 	<Wrapper>
 		<Container>
 			<ContentBlock>
@@ -84,4 +84,4 @@ const ProductGrid = ({ title, items }) => (
 	</Wrapper>
 )
 
-export default ProductGrid
+export default ProductsGrid

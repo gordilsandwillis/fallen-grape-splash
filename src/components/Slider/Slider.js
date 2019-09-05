@@ -144,24 +144,21 @@ const Slider = ({ items, windowWidth, windowHeight, height, title, dots = true, 
 				</Container>
 			)}
 			<SlickSliderDark accessibility centered={centered} {...settings}>
-				{items && items.map(({ name, announcement, byline, links, icon, slideshow }, index) => (
+				{items && items.map(({ name, announcement, links, slideshow }, index) => (
 					centered ? (
 						<ContainerStyled key={name + announcement + index + '_containerstyled'} height={height} key={name + announcement} centered={centered}>
 							<CenteredText>
 								{name && <Name>{name}</Name>}
 								{announcement && <h2>{announcement}</h2>}
+								{links && <LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>}
 							</CenteredText>
 						</ContainerStyled>
 					) : (
 						<ContainerStyled key={name + announcement + index + '_containerstyled'} height={height} src={slideshow}>
-							<Grid
-								showOverlay={false}
-								small="[4] 2"
-								medium="[12]"
-								large="[12]"
-							>
+							<Grid showOverlay={false} small="[4] 2" medium="[12]" large="[12]">
 								{name && <LargeName>{name}</LargeName>}
-								<LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>
+								{announcement && <h2>{announcement}</h2>}
+								{links && <LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>}
 							</Grid>
 						</ContainerStyled>
 					)
