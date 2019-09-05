@@ -1,10 +1,47 @@
-import React, { Fragment } from 'react'
+import React, { Component } from 'react'
+import { navigate } from 'gatsby'
+import ATF from 'src/components/ATF'
+import SEO from 'src/components/SEO'
+import Header from 'src/components/Header'
+import Footer from 'src/components/Footer'
+import { shared } from 'src/mockData'
 
-const NotFoundPage = () => (
-	<Fragment>
-		<h1>NOT FOUND</h1>
-		<p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-	</Fragment>
-)
+class NotFound extends Component {
+	componentDidMount () {
+		setTimeout(() => {
+			navigate('/')
+		}, 2000)
+	}
 
-export default NotFoundPage
+	render () {
+		const { data, location } = this.props
+		const { footerData } = shared
+		return (
+			<main>
+				<SEO title="Mosaic" />
+				<Header hasAtf location={location} />
+				<ATF
+					headline='Page not found. Redirecting...'
+					image={data.ATFimage}
+					horizontalAlignCenter={true}
+					verticalAlignCenter={true}
+				/>
+				<Footer position='absolute' {...footerData} />
+			</main>
+		)
+	}
+}
+
+export default NotFound
+
+export const PlaceholderQuery = graphql`
+	query {
+		ATFimage: file(relativePath: { eq: "images/home.jpg" }) {
+			childImageSharp {
+				fluid {
+					...GatsbyImageSharpFluid_noBase64
+				}
+			}
+		}
+	}
+`
