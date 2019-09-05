@@ -10,7 +10,7 @@ const Press = ({ location }) => {
 	const { footerData } = shared
 	return (
 		<main>
-			<SEO title="Mosaic" />
+			<SEO title="Press" />
 			<Header location={location} />
 			<PressList {...pressData} />
 			<Footer

@@ -13,7 +13,7 @@ const Products = ({ location }) => {
 	const items = productData.items.filter(item => item.slideshow)
 	return (
 		<main>
-			<SEO title="Mosaic" />
+			<SEO title="Products" />
 			<Header location={location} />
 			<Slider
 				imageSlideshow

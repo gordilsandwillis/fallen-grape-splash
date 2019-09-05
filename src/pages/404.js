@@ -18,7 +18,7 @@ class NotFound extends Component {
 		const { footerData } = shared
 		return (
 			<main>
-				<SEO title="Mosaic" />
+				<SEO title="404" />
 				<Header hasAtf location={location} />
 				<ATF
 					headline='Page not found. Redirecting...'

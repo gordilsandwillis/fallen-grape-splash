@@ -10,7 +10,7 @@ const Home = ({ data, location }) => {
 	const { footerData } = shared
 	return (
 		<main>
-			<SEO title="Mosaic" />
+			<SEO title='Home' />
 			<Header hasAtf location={location} />
 			<ATF
 				{...buttonData}

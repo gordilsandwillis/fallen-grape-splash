@@ -15,7 +15,7 @@ const About = ({ data, location }) => {
 	const { footerData } = shared
 	return (
 		<main>
-			<SEO title="Mosaic" />
+			<SEO title="About" />
 			<Header hasAtf location={location} />
 			<ATF
 				{...atfData}

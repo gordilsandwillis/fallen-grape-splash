@@ -12,7 +12,7 @@ const Contact = ({ data, location }) => {
 	const { footerData } = shared
 	return (
 		<main>
-			<SEO title="Mosaic" />
+			<SEO title="Contact" />
 			<Header location={location} />
 			<Hero image={data.HeroImage} />
 			<ContactCopy {...contactData} />

@@ -8,7 +8,7 @@ const Careers = ({ location }) => {
 	const { footerData } = shared
 	return (
 		<main>
-			<SEO title="Mosaic" />
+			<SEO title="Careers" />
 			<Header location={location} />
 			<Footer
 				showHr
