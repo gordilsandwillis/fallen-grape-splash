@@ -26,7 +26,7 @@ class NotFound extends Component {
 					horizontalAlignCenter={true}
 					verticalAlignCenter={true}
 				/>
-				<Footer position='absolute' {...footerData} />
+				<Footer isHomePage position='absolute' {...footerData} />
 			</main>
 		)
 	}
