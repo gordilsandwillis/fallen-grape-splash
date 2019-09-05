@@ -223,6 +223,12 @@ export const pages = {
 						image: 'https://media.pri.org/s3fs-public/styles/story_main/public/images/2019/08/robot_lead_crop.jpg?itok=Uc4umkLW'
 					},
 					{
+						title: `New app released can help stop 'robo-calls'`,
+						text: 'The app-based service instantly protects people from more than 200,000 numbers.',
+						link: 'https://abc.com',
+						logo: 'https://i.imgur.com/TJ4tP5Z.png'
+					},
+					{
 						title: 'Second video example title',
 						text: 'Google News example correspondent reports information about product.',
 						link: 'https://google.com',
