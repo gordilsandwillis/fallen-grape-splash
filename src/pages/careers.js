@@ -9,7 +9,7 @@ const Careers = ({ location }) => {
 	return (
 		<main>
 			<SEO title="Mosaic" />
-			<Header theme='light' location={location} />
+			<Header location={location} />
 			<Footer
 				showHr={true}
 				{...footerData}

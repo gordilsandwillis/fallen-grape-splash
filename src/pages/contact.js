@@ -13,7 +13,7 @@ const Contact = ({ data, location }) => {
 	return (
 		<main>
 			<SEO title="Mosaic" />
-			<Header theme='light' location={location} />
+			<Header location={location} />
 			<Hero image={data.HeroImage} />
 			<ContactCopy {...contactData} />
 			<Footer

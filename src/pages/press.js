@@ -11,7 +11,7 @@ const Press = ({ location }) => {
 	return (
 		<main>
 			<SEO title="Mosaic" />
-			<Header theme='light' location={location} />
+			<Header location={location} />
 			<PressList {...pressData} />
 			<Footer
 				showHr={true}

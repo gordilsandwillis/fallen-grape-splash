@@ -67,14 +67,14 @@ const Text = styled(LogoText)`
   transition: transform ${ animations.mediumSpeed } ease-in-out;
 `
 
-const LogoCollapse = ({ scrolled, theme = 'light' }) => (
+const LogoCollapse = ({ scrolled }) => (
 	<Wrapper className={scrolled ? 'scrolled' : ''}>
-		<Corner style={{ top: 0, left: 0 }}><TopLeft theme={theme} /></Corner>
-		<Corner style={{ top: 0, right: 0 }}><TopRight theme={theme} /></Corner>
-		<Corner style={{ bottom: 0, left: 0 }}><BottomLeft theme={theme} /></Corner>
-		<Corner style={{ bottom: 0, right: 0 }}><BottomRight theme={theme} /></Corner>
+		<Corner style={{ top: 0, left: 0 }}><TopLeft /></Corner>
+		<Corner style={{ top: 0, right: 0 }}><TopRight /></Corner>
+		<Corner style={{ bottom: 0, left: 0 }}><BottomLeft /></Corner>
+		<Corner style={{ bottom: 0, right: 0 }}><BottomRight /></Corner>
 		<TextContainer id="text-container">
-			<Text id="logo-svg" theme={theme} />
+			<Text id="logo-svg" />
 		</TextContainer>
 	</Wrapper>
 )

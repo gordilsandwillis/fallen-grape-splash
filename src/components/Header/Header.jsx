@@ -17,24 +17,6 @@ const PageCheat = styled.div`
   position: static;
   ${ ({ hasAtf }) => (hasAtf ? 'height: 0' : typography.responsiveStyles('height', 150, 150, 150, 110)) }
 `
-
-const Wrapper = styled.header`
-  ${ ({ theme }) => (theme === 'light' ? lightStyles : transparentStyles) };
-  ${ typography.body }
-  left: 0;
-  transition: height ${ animations.mediumSpeed } ease-in-out,
-    background-color ${ animations.mediumSpeed } ease-in-out;
-  right: 0;
-  z-index: 4;
-  ${ typography.responsiveStyles('height', 150, 150, 150, 110) }
-  position: fixed;
-  &.scrolled {
-    ${ typography.responsiveStyles('height', 110, 110, 110, 70) }
-    background-color: ${ colors.offwhite };
-    color: ${ colors.black };
-  }
-`
-
 const lightStyles = `
   position: static;
   background-color: ${ colors.offwhite };
@@ -46,6 +28,25 @@ const transparentStyles = `
   background-color: transparent;
   top: 0;
   color: ${ colors.white };
+`
+
+const Wrapper = styled.header`
+  ${ ({ hasAtf, scrolled }) => (hasAtf && !scrolled) ? transparentStyles : lightStyles };
+  ${ typography.body }
+  left: 0;
+  transition: height ${ animations.mediumSpeed } ease-in-out,
+    background-color ${ animations.mediumSpeed } ease-in-out;
+  right: 0;
+  z-index: 4;
+  ${ typography.responsiveStyles('height', 150, 150, 150, 110) }
+  position: fixed;
+	${ ({ scrolled }) => scrolled &&
+	`
+    ${ typography.responsiveStyles('height', 110, 110, 110, 70) }
+    background-color: ${ colors.offwhite };
+		color: ${ colors.black };
+  `
+}
 `
 
 const HeaderContainer = styled.div`
@@ -256,16 +257,15 @@ class Header extends Component {
 
   render () {
   	const {
-  		theme = 'transparent',
   		location: { pathname },
   		hasAtf = false,
   	} = this.props
   	const { mobileNavOpen, scrolled } = this.state
   	return (
-  		<PageCheat className={scrolled ? 'scrolled' : ''} hasAtf={hasAtf}>
+  		<PageCheat scrolled={scrolled} hasAtf={hasAtf}>
   			<Wrapper
-  				className={scrolled ? 'scrolled' : ''}
-  				theme={scrolled ? 'light' : theme}
+  				scrolled={scrolled}
+  				hasAtf={hasAtf}
   			>
   				<HeaderContainer>
   					<Grid
@@ -278,22 +278,22 @@ class Header extends Component {
   							<LinkStyled to={'/'}>
   								<LogoCollapse
   									scrolled={scrolled}
-  									theme={scrolled ? 'light' : theme}
-  								/>
+  									hasAtf={hasAtf} />
   							</LinkStyled>
   						</div>
   						<NavItemsContainer>
   							<DesktopDetect>
   								{navPages.map(({ name, slug }) => (
   									<DesktopLinkContainer
-  										theme={scrolled ? 'light' : theme}
+  										scrolled={scrolled}
+  										hasAtf={hasAtf}
   										underlined={checkSlug({ slug, pathname })}
   										key={name + slug}
-  										theme={scrolled ? 'light' : theme}
   									>
   										<Link
   											underlined={checkSlug({ slug, pathname })}
-  											theme={scrolled ? 'light' : theme}
+  											scrolled={scrolled}
+  											hasAtf={hasAtf}
   											key={name}
   											to={slug}
   											noHoverColor
@@ -329,8 +329,7 @@ class Header extends Component {
   									<HamburgerIcon
   										clicked={mobileNavOpen}
   										scrolled={scrolled}
-  										theme={scrolled ? 'light' : theme}
-  									/>
+  										hasAtf={hasAtf} />
   								</HamburgerContainer>
   							</MobileDetect>
   						</NavItemsContainer>

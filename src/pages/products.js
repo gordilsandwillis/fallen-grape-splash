@@ -16,7 +16,7 @@ const Products = ({ location }) => {
 	return (
 		<main>
 			<SEO title="Mosaic" />
-			<Header theme='light' location={location} />
+			<Header location={location} />
 			<Slider
 				imageSlideshow
 				horizontalTextAlignCentered={false}
