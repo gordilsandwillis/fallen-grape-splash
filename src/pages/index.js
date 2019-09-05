@@ -19,7 +19,7 @@ const Home = ({ data, location }) => {
 				horizontalAlignCenter={true}
 				verticalAlignCenter={true}
 			/>
-			<Footer position='absolute' {...footerData} />
+			<Footer isHomePage {...footerData} />
 		</main>
 	)
 }

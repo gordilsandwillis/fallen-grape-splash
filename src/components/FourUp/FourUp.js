@@ -34,12 +34,7 @@ const FourUp = ({ items, title }) => (
 		<ContentBlock>
 			<Container>
 				<Title>{title}</Title>
-				<Grid
-					showOverlay={false}
-					large="[3] [3] [3] [3]"
-					medium="[3] [3] [3] [3]"
-					small="[6]"
-				>
+				<Grid large="[3] [3] [3] [3]" medium="[3] [3] [3] [3]" small="[6]" >
 					{items &&
 						items.map(({ title, subtitle, description }, index) => (
 							<Item key={title + index}>

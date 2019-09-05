@@ -268,12 +268,7 @@ class Header extends Component {
   				hasAtf={hasAtf}
   			>
   				<HeaderContainer>
-  					<Grid
-  						showOverlay={false}
-  						small="[5] [1]"
-  						medium="[6] [6]"
-  						large="[6] [6]"
-  					>
+  					<Grid small="[5] [1]" medium="[6] [6]" large="[6] [6]" >
   						<div>
   							<LinkStyled to={'/'}>
   								<LogoCollapse
@@ -283,21 +278,13 @@ class Header extends Component {
   						</div>
   						<NavItemsContainer>
   							<DesktopDetect>
-  								{navPages.map(({ name, slug }) => (
-  									<DesktopLinkContainer
-  										scrolled={scrolled}
-  										hasAtf={hasAtf}
-  										underlined={checkSlug({ slug, pathname })}
-  										key={name + slug}
-  									>
+  								{navPages.map(({ name, slug }, index) => (
+  									<DesktopLinkContainer key={name + slug + index} underlined={checkSlug({ slug, pathname })}>
   										<Link
-  											underlined={checkSlug({ slug, pathname })}
-  											scrolled={scrolled}
-  											hasAtf={hasAtf}
-  											key={name}
   											to={slug}
-  											noHoverColor
-  										>
+  											underlined={checkSlug({ slug, pathname })}
+  											dark={!(hasAtf && !scrolled)}
+  											noHoverColor >
   											{name}
   										</Link>
   									</DesktopLinkContainer>

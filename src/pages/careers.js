@@ -11,7 +11,7 @@ const Careers = ({ location }) => {
 			<SEO title="Mosaic" />
 			<Header location={location} />
 			<Footer
-				showHr={true}
+				showHr
 				{...footerData}
 			/>
 		</main>

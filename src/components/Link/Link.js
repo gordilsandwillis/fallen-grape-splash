@@ -36,8 +36,8 @@ const StyledLinkElement = styled.a`
 
 const StyledGatsbyLink = styled(GatsbyLink)`
   ${ LinkStyles }
-  ${ ({ underlined, theme }) => underlined && `border-bottom: 1px solid ${ theme === 'light' ? colors.black : colors.white };` }
-  color: ${ ({ theme }) => theme === 'light' ? colors.black : colors.white };
+  ${ ({ underlined, dark }) => underlined && `border-bottom: 1px solid ${ dark ? colors.black : colors.white };` }
+  color: ${ ({ dark }) => dark ? colors.black : colors.white };
   transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
     color: ${ ({ nohover }) => !nohover ? colors.unofficialLightGrey : 'inherit' };
@@ -47,7 +47,7 @@ const StyledGatsbyLink = styled(GatsbyLink)`
 
 class Link extends Component {
 	render () {
-		let { to, external, white, noHoverColor, target, children, className, theme, underlined } = this.props
+		let { to, external, white, noHoverColor, target, children, className, dark, underlined } = this.props
 		if (external) {
 			return (
 				<StyledLinkElement
@@ -66,7 +66,7 @@ class Link extends Component {
 					nohover={(noHoverColor || '').toString()}
 					className={className}
 					to={to}
-					theme={theme}
+					dark={(dark || '').toString()}
 					underlined={(underlined || '').toString()}
 				>
 					{children}

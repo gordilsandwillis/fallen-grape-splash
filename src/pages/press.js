@@ -14,7 +14,7 @@ const Press = ({ location }) => {
 			<Header location={location} />
 			<PressList {...pressData} />
 			<Footer
-				showHr={true}
+				showHr
 				{...footerData}
 			/>
 		</main>

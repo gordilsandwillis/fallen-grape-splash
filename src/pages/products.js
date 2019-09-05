@@ -13,6 +13,7 @@ import { graphql } from 'gatsby'
 const Products = ({ location }) => {
 	const { Products: { components: { productData } } } = pages
 	const { footerData } = shared
+	const items = productData.items.filter(item => item.slideshow)
 	return (
 		<main>
 			<SEO title="Mosaic" />
@@ -20,11 +21,11 @@ const Products = ({ location }) => {
 			<Slider
 				imageSlideshow
 				horizontalTextAlignCentered={false}
-				items={productData.items.filter(item => item.slideshow)}
+				items={items}
 			/>
 			<ProductsGrid {...productData} />
-			<Hr color={colors.black} />
 			<Footer
+				showHr
 				{...footerData}
 			/>
 		</main>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ATF from 'src/components/ATF'
 import SEO from 'src/components/SEO'
 import Header from 'src/components/Header'
@@ -21,7 +21,7 @@ const About = ({ data, location }) => {
 				{...atfData}
 				image={data.ATFimage}
 				horizontalAlignCenter={false}
-				showHr={true}
+				showHr
 				verticalAlignCenter={false}
 			/>
 			<ThreeUp {...conceptsData} />
@@ -29,7 +29,6 @@ const About = ({ data, location }) => {
 			<Companies {...companyData} />
 			<Slider {...awardsData} />
 			<Footer
-				fixed={true}
 				{...footerData}
 			/>
 		</main>

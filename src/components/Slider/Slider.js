@@ -155,7 +155,7 @@ const Slider = ({ items, windowWidth, imageSlideshow, title, dots = true, arrows
 						</ContainerStyled>
 					) : (
 						<ContainerStyled key={name + announcement + index + '_containerstyled'} imageSlideshow={imageSlideshow} src={slideshow}>
-							<Grid showOverlay={false} small="[4] 2" medium="[12]" large="[12]">
+							<Grid small="[4] 2" medium="[12]" large="[12]">
 								{name && <LargeName>{name}</LargeName>}
 								{announcement && <h2>{announcement}</h2>}
 								{links && <LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>}
