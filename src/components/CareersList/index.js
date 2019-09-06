@@ -1,1 +1,1 @@
-export { default } from './CareersBlock'
+export { default } from './CareersList'
