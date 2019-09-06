@@ -1,28 +1,27 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors, animations, gridSettings, mediaQueries as mq } from 'src/styles'
-import DropdownArrow from 'src/assets/images/dropdown-arrow.svg'
+import { colors, animations } from 'src/styles'
 import Select from 'react-select'
 
-const TextAlign = styled.div`
-  text-align: ${ ({ align }) => align };
-`
+// const TextAlign = styled.div`
+//   text-align: ${ ({ align }) => align };
+// `
 
-const DropdownArrowContainer = styled.div`
-  width: 12px;
-  height: 12px;
-  margin: -2px 5px 5px 15px;
-    svg {
-      transform: rotate(-45deg);
-    path, polygon {
-      fill: currentColor
-    }
-    display: block;
-    rect {
-     fill: transparent;
-    }
-  }
-`
+// const DropdownArrowContainer = styled.div`
+//   width: 12px;
+//   height: 12px;
+//   margin: -2px 5px 5px 15px;
+//     svg {
+//       transform: rotate(-45deg);
+//     path, polygon {
+//       fill: currentColor
+//     }
+//     display: block;
+//     rect {
+//      fill: transparent;
+//     }
+//   }
+// `
 
 const customStyles = {
 	option: (provided, state) => ({
@@ -65,7 +64,7 @@ const SelectStyled = styled(Select)`
 
 class Dropdown extends React.Component {
 	render () {
-		const { title, filters, items, onChange, categories, align = 'inherit' } = this.props
+		const { title, items, onChange } = this.props
 		return <div>
 			<SelectStyled
 				isClearable
