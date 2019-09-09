@@ -11,6 +11,15 @@ module.exports = {
 	},
 	plugins: [
 		{
+			resolve: `gatsby-source-greenhouse`,
+			options: {
+				apiToken: `${ process.env.GREENHOUSE_HARVEST_API_KEY }`,
+				jobPosts: {
+					live: true
+				}
+			},
+		},
+		{
 			resolve: `gatsby-plugin-emotion`,
 		},
 		'gatsby-plugin-react-helmet',

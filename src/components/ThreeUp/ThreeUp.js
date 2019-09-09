@@ -37,12 +37,7 @@ const ThreeUp = ({ items, title }) => (
 		<Container>
 			<ContentBlock>
 				{title && <Title>{title}</Title>}
-				<Grid
-					showOverlay={false}
-					large="[4] [4] [4]"
-					medium="[4] [4] [4]"
-					small="[6]"
-				>
+				<Grid large="[4] [4] [4]" medium="[4] [4] [4]" small="[6]">
 					{items &&
 						items.map(({ title, tags, description }, index) => (
 							<Item key={title + index}>

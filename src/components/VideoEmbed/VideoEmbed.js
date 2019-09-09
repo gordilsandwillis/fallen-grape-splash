@@ -53,15 +53,17 @@ const CoverImage = styled.div`
 
 const ReactPlayerStyled = styled(ReactPlayer)`
   div {
+  padding-bottom: 0;
+  visibility: hidden;
+  ${ ({ video }) => video && `background-color: black; visibility: visible; padding-bottom: 56.25%;` }
   position: relative;
-  ${ ({ video }) => video && `padding-bottom: 56.25%;` }
   height: 0;
   iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   }
   }
 `

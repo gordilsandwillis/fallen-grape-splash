@@ -11,11 +11,11 @@ const Spacer = styled.div`
 const stories = storiesOf(`Components/Slider`, module)
 stories.add(`default`, props => (
 	<React.Fragment>
-		<Slider collapseToArrows={true} {...exampleDataOne} />
+		<Slider imageSlideshow {...exampleDataOne} />
 		<Spacer />
 		<Slider
 			height={400}
-			centered={false}
+			horizontalTextAlignCentered={false}
 			{...exampleDataTwo} />
 	</React.Fragment>
 ))

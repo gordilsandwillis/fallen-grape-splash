@@ -9,7 +9,7 @@ import Hr from 'src/components/Hr'
 import { colors, typography } from 'src/styles'
 
 const Wrapper = styled.footer`
-  position: ${ ({ position = 'static' }) => position };
+  position: ${ ({ isHomePage }) => isHomePage ? 'absolute' : 'static' };
   background: ${ colors.offwhite };
   bottom: 0;
   left: 0;
@@ -48,17 +48,12 @@ const Footer = ({
 	footerTextLeftLineTwo,
 	footerTextRight,
 	footerTextRightLink,
-	position,
+	isHomePage,
 }) => (
-	<Wrapper position={position}>
+	<Wrapper isHomePage={isHomePage}>
 		{showHr && <Hr color={colors.black} />}
 		<FooterContainer>
-			<Grid
-				showOverlay={false}
-				small="[5] [1]"
-				medium="[6] [6]"
-				large="[6] [6]"
-			>
+			<Grid small="[5] [1]" medium="[6] [6]" large="[6] [6]">
 				<div>
 					<div>{footerTextLeft}</div>
 					<FooterTextGrey>{footerTextLeftLineTwo}</FooterTextGrey>

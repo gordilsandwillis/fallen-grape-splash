@@ -32,12 +32,7 @@ const Paragraph = styled.div`
 
 const ContactCopy = ({ headline, title, items }) => (
 	<ContainerStyled>
-		<Grid
-			showOverlay={false}
-			small={'[6]'}
-			medium={'[6] 2 [4]'}
-			large={'[6] 2 [4]'}
-		>
+		<Grid small={'[6]'} medium={'[6] 2 [4]'} large={'[6] 2 [4]'} >
 			<ScrollEntrance>
 				{headline && <Headline>{headline}</Headline>}
 			</ScrollEntrance>

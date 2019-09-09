@@ -35,15 +35,15 @@ const ContainerRow = styled(Container)`
 `
 
 const HrFullContainer = styled.div`
-	margin: 20px 0;
+	padding: 20px 0;
 `
 
 const LinkContainer = styled.div`
 	transform: translate(0, -3px);
 `
 const Padding = styled.div`
-	${ ({ notFirst }) => notFirst && typography.responsiveStyles('padding-top', 40, 40, 40, 35) }
-	${ ({ notLast }) => notLast && typography.responsiveStyles('padding-bottom', 40, 40, 40, 35) }
+	${ typography.responsiveStyles('padding-top', 40, 40, 40, 35) }
+	${ typography.responsiveStyles('padding-bottom', 40, 40, 40, 35) }
 	width: 100%;
 	padding: 10px 0px;
 `
@@ -71,7 +71,7 @@ const PressList = ({ title, items, linkText, externalLink }) => (
 						<React.Fragment key={index + '_fragment'}>
 							{(index !== 0) && <Hr key={index + '_hr'} color={colors.black} />}
 							<Container key={index + '_container'}>
-								<Padding notFirst={index} notLast={index !== items.length - 1}>
+								<Padding>
 									<Grid large='[2] 1 [8] 1' medium='[2] 1 [9]' small='[2] [4]'>
 										<LogoContainer><div>{logo && <ImgStyled src={logo} />}</div></LogoContainer>
 										<div>

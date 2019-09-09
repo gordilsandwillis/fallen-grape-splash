@@ -23,7 +23,7 @@ ${ typography.responsiveStyles('padding-top', 40, 40, 40, 30) }
 
 const SlickSliderDark = styled(SlickSlider)`
   outline: none;
-  ${ ({ centered }) => (!centered) && `position: relative;` };
+  ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `position: relative;` };
   
   .slick-dots li.slick-active button:before {
     color: ${ colors.white };
@@ -41,7 +41,7 @@ const SlickSliderDark = styled(SlickSlider)`
   .slick-dots {
     position: static;
     padding-bottom: 40px;
-    ${ ({ centered }) => (!centered) && `
+    ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `
     position: absolute;
     display: flex !important;
     justify-content: flex-end;
@@ -106,11 +106,11 @@ const LinkStyled = styled(Link)`
 const ContainerStyled = styled(Container)`
   display: flex !important;
   flex-direction: column;
-  justify-content: ${ ({ centered }) => centered ? 'center' : 'flex-end' };
+  justify-content: ${ ({ horizontalTextAlignCentered }) => horizontalTextAlignCentered ? 'center' : 'flex-end' };
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ height }) => height && 'height: 400px' };
+  ${ ({ imageSlideshow }) => imageSlideshow && 'height: 400px' };
   padding: 40px;
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
@@ -122,8 +122,8 @@ const LargeName = styled.div`
   padding-bottom: 10px;
 `
 
-const Slider = ({ items, windowWidth, windowHeight, height, title, dots = true, arrows = false, collapseToArrows = false, centered = true }) => {
-	if (collapseToArrows && windowWidth < mq.mediumBreakpoint) {
+const Slider = ({ items, windowWidth, imageSlideshow, title, dots = true, arrows = false, horizontalTextAlignCentered = true }) => {
+	if (imageSlideshow && windowWidth < mq.mediumBreakpoint) {
 		dots = false
 		arrows = true
 	}
@@ -143,25 +143,22 @@ const Slider = ({ items, windowWidth, windowHeight, height, title, dots = true, 
 					<Title>{title}</Title>
 				</Container>
 			)}
-			<SlickSliderDark accessibility centered={centered} {...settings}>
-				{items && items.map(({ name, announcement, byline, links, icon, slideshow }, index) => (
-					centered ? (
-						<ContainerStyled key={name + announcement + index + '_containerstyled'} height={height} key={name + announcement} centered={centered}>
+			<SlickSliderDark accessibility horizontalTextAlignCentered={horizontalTextAlignCentered} {...settings}>
+				{items && items.map(({ name, announcement, links, slideshow }, index) => (
+					horizontalTextAlignCentered ? (
+						<ContainerStyled key={name + announcement + index + '_containerstyled'} imageSlideshow={imageSlideshow} key={name + announcement} horizontalTextAlignCentered={horizontalTextAlignCentered}>
 							<CenteredText>
 								{name && <Name>{name}</Name>}
 								{announcement && <h2>{announcement}</h2>}
+								{links && <LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>}
 							</CenteredText>
 						</ContainerStyled>
 					) : (
-						<ContainerStyled key={name + announcement + index + '_containerstyled'} height={height} src={slideshow}>
-							<Grid
-								showOverlay={false}
-								small="[4] 2"
-								medium="[12]"
-								large="[12]"
-							>
+						<ContainerStyled key={name + announcement + index + '_containerstyled'} imageSlideshow={imageSlideshow} src={slideshow}>
+							<Grid small="[4] 2" medium="[12]" large="[12]">
 								{name && <LargeName>{name}</LargeName>}
-								<LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>
+								{announcement && <h2>{announcement}</h2>}
+								{links && <LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>}
 							</Grid>
 						</ContainerStyled>
 					)

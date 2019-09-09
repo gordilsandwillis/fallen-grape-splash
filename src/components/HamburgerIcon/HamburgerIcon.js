@@ -37,11 +37,8 @@ const MenuIcon = styled.div`
   width: 30px;
   height: 20px;
   transition: transform ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
-  color: ${ ({ theme, scrolled, clicked }) => {
-		if (clicked) return colors.white
-		else if (theme === 'light' || scrolled) return colors.black
-		else return colors.white
-	} };
+  color: ${ ({ clicked, hasAtf, scrolled }) => (clicked || (hasAtf && !scrolled)) ? colors.white : colors.black };
+
   &:before,
   &:after,
   .center,
@@ -73,9 +70,9 @@ top: 50%;
 margin-top: -1px;
 `
 
-const HamburgerIcon = ({ scrolled, theme = 'light', clicked }) => (
+const HamburgerIcon = ({ scrolled, hasAtf, clicked }) => (
 	<MenuLink className={clicked && 'clicked'}>
-		<MenuIcon scrolled={scrolled} theme={theme} clicked={clicked} className="menu-icon">
+		<MenuIcon scrolled={scrolled} hasAtf={hasAtf} scrolled={scrolled} clicked={clicked} className="menu-icon">
 			<Center className="center" />
 		</MenuIcon>
 	</MenuLink>
