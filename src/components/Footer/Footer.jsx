@@ -34,6 +34,7 @@ const FooterTextGrey = styled.div`
 const FooterTextRightAlign = styled.div`
   text-align: right;
   justify-content: flex-end;
+  display: flex;
 `
 
 const FooterLink = styled(Link)`

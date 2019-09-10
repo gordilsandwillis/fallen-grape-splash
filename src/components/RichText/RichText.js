@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 
 const BoxedText = styled.span`
   border: 1px solid currentColor;
-  padding: 0 .28em;
+  padding: 0 .2em;
   font-style: normal !important;
 `
 

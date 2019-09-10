@@ -268,7 +268,7 @@ class Header extends Component {
   				hasAtf={hasAtf}
   			>
   				<HeaderContainer>
-  					<Grid small="[5] [1]" medium="[6] [6]" large="[6] [6]" >
+  					<Grid small="[1] [1]" medium="[4] [8]" large="[4] [8]" >
   						<div>
   							<LinkStyled to={'/'}>
   								<LogoCollapse
