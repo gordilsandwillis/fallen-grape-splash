@@ -3,7 +3,7 @@
   "private": true,
   "description": "mosaic",
   "version": "0.1.0",
-  "author": "@robincwillis",
+  "author": "@dillon",
   "dependencies": {
     "@babel/core": "^7.4.4",
     "@contentful/rich-text-react-renderer": "^13.4.0",
