@@ -20,8 +20,9 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
 
 		const pageTemplateMap = {
 			page: path.resolve('./src/templates/PageTemplate.jsx'),
-			careers: path.resolve('./src/templates/Careers.jsx')
+			// careers: path.resolve('./src/templates/Careers.jsx')
 		}
+		console.log(result)
 		result.data.allContentfulPage.edges.forEach(edge => {
 			const template = pageTemplateMap[edge.node.type] || pageTemplateMap['page']
 			createPage({
