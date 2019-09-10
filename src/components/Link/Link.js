@@ -12,6 +12,7 @@ const LinkStyles = `
 `
 
 const StyledLinkElement = styled.a`
+	white-space:nowrap;
   ${ LinkStyles }
   color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
   span {
@@ -61,6 +62,7 @@ class Link extends Component {
 				</StyledLinkElement >
 			)
 		} else {
+			if (to[0] !== '/') to = '/' + to
 			return (
 				<StyledGatsbyLink
 					nohover={(noHoverColor || '').toString()}

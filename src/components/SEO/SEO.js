@@ -8,42 +8,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
 
-function SEO ({ description, lang, meta, keywords, title }) {
-	const { site, favicon, appleTouchIcon, socialShareImage } = useStaticQuery(
-		graphql`
-			query {
-				site {
-					siteMetadata {
-						title
-						description
-						author
-					}
-				}
-				favicon: file(relativePath:{eq: "images/favicon.ico"}) {
-					publicURL
-				}
-				appleTouchIcon: file(relativePath: { eq: "images/apple-touch-icon.png" }) {
-					publicURL
-				},
-				socialShareImage: file(relativePath: { eq: "images/share-image.png" }) {
-					publicURL
-					absolutePath
-				}
-			}
-		`
-	)
-
-	const metaDescription = description || site.siteMetadata.description
-
+function SEO ({ title, siteTitle, lang = 'en', seoAppleTouchIcon, meta = '', seoSocialShareImage, favicon, keywords, description }) {
 	return (
 		<Helmet
 			htmlAttributes={{
 				lang,
 			}}
-			title={title}
-			titleTemplate={`%s | ${ site.siteMetadata.title }`}
+			title={siteTitle}
+			titleTemplate={`%s | ${ title }`}
 			meta={[
 				{
 					name: `viewport`,
@@ -51,11 +24,11 @@ function SEO ({ description, lang, meta, keywords, title }) {
 				},
 				{
 					name: `description`,
-					content: metaDescription,
+					content: description,
 				},
 				{
 					property: `og:image`,
-					content: socialShareImage.absolutePath,
+					content: seoSocialShareImage.fixed.src,
 				},
 				{
 					property: `og:title`,
@@ -63,7 +36,7 @@ function SEO ({ description, lang, meta, keywords, title }) {
 				},
 				{
 					property: `og:description`,
-					content: metaDescription,
+					content: description,
 				},
 				{
 					property: `og:type`,
@@ -71,7 +44,7 @@ function SEO ({ description, lang, meta, keywords, title }) {
 				},
 				{
 					name: `twitter:image`,
-					content: socialShareImage.absolutePath,
+					content: seoSocialShareImage.fixed.src,
 				},
 				{
 					name: `twitter:card`,
@@ -79,7 +52,7 @@ function SEO ({ description, lang, meta, keywords, title }) {
 				},
 				{
 					name: `twitter:creator`,
-					content: site.siteMetadata.author,
+					content: title,
 				},
 				{
 					name: `twitter:title`,
@@ -87,7 +60,7 @@ function SEO ({ description, lang, meta, keywords, title }) {
 				},
 				{
 					name: `twitter:description`,
-					content: metaDescription,
+					content: description,
 				},
 			]
 				.concat(
@@ -100,8 +73,8 @@ function SEO ({ description, lang, meta, keywords, title }) {
 				)
 				.concat(meta)}
 			link={[
-				{ rel: 'icon', type: 'image/png', sizes: '32x32', href: favicon.publicURL },
-				{ rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120', href: appleTouchIcon.publicURL }
+				{ rel: 'icon', type: 'image/png', sizes: '32x32', href: favicon.fixed.src },
+				{ rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120', href: seoAppleTouchIcon.fixed.src }
 			]}
 		/>
 	)

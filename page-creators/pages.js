@@ -1,37 +1,40 @@
-// const Promise = require(`bluebird`)
-// const path = require(`path`)
+const Promise = require(`bluebird`)
+const path = require(`path`)
 
-// const createContentfulPages = (graphql, createPage) => new Promise((resolve, reject) => {
-//   graphql(`
-//     {
-//       allContentfulPage {
-//         edges {
-//           node {
-//             id
-//             path
-//           }
-//         }
-//       }
-//     }
-//   `).then(result => {
-//     if (result.errors) {
-//       reject(result.errors)
-//     }
+const createContentfulPages = (graphql, createPage) => new Promise((resolve, reject) => {
+	graphql(`
+    query {
+      allContentfulPage {
+        edges {
+          node {
+            id
+            slug
+          }
+        }
+      }
+    }
+  `).then(result => {
+		if (result.errors) {
+			reject(result.errors)
+		}
 
-//     const template = path.resolve('./src/templates/PageTemplate.jsx')
+		const pageTemplateMap = {
+			page: path.resolve('./src/templates/PageTemplate.jsx'),
+			// careers: path.resolve('./src/templates/Careers.jsx')
+		}
+		result.data.allContentfulPage.edges.forEach(edge => {
+			const template = pageTemplateMap[edge.node.type] || pageTemplateMap['page']
+			createPage({
+				path: `${ edge.node.slug }`,
+				component: template,
+				context: {
+					id: edge.node.id
+				},
+			})
+		})
 
-//     result.data.allContentfulPage.edges.forEach(edge => {
-//       createPage({
-//         path: `${ edge.node.path }`,
-//         component: template,
-//         context: {
-//           id: edge.node.id
-//         },
-//       })
-//     })
+		resolve()
+	})
+})
 
-//     resolve()
-//   })
-// })
-
-// module.exports = createContentfulPages
+module.exports = createContentfulPages

@@ -8,6 +8,7 @@ import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import { colors, gridSettings, typography, mediaQueries as mq } from 'src/styles'
+import RichText from 'src/components/RichText'
 import MobileDetect from 'mobile-detect'
 import PropTypes from 'prop-types'
 
@@ -15,7 +16,7 @@ const AlignmentContainer = styled.div`
 height: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: ${ ({ verticalAlignCenter }) => verticalAlignCenter ? 'center' : 'flex-end' };
+	align-items: ${ ({ verticalTextAlignment }) => verticalTextAlignment ? 'flex-end' : 'center' };
 	${ typography.responsiveStyles('padding-top', 70, 70, 70, 75) }
 	${ typography.responsiveStyles('padding-bottom', 70, 70, 70, 75) }
 `
@@ -23,20 +24,16 @@ height: 100%;
 const Content = styled(Container)`
 	flex: 1;
 	${ typography.h1 }
-	p {
-		${ typography.h2Special }
-		margin-top: 0;
-	}
 `
 
 const AlignedText = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	align-items: ${ ({ horizontalAlignCenter }) => horizontalAlignCenter ? 'center' : 'left' };
-  text-align: ${ ({ horizontalAlignCenter }) => horizontalAlignCenter ? 'center' : 'left' };
+	align-items: ${ ({ horizontalTextAlignment }) => horizontalTextAlignment ? 'left' : 'center' };
+  text-align: ${ ({ horizontalTextAlignment }) => horizontalTextAlignment ? 'left' : 'center' };
   p {
-    text-align: ${ ({ horizontalAlignCenter }) => horizontalAlignCenter ? 'center' : 'left' };
+    text-align: ${ ({ horizontalTextAlignment }) => horizontalTextAlignment ? 'left' : 'center' };
 
   ${ typography.responsiveStyles('padding-bottom', 50, 30, 20, 10) }
   }
@@ -107,7 +104,9 @@ const ButtonContainer = styled.div`
 	margin-top: 36px;
 `
 
-const PaddedParagraph = styled.p`
+const PaddedParagraph = styled.div`
+	${ typography.h2Special }
+	margin-top: 0;
 	padding-top: 15px;
 	max-width: 25em;
 	${ typography.responsiveStyles('padding-bottom', 50, 30, 0, 0) }
@@ -115,6 +114,9 @@ const PaddedParagraph = styled.p`
 
 const H1 = styled.h1`
 	max-width: 15em;
+	span {
+		max-width: 15em;
+	}
 `
 
 class ATF extends Component {
@@ -141,41 +143,40 @@ class ATF extends Component {
 	render () {
 		const {
 			image,
-			horizontalAlignCenter,
-			verticalAlignCenter,
+			horizontalTextAlignment,
+			verticalTextAlignment,
 			headline,
-			text,
+			smallText,
 			winHeight,
-			showHr,
-			buttonText,
-			buttonLink,
+			horizontalBreak,
+			button,
 		} = this.props
 		const { isMobile } = this.state
 		return (
 			<Fragment>
-				<Block isMobile={isMobile} full={text && headline} background winHeight={winHeight}>
+				<Block isMobile={isMobile} full={smallText && headline} background winHeight={winHeight}>
 					<BgImage image={image} />
 					<Overlay />
 				</Block>
-				<Block isMobile={isMobile} full={text && headline} content="true" winHeight={winHeight}>
-					<AlignmentContainer verticalAlignCenter={verticalAlignCenter}>
+				<Block isMobile={isMobile} full={smallText && headline} content="true" winHeight={winHeight}>
+					<AlignmentContainer verticalTextAlignment={verticalTextAlignment}>
 						<MainContent>
 							<ScrollEntrance>
 								<Content>
 									<Grid small='[6]' medium='[12]' large='[12]' >
-										<AlignedText horizontalAlignCenter={horizontalAlignCenter}>
-											<H1>{headline}</H1>
+										<AlignedText horizontalTextAlignment={horizontalTextAlignment}>
+											<H1>{headline && RichText(headline)}</H1>
 										</AlignedText>
 									</Grid>
 								</Content>
 								<Content>
 									<Grid small='[6]' medium='[12]' large='[12]' >
-										<AlignedText horizontalAlignCenter={horizontalAlignCenter}>
-											{buttonText &&
+										<AlignedText horizontalTextAlignment={horizontalTextAlignment}>
+											{button &&
 												<ButtonContainer>
-													<Link to={buttonLink}>
+													<Link external={!button.internalExternal} to={button.url}>
 														<Button>
-															{buttonText}
+															{button.text}
 														</Button>
 													</Link>
 												</ButtonContainer>
@@ -183,11 +184,11 @@ class ATF extends Component {
 										</AlignedText>
 									</Grid>
 								</Content>
-								{showHr && <Margin><Hr /></Margin>}
-								{text &&
+								{horizontalBreak && <Margin><Hr /></Margin>}
+								{smallText &&
 								<Content>
 									<Grid small="[6]" medium="[7] 2" large="[7] 2">
-										<PaddedParagraph>{text}</PaddedParagraph>
+										<PaddedParagraph>{RichText(smallText)}</PaddedParagraph>
 									</Grid>
 								</Content>
 								}
@@ -202,22 +203,22 @@ class ATF extends Component {
 }
 
 ATF.defaultProps = {
-	horizontalAlignCenter: false,
-	verticalAlignCenter: false,
+	horizontalTextAlignment: false,
+	verticalTextAlignment: false,
 	image: {},
-	headline: 'Headline',
-	showHr: false,
+	headline: {},
+	horizontalBreak: false,
 	// text,
 	// buttonText,
 	// buttonLink,
 }
 
 ATF.propTypes = {
-	horizontalAlignCenter: PropTypes.bool.isRequired,
-	verticalAlignCenter: PropTypes.bool.isRequired,
+	horizontalTextAlignment: PropTypes.bool.isRequired,
+	verticalTextAlignment: PropTypes.bool.isRequired,
 	image: PropTypes.object.isRequired,
-	headline: PropTypes.string.isRequired,
-	showHr: PropTypes.bool.isRequired,
+	headline: PropTypes.object.isRequired,
+	horizontalBreak: PropTypes.bool.isRequired,
 	text: PropTypes.string,
 	buttonText: PropTypes.any,
 	buttonLink: PropTypes.any,

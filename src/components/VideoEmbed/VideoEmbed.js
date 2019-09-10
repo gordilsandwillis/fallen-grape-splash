@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import Image from 'src/components/Image'
 import ReactPlayer from 'react-player'
 import Grid from 'src/components/Grid'
 import { colors, animations } from 'src/styles'
@@ -44,11 +45,6 @@ const CoverImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url(${ ({ image }) => image }) no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 `
 
 const ReactPlayerStyled = styled(ReactPlayer)`
@@ -66,6 +62,13 @@ const ReactPlayerStyled = styled(ReactPlayer)`
   height: 100%; */
   }
   }
+`
+
+const BgImage = styled(Image)`
+  position: absolute !important;
+  height: 100%;
+  width: 100%;
+
 `
 
 const PlayIconStyled = styled(PlayIcon)`
@@ -88,7 +91,8 @@ class VideoEmbed extends Component {
 			<Grid small='[6]' medium='[6]' large='[6]'>
 				<Wrapper onClick={() => this.setState({ video: true })}>
 					<CoverImageContainer video={(video || '').toString()} >
-						<CoverImage image={coverImage}>
+						<CoverImage>
+							<BgImage image={coverImage}/>
 							<Overlay />
 							<PlayIconStyled />
 						</CoverImage>

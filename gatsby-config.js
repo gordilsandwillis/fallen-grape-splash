@@ -7,7 +7,7 @@ module.exports = {
 	siteMetadata: {
 		title: 'Mosiac',
 		description: 'Mosiac',
-		author: '@robincwillis',
+		author: '@dillon',
 	},
 	plugins: [
 		{
@@ -78,6 +78,8 @@ module.exports = {
 			options: {
 				spaceId: process.env.CONTENTFUL_SPACE_ID,
 				accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+				environment: 'master',
+				host: 'cdn.contentful.com'
 			},
 		},
 

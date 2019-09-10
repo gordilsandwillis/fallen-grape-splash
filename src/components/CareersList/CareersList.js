@@ -100,17 +100,22 @@ class CareersList extends Component {
 
 	filterByDepartment = jobs => Object.values(jobs).filter(job => {
 		const { departmentFilter } = this.state
-		if (departmentFilter && job.departmentName !== departmentFilter) return false
+		if (departmentFilter && job.departmentName !== departmentFilter.value) return false
 		return true
 	})
 
 	filterByLocation = jobs => Object.values(jobs).filter(job => {
 		const { locationFilter } = this.state
-		if (locationFilter && job.locationName !== locationFilter) return false
+		if (locationFilter && job.locationName !== locationFilter.value) return false
 		return true
 	})
 
+	handleChangeFilter = (name, x) => {
+		this.setState({ [name]: x })
+	}
+
 	render () {
+		console.log(this.state)
 		const { selectedJobId, companyFilter, locationFilter, departmentFilter } = this.state
 		const { data, windowWidth } = this.props
 		const { jobs, companies } = data
@@ -125,7 +130,6 @@ class CareersList extends Component {
 			? <Job job={selectedJobId} />
 			: (
 				<Wrapper>
-					{/* <Hero /> */}
 					<ScrollEntrance>
 						<Container>
 							<ContentBlock>
@@ -138,14 +142,43 @@ class CareersList extends Component {
 													{companies && companies.map(({ id, name }) => <JobButton key={id} tabindex="-1" underlined={companyFilter === id} onClick={() => this.setState({ companyFilter: id, departmentFilter: null, locationFilter: null })}>{name}</JobButton>)}
 												</JobFilters>
 												<Grid small='[2]' medium='[2]' large='[2] [2]' >
-													<Dropdown filters={companyFilter + locationFilter + departmentFilter} onChange={x => this.setState({ locationFilter: (x && x.value) || null })} align='right' title="Location" items={locations} />
-													<Dropdown filters={companyFilter + locationFilter + departmentFilter} onChange={x => this.setState({ departmentFilter: (x && x.value) || null })} align='right' title="Department" items={departments} />
+													<Dropdown
+														filters={companyFilter + locationFilter + departmentFilter}
+														value={locationFilter}
+														onChange={x => this.handleChangeFilter('locationFilter', x)}
+														clearValue={() => this.handleChangeFilter('locationFilter', null)}
+														align='right'
+														title="Location"
+														items={locations}
+													/>
+													<Dropdown
+														filters={companyFilter + locationFilter + departmentFilter}
+														value={departmentFilter}
+														onChange={x => this.handleChangeFilter('departmentFilter', x)}
+														clearValue={() => this.handleChangeFilter('departmentFilter', null)}
+														align='right'
+														title="Department"
+														items={departments}
+													/>
 												</Grid>
 											</React.Fragment>
 										) : (
 											<RowRightAlign>
-												<Dropdown filters={companyFilter + locationFilter + departmentFilter} onChange={x => this.setState({ companyFilter: (x && x.value) || null })} align='right' title="All Jobs" />
-												<Dropdown filters={companyFilter + locationFilter + departmentFilter} onChange={this.handleComplexDropdownChange} align='right'
+												<Dropdown
+													filters={companyFilter + locationFilter + departmentFilter}
+													value={departmentFilter}
+													onChange={x => this.handleChangeFilter('departmentFilter', x)}
+													clearValue={() => this.handleChangeFilter('departmentFilter', null)}
+													align='right'
+													 title="All Jobs"
+												/>
+												<Dropdown
+													filters={companyFilter + locationFilter + departmentFilter}
+													value={[companyFilter, locationFilter]}
+													onChange={x => this.handleChangeFilter('companyAndLocation', x)}
+													clearValue={x => this.handleChangeFilter(x, null)}
+													 align='righ
+													'
 													title="Location / Department"
 													categories={[
 														{ title: 'Locations', items: locations },

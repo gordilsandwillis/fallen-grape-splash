@@ -11,7 +11,6 @@ import {
 	mediaQueries as mq,
 	gridSettings
 } from 'src/styles'
-import { navPages } from 'src/mockData'
 
 const PageCheat = styled.div`
   position: static;
@@ -257,7 +256,8 @@ class Header extends Component {
 
   render () {
   	const {
-  		location: { pathname },
+  		location: { pathname = '/' },
+  		navigation,
   		hasAtf = false,
   	} = this.props
   	const { mobileNavOpen, scrolled } = this.state
@@ -268,7 +268,7 @@ class Header extends Component {
   				hasAtf={hasAtf}
   			>
   				<HeaderContainer>
-  					<Grid small="[5] [1]" medium="[6] [6]" large="[6] [6]" >
+  					<Grid small="[1] [1]" medium="[4] [8]" large="[4] [8]" >
   						<div>
   							<LinkStyled to={'/'}>
   								<LogoCollapse
@@ -278,14 +278,14 @@ class Header extends Component {
   						</div>
   						<NavItemsContainer>
   							<DesktopDetect>
-  								{navPages.map(({ name, slug }, index) => (
-  									<DesktopLinkContainer key={name + slug + index} underlined={checkSlug({ slug, pathname })}>
+  								{navigation && navigation.map(({ title, slug }, index) => (
+  									<DesktopLinkContainer key={title + slug + index} underlined={checkSlug({ slug, pathname })}>
   										<Link
   											to={slug}
   											underlined={checkSlug({ slug, pathname })}
   											dark={!(hasAtf && !scrolled)}
   											noHoverColor >
-  											{name}
+  											{title}
   										</Link>
   									</DesktopLinkContainer>
   								))}
@@ -297,14 +297,14 @@ class Header extends Component {
   								>
   									<NavContainer mobileNavOpen={mobileNavOpen}>
   										<MobileNavLinkContainer mobileNavOpen={mobileNavOpen}>
-  											{navPages.map(({ name, slug }, index) => (
+  											{navigation && navigation.map(({ title, slug }, index) => (
   												<MobileNavLink
-  													key={name}
+  													key={title}
   													to={slug}
   													orderNumber={index}
   													mobileNavOpen={mobileNavOpen}
   												>
-  													{name}
+  													{title}
   												</MobileNavLink>
   											))}
   										</MobileNavLinkContainer>
@@ -331,4 +331,4 @@ class Header extends Component {
 export default Header
 
 const checkSlug = ({ slug, pathname }) =>
-	'/' + pathname.split(/([$&+,/:;=?@#><%])/g)[2] === slug
+	pathname.split(/([$&+,/:;=?@#><%])/g)[2] === slug

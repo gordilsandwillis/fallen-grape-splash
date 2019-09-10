@@ -5,6 +5,7 @@ import Container from 'src/components/Container'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import { colors, typography } from 'src/styles'
+import RichText from 'src/components/RichText'
 
 const ContainerStyled = styled(Container)`
   color: ${ colors.black };
@@ -12,8 +13,8 @@ const ContainerStyled = styled(Container)`
 `
 
 const Title = styled.div`
-  ${ typography.body }
-  margin-bottom: 25px;
+  ${ typography.h2 }
+	padding-bottom: 25px;
 `
 
 const Pretext = styled.div`
@@ -30,19 +31,26 @@ const Paragraph = styled.div`
 	padding-bottom: 8px;
 `
 
-const ContactCopy = ({ headline, title, items }) => (
+const LinksTitle = styled.div`
+	${ typography.body }
+	margin-bottom: 25px;
+
+`
+
+const ContactCopy = ({ title, smallText, showTitle, descriptionRichText, linksTitle, contactLinks }) => (
 	<ContainerStyled>
+		{(title && showTitle) && <Title>{title}</Title>}
 		<Grid small={'[6]'} medium={'[6] 2 [4]'} large={'[6] 2 [4]'} >
 			<ScrollEntrance>
-				{headline && <Headline>{headline}</Headline>}
+				{descriptionRichText && <Headline>{RichText(descriptionRichText)}</Headline>}
 			</ScrollEntrance>
 			<div>
 				<ScrollEntrance>
-					<Title>{title}</Title>
-					{items && items.map(({ pretext, linkText, linkHref }, i) => (
-						<Paragraph key={pretext || i}>
-							<Pretext>{pretext}</Pretext>
-							<Link external to={linkHref}>{linkText}</Link>
+					{linksTitle && <LinksTitle>{linksTitle}</LinksTitle>}
+					{contactLinks && contactLinks.map(({ id, additionalLabel, text, url }, i) => (
+						<Paragraph key={id}>
+							{additionalLabel && <Pretext>{additionalLabel}</Pretext>}
+							<Link external to={url}>{text}</Link>
 						</Paragraph>
 					))}
 				</ScrollEntrance>
