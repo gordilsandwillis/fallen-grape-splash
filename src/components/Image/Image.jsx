@@ -23,21 +23,21 @@ const ResponsiveImage = ({ image, small, medium, large, className }) => {
 	if (small || medium || large || image) {
 		let source = null
 		if (image) {
-			source = image.childImageSharp.fluid
+			source = image.fluid
 		} else {
 			source = [
 				{
-					...large.childImageSharp.fluid,
+					...large.fluid,
 					media: `(min-width: ${ mq.largeBreakpoint }px)`,
 				},
 				{
-					...medium.childImageSharp.fluid,
-					aspectRatio: medium.childImageSharp.fluid.aspectRatio,
+					...medium.fluid,
+					aspectRatio: medium.fluid.aspectRatio,
 					media: `(min-width: ${ mq.mediumBreakpoint }px)`,
 				},
 				{
-					...small.childImageSharp.fluid,
-					aspectRatio: small.childImageSharp.fluid.aspectRatio,
+					...small.fluid,
+					aspectRatio: small.fluid.aspectRatio,
 					media: `(min-width: 1px)`,
 				},
 			]

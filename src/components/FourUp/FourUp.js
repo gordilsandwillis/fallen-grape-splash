@@ -29,17 +29,17 @@ const Item = styled.div`
 	padding-bottom: 12px;
 `
 
-const FourUp = ({ items, title }) => (
+const FourUp = ({ items, title, showTitle }) => (
 	<Wrapper>
 		<ContentBlock>
 			<Container>
 				<Title>{title}</Title>
 				<Grid large="[3] [3] [3] [3]" medium="[3] [3] [3] [3]" small="[6]" >
 					{items &&
-						items.map(({ title, subtitle, description }, index) => (
-							<Item key={title + index}>
-								{title && <ItemTitle>{title}</ItemTitle>}
-								{subtitle && <GreyText>{subtitle}</GreyText>}
+						items.map(({ id, name, role, description }, index) => (
+							<Item key={id}>
+								{name && <ItemTitle>{name}</ItemTitle>}
+								{role && <GreyText>{role}</GreyText>}
 								{description && <p>{description}</p>}
 							</Item>
 						))

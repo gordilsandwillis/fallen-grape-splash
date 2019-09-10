@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { colors, typography } from 'src/styles'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
+import RichText from 'src/components/RichText'
 import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`
@@ -32,18 +33,18 @@ const Title = styled.div`
 	${ typography.h2 }
 `
 
-const ThreeUp = ({ items, title }) => (
+const ThreeUp = ({ items, showTitle, title }) => (
 	<Wrapper>
 		<Container>
 			<ContentBlock>
-				{title && <Title>{title}</Title>}
+				{(title && showTitle) && <Title>{title}</Title>}
 				<Grid large="[4] [4] [4]" medium="[4] [4] [4]" small="[6]">
 					{items &&
-						items.map(({ title, tags, description }, index) => (
+						items.map(({ title, keywords, descriptionLongText }, index) => (
 							<Item key={title + index}>
 								{title && <ItemTitle>{title}</ItemTitle>}
-								{tags && <GreyText>{tags && mapTags(tags)}</GreyText>}
-								{description && <p>{description}</p>}
+								{keywords && <GreyText>{keywords && mapKeywords(keywords)}</GreyText>}
+								{descriptionLongText && <p>{descriptionLongText.descriptionText}</p>}
 							</Item>
 						))
 					}
@@ -53,12 +54,12 @@ const ThreeUp = ({ items, title }) => (
 	</Wrapper>
 )
 
-const mapTags = tags => {
-	let n = tags.length
-	return tags.map(tag => {
+const mapKeywords = keywords => {
+	let n = keywords.length
+	return keywords.map(word => {
 		n -= 1
-		if (n) tag += ', '
-		return tag
+		if (n) word += ', '
+		return word
 	})
 }
 

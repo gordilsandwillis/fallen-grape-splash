@@ -5,6 +5,7 @@ import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import Hr from 'src/components/Hr'
+import RichText from 'src/components/RichText'
 
 import { colors, typography } from 'src/styles'
 
@@ -44,10 +45,9 @@ const FooterLink = styled(Link)`
 
 const Footer = ({
 	showHr,
-	footerTextLeft,
-	footerTextLeftLineTwo,
-	footerTextRight,
-	footerTextRightLink,
+	footerCompanyBio,
+	copyright,
+	footerNavigation,
 	isHomePage,
 }) => (
 	<Wrapper isHomePage={isHomePage}>
@@ -55,11 +55,11 @@ const Footer = ({
 		<FooterContainer>
 			<Grid small="[5] [1]" medium="[6] [6]" large="[6] [6]">
 				<div>
-					<div>{footerTextLeft}</div>
-					<FooterTextGrey>{footerTextLeftLineTwo}</FooterTextGrey>
+					<div>{footerCompanyBio && RichText(footerCompanyBio)}</div>
+					<FooterTextGrey>{copyright && RichText(copyright)}</FooterTextGrey>
 				</div>
 				<FooterTextRightAlign>
-					<FooterLink to={footerTextRightLink}>{footerTextRight}</FooterLink>
+					{footerNavigation && footerNavigation.map(({ slug, title }, index) => <FooterLink key={slug + index} to={slug}>{title}</FooterLink>)}
 				</FooterTextRightAlign>
 			</Grid>
 		</FooterContainer>

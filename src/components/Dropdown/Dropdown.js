@@ -63,8 +63,11 @@ const SelectStyled = styled(Select)`
 `
 
 class Dropdown extends React.Component {
+	componentWillReceiveProps (props) {
+		if (props.clearValue) this.setState({ value: null })
+	}
 	render () {
-		const { title, items, onChange } = this.props
+		const { title, items, onChange, clearValue } = this.props
 		return <div>
 			<SelectStyled
 				isClearable

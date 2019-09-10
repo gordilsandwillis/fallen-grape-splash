@@ -11,7 +11,7 @@ const Home = ({ data, location }) => {
 	return (
 		<main>
 			<SEO title='Home' />
-			<Header hasAtf location={location} />
+			<Header location={location} />
 			<ATF
 				{...buttonData}
 				{...atfData}

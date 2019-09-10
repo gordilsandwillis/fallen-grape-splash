@@ -6,10 +6,12 @@ import withSizes from 'react-sizes'
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
+import RichText from 'src/components/RichText'
 import { typography, colors, gridSettings, mediaQueries as mq } from 'src/styles'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+
 const Wrapper = styled.div`
   background-color: ${ colors.black };
   color: ${ colors.white };
@@ -106,11 +108,12 @@ const LinkStyled = styled(Link)`
 const ContainerStyled = styled(Container)`
   display: flex !important;
   flex-direction: column;
+  position: relative;
   justify-content: ${ ({ horizontalTextAlignCentered }) => horizontalTextAlignCentered ? 'center' : 'flex-end' };
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ imageSlideshow }) => imageSlideshow && 'height: 400px' };
+  ${ ({ imageInSlider }) => imageInSlider && 'height: 400px' };
   padding: 40px;
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
@@ -122,8 +125,12 @@ const LargeName = styled.div`
   padding-bottom: 10px;
 `
 
-const Slider = ({ items, windowWidth, imageSlideshow, title, dots = true, arrows = false, horizontalTextAlignCentered = true }) => {
-	if (imageSlideshow && windowWidth < mq.mediumBreakpoint) {
+const BgImage = styled(Image)`
+  position: absolute;
+`
+
+const Slider = ({ items, windowWidth, imageInSlider, title, showTitle, dots = true, arrows = false, horizontalTextAlignCentered = true }) => {
+	if (imageInSlider && windowWidth < mq.mediumBreakpoint) {
 		dots = false
 		arrows = true
 	}
@@ -138,27 +145,29 @@ const Slider = ({ items, windowWidth, imageSlideshow, title, dots = true, arrows
 	}
 	return (
 		<Wrapper>
-			{title && (
+			{(title && showTitle) && (
 				<Container>
 					<Title>{title}</Title>
 				</Container>
 			)}
 			<SlickSliderDark accessibility horizontalTextAlignCentered={horizontalTextAlignCentered} {...settings}>
-				{items && items.map(({ name, announcement, links, slideshow }, index) => (
+				{items && items.map(({ id, titleInSlider, award, companyName, linkInSlider, imageInSlider }, index) => (
 					horizontalTextAlignCentered ? (
-						<ContainerStyled key={name + announcement + index + '_containerstyled'} imageSlideshow={imageSlideshow} key={name + announcement} horizontalTextAlignCentered={horizontalTextAlignCentered}>
+						<ContainerStyled key={id} horizontalTextAlignCentered={horizontalTextAlignCentered}>
+							{imageInSlider && <BgImage image={imageInSlider}/>}
 							<CenteredText>
-								{name && <Name>{name}</Name>}
-								{announcement && <h2>{announcement}</h2>}
-								{links && <LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>}
+								{companyName && <Name>{companyName}</Name>}
+								{titleInSlider && <h2>{titleInSlider}</h2>}
+								{award && <h2>{RichText(award)}</h2>}
+								{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
 							</CenteredText>
 						</ContainerStyled>
 					) : (
-						<ContainerStyled key={name + announcement + index + '_containerstyled'} imageSlideshow={imageSlideshow} src={slideshow}>
+						<ContainerStyled key={id} imageInSlider={imageInSlider}>
 							<Grid small="[4] 2" medium="[12]" large="[12]">
-								{name && <LargeName>{name}</LargeName>}
-								{announcement && <h2>{announcement}</h2>}
-								{links && <LinkStyled external white to={links[0].href}>LEARN MORE</LinkStyled>}
+								{titleInSlider && <LargeName>{titleInSlider}</LargeName>}
+								{companyName && <h2>{companyName}</h2>}
+								{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
 							</Grid>
 						</ContainerStyled>
 					)

@@ -4,17 +4,17 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// const createContentfulPages = require('./page-creators/pages')
+const createContentfulPages = require('./page-creators/pages')
 
 // // Implement the Gatsby API “createPages”. This is
 // // called after the Gatsby bootstrap is finished so you have
 // // access to any information necessary to programmatically
 // // create pages.
-// exports.createPages = ({ graphql, actions }) => {
-//   const { createPage } = actions
-//   return Promise.all(
-//     [
-//       createContentfulPages,
-//     ].map(fn => fn(graphql, createPage))
-//   )
-// }
+exports.createPages = ({ graphql, actions }) => {
+	const { createPage } = actions
+	return Promise.all(
+		[
+			createContentfulPages,
+		].map(fn => fn(graphql, createPage))
+	)
+}
