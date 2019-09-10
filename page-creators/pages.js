@@ -3,7 +3,7 @@ const path = require(`path`)
 
 const createContentfulPages = (graphql, createPage) => new Promise((resolve, reject) => {
 	graphql(`
-    {
+    query {
       allContentfulPage {
         edges {
           node {
@@ -17,8 +17,7 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
 		if (result.errors) {
 			reject(result.errors)
 		}
-		// eslint-disable-next-line no-console
-		if (!result.data) console.log(result)
+		console.log(JSON.stringify(result, null, 4))
 
 		const pageTemplateMap = {
 			page: path.resolve('./src/templates/PageTemplate.jsx'),
