@@ -11,7 +11,7 @@ const BoxedText = styled.span`
 const Bold = ({ children }) => <span style={{ fontWeight: 'bold' }}>{children}</span>
 const Italic = ({ children }) => <i>{children}</i>
 const Code = ({ children }) => <BoxedText>{children}</BoxedText>
-const Text = ({ children }) => <span>{children}</span>
+const Text = ({ children }) => <div>{children}</div>
 
 const options = {
 	renderMark: {

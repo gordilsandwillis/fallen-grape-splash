@@ -14,6 +14,7 @@ const ContainerStyled = styled(Container)`
 
 const Title = styled.div`
   ${ typography.h2 }
+	padding-bottom: 25px;
 `
 
 const Pretext = styled.div`
@@ -30,22 +31,28 @@ const Paragraph = styled.div`
 	padding-bottom: 8px;
 `
 
-const ContactCopy = ({ title, smallText, descriptionRichText }) => (
+const LinksTitle = styled.div`
+	${ typography.body }
+	margin-bottom: 25px;
+
+`
+
+const ContactCopy = ({ title, smallText, showTitle, descriptionRichText, linksTitle, contactLinks }) => (
 	<ContainerStyled>
-		<Title>{title}</Title>
+		{(title && showTitle) && <Title>{title}</Title>}
 		<Grid small={'[6]'} medium={'[6] 2 [4]'} large={'[6] 2 [4]'} >
 			<ScrollEntrance>
 				{descriptionRichText && <Headline>{RichText(descriptionRichText)}</Headline>}
 			</ScrollEntrance>
 			<div>
 				<ScrollEntrance>
-					{smallText && RichText(smallText)}
-					{/* {items && items.map(({ pretext, linkText, linkHref }, i) => (
-						<Paragraph key={pretext || i}>
-							<Pretext>{pretext}</Pretext>
-							<Link external to={linkHref}>{linkText}</Link>
+					{linksTitle && <LinksTitle>{linksTitle}</LinksTitle>}
+					{contactLinks && contactLinks.map(({ id, additionalLabel, text, url }, i) => (
+						<Paragraph key={id}>
+							{additionalLabel && <Pretext>{additionalLabel}</Pretext>}
+							<Link external to={url}>{text}</Link>
 						</Paragraph>
-					))} */}
+					))}
 				</ScrollEntrance>
 			</div>
 		</Grid>

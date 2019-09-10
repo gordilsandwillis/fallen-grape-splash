@@ -19,26 +19,25 @@ class PageTemplate extends React.Component {
 			location = '/'
 		} = this.props
 		const site = _.get(data, 'allContentfulSite.edges[0].node')
-		const favicon = _.get(site, 'favicon')
-		const seoSocialShareImage = _.get(site, 'seoSocialShareImage')
-		const seoAppleTouchIcon = _.get(site, 'seoAppleTouchIcon')
-		const { navigation } = site
-		const copyright = _.get(site, 'copyright')
-		const footerCompanyBio = _.get(site, 'footerCompanyBio')
-		const footerNavigation = _.get(site, 'footerNavigation')
+		const { navigation, footerNavigation, footerCompanyBio, copyright, seoAppleTouchIcon, seoSocialShareImage, favicon } = site
 
 		const page = _.get(data, 'allContentfulPage.edges[0].node')
-		const blocks = _.get(page, 'blocks', [])
+		const { blocks, horizontalBreakInFooter, keywords } = page
 		const hasAtf = blocks.filter(item => item.__typename === 'ContentfulBlockAboveTheFold').length > 0 || false
 		return (
 			<main>
 				<SEO
+					seoAppleTouchIcon={seoAppleTouchIcon}
+					seoSocialShareImage={seoSocialShareImage}
+					favicon={favicon}
+					keywords={keywords}
 					title={page.title}
+					siteTitle={site.title}
 					description={page.seoDescription.seoDescription}
 				/>
 				<Header hasAtf={hasAtf} navigation={navigation} location={location} />
 				{blocks.map(b => <ComponentRenderer key={b.id} item={b} />)}
-				<Footer isHomePage={page.slug === '/'} footerCompanyBio={footerCompanyBio} copyright={copyright} footerNavigation={footerNavigation}/>
+				<Footer horizontalBreakInFooter={horizontalBreakInFooter} isHomePage={page.slug === '/'} footerCompanyBio={footerCompanyBio} copyright={copyright} footerNavigation={footerNavigation}/>
 			</main>
 		)
 	}
@@ -54,18 +53,18 @@ export const pageQuery = graphql`
 					id
 					title
 					favicon {
-						file {
-							url
+						fixed(width: 32, height: 32, quality: 100, toFormat: PNG) {
+							src
 						}
 					}
 					seoSocialShareImage {
-						file {
-							url
+						fixed(width: 180, height: 180, quality: 100, toFormat: PNG) {
+							src
 						}
 					}
 					seoAppleTouchIcon {
-						file {
-							url
+						fixed(width: 180, height: 180, quality: 100, toFormat: PNG) {
+							src
 						}
 					}
 					navigation {

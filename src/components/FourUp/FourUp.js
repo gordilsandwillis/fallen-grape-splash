@@ -16,7 +16,7 @@ const GreyText = styled.div`
 	${ typography.body }
 `
 const Title = styled.div`
-	padding-bottom: 35px;
+	padding-bottom: 40px;
 	${ typography.h2 }
 `
 
@@ -26,7 +26,7 @@ const ItemTitle = styled.div`
 `
 
 const Item = styled.div`
-	padding-bottom: 12px;
+	padding-bottom: 15px;
 `
 
 const FourUp = ({ items, title, showTitle }) => (

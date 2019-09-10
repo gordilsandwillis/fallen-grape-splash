@@ -67,7 +67,7 @@ class Dropdown extends React.Component {
 		if (props.clearValue) this.setState({ value: null })
 	}
 	render () {
-		const { title, items, onChange, clearValue } = this.props
+		const { title, items, onChange } = this.props
 		return <div>
 			<SelectStyled
 				isClearable

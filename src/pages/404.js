@@ -33,8 +33,8 @@ class NotFound extends Component {
 }
 
 export default NotFound
-
-export const PlaceholderQuery = graphql`
+// TODO
+export const PlaceholderQuery = graphql` 
 	query {
 		ATFimage: file(relativePath: { eq: "images/home.jpg" }) {
 			childImageSharp {

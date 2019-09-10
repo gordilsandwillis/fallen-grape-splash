@@ -44,14 +44,14 @@ const FooterLink = styled(Link)`
 `
 
 const Footer = ({
-	showHr,
+	horizontalBreakInFooter,
 	footerCompanyBio,
 	copyright,
 	footerNavigation,
 	isHomePage,
 }) => (
 	<Wrapper isHomePage={isHomePage}>
-		{showHr && <Hr color={colors.black} />}
+		{horizontalBreakInFooter && <Hr color={colors.black} />}
 		<FooterContainer>
 			<Grid small="[5] [1]" medium="[6] [6]" large="[6] [6]">
 				<div>

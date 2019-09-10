@@ -152,8 +152,6 @@ class ATF extends Component {
 			button,
 		} = this.props
 		const { isMobile } = this.state
-		console.log('image: ', image)
-		console.log(RichText(headline))
 		return (
 			<Fragment>
 				<Block isMobile={isMobile} full={smallText && headline} background winHeight={winHeight}>

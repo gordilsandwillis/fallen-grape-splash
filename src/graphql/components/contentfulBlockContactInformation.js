@@ -3,11 +3,17 @@ export const query = graphql`
     __typename
     id
     title
-    smallText {
-      json
-    }
+    showTitle
     descriptionRichText: description {
       json
+    }
+    linksTitle
+    contactLinks {
+      additionalLabel
+      id
+      text
+      url
+      internalExternal
     }
   }
 `

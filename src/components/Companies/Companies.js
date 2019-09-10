@@ -21,8 +21,11 @@ const LogoContainer = styled.div`
   justify-content: center;
   align-content: center;
   div {
-    max-width: 300px;
+    max-width: 250px;
   };
+	img {
+		height: auto !important;
+	}
 `
 
 const Padding = styled.div`
@@ -33,7 +36,6 @@ const Padding = styled.div`
 `
 const ImageStyled = styled(Image)`
 	width: 100%;
-	height: 100%;
 	${ typography.responsiveStyles('margin-top', 0, 0, 0, 20) }
 	${ typography.responsiveStyles('margin-bottom', 0, 0, 20, 28) }
 `
@@ -55,7 +57,7 @@ const Companies = ({ title, items, showTitle }) => (
 							<Grid large='[4] 1 [7]' medium='[4] 1 [7]' small='[6]'>
 								<LogoContainer>{logo && <ImageStyled image={logo} />}</LogoContainer>
 								<div>
-									{description && <p>{RichText(description)}</p>}
+									{description && RichText(description)}
 									{linkToSite && <p><Link external to={linkToSite.url}>{linkToSite.text}</Link></p>}
 								</div>
 							</Grid>

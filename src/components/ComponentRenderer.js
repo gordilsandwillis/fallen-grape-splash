@@ -25,7 +25,6 @@ const componentMap = {
 }
 
 export default ({ item }) => {
-	console.log(item.__typename)
 	const Component = componentMap[item.__typename]
 	return Component ? (
 		<Component {...item} />

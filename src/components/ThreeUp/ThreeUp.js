@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import { colors, typography } from 'src/styles'
 import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
-import RichText from 'src/components/RichText'
 import ContentBlock from 'src/components/ContentBlock'
 
 const Wrapper = styled.div`

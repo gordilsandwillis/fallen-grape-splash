@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import SlickSlider from 'react-slick'
 import withSizes from 'react-sizes'
-
+import Image from 'src/components/Image'
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
@@ -39,28 +39,31 @@ const SlickSliderDark = styled(SlickSlider)`
   .slick-dots li {
     margin: 0px;
   }
+  .slick-slide {
+    outline: none;
+  }
   
   .slick-dots {
-    position: static;
-    padding-bottom: 40px;
+    position: ${ ({ horizontalTextAlignCentered }) => horizontalTextAlignCentered ? 'static' : 'absolute' };
+    padding-bottom: 50px;
+    padding-top:0px;
     ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `
-    position: absolute;
-    display: flex !important;
-    justify-content: flex-end;
-    padding-right: ${ gridSettings.containerLargeMargins };
-    ${ mq.largeAndBelow } {
-      padding-right: ${ gridSettings.containerMediumMargins };
-    }
+      display: flex !important;
+      justify-content: flex-end;
+      padding-right: ${ gridSettings.containerLargeMargins };
+      ${ mq.largeAndBelow } {
+        padding-right: ${ gridSettings.containerMediumMargins };
+      }
 
-    ${ mq.mediumAndBelow } {
-      padding-right: ${ gridSettings.containerMediumMargins };
-    }
+      ${ mq.mediumAndBelow } {
+        padding-right: ${ gridSettings.containerMediumMargins };
+      }
 
-    ${ mq.smallAndBelow } {
-      padding-right: ${ gridSettings.containerSmallMargins };
-    }
+      ${ mq.smallAndBelow } {
+        padding-right: ${ gridSettings.containerSmallMargins };
+      }
 
-` }
+    ` }
   }
 
   .slick-arrow.slick-next, .slick-arrow.slick-prev {
@@ -109,12 +112,12 @@ const ContainerStyled = styled(Container)`
   display: flex !important;
   flex-direction: column;
   position: relative;
-  justify-content: ${ ({ horizontalTextAlignCentered }) => horizontalTextAlignCentered ? 'center' : 'flex-end' };
+  justify-content: flex-end;
   align-items: flex-start;
   outline: none;
   height: 100%;
   ${ ({ imageInSlider }) => imageInSlider && 'height: 400px' };
-  padding: 40px;
+  ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 20px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
     background-size: cover;
@@ -126,11 +129,17 @@ const LargeName = styled.div`
 `
 
 const BgImage = styled(Image)`
-  position: absolute;
+  position: absolute !important;
+  height: 100%;
+  width: 100%;
 `
 
-const Slider = ({ items, windowWidth, imageInSlider, title, showTitle, dots = true, arrows = false, horizontalTextAlignCentered = true }) => {
-	if (imageInSlider && windowWidth < mq.mediumBreakpoint) {
+const RelativeDiv = styled.div`
+  position: relative;
+`
+
+const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = false, horizontalTextAlignCentered = true }) => {
+	if (items && items[0].imageInSlider && windowWidth < mq.mediumBreakpoint) {
 		dots = false
 		arrows = true
 	}
@@ -141,7 +150,7 @@ const Slider = ({ items, windowWidth, imageInSlider, title, showTitle, dots = tr
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		autoplay: true,
+		// autoplay: true, // TODO
 	}
 	return (
 		<Wrapper>
@@ -150,27 +159,29 @@ const Slider = ({ items, windowWidth, imageInSlider, title, showTitle, dots = tr
 					<Title>{title}</Title>
 				</Container>
 			)}
-			<SlickSliderDark accessibility horizontalTextAlignCentered={horizontalTextAlignCentered} {...settings}>
+			<SlickSliderDark accessibility horizontalTextAlignCentered={!items[0].imageInSlider} {...settings}>
 				{items && items.map(({ id, titleInSlider, award, companyName, linkInSlider, imageInSlider }, index) => (
-					horizontalTextAlignCentered ? (
-						<ContainerStyled key={id} horizontalTextAlignCentered={horizontalTextAlignCentered}>
-							{imageInSlider && <BgImage image={imageInSlider}/>}
-							<CenteredText>
-								{companyName && <Name>{companyName}</Name>}
-								{titleInSlider && <h2>{titleInSlider}</h2>}
-								{award && <h2>{RichText(award)}</h2>}
-								{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
-							</CenteredText>
-						</ContainerStyled>
-					) : (
-						<ContainerStyled key={id} imageInSlider={imageInSlider}>
-							<Grid small="[4] 2" medium="[12]" large="[12]">
-								{titleInSlider && <LargeName>{titleInSlider}</LargeName>}
-								{companyName && <h2>{companyName}</h2>}
-								{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
-							</Grid>
-						</ContainerStyled>
-					)
+					<RelativeDiv key={id}>
+						{imageInSlider && <BgImage image={imageInSlider}/>}
+						{award ? (
+							<ContainerStyled key={id} horizontalTextAlignCentered={horizontalTextAlignCentered}>
+								<CenteredText>
+									{companyName && <Name>{companyName}</Name>}
+									{titleInSlider && <h2>{titleInSlider}</h2>}
+									{award && <h2>{RichText(award)}</h2>}
+									{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
+								</CenteredText>
+							</ContainerStyled>
+						) : (
+							<ContainerStyled key={id} imageInSlider={imageInSlider}>
+								<Grid small="[4] 2" medium="[12]" large="[12]">
+									{titleInSlider && <LargeName>{titleInSlider}</LargeName>}
+									{companyName && <h2>{companyName}</h2>}
+									{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
+								</Grid>
+							</ContainerStyled>
+						)}
+					</RelativeDiv>
 				))}
 			</SlickSliderDark>
 		</Wrapper >

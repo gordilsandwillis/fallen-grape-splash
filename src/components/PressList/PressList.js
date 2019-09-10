@@ -5,7 +5,9 @@ import Container from 'src/components/Container'
 import Grid from 'src/components/Grid'
 import Link from 'src/components/Link'
 import ContentBlock from 'src/components/ContentBlock'
+import Image from 'src/components/Image'
 import Hr from 'src/components/Hr'
+import RichText from 'src/components/RichText'
 import VideoEmbed from 'src/components/VideoEmbed'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 
@@ -47,7 +49,7 @@ const Padding = styled.div`
 	width: 100%;
 	padding: 10px 0px;
 `
-const ImgStyled = styled.img`
+const ImageStyled = styled(Image)`
 	${ typography.responsiveStyles('margin-top', 0, 0, 0, 20) }
 	${ typography.responsiveStyles('margin-bottom', 0, 0, 20, 28) }
 `
@@ -57,33 +59,37 @@ ${ typography.h2 }
 padding-bottom: 10px;
 `
 
-const PressList = ({ title, items, linkText, externalLink }) => (
+const PressList = ({ title, showTitle, pressContactLink, items }) => (
 	<Wrapper>
 		<ContentBlock>
 			<ScrollEntrance>
 				<ContainerRow>
-					<Title>{title}</Title>
-					<LinkContainer><Link external to={externalLink.href}>{externalLink.name}</Link></LinkContainer>
+					{(title && showTitle) && <Title>{title}</Title>}
+					{pressContactLink && <LinkContainer><Link external to={pressContactLink.url}>{pressContactLink.text}</Link></LinkContainer>}
 				</ContainerRow>
 				<HrFullContainer><Hr full color={colors.black} /></HrFullContainer>
 				{items &&
-					items.map(({ logo, title, text, link, image, video }, index) => (
-						<React.Fragment key={index + '_fragment'}>
-							{(index !== 0) && <Hr key={index + '_hr'} color={colors.black} />}
-							<Container key={index + '_container'}>
+					items.map(({ id, title, mediaOrganizationsLogo, description, link, inlineVideo, inlineImage }, index) => (
+						<React.Fragment key={id}>
+							{(index !== 0) && <Hr color={colors.black} />}
+							<Container>
 								<Padding>
 									<Grid large='[2] 1 [8] 1' medium='[2] 1 [9]' small='[2] [4]'>
-										<LogoContainer><div>{logo && <ImgStyled src={logo} />}</div></LogoContainer>
+										<LogoContainer><div>{mediaOrganizationsLogo && <ImageStyled image={mediaOrganizationsLogo} />}</div></LogoContainer>
 										<div>
 											{title && <Title>{title}</Title>}
-											{text && <p>{text}</p>}
-											{link && <p><Link external to={link}>{linkText}</Link></p>}
+											{description && RichText(description)}
+											{link && <p><Link external to={link.url}>{link.text}</Link></p>}
 										</div>
 									</Grid>
-									{(image || video) && <Padding>
+									{inlineImage && <Padding>
 										<Grid large='3 [4] 5' medium='3 [5] 4' small='[6]'>
-											{image && <ImgStyled src={image} />}
-											{video && <VideoEmbed {...video} />}
+											{inlineImage && <ImageStyled src={inlineImage} />}
+										</Grid>
+									</Padding>}
+									{inlineVideo && <Padding>
+										<Grid large='3 [4] 5' medium='3 [5] 4' small='[6]'>
+											{inlineVideo && <VideoEmbed url={inlineVideo.url} coverImage={inlineVideo.coverImage} />}
 										</Grid>
 									</Padding>}
 								</Padding>
