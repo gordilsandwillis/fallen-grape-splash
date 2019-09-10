@@ -17,7 +17,6 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
 		if (result.errors) {
 			reject(result.errors)
 		}
-		console.log(JSON.stringify(result, null, 4))
 
 		const pageTemplateMap = {
 			page: path.resolve('./src/templates/PageTemplate.jsx'),
