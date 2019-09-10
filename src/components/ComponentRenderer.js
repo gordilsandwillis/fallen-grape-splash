@@ -13,7 +13,7 @@ import Slider from 'src/components/Slider'
 
 const componentMap = {
 	ContentfulBlockAboveTheFold: ATF,
-	ContentfulCareersList: CareersList,
+	ContentfulBlockCareersList: CareersList,
 	ContentfulBlockCompanies: Companies,
 	ContentfulBlockCompanyPillars: ThreeUp,
 	ContentfulBlockContactInformation: ContactCopy,
