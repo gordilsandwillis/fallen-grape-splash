@@ -30,7 +30,6 @@ export const query = graphql`
       linkToSite {
         url
         text
-        styleAsButton
         internalExternal
         id
       }

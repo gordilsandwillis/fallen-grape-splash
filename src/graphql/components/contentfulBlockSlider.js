@@ -16,7 +16,6 @@ export const query = graphql`
           id
           url
           text
-          styleAsButton
           internalExternal
         }
         imageInSlider {

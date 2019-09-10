@@ -15,7 +15,7 @@ function SEO ({ title, siteTitle, lang = 'en', seoAppleTouchIcon, meta = '', seo
 			htmlAttributes={{
 				lang,
 			}}
-			title={title}
+			title={siteTitle}
 			titleTemplate={`%s | ${ title }`}
 			meta={[
 				{

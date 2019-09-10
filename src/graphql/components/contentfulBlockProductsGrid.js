@@ -14,7 +14,6 @@ export const query = graphql`
       links {
         text
         url
-        styleAsButton
         internalExternal
         id
       }

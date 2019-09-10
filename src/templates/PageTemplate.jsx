@@ -111,6 +111,7 @@ export const pageQuery = graphql`
 						...BlockContactInformation
 						...BlockCompanyPillars
 						...BlockCompanies
+						...BlockCareersList
 					}
 				}
 			}
