@@ -9,6 +9,7 @@ import Hr from 'src/components/Hr'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentBlock from 'src/components/ContentBlock'
 import Dropdown from 'src/components/Dropdown'
+import Link from 'src/components/Link'
 import { colors, animations, typography, mediaQueries as mq } from 'src/styles'
 import remapJobData from './helpers/remapJobData'
 import getValues from './helpers/getValues'
@@ -79,6 +80,15 @@ const RowRightAlign = styled.div`
 	align-items: center;
 `
 
+const Title = styled.div`
+	${ typography.h2 };
+`
+
+const LocationName = styled.div`
+	${ typography.body };
+	color: ${ colors.grey };
+`
+
 class CareersList extends Component {
 	constructor (props) {
 		super(props)
@@ -115,7 +125,6 @@ class CareersList extends Component {
 	}
 
 	render () {
-		console.log(this.state)
 		const { selectedJobId, companyFilter, locationFilter, departmentFilter } = this.state
 		const { data, windowWidth } = this.props
 		const { jobs, companies } = data
@@ -191,13 +200,15 @@ class CareersList extends Component {
 							</ContentBlock>
 						</Container>
 						<Hr full color={colors.black}/>
-						{filteredJobs && filteredJobs.map(({ companyName, departmentName, title }) => (
-							<div key={title + departmentName + companyName} style={{ padding: 20 }}>
-								{title && <div>{title}</div>}
-								{companyName && <div>{companyName}</div>}
-								{departmentName && <div>{departmentName}</div>}
-							</div>
-						))}
+						<Grid small="[6]" medium="4 [8]" large="4 [8]">
+							{filteredJobs && filteredJobs.map(({ companyName, departmentName, title, locationName, id }) => (
+								<div key={title + departmentName + companyName} style={{ padding: 20 }}>
+									{title && <Title>{title}{companyName &&	 <span> at {companyName}</span>}</Title>}
+									{locationName && <LocationName>{locationName}</LocationName>}
+									<Link to={`careers/${ id }`} fakeExternal>LEARN MORE</Link>
+								</div>
+							))}
+						</Grid>
 					</ScrollEntrance>
 					<ScrollEntrance>
 						<Container>

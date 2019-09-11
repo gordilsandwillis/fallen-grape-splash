@@ -47,7 +47,9 @@
     "react-slick": "^0.25.2",
     "react-svg-loader": "^3.0.3",
     "react-transition-group": "^4.2.2",
-    "slick-carousel": "^1.8.1"
+    "slash": "^3.0.0",
+    "slick-carousel": "^1.8.1",
+    "slug": "^1.1.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.1.5",
