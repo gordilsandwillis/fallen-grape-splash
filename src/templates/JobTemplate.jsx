@@ -1,55 +1,49 @@
-import React, { Component } from 'react'
-import { navigate, graphql } from 'gatsby'
 import _ from 'lodash'
-import ATF from 'src/components/ATF'
+import React from 'react'
+import { graphql } from 'gatsby'
+
 import SEO from 'src/components/SEO'
+import Job from 'src/components/Job'
 import Header from 'src/components/Header'
 import Footer from 'src/components/Footer'
 
-class NotFound extends Component {
-	componentDidMount () {
-		setTimeout(() => {
-			navigate('/')
-		}, 2200)
-	}
+const propTypes = {}
 
+class JobTemplate extends React.Component {
 	render () {
 		const {
 			data,
 			location = '/'
 		} = this.props
 		const site = _.get(data, 'allContentfulSite.edges[0].node')
-		const { navigation, pageImage, pageText, footerNavigation, footerCompanyBio, copyright, seoAppleTouchIcon, seoSocialShareImage, favicon } = site
-		const horizontalBreakInFooter = false
-		const hasAtf = true
+		const { navigation, footerNavigation, footerCompanyBio, copyright, seoAppleTouchIcon, seoSocialShareImage, favicon } = site
+		const horizontalBreakInFooter = true
 
+		const jobData = _.get(data, 'allGreenhouseJobPost.edges[0].node')
 		return (
 			<main>
 				<SEO
 					seoAppleTouchIcon={seoAppleTouchIcon}
 					seoSocialShareImage={seoSocialShareImage}
 					favicon={favicon}
-					title={'404'}
+					title={'Careers'}
 					siteTitle={site.title}
 					description={''}
 				/>
-				<Header hasAtf={hasAtf} navigation={navigation} location={location} />
-				<ATF
-					image={pageImage}
-					headline={pageText}
-					horizontalAlignCenter={true}
-					verticalAlignCenter={true}
-				/>
-				<Footer horizontalBreakInFooter={horizontalBreakInFooter} isHomePage={true} footerCompanyBio={footerCompanyBio} copyright={copyright} footerNavigation={footerNavigation}/>
+				<Header location={location} navigation={navigation} />
+				<Job jobData={jobData}/>
+				<Footer horizontalBreakInFooter={horizontalBreakInFooter} footerCompanyBio={footerCompanyBio} copyright={copyright} footerNavigation={footerNavigation} />
 			</main>
 		)
 	}
 }
 
-export default NotFound
-// TODO
-export const NotFoundQuery = graphql` 
-	query {
+JobTemplate.propTypes = propTypes
+
+export default JobTemplate
+
+export const JobQuery = graphql` 
+	query($id: Float!) {
 		allContentfulSite(limit: 1) {
 			edges {
 				node {
@@ -88,23 +82,35 @@ export const NotFoundQuery = graphql`
 							slug
 						}
 					}
-					pageText {
-						json
-					}
-					pageImage {
-						fluid(maxWidth: 1440, quality: 100) {
-							base64
-							aspectRatio
-							src
-							srcSet
-							srcWebp
-							srcSetWebp
-							sizes
+				}
+			}
+		}
+		allGreenhouseJobPost(filter: {job_id: {eq: $id}}) {
+			edges {
+				node {
+					greenhouseId
+					job_id
+					content
+					internal_content
+					title
+					questions {
+						required
+						private
+						name
+						description
+						label
+						values {
+							value
+							label
 						}
+						type
+					}
+					location {
+						name
+						id
 					}
 				}
 			}
 		}
-		
 	}
 `

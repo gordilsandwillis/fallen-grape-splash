@@ -46,9 +46,29 @@ const StyledGatsbyLink = styled(GatsbyLink)`
   }
 `
 
+const StyledLinkElementFakeExternal = styled(GatsbyLink)`
+	white-space:nowrap;
+  ${ LinkStyles }
+  color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
+	border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
+  transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+  &:hover {
+    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
+		border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
+  }
+
+&::after {
+    content: '↗';
+    margin-left: 2px;
+    line-height: 1em;
+    font-size: 1.25em;
+    display: inline-block
+  }
+`
+
 class Link extends Component {
 	render () {
-		let { to, external, white, noHoverColor, target, children, className, dark, underlined } = this.props
+		let { to, external, fakeExternal, white, noHoverColor, target, children, className, dark, underlined } = this.props
 		if (external) {
 			return (
 				<StyledLinkElement
@@ -60,6 +80,19 @@ class Link extends Component {
 				>
 					<span>{children}</span>
 				</StyledLinkElement >
+			)
+		} else if (fakeExternal) {
+			if (to[0] !== '/') to = '/' + to
+			return (
+				<StyledLinkElementFakeExternal
+					nohover={(noHoverColor || '').toString()}
+					className={className}
+					to={to}
+					dark={(dark || '').toString()}
+					underlined={(underlined || '').toString()}
+				>
+					{children}
+				</ StyledLinkElementFakeExternal>
 			)
 		} else {
 			if (to[0] !== '/') to = '/' + to
