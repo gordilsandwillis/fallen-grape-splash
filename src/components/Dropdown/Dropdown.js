@@ -74,7 +74,7 @@ class Dropdown extends React.Component {
 				value={value}
 				isClearable
 				styles={customStyles}
-				options={items}
+				options={items.filter(x => x.label)}
 				placeholder={title}
 				onChange={onChange}
 			/>
