@@ -7,6 +7,7 @@ import Link from 'src/components/Link'
 import Button from 'src/components/Button'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import Hr from 'src/components/Hr'
+import ContentBlock from 'src/components/ContentBlock'
 // eslint-disable-next-line no-unused-vars
 import { colors, typography, mediaQueries as mq } from 'src/styles'
 
@@ -16,6 +17,7 @@ const Wrapper = styled.div`
 
 const JobName = styled.div`
 	${ typography.h1 }
+	padding-bottom: 20px;
 `
 
 const CompanyName = styled.div`
@@ -33,10 +35,17 @@ const LinkArrow = styled.span`
 `
 
 const MarkupContainer = styled.div`
+ul {
+	list-style: none;
+	li:before {
+		content: '- '
+	}
+}
 `
 
 const ApplyTitle = styled.div`
 	${ typography.h2 }
+	padding-bottom: 20px;
 `
 
 class Job extends React.Component {
@@ -56,24 +65,34 @@ class Job extends React.Component {
 			<Wrapper>
 				<Container>
 					<Link dark to={'careers'}><LinkArrow>←</LinkArrow> All Jobs</Link>
-					{title && <JobName>{title}</JobName>}
-					{companyName && <CompanyName>at {companyName}</CompanyName>}
-					{(location && location.name) && <LocationName>{location.name}</LocationName>}
 				</Container>
+				<ContentBlock>
+					<Container>
+						{title && <JobName>{title}</JobName>}
+						{companyName && <CompanyName>at {companyName}</CompanyName>}
+						{(location && location.name) && <LocationName>{location.name}</LocationName>}
+					</Container>
+				</ContentBlock>
 				<Hr full color={colors.black}/>
-				<Container>
-					<ScrollEntrance>
-						<MarkupContainer>{markup && <div dangerouslySetInnerHTML={markup}/>}</MarkupContainer>
-					</ScrollEntrance>
-				</Container>
+				<ContentBlock>
+					<Container>
+						<ScrollEntrance>
+							<MarkupContainer>{markup && <div dangerouslySetInnerHTML={markup}/>}</MarkupContainer>
+						</ScrollEntrance>
+					</Container>
+				</ContentBlock>
 				<Hr full color={colors.black}/>
-				<Container>
-					<ApplyTitle>Apply for this Job</ApplyTitle>
-					<form onSubmit={this.handleSubmit}>
-						{questions && questions.map((x, i) => <Question key={x.name + i} {...x} />)}
-						<Button style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
-					</form>
-				</Container>
+				<ContentBlock>
+					<Container>
+						<ApplyTitle>Apply for this Job</ApplyTitle>
+						<form onSubmit={this.handleSubmit}>
+							{questions && questions.map((x, i) => <Question key={x.name + i} {...x} />)}
+							<div style={{ marginTop: 20 }}>
+								<Button style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
+							</div>
+						</form>
+					</Container>
+				</ContentBlock>
 			</Wrapper>
 		)
 	}

@@ -56,7 +56,7 @@ class Question extends React.Component {
 		const descriptionMarkup = createMarkup(description)
 		const placeholder = label + (required ? '*' : '')
 		return (this.props.private ? ''
-			: <div style={{ padding: 10 }}>
+			: <div style={{ padding: '10px 0px' }}>
 				{descriptionMarkup && <div style={{ color: 'red' }} dangerouslySetInnerHTML={descriptionMarkup} />}
 				{type === 'short_text' && <Input id={name} placeholder={placeholder} required={required} type="text"></Input>}
 				{type === 'attachment' && (
