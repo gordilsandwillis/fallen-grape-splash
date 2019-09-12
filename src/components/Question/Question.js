@@ -1,6 +1,7 @@
+
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
+import { colors, typography, animations } from 'src/styles'
 import Dropdown from 'src/components/Dropdown'
 import Grid from 'src/components/Grid'
 import Dropzone from 'react-dropzone'
@@ -49,6 +50,7 @@ class Question extends React.Component {
 		super(props)
 		this.state = { value: null }
 	}
+	/* eslint-disable no-console */
 	render () {
 		const { required, name, description, values, label, type } = this.props
 		const descriptionMarkup = createMarkup(description)
