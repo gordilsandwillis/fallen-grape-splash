@@ -39,7 +39,7 @@ const ButtonStyles = (state, shape, size) => (`
   display: inline-block;
   vertical-align: middle;
   background: transparent;
-  border: 2px solid ${ colors.white };
+  border: 2px solid currentcolor;
 	${ typography.responsiveStyles('height', 50, 30, 30, 45) }
 	height: ${ buttonSizes.small };
   cursor: pointer;
@@ -47,7 +47,7 @@ const ButtonStyles = (state, shape, size) => (`
   text-transform: none;
   letter-spacing: 0;
   border-radius: 0;
-  color: ${ colors.white };
+  color: currentColor;
   font-style: normal;
   font-family: inherit;
   ${ typography.button }

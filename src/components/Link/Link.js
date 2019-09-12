@@ -50,8 +50,10 @@ const StyledLinkElementFakeExternal = styled(GatsbyLink)`
 	white-space:nowrap;
   ${ LinkStyles }
   color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
-	border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
-  transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+	span{
+		border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
+		transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+	}
   &:hover {
     color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
 		border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
