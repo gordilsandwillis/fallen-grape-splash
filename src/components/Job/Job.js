@@ -36,10 +36,10 @@ const LinkArrow = styled.span`
 
 const MarkupContainer = styled.div`
 ul {
-	list-style: none;
+	/* list-style: none;
 	li:before {
 		content: '- '
-	}
+	} */
 }
 `
 
