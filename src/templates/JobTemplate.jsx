@@ -20,6 +20,22 @@ class JobTemplate extends React.Component {
 		const horizontalBreakInFooter = true
 
 		const jobData = _.get(data, 'allGreenhouseJobPost.edges[0].node')
+		let companyName = null
+		data.allGreenhouseDepartment.edges.find(d => {
+			return d.node.childrenGreenhouseJobPost.find(j => {
+				if (j.job_id === jobData.job_id) {
+					const result = data.allGreenhouseDepartment.edges.find(({ node }) => {
+						if (node.greenhouseId === (d.node.parent_id && d.node.parent_id.toString())) {
+							companyName = node.name
+							return node.name
+						}
+					})
+					if (result) return result
+					companyName = d.node && d.node.name
+					return companyName
+				}
+			})
+		})
 		return (
 			<main>
 				<SEO
@@ -31,7 +47,7 @@ class JobTemplate extends React.Component {
 					description={''}
 				/>
 				<Header location={location} navigation={navigation} />
-				<Job jobData={jobData}/>
+				<Job companyName={companyName} jobData={jobData}/>
 				<Footer horizontalBreakInFooter={horizontalBreakInFooter} footerCompanyBio={footerCompanyBio} copyright={copyright} footerNavigation={footerNavigation} />
 			</main>
 		)
@@ -82,6 +98,18 @@ export const JobQuery = graphql`
 							slug
 						}
 					}
+				}
+			}
+		}
+		allGreenhouseDepartment {
+			edges {
+				node {
+					name
+					childrenGreenhouseJobPost {
+						job_id
+					}
+					parent_id
+					greenhouseId
 				}
 			}
 		}
