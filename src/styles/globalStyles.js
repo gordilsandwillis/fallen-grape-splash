@@ -59,6 +59,7 @@ export default `
     ${ typography.body }
     ${ responsiveStyles('margin-top', 24, 16, 14, 8) }
     ${ responsiveStyles('margin-bottom', 8, 8, 6, 8) }
+    ${ responsiveStyles('max-width', 1200, 800, 800, 600) }
   }
 
   h1, .h1 {

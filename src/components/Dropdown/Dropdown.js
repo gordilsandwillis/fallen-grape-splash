@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Select from 'react-select'
-import { colors, animations, typography } from 'src/styles'
+import { colors, animations } from 'src/styles'
 import DropdownArrowSvg from 'src/assets/images/dropdown_arrow.svg'
 // const TextAlign = styled.div`
 //   text-align: ${ ({ align }) => align };
