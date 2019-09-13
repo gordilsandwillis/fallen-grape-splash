@@ -35,19 +35,19 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 
 export const body = `
 	${ responsiveStyles('font-size', 18, 14, 14, 18) }
-	${ responsiveStyles('line-height', 21, 21, 21, 24) }
+	${ responsiveStyles('line-height', 25, 21, 21, 25) }
 	font-family: ${ bodyFontFamilyRegular };
 `
 export const bodyLight = `
 	${ responsiveStyles('font-size', 18, 14, 14, 18) }
-	${ responsiveStyles('line-height', 21, 21, 21, 24) }
+	${ responsiveStyles('line-height', 25, 21, 21, 25) }
 	letter-spacing: 0.33px;
 	font-family: ${ bodyFontFamilyLight };
 `
 
 export const bodyBold = `
 ${ responsiveStyles('font-size', 18, 14, 14, 18) }
-${ responsiveStyles('line-height', 21, 21, 21, 24) }
+${ responsiveStyles('line-height', 25, 21, 21, 25) }
 font-family: ${ bodyFontFamilyBold };
 `
 
@@ -61,14 +61,14 @@ export const h1 = `
 
 export const h2 = `
 	${ responsiveStyles('font-size', 30, 24, 24, 22) }
-	${ responsiveStyles('line-height', 30, 30, 30, 30) }
+	line-height: 1.285em;
 	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
 	font-family: ${ bodyFontFamilyLight };
 `
-
 export const h3 = `
 	${ responsiveStyles('font-size', 14, 14, 14, 18) }
 	letter-spacing: ${ 20 / 1000 }em;
+	line-height: 1.285em;
 	font-family: ${ bodyFontFamilyRegular };
 	font-weight: 500;
 `
@@ -116,11 +116,4 @@ export const footer = `
 	${ responsiveStyles('line-height', 18, 12, 12, 14) }
 	letter-spacing: ${ 20 / 1000 }em;
 	font-family: ${ bodyFontFamilyRegular };
-`
-
-export const h2Special = `
-	${ responsiveStyles('font-size', 30, 24, 24, 22) }
-	${ responsiveStyles('line-height', 30, 30, 30, 30) }
-	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
-	font-family: ${ bodyFontFamilyLight };
 `
