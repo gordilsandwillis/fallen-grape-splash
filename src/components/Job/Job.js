@@ -10,7 +10,7 @@ import Hr from 'src/components/Hr'
 import ContentBlock from 'src/components/ContentBlock'
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
-import { colors, typography, mediaQueries as mq } from 'src/styles'
+import { colors, typography } from 'src/styles'
 
 const Wrapper = styled.div`
   color: ${ colors.black };
@@ -82,11 +82,18 @@ class Job extends React.Component {
 			}, {})
 		const { job_id } = this.props.jobData
 		const url = `${ process.env.SERVER_URL }/${ job_id }`
+		this.setState({ loading: true })
 		axios.post(url, data, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
-		}).then(res => console.log(res)).catch(e => console.log(e))
+		}).then(res => {
+			console.log(res)
+			this.setState({ loading: false })
+		}).catch(e => {
+			console.log(e)
+			this.setState({ loading: false })
+		})
 	}
 
 	handleDropdownChange = ({ name, x }) => {

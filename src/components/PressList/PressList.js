@@ -22,8 +22,11 @@ const LogoContainer = styled.div`
   justify-content: center;
   align-content: center;
   div {
-    max-width: 300px;
+    max-width: 250px;
   };
+	img {
+		height: auto !important;
+	}
 `
 
 const ContainerRow = styled(Container)`
@@ -50,6 +53,7 @@ const Padding = styled.div`
 	padding: 10px 0px;
 `
 const ImageStyled = styled(Image)`
+	width: 100%;
 	${ typography.responsiveStyles('margin-top', 0, 0, 0, 20) }
 	${ typography.responsiveStyles('margin-bottom', 0, 0, 20, 28) }
 `
@@ -75,7 +79,7 @@ const PressList = ({ title, showTitle, pressContactLink, items }) => (
 							<Container>
 								<Padding>
 									<Grid large='[2] 1 [8] 1' medium='[2] 1 [9]' small='[2] [4]'>
-										<LogoContainer><div>{mediaOrganizationsLogo && <ImageStyled image={mediaOrganizationsLogo} />}</div></LogoContainer>
+										<LogoContainer>{mediaOrganizationsLogo && <ImageStyled image={mediaOrganizationsLogo} />}</LogoContainer>
 										<div>
 											{title && <Title>{title}</Title>}
 											{description && RichText(description)}

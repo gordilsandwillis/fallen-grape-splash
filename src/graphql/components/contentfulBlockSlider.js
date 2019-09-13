@@ -11,7 +11,6 @@ export const query = graphql`
         id
         titleInSlider
         descriptionText: description
-        showInSlider
         linkInSlider {
           id
           url

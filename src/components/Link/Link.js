@@ -76,7 +76,9 @@ class Link extends Component {
 				<StyledLinkElement
 					className={className}
 					href={to}
-					target={target}
+					target={target || '_blank'}
+					rel="noopener"
+					rel="noreferrer"
 					white={white}
 					nohover={(noHoverColor || '').toString()}
 				>
@@ -116,7 +118,7 @@ class Link extends Component {
 Link.defaultProps = {
 	to: '#',
 	external: false,
-	target: ''
+	target: '_blank'
 }
 
 Link.propTypes = {
