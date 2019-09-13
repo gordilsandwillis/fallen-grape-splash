@@ -63,7 +63,7 @@ class Job extends React.Component {
 		const formData = new FormData(e.target)
 		const data = this.props.jobData.questions
 			.reduce((acc, q) => {
-				const value = formData.get(q.name)
+				const value = formData.get(q.name || 'Career')
 				switch (q.type) {
 				case 'short_text':
 					if (value) acc[q.name] = value
@@ -82,7 +82,7 @@ class Job extends React.Component {
 				return acc
 			}, {})
 		const { job_id } = this.props.jobData
-		const url = `${ process.env.SERVER_URL }/${ job_id }`
+		const url = `${ 'http://localhost:3000' }/${ job_id }`
 		this.setState({ loading: true })
 		axios.post(url, data, {
 			headers: {
@@ -133,7 +133,7 @@ class Job extends React.Component {
 						<form onSubmit={e => this.handleSubmit(e)} encType='multipart/form-data'>
 							<input type="hidden" name="id" value={job_id} />
 							<input type="hidden" name="mapped_url_token" value="mosaic_website" />
-							{questions && questions.map((x, i) => <Question onChange={this.handleDropdownChange} dropdownValue={this.state[name]} key={x.name + i} {...x} />)}
+							{questions && questions.map((x, i) => <Question onChange={this.handleDropdownChange} dropdownValue={this.state[name]} key={(x.name || i) + i} {...x} />)}
 							<div style={{ marginTop: 20 }}>
 								<Button style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
 							</div>
