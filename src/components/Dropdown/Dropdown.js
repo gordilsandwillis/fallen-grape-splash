@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Select from 'react-select'
-import { colors, animations } from 'src/styles'
+import { colors, animations, typography } from 'src/styles'
 import DropdownArrowSvg from 'src/assets/images/dropdown_arrow.svg'
 // const TextAlign = styled.div`
 //   text-align: ${ ({ align }) => align };
@@ -26,10 +26,11 @@ import DropdownArrowSvg from 'src/assets/images/dropdown_arrow.svg'
 const customStyles = {
 	option: (provided, state) => ({
 		cursor: 'pointer',
-		backgroundColor: state.isSelected ? 'rgba(0, 0, 0, 0.1) !important' : colors.offwhite,
-		color: colors.black,
-		padding: 5,
-		margin: 0
+		backgroundColor: state.isSelected ? 'rgba(0, 0, 0, 0.1) !important' : colors.offWhiteHighOpacity,
+		color: state.isSelected ? colors.black : `${ colors.grey } !important`,
+		padding: 3,
+		margin: 0,
+		fontSize: 12
 	}),
 	control: provided => ({
 		...provided,
@@ -50,12 +51,14 @@ const customStyles = {
 }
 
 const SelectStyled = styled(Select)`
-  div {
+  max-width:150px;
+	div {
     color: ${ colors.black };
-		/* border: none; */
-		/* border-radius: none; */
+		border: none;
+		border-radius: none;
+		box-shadow: none;
     transition: color ${ animations.mediumSpeed } ease-in-out;
-    background-color: ${ colors.offwhite };
+    background-color: ${ colors.offWhiteHighOpacity };
   }
   div:hover {
     color: ${ colors.grey }
@@ -68,6 +71,7 @@ const SelectStyled = styled(Select)`
 const DropdownArrowSvgStyled = styled(DropdownArrowSvg)`
 	height:16px;
 	width: 16px;
+	margin-bottom:-2px;
 `
 const DropdownIndicator = () => <div><DropdownArrowSvgStyled/></div>
 class Dropdown extends React.Component {
