@@ -126,6 +126,21 @@ const ContainerStyled = styled(Container)`
     background-size: cover;
 `
 
+const DivStyled = styled.div`
+  display: flex !important;
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-end;
+  align-items: flex-start;
+  outline: none;
+  height: 100%;
+  ${ ({ imageInSlider }) => imageInSlider && 'min-height: 400px; max-height:50vw; height:40em' };
+  ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
+  ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
+  background: url(${ ({ src }) => src }) no-repeat center center;
+    background-size: cover;
+`
+
 const LargeName = styled.div`
   ${ typography.h2 }
   padding-bottom: 10px;
@@ -153,7 +168,7 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		autoplay: true,
+		// autoplay: true,
 	}
 	return (
 		<Wrapper>
@@ -176,13 +191,13 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 								</CenteredText>
 							</ContainerStyled>
 						) : (
-							<ContainerStyled key={id} imageInSlider={imageInSlider}>
+							<DivStyled key={id} imageInSlider={imageInSlider}>
 								<Grid small="[4] 2" medium="[12]" large="[12]">
 									{titleInSlider && <LargeName>{titleInSlider}</LargeName>}
 									{companyName && <h2>{companyName}</h2>}
 									{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
 								</Grid>
-							</ContainerStyled>
+							</DivStyled>
 						)}
 					</RelativeDiv>
 				))}
