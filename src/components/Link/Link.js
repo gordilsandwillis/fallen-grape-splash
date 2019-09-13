@@ -19,10 +19,10 @@ const StyledLinkElement = styled.a`
     border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
     transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out;
   }
-  &:hover {
-    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
+  &:hover {    
+		${ ({ nohover }) => nohover ? '' : `color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };` }
     span {
-      border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
+			${ ({ nohover }) => nohover ? '' : `      border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };` }
     }
   }
 

@@ -103,7 +103,7 @@ export const caption = `
 `
 
 export const button = `
-	${ responsiveStyles('font-size', 18, 14, 14, 16) }
+	${ responsiveStyles('font-size', 18, 16, 16, 18) }
 	font-family: ${ bodyFontFamilyRegular };
 	line-height: ${ 16 / 14 };
 	letter-spacing: ${ 20 / 1000 }em;

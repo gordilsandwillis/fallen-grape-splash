@@ -174,8 +174,8 @@ class ATF extends Component {
 										<AlignedText horizontalTextAlignment={horizontalTextAlignment}>
 											{button &&
 												<ButtonContainer>
-													<Link external={!button.internalExternal} to={button.url}>
-														<Button>
+													<Link noHoverColor external={!button.internalExternal} to={button.url}>
+														<Button home>
 															{button.text}
 														</Button>
 													</Link>
