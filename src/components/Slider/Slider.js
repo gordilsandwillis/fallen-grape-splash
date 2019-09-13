@@ -119,7 +119,7 @@ const ContainerStyled = styled(Container)`
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ imageInSlider }) => imageInSlider && 'min-height: 400px; max-height:50vw; height:40em' };
+  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }` };
   ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
@@ -134,7 +134,7 @@ const DivStyled = styled.div`
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ imageInSlider }) => imageInSlider && 'min-height: 400px; max-height:50vw; height:40em' };
+  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }` };
   ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
