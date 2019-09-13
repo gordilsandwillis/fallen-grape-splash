@@ -4,6 +4,7 @@ export const unofficialLightGrey = '#bbb'
 export const grey = '#6E6E6C'
 export const white = '#FFF'
 export const whiteLowOpacity = 'rgba(255, 255, 255, .3)'
+export const offWhiteHighOpacity = 'rgba(249, 249, 239, .75)'
 export const offwhite = '#F9F9EF'
 
 // secondary

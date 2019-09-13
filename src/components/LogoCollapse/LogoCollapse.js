@@ -7,10 +7,10 @@ import TopRight from 'src/assets/images/mosaic-logo-corner-topright.svg'
 import BottomLeft from 'src/assets/images/mosaic-logo-corner-bottomleft.svg'
 import BottomRight from 'src/assets/images/mosaic-logo-corner-bottomright.svg'
 
-const XLARGE = 85
-const LARGE = 72
-const MEDIUM = 72
-const SMALL = 72
+const XLARGE = 85 * 1.25
+const LARGE = 72 * 1.25
+const MEDIUM = 72 * 1.25
+const SMALL = 72 * 1.25
 
 const Wrapper = styled.div`
   ${ typography.responsiveStyles('height', XLARGE, LARGE, MEDIUM, SMALL) }
@@ -63,7 +63,7 @@ const TextContainer = styled.div`
 `
 
 const Text = styled(LogoText)`
-  ${ typography.responsiveStyles('width', 56, 47.5, 47.5, 47.5) }
+  ${ typography.responsiveStyles('width', XLARGE * 0.659722222, LARGE * 0.659722222, MEDIUM * 0.659722222, SMALL * 0.659722222) }
   transition: transform ${ animations.mediumSpeed } ease-in-out;
 `
 

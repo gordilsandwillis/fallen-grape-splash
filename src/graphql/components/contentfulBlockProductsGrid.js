@@ -10,7 +10,6 @@ export const query = graphql`
       __typename
       id
       title
-      showInProductsGrid
       links {
         text
         url

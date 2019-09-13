@@ -73,8 +73,8 @@ const ProductsGrid = ({ title, showTitle, items }) => (
 				<ScrollEntrance>
 					{(title && showTitle) && <div><h2>{title}</h2></div>}
 					<Grid large="[3] [3] [3] [3]" medium="[3] [3] [3] [3]" small="[3] [3]">
-						{items && items.map(({ id, title, showInProductsGrid, links, icon, descriptionText, company }) => {
-							if (showInProductsGrid) {
+						{items && items.map(({ id, title, links, icon, descriptionText, company }) => {
+							if (icon) {
 								return (
 									<ProductContainer key={id}>
 										<Grid large="[2] 1" medium="[2] 1" small="[2] 1">

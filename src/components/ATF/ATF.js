@@ -105,7 +105,7 @@ const ButtonContainer = styled.div`
 `
 
 const PaddedParagraph = styled.div`
-	${ typography.h2Special }
+	${ typography.h2 }
 	margin-top: 0;
 	padding-top: 15px;
 	max-width: 25em;
@@ -174,8 +174,8 @@ class ATF extends Component {
 										<AlignedText horizontalTextAlignment={horizontalTextAlignment}>
 											{button &&
 												<ButtonContainer>
-													<Link external={!button.internalExternal} to={button.url}>
-														<Button>
+													<Link noHoverColor external={!button.internalExternal} to={button.url}>
+														<Button home>
 															{button.text}
 														</Button>
 													</Link>

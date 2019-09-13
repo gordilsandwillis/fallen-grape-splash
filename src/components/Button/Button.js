@@ -30,7 +30,7 @@ const getState = (loading, error, success, disabled) => {
 	return buttonState
 }
 
-const ButtonStyles = (state, shape, size) => (`
+const ButtonStyles = (state, shape, size, home) => (`
 	padding: 30px 0;
 	appearance: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -38,16 +38,18 @@ const ButtonStyles = (state, shape, size) => (`
   outline: none;
   display: inline-block;
   vertical-align: middle;
-  background: transparent;
-  border: 2px solid currentcolor;
-	${ typography.responsiveStyles('height', 50, 30, 30, 45) }
+	background: transparent;
+	border: 2px solid currentColor;
+  ${ home && `border: 2px solid ${ colors.red };` }
+	${ typography.responsiveStyles('height', 50, 40, 40, 45) }
 	height: ${ buttonSizes.small };
   cursor: pointer;
   line-height: 1em;
   text-transform: none;
   letter-spacing: 0;
   border-radius: 0;
-  color: currentColor;
+	color: currentcolor;
+	${ home && `color: ${ colors.white };` }
   font-style: normal;
   font-family: inherit;
   ${ typography.button }
@@ -67,7 +69,12 @@ const ButtonStyles = (state, shape, size) => (`
 	${ state === 'error' ? `cursor: default;` : `` }
 	${ state !== 'disabled' ? `
 		&:hover {
-      background: ${ colors.whiteLowOpacity };
+			
+			${ home && `background: ${ colors.whiteLowOpacity } !important;` }
+			background: ${ colors.white } !important;
+			${ home && `color: ${ colors.white };` }
+			color: ${ '#000' } !important;
+			${ home && `border-color: ${ colors.white } !important;` }
 		}
 	` : `` }
 
@@ -106,7 +113,7 @@ const ButtonStyles = (state, shape, size) => (`
 
 const ButtonContent = styled.div`
 	display: flex;
-	${ typography.responsiveStyles('padding-top', 2, 1, 1, 2) }
+	${ typography.responsiveStyles('padding-top', 3, 3, 3, 3) }
 	align-items: center;
 	justify-content: center;
 	height: 100%;
@@ -118,11 +125,11 @@ const ButtonContent = styled.div`
 `
 
 const StyledButtonLink = styled(Link)`
-	${ props => ButtonStyles(getState(props.loading, props.error, props.success, props.disabled), props.shape, props.size) }
+	${ props => ButtonStyles(getState(props.loading, props.error, props.success, props.disabled), props.shape, props.size, props.home) }
 `
 
 const StyledButtonElement = styled.button`
-	${ props => ButtonStyles(getState(props.loading, props.error, props.success, props.disabled), props.shape, props.size) }
+	${ props => ButtonStyles(getState(props.loading, props.error, props.success, props.disabled), props.shape, props.size, props.home) }
 `
 
 class Button extends Component {
@@ -151,7 +158,8 @@ class Button extends Component {
 			theme,
 			className,
 			shape,
-			size
+			size,
+			home
 		} = this.props
 
 		if (to) {
@@ -171,6 +179,7 @@ class Button extends Component {
 					theme={theme}
 					shape={shape}
 					size={size}
+					home={home}
 				>
 					<ButtonContent>
 						{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
@@ -183,6 +192,7 @@ class Button extends Component {
 			return (
 				<StyledButtonElement
 					className={className}
+					home={home}
 					icon={icon}
 					iconPosition={iconPosition}
 					loading={loading}

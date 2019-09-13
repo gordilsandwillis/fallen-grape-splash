@@ -97,7 +97,15 @@ class VideoEmbed extends Component {
 							<PlayIconStyled />
 						</CoverImage>
 					</CoverImageContainer>
-					<ReactPlayerStyled controls playing={video} video={(video || '').toString()} width={'100%'} height={'100%'} url={url} />
+					<ReactPlayerStyled
+						controls
+						playing={video}
+						video={(video || '').toString()}
+						width={'100%'}
+						height={'100%'}
+						url={url}
+						youtubeConfig={{ playerVars: { color: 'white', modestbranding: 1 } }}
+					/>
 				</Wrapper>
 			</Grid >
 		)

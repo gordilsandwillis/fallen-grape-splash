@@ -19,10 +19,10 @@ const StyledLinkElement = styled.a`
     border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
     transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out;
   }
-  &:hover {
-    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
+  &:hover {    
+		${ ({ nohover }) => nohover ? '' : `color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };` }
     span {
-      border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
+			${ ({ nohover }) => nohover ? '' : `      border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };` }
     }
   }
 
@@ -37,7 +37,7 @@ const StyledLinkElement = styled.a`
 
 const StyledGatsbyLink = styled(GatsbyLink)`
   ${ LinkStyles }
-  ${ ({ underlined, dark }) => underlined && `border-bottom: 1px solid ${ dark ? colors.black : colors.white };` }
+  ${ ({ underlined, dark }) => underlined && `border-bottom: 2px solid ${ dark ? colors.black : colors.white };` }
   color: ${ ({ dark }) => dark ? colors.black : colors.white };
   transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
@@ -76,7 +76,9 @@ class Link extends Component {
 				<StyledLinkElement
 					className={className}
 					href={to}
-					target={target}
+					target={target || '_blank'}
+					rel="noopener"
+					rel="noreferrer"
 					white={white}
 					nohover={(noHoverColor || '').toString()}
 				>
@@ -116,7 +118,7 @@ class Link extends Component {
 Link.defaultProps = {
 	to: '#',
 	external: false,
-	target: ''
+	target: '_blank'
 }
 
 Link.propTypes = {

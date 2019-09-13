@@ -25,6 +25,9 @@ ${ typography.responsiveStyles('padding-top', 40, 40, 40, 30) }
 
 const SlickSliderDark = styled(SlickSlider)`
   outline: none;
+  *, div {
+  outline: none;
+  }
   ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `position: relative;` };
   
   .slick-dots li.slick-active button:before {
@@ -45,7 +48,7 @@ const SlickSliderDark = styled(SlickSlider)`
   
   .slick-dots {
     position: ${ ({ horizontalTextAlignCentered }) => horizontalTextAlignCentered ? 'static' : 'absolute' };
-    padding-bottom: 50px;
+    padding-bottom: 70px;
     padding-top:0px;
     ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `
       display: flex !important;
@@ -116,8 +119,23 @@ const ContainerStyled = styled(Container)`
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ imageInSlider }) => imageInSlider && 'height: 400px' };
-  ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 20px' };
+  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }` };
+  ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
+  ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
+  background: url(${ ({ src }) => src }) no-repeat center center;
+    background-size: cover;
+`
+
+const DivStyled = styled.div`
+  display: flex !important;
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-end;
+  align-items: flex-start;
+  outline: none;
+  height: 100%;
+  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }` };
+  ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
     background-size: cover;
@@ -150,7 +168,7 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		// autoplay: true, // TODO
+		// autoplay: true,
 	}
 	return (
 		<Wrapper>
@@ -173,13 +191,13 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 								</CenteredText>
 							</ContainerStyled>
 						) : (
-							<ContainerStyled key={id} imageInSlider={imageInSlider}>
+							<DivStyled key={id} imageInSlider={imageInSlider}>
 								<Grid small="[4] 2" medium="[12]" large="[12]">
 									{titleInSlider && <LargeName>{titleInSlider}</LargeName>}
 									{companyName && <h2>{companyName}</h2>}
 									{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
 								</Grid>
-							</ContainerStyled>
+							</DivStyled>
 						)}
 					</RelativeDiv>
 				))}

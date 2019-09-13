@@ -34,25 +34,25 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 `
 
 export const body = `
-	${ responsiveStyles('font-size', 18, 14, 14, 18) }
-	${ responsiveStyles('line-height', 21, 21, 21, 24) }
+${ responsiveStyles('font-size', 18, 16, 16, 18) }
+${ responsiveStyles('line-height', 25, 24, 24, 25) }
 	font-family: ${ bodyFontFamilyRegular };
 `
 export const bodyLight = `
-	${ responsiveStyles('font-size', 18, 14, 14, 18) }
-	${ responsiveStyles('line-height', 21, 21, 21, 24) }
+${ responsiveStyles('font-size', 18, 16, 16, 18) }
+${ responsiveStyles('line-height', 25, 24, 24, 25) }
 	letter-spacing: 0.33px;
 	font-family: ${ bodyFontFamilyLight };
 `
 
 export const bodyBold = `
-${ responsiveStyles('font-size', 18, 14, 14, 18) }
-${ responsiveStyles('line-height', 21, 21, 21, 24) }
+${ responsiveStyles('font-size', 18, 16, 16, 18) }
+${ responsiveStyles('line-height', 25, 24, 24, 25) }
 font-family: ${ bodyFontFamilyBold };
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 60, 48, 44, 34) }
+	${ responsiveStyles('font-size', 60, 54, 48, 34) }
 	font-family: ${ titleFontFamily };
 	font-weight: lighter;
 	letter-spacing: ${ -10 / 1000 }em;
@@ -60,15 +60,15 @@ export const h1 = `
 `
 
 export const h2 = `
-	${ responsiveStyles('font-size', 30, 24, 24, 22) }
-	${ responsiveStyles('line-height', 30, 30, 30, 30) }
+	${ responsiveStyles('font-size', 34, 30, 30, 22) }
+	line-height: 1.285em;
 	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
 	font-family: ${ bodyFontFamilyLight };
 `
-
 export const h3 = `
 	${ responsiveStyles('font-size', 14, 14, 14, 18) }
 	letter-spacing: ${ 20 / 1000 }em;
+	line-height: 1.285em;
 	font-family: ${ bodyFontFamilyRegular };
 	font-weight: 500;
 `
@@ -103,7 +103,7 @@ export const caption = `
 `
 
 export const button = `
-	${ responsiveStyles('font-size', 18, 14, 14, 16) }
+	${ responsiveStyles('font-size', 18, 16, 16, 18) }
 	font-family: ${ bodyFontFamilyRegular };
 	line-height: ${ 16 / 14 };
 	letter-spacing: ${ 20 / 1000 }em;
@@ -116,11 +116,4 @@ export const footer = `
 	${ responsiveStyles('line-height', 18, 12, 12, 14) }
 	letter-spacing: ${ 20 / 1000 }em;
 	font-family: ${ bodyFontFamilyRegular };
-`
-
-export const h2Special = `
-	${ responsiveStyles('font-size', 30, 24, 24, 22) }
-	${ responsiveStyles('line-height', 30, 30, 30, 30) }
-	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
-	font-family: ${ bodyFontFamilyLight };
 `

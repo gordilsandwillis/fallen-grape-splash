@@ -169,7 +169,9 @@ const MobileDetect = styled.div`
   ${ mq.largeAndUp } {
     display: none;
   }
-  align-self: flex-start;
+	align-self: flex-start;
+	transition: transform ${ animations.mediumSpeed } ease-in-out;
+	${ ({ center, scrolled }) => (center && scrolled) && 'transform: translate3d(0px, .2em, 0px)' };
   z-index: 4;
 `
 
@@ -196,7 +198,7 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
   &.open {
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(0, 0, 0, 0.8);
   }
 `
 
@@ -311,7 +313,7 @@ class Header extends Component {
   									</NavContainer>
   								</Overlay>
   							</MobileDetect>
-  							<MobileDetect>
+  							<MobileDetect scrolled={scrolled} center>
   								<HamburgerContainer onClick={this.toggleNav}>
   									<HamburgerIcon
   										clicked={mobileNavOpen}

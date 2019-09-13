@@ -3,9 +3,10 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from '@emotion/styled'
 
 const BoxedText = styled.span`
-  border: 1px solid currentColor;
+  border: 2px solid currentColor;
   padding: 0 .2em;
   font-style: normal !important;
+	display: inline-block;
 `
 
 const Bold = ({ children }) => <span style={{ fontWeight: 'bold' }}>{children}</span>
