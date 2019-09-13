@@ -25,6 +25,9 @@ ${ typography.responsiveStyles('padding-top', 40, 40, 40, 30) }
 
 const SlickSliderDark = styled(SlickSlider)`
   outline: none;
+  *, div {
+  outline: none;
+  }
   ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `position: relative;` };
   
   .slick-dots li.slick-active button:before {
@@ -45,7 +48,7 @@ const SlickSliderDark = styled(SlickSlider)`
   
   .slick-dots {
     position: ${ ({ horizontalTextAlignCentered }) => horizontalTextAlignCentered ? 'static' : 'absolute' };
-    padding-bottom: 50px;
+    padding-bottom: 70px;
     padding-top:0px;
     ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `
       display: flex !important;
@@ -117,7 +120,7 @@ const ContainerStyled = styled(Container)`
   outline: none;
   height: 100%;
   ${ ({ imageInSlider }) => imageInSlider && 'min-height: 400px; max-height:50vw; height:40em' };
-  ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 20px' };
+  ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
     background-size: cover;
@@ -150,7 +153,7 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		// autoplay: true, // TODO
+		autoplay: true,
 	}
 	return (
 		<Wrapper>
