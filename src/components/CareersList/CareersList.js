@@ -95,19 +95,18 @@ const DropdownsContainer = styled.div`
 `
 
 const JobItem = styled.div`
-	${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
-	${ typography.responsiveStyles('padding-top', 20, 30, 40, 40) }
 `
 const DepartmentName = styled.div`
 	${ typography.body }
 	text-transform: uppercase;
 	${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
-	${ typography.responsiveStyles('padding-top', 20, 30, 40, 40) }
 `
 
 const LocationName = styled.div`
 	${ typography.body };
 	color: ${ colors.grey };
+	padding-top:3px;
+	padding-bottom:3px;
 `
 
 class CareersList extends Component {
@@ -284,17 +283,22 @@ class CareersList extends Component {
 								{index > 0 && <Hr key={(departmentName || 'noDepartment') + '_hr'} color={colors.black}/>}
 								<Grid key={departmentName || 'noDepartment'} small="[6]" medium="[4] [8]" large="[4] [8]">
 									<Container>
-										<DepartmentName>{departmentName}</DepartmentName>
+										<ContentBlock>
+											<DepartmentName>{departmentName}</DepartmentName>
+										</ContentBlock>
 									</Container>
 									<Container>
 										{(jobs && Object.keys(jobs).length > 0) && Object.values(jobs).map(({ jobId, jobName, locationName, companyId, companyName }) => (
 											<JobItem key={jobId}>
-												{jobName && <JobName>{jobName}{companyName &&	 <span> at {companyName}</span>}</JobName>}
-												{locationName && <LocationName>{locationName}</LocationName>}
-												<Link to={`careers/${ jobId }`} fakeExternal><span>LEARN MORE</span></Link>
+												<ContentBlock>
+													{jobName && <JobName>{jobName}{companyName &&	 <span> at {companyName}</span>}</JobName>}
+													{locationName && <LocationName>{locationName}</LocationName>}
+													<Link to={`careers/${ jobId }`} fakeExternal><span>LEARN MORE</span></Link>
+												</ContentBlock>
 											</JobItem>
 										))}
 									</Container>
+									<div style={{ height: 60 }}/>
 								</Grid>
 							</React.Fragment>
 						))}
