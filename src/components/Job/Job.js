@@ -9,6 +9,7 @@ import ScrollEntrance from 'src/components/ScrollEntrance'
 import Hr from 'src/components/Hr'
 import ContentBlock from 'src/components/ContentBlock'
 // eslint-disable-next-line no-unused-vars
+import axios from 'axios'
 import { colors, typography, mediaQueries as mq } from 'src/styles'
 
 const Wrapper = styled.div`
@@ -49,11 +50,47 @@ const ApplyTitle = styled.div`
 `
 
 class Job extends React.Component {
+	constructor (props) {
+		super(props)
+		this.state = {
+			loading: false
+		}
+	}
 	handleSubmit = e => {
 		e.preventDefault()
-		// const data = new FormData(e.target)
-		// console.log(e.target)
-		// console.log(data)
+		if (this.state.loading) return
+		const formData = new FormData(e.target)
+		const data = this.props.jobData.questions
+			.reduce((acc, q) => {
+				const value = formData.get(q.name)
+				switch (q.type) {
+				case 'short_text':
+					if (value) acc[q.name] = value
+					break
+				case 'attachment':
+					if (value) acc[q.name] = value
+					break
+				case 'boolean':
+					if (this.state[q.name].value) acc[q.name] = this.state[q.name].value
+					break
+				case 'multi_select':
+					break
+				default:
+					break
+				}
+				return acc
+			}, {})
+		const { job_id } = this.props.jobData
+		const url = `${ process.env.SERVER_URL }/${ job_id }`
+		axios.post(url, data, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		}).then(res => console.log(res)).catch(e => console.log(e))
+	}
+
+	handleDropdownChange = ({ name, x }) => {
+		this.setState({ [name]: x })
 	}
 
 	render () {
@@ -85,8 +122,10 @@ class Job extends React.Component {
 				<ContentBlock>
 					<Container>
 						<ApplyTitle>Apply for this Job</ApplyTitle>
-						<form onSubmit={this.handleSubmit}>
-							{questions && questions.map((x, i) => <Question key={x.name + i} {...x} />)}
+						<form onSubmit={e => this.handleSubmit(e)} encType='multipart/form-data'>
+							<input type="hidden" name="id" value={job_id} />
+							<input type="hidden" name="mapped_url_token" value="mosaic_website" />
+							{questions && questions.map((x, i) => <Question onChange={this.handleDropdownChange} dropdownValue={this.state[name]} key={x.name + i} {...x} />)}
 							<div style={{ marginTop: 20 }}>
 								<Button style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
 							</div>

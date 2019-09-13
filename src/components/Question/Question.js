@@ -54,11 +54,12 @@ class Question extends React.Component {
 	render () {
 		const { required, name, description, values, label, type } = this.props
 		const descriptionMarkup = createMarkup(description)
+		const { onChange } = this.props
 		const placeholder = label + (required ? '*' : '')
 		return (this.props.private ? ''
 			: <div style={{ padding: '10px 0px' }}>
 				{descriptionMarkup && <div style={{ color: 'red' }} dangerouslySetInnerHTML={descriptionMarkup} />}
-				{type === 'short_text' && <Input id={name} placeholder={placeholder} required={required} type="text"></Input>}
+				{type === 'short_text' && <Input name={name} placeholder={placeholder} required={required} type={name === 'email' ? 'email' : 'text'}></Input>}
 				{type === 'attachment' && (
 					<div style={{ display: 'inline-block' }}>
 						<label htmlFor={name}>{label}</label>
@@ -66,7 +67,7 @@ class Question extends React.Component {
 							{({ getRootProps, getInputProps }) => (
 								<section>
 									<div {...getRootProps()}>
-										<input {...getInputProps()} />
+										<input name={name} {...getInputProps()} />
 										<FakeLink><span>ATTACH</span></FakeLink>
 									</div>
 								</section>
@@ -78,7 +79,7 @@ class Question extends React.Component {
 					<div>
 						<label htmlFor={name}>{label}</label>
 						<Grid small="[6]" medium="[8] 4" large="[8] 4">
-							<Dropdown id={name} title={'Yes / No'} items={values.reverse()} onChange={x => this.setState({ value: x })} value={this.state.value}/>
+							<Dropdown name={name} title={'Yes / No'} items={values.reverse()} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
 						</Grid>
 					</div>
 				)}
@@ -86,7 +87,7 @@ class Question extends React.Component {
 					<div>
 						<label htmlFor={name}>{label}</label>
 						<DropdownContainer>
-							<Dropdown isMulti id={name} title={'Select Values'} items={values.reverse()} onChange={x => this.setState({ value: x })} value={this.state.value}/>
+							<Dropdown name={name} isMulti title={'Select Values'} items={values.reverse()} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
 						</DropdownContainer>
 					</div>
 				)}
