@@ -116,7 +116,7 @@ const ContainerStyled = styled(Container)`
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ imageInSlider }) => imageInSlider && 'height: 400px' };
+  ${ ({ imageInSlider }) => imageInSlider && 'min-height: 400px; max-height:50vw; height:40em' };
   ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 20px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
