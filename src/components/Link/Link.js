@@ -37,7 +37,7 @@ const StyledLinkElement = styled.a`
 
 const StyledGatsbyLink = styled(GatsbyLink)`
   ${ LinkStyles }
-  ${ ({ underlined, dark }) => underlined && `border-bottom: 1px solid ${ dark ? colors.black : colors.white };` }
+  ${ ({ underlined, dark }) => underlined && `border-bottom: 2px solid ${ dark ? colors.black : colors.white };` }
   color: ${ ({ dark }) => dark ? colors.black : colors.white };
   transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
