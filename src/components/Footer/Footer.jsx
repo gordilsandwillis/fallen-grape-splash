@@ -28,6 +28,7 @@ const FooterContainer = styled(Container)`
 `
 
 const FooterTextGrey = styled.div`
+  margin-top: 2px;
   color: ${ colors.grey };
 `
 

@@ -41,7 +41,7 @@ const ButtonStyles = (state, shape, size, home) => (`
 	background: transparent;
 	border: 2px solid currentColor;
   ${ home && `border: 2px solid ${ colors.red };` }
-	${ typography.responsiveStyles('height', 50, 30, 30, 45) }
+	${ typography.responsiveStyles('height', 50, 40, 40, 45) }
 	height: ${ buttonSizes.small };
   cursor: pointer;
   line-height: 1em;
@@ -113,7 +113,7 @@ const ButtonStyles = (state, shape, size, home) => (`
 
 const ButtonContent = styled.div`
 	display: flex;
-	${ typography.responsiveStyles('padding-top', 3, 2, 2, 3) }
+	${ typography.responsiveStyles('padding-top', 3, 3, 3, 3) }
 	align-items: center;
 	justify-content: center;
 	height: 100%;
