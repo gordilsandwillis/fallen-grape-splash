@@ -3,7 +3,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { colors, typography, animations } from 'src/styles'
 import Dropdown from 'src/components/Dropdown'
-import Grid from 'src/components/Grid'
 import Dropzone from 'react-dropzone'
 
 const Input = styled.input`

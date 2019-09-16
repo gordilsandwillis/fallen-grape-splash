@@ -259,7 +259,7 @@ class Header extends Component {
 
   render () {
   	const {
-  		location: { pathname = '/' },
+  		location = { pathname: '/' },
   		navigation,
   		hasAtf = false,
   	} = this.props
@@ -282,10 +282,10 @@ class Header extends Component {
   						<NavItemsContainer>
   							<DesktopDetect>
   								{navigation && navigation.map(({ title, slug }, index) => (
-  									<DesktopLinkContainer key={title + slug + index} underlined={checkSlug({ slug, pathname })}>
+  									<DesktopLinkContainer key={title + slug + index} underlined={checkSlug({ slug, pathname: location.pathname })}>
   										<Link
   											to={slug}
-  											underlined={checkSlug({ slug, pathname })}
+  											underlined={checkSlug({ slug, pathname: location.pathname })}
   											dark={!(hasAtf && !scrolled)}
   											noHoverColor >
   											{title}
