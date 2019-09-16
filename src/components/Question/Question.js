@@ -30,8 +30,8 @@ const FakeLink = styled.div`
 		transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
 	}
   &:hover {
-    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
-		border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
+    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.grey };
+		border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.grey) : (white ? colors.white : colors.brightblue) };
   }
 
 &::after {
@@ -78,17 +78,17 @@ class Question extends React.Component {
 				{type === 'boolean' && (
 					<div>
 						<label htmlFor={name}>{label}</label>
-						<Grid small="[6]" medium="[8] 4" large="[8] 4">
-							<Dropdown name={name} title={'Yes / No'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
-						</Grid>
+						<div style={{ padding: '10px 0' }}>
+							<Dropdown left name={name} title={'Yes / No'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+						</div>
 					</div>
 				)}
 				{type === 'multi_select' && (
 					<div>
 						<label htmlFor={name}>{label}</label>
-						<Grid small="[6]" medium="[8] 4" large="[8] 4">
-							<Dropdown name={name} isMulti title={'Select Values'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
-						</Grid>
+						<div style={{ padding: '10px 0' }}>
+							<Dropdown left name={name} isMulti title={'Select Values'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+						</div>
 					</div>
 				)}
 			</div>

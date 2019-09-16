@@ -12,22 +12,20 @@ const LinkStyles = `
 `
 
 const StyledLinkElement = styled.a`
-	white-space:nowrap;
+	white-space: nowrap;
   ${ LinkStyles }
-  color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
+	color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
+	transition: color ${ animations.mediumSpeed } ease-in-out, border-bottom-color ${ animations.mediumSpeed } ease-in-out;
   span {
-    border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
-    transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out;
+    border-bottom: 2px solid currentColor;
   }
   &:hover {    
-		${ ({ nohover }) => nohover ? '' : `color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };` }
-    span {
-			${ ({ nohover }) => nohover ? '' : `      border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };` }
-    }
+		${ ({ nohover, white }) => nohover ? '' : `
+			color: ${ white ? colors.unofficialLightGrey : colors.grey };
+		` }
   }
-
 &::after {
-    content: '↗';
+		content: '↗';
     margin-left: 2px;
     line-height: 1em;
     font-size: 1.25em;
@@ -37,12 +35,14 @@ const StyledLinkElement = styled.a`
 
 const StyledGatsbyLink = styled(GatsbyLink)`
   ${ LinkStyles }
-  ${ ({ underlined, dark }) => underlined && `border-bottom: 2px solid ${ dark ? colors.black : colors.white };` }
+  ${ ({ underlined }) => underlined && `border-bottom: 2px solid currentColor;` }
   color: ${ ({ dark }) => dark ? colors.black : colors.white };
-  transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+	span {
+		transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+	}
+	transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
     color: ${ ({ nohover }) => !nohover ? colors.unofficialLightGrey : 'inherit' };
-    border-bottom-color: ${ colors.unofficialLightGrey };
   }
 `
 
@@ -50,17 +50,16 @@ const StyledLinkElementFakeExternal = styled(GatsbyLink)`
 	white-space:nowrap;
   ${ LinkStyles }
   color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
-	span{
-		border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
-		transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+	span {
+		border-bottom: 2px solid currentColor;
 	}
   &:hover {
-    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.darkBlue };
-		border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.darkBlue) : (white ? colors.white : colors.brightblue) };
+    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.grey };
   }
 
 &::after {
-    content: '↗';
+		content: '↗';
+		color: currentColor;
     margin-left: 2px;
     line-height: 1em;
     font-size: 1.25em;
@@ -80,7 +79,7 @@ class Link extends Component {
 					rel="noopener"
 					rel="noreferrer"
 					white={white}
-					nohover={(noHoverColor || '').toString()}
+					nohover={noHoverColor}
 				>
 					<span>{children}</span>
 				</StyledLinkElement >
@@ -89,7 +88,7 @@ class Link extends Component {
 			if (to[0] !== '/') to = '/' + to
 			return (
 				<StyledLinkElementFakeExternal
-					nohover={(noHoverColor || '').toString()}
+					nohover={noHoverColor}
 					className={className}
 					to={to}
 					dark={(dark || '').toString()}
@@ -102,7 +101,7 @@ class Link extends Component {
 			if (to[0] !== '/') to = '/' + to
 			return (
 				<StyledGatsbyLink
-					nohover={(noHoverColor || '').toString()}
+					nohover={noHoverColor}
 					className={className}
 					to={to}
 					dark={(dark || '').toString()}
