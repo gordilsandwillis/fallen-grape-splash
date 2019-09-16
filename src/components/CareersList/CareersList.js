@@ -45,18 +45,18 @@ const JobButton = styled.div`
     position: absolute;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     bottom: -5px;
     opacity: 0;
-    transition: bottom ${ animations.mediumSpeed } ease-in-out,
+    transition: transform ${ animations.mediumSpeed } ease-in-out,
 			color ${ animations.mediumSpeed } ease-in-out,
 			opacity ${ animations.mediumSpeed } ease-in-out;
   }
 	&:after {
       ${ ({ underlined }) =>
 		underlined &&
-        ` bottom: -1px;
-					 opacity: 1;
+		` transform: translate3d(0,-5px, 0);
+							 opacity: 1;
 					 color: ${ colors.black }
 			 ` }
     }
@@ -67,7 +67,7 @@ const JobButton = styled.div`
     &:after {
       ${ ({ underlined }) =>
 		!underlined &&
-        ` bottom: -1px;
+		` transform: translate3d(0,-5px, 0);
 			 		opacity: 1;
 			 ` }
     }

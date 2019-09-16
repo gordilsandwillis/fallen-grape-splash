@@ -127,9 +127,9 @@ const DesktopLinkContainer = styled.span`
     left: 0;
     right: 0;
     height: 2px;
-    bottom: -5px;
+    bottom: -7px;
     opacity: 0;
-    transition: bottom ${ animations.mediumSpeed } ease-in-out,
+    transition: transform ${ animations.mediumSpeed } ease-in-out,
       opacity ${ animations.mediumSpeed } ease-in-out;
   }
   &:hover {
@@ -139,7 +139,7 @@ const DesktopLinkContainer = styled.span`
     &:after {
       ${ ({ underlined }) =>
 		!underlined &&
-        ` bottom: -2px;
+		` transform: translate3d(0,-5px, 0);
 			 		opacity: 1;
 			 ` }
     }
