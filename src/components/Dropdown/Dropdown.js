@@ -52,6 +52,8 @@ const customStyles = {
 
 const SelectStyled = styled(Select)`
   max-width:150px;
+	margin-right:0;
+	margin-left:auto;
 	div {
     color: ${ colors.black };
 		border: none;

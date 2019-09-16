@@ -6,6 +6,9 @@ import { colors, animations } from 'src/styles'
 // TODO ACCESSIBILITY OF MENU LINK
 const MenuLink = styled.div`
   display: inline-block;
+  &.active {
+  outline: none;
+  }
   &.clicked {
     .menu-icon {
       opacity: 1;

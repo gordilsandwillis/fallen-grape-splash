@@ -95,6 +95,7 @@ const DropdownsContainer = styled.div`
 `
 
 const JobItem = styled.div`
+${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
 `
 const DepartmentName = styled.div`
 	${ typography.body }
@@ -107,6 +108,9 @@ const LocationName = styled.div`
 	color: ${ colors.grey };
 	padding-top:3px;
 	padding-bottom:3px;
+`
+
+const AlignRight = styled.div`
 `
 
 class CareersList extends Component {
@@ -225,22 +229,26 @@ class CareersList extends Component {
 														items={companyDropdownItems}
 													/>}
 												<Grid small='[4]' medium='[3] [3]' large='[3] [3]' >
-													<Dropdown
-														value={locationFilter}
-														onChange={x => this.handleChangeFilter('locationFilter', x)}
-														clearValue={() => this.handleChangeFilter('locationFilter', null)}
-														align='right'
-														title="Location"
-														items={locationDropdownItems}
-													/>
-													<Dropdown
-														value={departmentFilter}
-														onChange={x => this.handleChangeFilter('departmentFilter', x)}
-														clearValue={() => this.handleChangeFilter('departmentFilter', null)}
-														align='right'
-														title="Department"
-														items={departmentDropdownItems}
-													/>
+													<AlignRight>
+														<Dropdown
+															value={locationFilter}
+															onChange={x => this.handleChangeFilter('locationFilter', x)}
+															clearValue={() => this.handleChangeFilter('locationFilter', null)}
+															align='right'
+															title="Location"
+															items={locationDropdownItems}
+														/>
+													</AlignRight>
+													<AlignRight>
+														<Dropdown
+															value={departmentFilter}
+															onChange={x => this.handleChangeFilter('departmentFilter', x)}
+															clearValue={() => this.handleChangeFilter('departmentFilter', null)}
+															align='right'
+															title="Department"
+															items={departmentDropdownItems}
+														/>
+													</AlignRight>
 												</Grid>
 											</React.Fragment>
 										) : (
@@ -281,28 +289,28 @@ class CareersList extends Component {
 						{departments && Object.values(departments).filter(({ jobs }) => jobs && Object.keys(jobs).length > 0).map(({ departmentName, jobs }, index) => (
 							<React.Fragment>
 								{index > 0 && <Hr key={(departmentName || 'noDepartment') + '_hr'} color={colors.black}/>}
-								<Grid key={departmentName || 'noDepartment'} small="[6]" medium="[4] [8]" large="[4] [8]">
-									<Container>
-										<ContentBlock>
+								<Container>
+									<ContentBlock>
+										<Grid key={departmentName || 'noDepartment'} small="[6]" medium="[4] [8]" large="[4] [8]">
 											<DepartmentName>{departmentName}</DepartmentName>
-										</ContentBlock>
-									</Container>
-									<Container>
-										{(jobs && Object.keys(jobs).length > 0) && Object.values(jobs).map(({ jobId, jobName, locationName, companyId, companyName }) => (
-											<JobItem key={jobId}>
-												<ContentBlock>
-													{jobName && <JobName>{jobName}{companyName &&	 <span> at {companyName}</span>}</JobName>}
-													{locationName && <LocationName>{locationName}</LocationName>}
-													<Link to={`careers/${ jobId }`} fakeExternal><span>LEARN MORE</span></Link>
-												</ContentBlock>
-											</JobItem>
-										))}
-									</Container>
-									<div style={{ height: 60 }}/>
-								</Grid>
+											<div>
+												{(jobs && Object.keys(jobs).length > 0) && Object.values(jobs).map(({ jobId, jobName, locationName, companyId, companyName }) => (
+													<JobItem key={jobId}>
+														<div>
+															{jobName && <JobName>{jobName}{companyName &&	 <span> at {companyName}</span>}</JobName>}
+															{locationName && <LocationName>{locationName}</LocationName>}
+															<Link to={`careers/${ jobId }`} fakeExternal><span>LEARN MORE</span></Link>
+														</div>
+													</JobItem>
+												))}
+											</div>
+										</Grid>
+									</ContentBlock>
+								</Container>
 							</React.Fragment>
 						))}
 					</ScrollEntrance>
+					<div style={{ height: 60 }}/>
 				</Wrapper>
 			)
 	}

@@ -315,12 +315,14 @@ class Header extends Component {
   								</Overlay>
   							</MobileDetect>
   							<MobileDetect scrolled={scrolled} center>
+  								<Link to={location.pathname}>
   								<HamburgerContainer onClick={this.toggleNav}>
   									<HamburgerIcon
   										clicked={mobileNavOpen}
   										scrolled={scrolled}
   										hasAtf={hasAtf} />
   								</HamburgerContainer>
+  								</Link>
   							</MobileDetect>
   						</NavItemsContainer>
   					</Grid>
