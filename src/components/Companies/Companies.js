@@ -44,6 +44,11 @@ const H2 = styled.div`
 	${ typography.h2 }
 	padding-bottom: 30px;
 `
+
+const Body = styled.div`
+	${ typography.body }
+	
+`
 const Companies = ({ title, items, showTitle }) => (
 	<Wrapper>
 		<ContentBlock>
@@ -57,7 +62,7 @@ const Companies = ({ title, items, showTitle }) => (
 							<Grid large='[4] 1 [7]' medium='[4] 1 [7]' small='[6]'>
 								<LogoContainer>{logo && <ImageStyled image={logo} />}</LogoContainer>
 								<div>
-									{description && RichText(description)}
+									{description && <Body>{RichText(description)}</Body>}
 									{linkToSite && <p><Link external to={linkToSite.url}>LEARN MORE</Link></p>}
 								</div>
 							</Grid>

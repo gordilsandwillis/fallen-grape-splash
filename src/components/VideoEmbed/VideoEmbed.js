@@ -102,7 +102,7 @@ class VideoEmbed extends Component {
 						playing={video}
 						video={(video || '').toString()}
 						width={'100%'}
-						height={'100%'}
+						height={video ? '100%' : '0'}
 						url={url}
 						youtubeConfig={{ playerVars: { color: 'white', modestbranding: 1 } }}
 					/>

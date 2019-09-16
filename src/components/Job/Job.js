@@ -82,7 +82,8 @@ class Job extends React.Component {
 				return acc
 			}, {})
 		const { job_id } = this.props.jobData
-		const url = `${ 'http://localhost:3000' }/${ job_id }`
+		const url = `${ 'http://localhost:3000/api/' }${ job_id }`
+		console.log(url)
 		this.setState({ loading: true })
 		axios.post(url, data, {
 			headers: {

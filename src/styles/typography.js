@@ -35,19 +35,19 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 
 export const body = `
 ${ responsiveStyles('font-size', 18, 16, 16, 18) }
-${ responsiveStyles('line-height', 25, 24, 24, 25) }
+line-height: 1.5em;
 	font-family: ${ bodyFontFamilyRegular };
 `
 export const bodyLight = `
 ${ responsiveStyles('font-size', 18, 16, 16, 18) }
-${ responsiveStyles('line-height', 25, 24, 24, 25) }
+	line-height: 1.5em;
 	letter-spacing: 0.33px;
 	font-family: ${ bodyFontFamilyLight };
 `
 
 export const bodyBold = `
 ${ responsiveStyles('font-size', 18, 16, 16, 18) }
-${ responsiveStyles('line-height', 25, 24, 24, 25) }
+line-height: 1.5em;
 font-family: ${ bodyFontFamilyBold };
 `
 

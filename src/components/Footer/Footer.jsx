@@ -20,11 +20,6 @@ const Wrapper = styled.footer`
   ${ typography.responsiveStyles('height', 70, 70, 70, 75) }
 `
 
-const MaxWidth = styled.div`
-  max-width: 2500px;
-  margin: auto;
-`
-
 const FooterContainer = styled(Container)`
   ${ typography.footer }
   display: flex;

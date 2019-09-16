@@ -5,7 +5,6 @@ import withSizes from 'react-sizes'
 import Image from 'src/components/Image'
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
-import Grid from 'src/components/Grid'
 import RichText from 'src/components/RichText'
 import { typography, colors, gridSettings, mediaQueries as mq } from 'src/styles'
 

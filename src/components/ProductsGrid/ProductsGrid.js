@@ -85,7 +85,7 @@ const ProductsGrid = ({ title, showTitle, items }) => (
 										<LineHeight>
 											<Name>{title}</Name>
 											<Byline>{descriptionText}</Byline>
-											<div>{company.name}</div>
+											<div>{company && company.name}</div>
 											{links && <ResponsiveRow>
 												{links.map(link => <LinkStyled key={link.id} external to={link.url}>{link.text}</LinkStyled>)}
 											</ResponsiveRow>
