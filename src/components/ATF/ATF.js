@@ -119,6 +119,10 @@ const H1 = styled.h1`
 	}
 `
 
+const ButtonUppercase = styled(Button)`
+	text-transform: uppercase;
+`
+
 class ATF extends Component {
 	constructor (props) {
 		super(props)
@@ -175,9 +179,9 @@ class ATF extends Component {
 											{button &&
 												<ButtonContainer>
 													<Link noHoverColor external={!button.internalExternal} to={button.url}>
-														<Button home>
+														<ButtonUppercase home>
 															{button.text}
-														</Button>
+														</ButtonUppercase>
 													</Link>
 												</ButtonContainer>
 											}

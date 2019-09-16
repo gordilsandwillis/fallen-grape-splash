@@ -34,7 +34,10 @@ const Paragraph = styled.div`
 const LinksTitle = styled.div`
 	${ typography.body }
 	margin-bottom: 25px;
+`
 
+const LinkUppercase = styled(Link)`
+	text-transform: uppercase;
 `
 
 const ContactCopy = ({ title, smallText, showTitle, descriptionRichText, linksTitle, contactLinks }) => (
@@ -50,7 +53,7 @@ const ContactCopy = ({ title, smallText, showTitle, descriptionRichText, linksTi
 					{contactLinks && contactLinks.map(({ id, additionalLabel, text, url }, i) => (
 						<Paragraph key={id}>
 							{additionalLabel && <Pretext>{additionalLabel}</Pretext>}
-							<Link external to={url}>{text}</Link>
+							<LinkUppercase external to={url}>{text}</LinkUppercase>
 						</Paragraph>
 					))}
 				</ScrollEntrance>

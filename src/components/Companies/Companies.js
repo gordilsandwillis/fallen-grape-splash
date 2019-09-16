@@ -58,7 +58,7 @@ const Companies = ({ title, items, showTitle }) => (
 								<LogoContainer>{logo && <ImageStyled image={logo} />}</LogoContainer>
 								<div>
 									{description && RichText(description)}
-									{linkToSite && <p><Link external to={linkToSite.url}>{linkToSite.text}</Link></p>}
+									{linkToSite && <p><Link external to={linkToSite.url}>LEARN MORE</Link></p>}
 								</div>
 							</Grid>
 						</Padding>
