@@ -114,7 +114,7 @@ export default `
   hr {
     margin: 2em auto;
     border: 0;
-    border-bottom: 1px solid ${ colors.grey };
+    border-bottom: 2px solid ${ colors.grey };
   }
 
   a {

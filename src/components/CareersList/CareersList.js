@@ -45,18 +45,18 @@ const JobButton = styled.div`
     position: absolute;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     bottom: -5px;
     opacity: 0;
-    transition: bottom ${ animations.mediumSpeed } ease-in-out,
+    transition: transform ${ animations.mediumSpeed } ease-in-out,
 			color ${ animations.mediumSpeed } ease-in-out,
 			opacity ${ animations.mediumSpeed } ease-in-out;
   }
 	&:after {
       ${ ({ underlined }) =>
 		underlined &&
-        ` bottom: -1px;
-					 opacity: 1;
+		` transform: translate3d(0,-5px, 0);
+							 opacity: 1;
 					 color: ${ colors.black }
 			 ` }
     }
@@ -67,7 +67,7 @@ const JobButton = styled.div`
     &:after {
       ${ ({ underlined }) =>
 		!underlined &&
-        ` bottom: -1px;
+		` transform: translate3d(0,-5px, 0);
 			 		opacity: 1;
 			 ` }
     }
@@ -95,6 +95,7 @@ const DropdownsContainer = styled.div`
 `
 
 const JobItem = styled.div`
+${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
 `
 const DepartmentName = styled.div`
 	${ typography.body }
@@ -107,6 +108,9 @@ const LocationName = styled.div`
 	color: ${ colors.grey };
 	padding-top:3px;
 	padding-bottom:3px;
+`
+
+const AlignRight = styled.div`
 `
 
 class CareersList extends Component {
@@ -225,22 +229,26 @@ class CareersList extends Component {
 														items={companyDropdownItems}
 													/>}
 												<Grid small='[4]' medium='[3] [3]' large='[3] [3]' >
-													<Dropdown
-														value={locationFilter}
-														onChange={x => this.handleChangeFilter('locationFilter', x)}
-														clearValue={() => this.handleChangeFilter('locationFilter', null)}
-														align='right'
-														title="Location"
-														items={locationDropdownItems}
-													/>
-													<Dropdown
-														value={departmentFilter}
-														onChange={x => this.handleChangeFilter('departmentFilter', x)}
-														clearValue={() => this.handleChangeFilter('departmentFilter', null)}
-														align='right'
-														title="Department"
-														items={departmentDropdownItems}
-													/>
+													<AlignRight>
+														<Dropdown
+															value={locationFilter}
+															onChange={x => this.handleChangeFilter('locationFilter', x)}
+															clearValue={() => this.handleChangeFilter('locationFilter', null)}
+															align='right'
+															title="Location"
+															items={locationDropdownItems}
+														/>
+													</AlignRight>
+													<AlignRight>
+														<Dropdown
+															value={departmentFilter}
+															onChange={x => this.handleChangeFilter('departmentFilter', x)}
+															clearValue={() => this.handleChangeFilter('departmentFilter', null)}
+															align='right'
+															title="Department"
+															items={departmentDropdownItems}
+														/>
+													</AlignRight>
 												</Grid>
 											</React.Fragment>
 										) : (
@@ -278,31 +286,31 @@ class CareersList extends Component {
 							</ContentBlock>
 						</Container>
 						<Hr full color={colors.black}/>
-						{departments && Object.values(departments).filter(({ jobs }) => jobs && Object.keys(jobs).length > 0).map(({ departmentName, jobs }, index) => (
-							<React.Fragment>
-								{index > 0 && <Hr key={(departmentName || 'noDepartment') + '_hr'} color={colors.black}/>}
-								<Grid key={departmentName || 'noDepartment'} small="[6]" medium="[4] [8]" large="[4] [8]">
-									<Container>
-										<ContentBlock>
+						{departments && Object.values(departments).filter(({ jobs }) => jobs && Object.keys(jobs).length > 0).map(({ departmentName, id, jobs }, index) => (
+							<React.Fragment key={(departmentName || 'noDepartment')}>
+								{index > 0 && <Hr color={colors.black}/>}
+								<Container>
+									<ContentBlock>
+										<Grid small="[6]" medium="[4] [8]" large="[4] [8]">
 											<DepartmentName>{departmentName}</DepartmentName>
-										</ContentBlock>
-									</Container>
-									<Container>
-										{(jobs && Object.keys(jobs).length > 0) && Object.values(jobs).map(({ jobId, jobName, locationName, companyId, companyName }) => (
-											<JobItem key={jobId}>
-												<ContentBlock>
-													{jobName && <JobName>{jobName}{companyName &&	 <span> at {companyName}</span>}</JobName>}
-													{locationName && <LocationName>{locationName}</LocationName>}
-													<Link to={`careers/${ jobId }`} fakeExternal><span>LEARN MORE</span></Link>
-												</ContentBlock>
-											</JobItem>
-										))}
-									</Container>
-									<div style={{ height: 60 }}/>
-								</Grid>
+											<div>
+												{(jobs && Object.keys(jobs).length > 0) && Object.values(jobs).map(({ jobId, jobName, locationName, companyId, companyName }) => (
+													<JobItem key={jobId}>
+														<div>
+															{jobName && <JobName>{jobName}{companyName &&	 <span> at {companyName}</span>}</JobName>}
+															{locationName && <LocationName>{locationName}</LocationName>}
+															<Link to={`careers/${ jobId }`} fakeExternal><span>LEARN MORE</span></Link>
+														</div>
+													</JobItem>
+												))}
+											</div>
+										</Grid>
+									</ContentBlock>
+								</Container>
 							</React.Fragment>
 						))}
 					</ScrollEntrance>
+					<div style={{ height: 60 }}/>
 				</Wrapper>
 			)
 	}

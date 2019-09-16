@@ -47,7 +47,6 @@ class NotFound extends Component {
 }
 
 export default NotFound
-// TODO
 export const NotFoundQuery = graphql` 
 	query {
 		allContentfulSite(limit: 1) {

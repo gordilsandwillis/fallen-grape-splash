@@ -58,6 +58,10 @@ const ImageStyled = styled(Image)`
 	${ typography.responsiveStyles('margin-bottom', 0, 0, 20, 28) }
 `
 
+const ImageStyledLogo = styled(Image)`
+	width: 100%;
+`
+
 const Title = styled.div`
 ${ typography.h2 }
 padding-bottom: 10px;
@@ -79,7 +83,7 @@ const PressList = ({ title, showTitle, pressContactLink, items }) => (
 							<Container>
 								<Padding>
 									<Grid large='[2] 1 [8] 1' medium='[2] 1 [9]' small='[2] [4]'>
-										<LogoContainer>{mediaOrganizationsLogo && <ImageStyled image={mediaOrganizationsLogo} />}</LogoContainer>
+										<LogoContainer>{mediaOrganizationsLogo && <ImageStyledLogo image={mediaOrganizationsLogo} />}</LogoContainer>
 										<div>
 											{title && <Title>{title}</Title>}
 											{description && RichText(description)}

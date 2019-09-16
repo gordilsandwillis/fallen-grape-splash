@@ -16,7 +16,7 @@ const Hr = styled.hr`
   margin: 2em auto;
   max-width: 75%;
   border: 0;
-  border-bottom: 1px solid #dadada;
+  border-bottom: 2px solid #dadada;
 `
 
 storiesOf('Styleguide', module)

@@ -73,10 +73,10 @@ const ProductsGrid = ({ title, showTitle, items }) => (
 				<ScrollEntrance>
 					{(title && showTitle) && <div><h2>{title}</h2></div>}
 					<Grid large="[3] [3] [3] [3]" medium="[3] [3] [3] [3]" small="[3] [3]">
-						{items && items.map(({ id, title, links, icon, descriptionText, company }) => {
+						{items && items.map(({ id, title, links, icon, descriptionText, company }, index) => {
 							if (icon) {
 								return (
-									<ProductContainer key={id}>
+									<ProductContainer key={id + index}>
 										<Grid large="[2] 1" medium="[2] 1" small="[2] 1">
 											<LogoContainer>
 												<StyledImage image={icon}/>
@@ -85,9 +85,9 @@ const ProductsGrid = ({ title, showTitle, items }) => (
 										<LineHeight>
 											<Name>{title}</Name>
 											<Byline>{descriptionText}</Byline>
-											<div>{company.name}</div>
+											<div>{company && company.name}</div>
 											{links && <ResponsiveRow>
-												{links.map(({ id, text, url }) => <LinkStyled key={id} external to={url}>{text}</LinkStyled>)}
+												{links.map(link => <LinkStyled key={link.id} external to={link.url}>{link.text}</LinkStyled>)}
 											</ResponsiveRow>
 											}
 										</LineHeight>

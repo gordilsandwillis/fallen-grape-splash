@@ -14,7 +14,7 @@ import {
 
 const PageCheat = styled.div`
   position: static;
-  ${ ({ hasAtf }) => (hasAtf ? 'height: 0' : typography.responsiveStyles('height', 150, 150, 150, 110)) }
+  ${ ({ hasAtf }) => (hasAtf ? 'height: 0' : typography.responsiveStyles('height', 150, 150, 150, 120)) }
 `
 const lightStyles = `
   position: static;
@@ -37,11 +37,11 @@ const Wrapper = styled.header`
     background-color ${ animations.mediumSpeed } ease-in-out;
   right: 0;
   z-index: 4;
-  ${ typography.responsiveStyles('height', 150, 150, 150, 110) }
+  ${ typography.responsiveStyles('height', 150, 150, 150, 120) }
   position: fixed;
 	${ ({ scrolled }) => scrolled &&
 	`
-    ${ typography.responsiveStyles('height', 110, 110, 110, 70) }
+    ${ typography.responsiveStyles('height', 90, 80, 80, 70) }
     background-color: ${ colors.offwhite };
 		color: ${ colors.black };
   `
@@ -126,10 +126,10 @@ const DesktopLinkContainer = styled.span`
     position: absolute;
     left: 0;
     right: 0;
-    height: 1px;
-    bottom: -5px;
+    height: 2px;
+    bottom: -7px;
     opacity: 0;
-    transition: bottom ${ animations.mediumSpeed } ease-in-out,
+    transition: transform ${ animations.mediumSpeed } ease-in-out,
       opacity ${ animations.mediumSpeed } ease-in-out;
   }
   &:hover {
@@ -139,7 +139,7 @@ const DesktopLinkContainer = styled.span`
     &:after {
       ${ ({ underlined }) =>
 		!underlined &&
-        ` bottom: -1px;
+		` transform: translate3d(0,-5px, 0);
 			 		opacity: 1;
 			 ` }
     }
@@ -171,7 +171,7 @@ const MobileDetect = styled.div`
   }
 	align-self: flex-start;
 	transition: transform ${ animations.mediumSpeed } ease-in-out;
-	${ ({ center, scrolled }) => (center && scrolled) && 'transform: translate3d(0px, .2em, 0px)' };
+	${ ({ center, scrolled }) => (center && scrolled) && 'transform: translate3d(0px, .65em, 0px)' };
   z-index: 4;
 `
 
@@ -222,9 +222,10 @@ class Header extends Component {
 
 	componentDidMount () {
 		if (this.props.scrolled && !this.state.scrolled) {
-			this.setState({ scrolled: true })
+			this.setState({ scrolled: false })
 		} else {
 			this.handleScroll()
+			this.setState({ scrolled: false })
 			window.addEventListener('scroll', this.handleScroll)
 		}
 	}
@@ -258,7 +259,7 @@ class Header extends Component {
 
   render () {
   	const {
-  		location: { pathname = '/' },
+  		location = { pathname: '/' },
   		navigation,
   		hasAtf = false,
   	} = this.props
@@ -281,10 +282,10 @@ class Header extends Component {
   						<NavItemsContainer>
   							<DesktopDetect>
   								{navigation && navigation.map(({ title, slug }, index) => (
-  									<DesktopLinkContainer key={title + slug + index} underlined={checkSlug({ slug, pathname })}>
+  									<DesktopLinkContainer key={title + slug + index} underlined={checkSlug({ slug, pathname: location.pathname })}>
   										<Link
   											to={slug}
-  											underlined={checkSlug({ slug, pathname })}
+  											underlined={checkSlug({ slug, pathname: location.pathname })}
   											dark={!(hasAtf && !scrolled)}
   											noHoverColor >
   											{title}
@@ -314,12 +315,14 @@ class Header extends Component {
   								</Overlay>
   							</MobileDetect>
   							<MobileDetect scrolled={scrolled} center>
+  								<Link to={location.pathname}>
   								<HamburgerContainer onClick={this.toggleNav}>
   									<HamburgerIcon
   										clicked={mobileNavOpen}
   										scrolled={scrolled}
   										hasAtf={hasAtf} />
   								</HamburgerContainer>
+  								</Link>
   							</MobileDetect>
   						</NavItemsContainer>
   					</Grid>

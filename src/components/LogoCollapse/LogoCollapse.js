@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { typography, animations } from 'src/styles'
-import LogoText from 'src/assets/images/mosaic-logo-text.svg' // TODO
+import LogoText from 'src/assets/images/mosaic-logo-text.svg'
 import TopLeft from 'src/assets/images/mosaic-logo-corner-topleft.svg'
 import TopRight from 'src/assets/images/mosaic-logo-corner-topright.svg'
 import BottomLeft from 'src/assets/images/mosaic-logo-corner-bottomleft.svg'

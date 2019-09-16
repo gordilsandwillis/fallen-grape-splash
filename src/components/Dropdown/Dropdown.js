@@ -52,6 +52,9 @@ const customStyles = {
 
 const SelectStyled = styled(Select)`
   max-width:150px;
+	${ ({ left }) => !left && `
+	margin-right:0;
+	margin-left:auto;` }
 	div {
     color: ${ colors.black };
 		border: none;
@@ -80,9 +83,10 @@ class Dropdown extends React.Component {
 	}
 
 	render () {
-		const { title, isMulti, items, onChange, value } = this.props
+		const { title, left, isMulti, items, onChange, value } = this.props
 		return <div>
 			<SelectStyled
+				left={left}
 				components={{ DropdownIndicator }}
 				arrowrenderer={this.arrowRenderer}
 				isMulti={isMulti}

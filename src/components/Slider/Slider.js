@@ -5,7 +5,6 @@ import withSizes from 'react-sizes'
 import Image from 'src/components/Image'
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
-import Grid from 'src/components/Grid'
 import RichText from 'src/components/RichText'
 import { typography, colors, gridSettings, mediaQueries as mq } from 'src/styles'
 
@@ -192,11 +191,9 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 							</ContainerStyled>
 						) : (
 							<DivStyled key={id} imageInSlider={imageInSlider}>
-								<Grid small="[4] 2" medium="[12]" large="[12]">
-									{titleInSlider && <LargeName>{titleInSlider}</LargeName>}
-									{companyName && <h2>{companyName}</h2>}
-									{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
-								</Grid>
+								{titleInSlider && <LargeName>{titleInSlider}</LargeName>}
+								{companyName && <h2>{companyName}</h2>}
+								{linkInSlider && <LinkStyled external white to={linkInSlider.url}>LEARN MORE</LinkStyled>}
 							</DivStyled>
 						)}
 					</RelativeDiv>
