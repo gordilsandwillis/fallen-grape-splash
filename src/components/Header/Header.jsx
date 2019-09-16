@@ -14,7 +14,7 @@ import {
 
 const PageCheat = styled.div`
   position: static;
-  ${ ({ hasAtf }) => (hasAtf ? 'height: 0' : typography.responsiveStyles('height', 150, 150, 150, 110)) }
+  ${ ({ hasAtf }) => (hasAtf ? 'height: 0' : typography.responsiveStyles('height', 150, 150, 150, 120)) }
 `
 const lightStyles = `
   position: static;
@@ -37,7 +37,7 @@ const Wrapper = styled.header`
     background-color ${ animations.mediumSpeed } ease-in-out;
   right: 0;
   z-index: 4;
-  ${ typography.responsiveStyles('height', 150, 150, 150, 110) }
+  ${ typography.responsiveStyles('height', 150, 150, 150, 120) }
   position: fixed;
 	${ ({ scrolled }) => scrolled &&
 	`
@@ -222,9 +222,10 @@ class Header extends Component {
 
 	componentDidMount () {
 		if (this.props.scrolled && !this.state.scrolled) {
-			this.setState({ scrolled: true })
+			this.setState({ scrolled: false })
 		} else {
 			this.handleScroll()
+			this.setState({ scrolled: false })
 			window.addEventListener('scroll', this.handleScroll)
 		}
 	}
