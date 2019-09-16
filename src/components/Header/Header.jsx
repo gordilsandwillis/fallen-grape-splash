@@ -41,7 +41,7 @@ const Wrapper = styled.header`
   position: fixed;
 	${ ({ scrolled }) => scrolled &&
 	`
-    ${ typography.responsiveStyles('height', 110, 110, 110, 70) }
+    ${ typography.responsiveStyles('height', 90, 80, 80, 70) }
     background-color: ${ colors.offwhite };
 		color: ${ colors.black };
   `
@@ -126,7 +126,7 @@ const DesktopLinkContainer = styled.span`
     position: absolute;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     bottom: -5px;
     opacity: 0;
     transition: bottom ${ animations.mediumSpeed } ease-in-out,
@@ -139,7 +139,7 @@ const DesktopLinkContainer = styled.span`
     &:after {
       ${ ({ underlined }) =>
 		!underlined &&
-        ` bottom: -1px;
+        ` bottom: -2px;
 			 		opacity: 1;
 			 ` }
     }
