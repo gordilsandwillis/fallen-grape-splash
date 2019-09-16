@@ -286,12 +286,12 @@ class CareersList extends Component {
 							</ContentBlock>
 						</Container>
 						<Hr full color={colors.black}/>
-						{departments && Object.values(departments).filter(({ jobs }) => jobs && Object.keys(jobs).length > 0).map(({ departmentName, jobs }, index) => (
-							<React.Fragment>
-								{index > 0 && <Hr key={(departmentName || 'noDepartment') + '_hr'} color={colors.black}/>}
+						{departments && Object.values(departments).filter(({ jobs }) => jobs && Object.keys(jobs).length > 0).map(({ departmentName, id, jobs }, index) => (
+							<React.Fragment key={(departmentName || 'noDepartment')}>
+								{index > 0 && <Hr color={colors.black}/>}
 								<Container>
 									<ContentBlock>
-										<Grid key={departmentName || 'noDepartment'} small="[6]" medium="[4] [8]" large="[4] [8]">
+										<Grid small="[6]" medium="[4] [8]" large="[4] [8]">
 											<DepartmentName>{departmentName}</DepartmentName>
 											<div>
 												{(jobs && Object.keys(jobs).length > 0) && Object.values(jobs).map(({ jobId, jobName, locationName, companyId, companyName }) => (

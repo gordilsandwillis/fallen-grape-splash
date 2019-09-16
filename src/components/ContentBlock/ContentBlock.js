@@ -7,7 +7,6 @@ const ContentBlockStyles = styled.div`
 	margin: 0 auto;
   height: 100%;
   padding: ${ gridSettings.containerLargeMargins } 0;
-	/* // TODO RESPONSIVE PADDING */
   ${ mq.extraLargeAndUp } {
 		padding: 60px 0;
 	}
