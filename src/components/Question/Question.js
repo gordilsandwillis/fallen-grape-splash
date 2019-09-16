@@ -5,8 +5,6 @@ import { colors, typography, animations } from 'src/styles'
 import Dropdown from 'src/components/Dropdown'
 import Grid from 'src/components/Grid'
 import Dropzone from 'react-dropzone'
-const DropdownContainer = styled.div`
-`
 
 const Input = styled.input`
 		background: none;
@@ -55,6 +53,7 @@ class Question extends React.Component {
 		const { required, name, description, values, label, type } = this.props
 		const descriptionMarkup = createMarkup(description)
 		const { onChange } = this.props
+		console.log(this.state.file)
 		const placeholder = label + (required ? '*' : '')
 		return (this.props.private ? ''
 			: <div style={{ padding: '10px 0px' }}>
@@ -63,12 +62,13 @@ class Question extends React.Component {
 				{type === 'attachment' && (
 					<div style={{ display: 'inline-block' }}>
 						<label htmlFor={name}>{label}</label>
-						<Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+						<Dropzone multiple={false} onDrop={acceptedFiles => this.setState({ file: acceptedFiles[0] })}>
 							{({ getRootProps, getInputProps }) => (
 								<section>
 									<div {...getRootProps()}>
 										<input name={name} {...getInputProps()} />
 										<FakeLink><span>ATTACH</span></FakeLink>
+										{this.state.file && this.state.file.name}
 									</div>
 								</section>
 							)}
@@ -79,16 +79,16 @@ class Question extends React.Component {
 					<div>
 						<label htmlFor={name}>{label}</label>
 						<Grid small="[6]" medium="[8] 4" large="[8] 4">
-							<Dropdown name={name} title={'Yes / No'} items={values.reverse()} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+							<Dropdown name={name} title={'Yes / No'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
 						</Grid>
 					</div>
 				)}
 				{type === 'multi_select' && (
 					<div>
 						<label htmlFor={name}>{label}</label>
-						<DropdownContainer>
-							<Dropdown name={name} isMulti title={'Select Values'} items={values.reverse()} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
-						</DropdownContainer>
+						<Grid small="[6]" medium="[8] 4" large="[8] 4">
+							<Dropdown name={name} isMulti title={'Select Values'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+						</Grid>
 					</div>
 				)}
 			</div>
