@@ -171,7 +171,7 @@ const MobileDetect = styled.div`
   }
 	align-self: flex-start;
 	transition: transform ${ animations.mediumSpeed } ease-in-out;
-	${ ({ center, scrolled }) => (center && scrolled) && 'transform: translate3d(0px, .2em, 0px)' };
+	${ ({ center, scrolled }) => (center && scrolled) && 'transform: translate3d(0px, .65em, 0px)' };
   z-index: 4;
 `
 
