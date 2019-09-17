@@ -1,4 +1,5 @@
-import { BLOCKS, MARKS } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
+import Link from 'src/components/Link'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from '@emotion/styled'
 
@@ -25,6 +26,7 @@ const options = {
 	},
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
+		[INLINES.HYPERLINK]: (node, children) => <Link external to={(node && node.data) && node.data.uri}>{children}</Link>
 	},
 	renderText: text => text
 }
