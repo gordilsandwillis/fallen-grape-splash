@@ -98,10 +98,17 @@ class Job extends React.Component {
 		this.setState({ [name]: x })
 	}
 
+	htmlDecode (input) {
+		let e = document.createElement('div')
+		e.innerHTML = input
+		return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
+	}
+
 	render () {
 		// eslint-disable-next-line no-unused-vars
-		const { greenhouseId, job_id, questions, content, internal_content, title, location } = this.props.jobData
-		const markup = createMarkup(content || internal_content)
+		const { ghid, job_id, questions, content, title, location } = this.props.jobData
+		console.log(content)
+		const markup = createMarkup(content)
 		return (
 			<Wrapper>
 				<Container>
@@ -117,7 +124,7 @@ class Job extends React.Component {
 				<ContentBlock>
 					<Container>
 						<ScrollEntrance>
-							<MarkupContainer>{markup && <div dangerouslySetInnerHTML={markup}/>}</MarkupContainer>
+							<MarkupContainer>{markup && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(content) }}/>}</MarkupContainer>
 						</ScrollEntrance>
 					</Container>
 				</ContentBlock>
