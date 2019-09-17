@@ -75,9 +75,9 @@ const AnimatedGradient = styled.div`
 	right: 0;
 	font-family: "Exo", sans-serif;
 	color: #fff;
-	background: linear-gradient(-45deg, rgb(185,53,22), rgb(231,142,48), rgb(237, 79, 0), rgb(113,88,76));
+	background: linear-gradient(-45deg, rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
 	background-size: 400% 400%;
-	animation: gradientBG 25s ease infinite;
+	animation: gradientBG 15s ease infinite;
 
 	@keyframes gradientBG {
 		0% {
@@ -98,9 +98,9 @@ const AnimatedGradient = styled.div`
 		height: 100vh;
 		font-family: "Exo", sans-serif;
 		color: #fff;
-		background: linear-gradient(69deg, rgba(52,207,214, .5), rgba(110,178,177, 1), rgba(166,172,160, .3), rgba(32,193,197, .5));
-		background-size: 400% 400%;
-		animation: gradientBG 45s ease infinite;
+		background: linear-gradient(60deg, rgba(25,150,154, .9), rgba(110,178,177, .1), rgba(52,207,214, .75), rgba(166,172,160, .1));
+		background-size: 300% 300%;
+		animation: gradientBG 25s ease infinite;
 	}
 
 	@keyframes gradientBG {
