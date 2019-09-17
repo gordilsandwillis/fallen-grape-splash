@@ -84,6 +84,7 @@ class Dropdown extends React.Component {
 
 	render () {
 		const { title, left, isMulti, items, onChange, value } = this.props
+		console.log(this.props, this.state)
 		return <div>
 			<SelectStyled
 				left={left}

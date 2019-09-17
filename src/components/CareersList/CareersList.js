@@ -199,7 +199,7 @@ class CareersList extends Component {
 			departments = { [departmentFilter.value]: departments[departmentFilter.value] }
 			departmentsForLocationDropdown = { [departmentFilter.value]: departmentsForLocationDropdown[departmentFilter.value] }
 		}
-
+		console.log(windowWidth)
 		const departmentDropdownItems = this.getDepartmentDropdownItems(departmentsForDepartmentDropdown)
 		const locationDropdownItems = this.getLocationDropdownItems(departmentsForLocationDropdown)
 		const companyDropdownItems = Object.values(companies).map(({ companyId, companyName }) => ({ value: companyId, label: companyName }))
@@ -211,26 +211,18 @@ class CareersList extends Component {
 					<ScrollEntrance>
 						<Container>
 							<ContentBlock>
-								<Grid small='[6]' medium='[3] 3 [6]' large='[6] 2 [4]' >
+								<Grid small='[6]' medium='[7] 1 [4]' large='[6] 2 [4]' >
 									{ (windowWidth > mq.mediumBreakpoint)
 										? (
 											<React.Fragment>
-												{windowWidth > mq.largeBreakpoint
-													? <JobFilters>
+													<JobFilters>
 														<JobButton tabindex="-1" underlined={!companyFilter} onClick={() => this.setState({ companyFilter: null, departmentFilter: null, locationFilter: null })}>All Jobs</JobButton>
 														{companies && companyDropdownItems.map(({ value, label }) => <JobButton key={value} tabindex="-1" underlined={(companyFilter && companyFilter.value) === value} onClick={() => this.setState({ companyFilter: { label, value }, departmentFilter: null, locationFilter: null })}>{label}</JobButton>)}
 													</JobFilters>
-													: <Dropdown
-														value={companyFilter}
-														onChange={x => this.setState({ companyFilter: x || null, departmentFilter: null, locationFilter: null })}
-														clearValue={() => this.setState({ companyFilter: null, departmentFilter: null, locationFilter: null })}
-														align='left'
-														title="All Jobs"
-														items={companyDropdownItems}
-													/>}
 												<Grid small='[4]' medium='[3] [3]' large='[3] [3]' >
 													<AlignRight>
 														<Dropdown
+															key={'location'}
 															value={locationFilter}
 															onChange={x => this.handleChangeFilter('locationFilter', x)}
 															clearValue={() => this.handleChangeFilter('locationFilter', null)}
@@ -241,6 +233,7 @@ class CareersList extends Component {
 													</AlignRight>
 													<AlignRight>
 														<Dropdown
+															key={'department'}
 															value={departmentFilter}
 															onChange={x => this.handleChangeFilter('departmentFilter', x)}
 															clearValue={() => this.handleChangeFilter('departmentFilter', null)}
@@ -255,6 +248,7 @@ class CareersList extends Component {
 											<Column>
 												<DropdownsContainer>
 													<Dropdown
+														key={'alljobs2'}
 														value={companyFilter}
 														onChange={x => this.setState({ companyFilter: (x || null), departmentFilter: null, locationFilter: null })}
 														clearValue={() => this.setState({ companyFilter: null, departmentFilter: null, locationFilter: null })}
@@ -263,6 +257,7 @@ class CareersList extends Component {
 														items={companyDropdownItems}
 													/>
 													<Dropdown
+														key={'location2'}
 														value={locationFilter}
 														onChange={x => this.handleChangeFilter('locationFilter', x)}
 														clearValue={() => this.handleChangeFilter('locationFilter', null)}
@@ -271,6 +266,7 @@ class CareersList extends Component {
 														items={locationDropdownItems}
 													/>
 													<Dropdown
+														key={'department2'}
 														value={departmentFilter}
 														onChange={x => this.handleChangeFilter('departmentFilter', x)}
 														clearValue={() => this.handleChangeFilter('departmentFilter', null)}
