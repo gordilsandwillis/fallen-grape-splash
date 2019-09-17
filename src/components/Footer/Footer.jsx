@@ -7,7 +7,7 @@ import Container from 'src/components/Container'
 import Hr from 'src/components/Hr'
 import RichText from 'src/components/RichText'
 
-import { colors, typography } from 'src/styles'
+import { colors, typography, mediaQueries as mq } from 'src/styles'
 
 const Wrapper = styled.footer`
   position: ${ ({ isHomePage }) => isHomePage ? 'absolute' : 'static' };
@@ -33,9 +33,12 @@ const FooterTextGrey = styled.div`
 `
 
 const FooterTextRightAlign = styled.div`
-  text-align: right;
-  justify-content: flex-end;
-  display: flex;
+  ${ mq.largeAndUp } {
+    justify-self: flex-end;
+    justify-content: flex-end;
+    text-align:right;
+    display: flex;
+  }
 `
 
 const FooterLink = styled(Link)`
@@ -43,6 +46,11 @@ const FooterLink = styled(Link)`
   &:hover {
     color: ${ colors.grey };
   }
+  ${ mq.largeAndUp } {
+    padding-right: 0 !important;
+    padding-left: 24px;
+  }
+  padding-right: 24px;
 `
 
 const Footer = ({
@@ -55,7 +63,7 @@ const Footer = ({
 	<Wrapper isHomePage={isHomePage}>
 		{horizontalBreakInFooter && <Hr color={colors.black} />}
 		<FooterContainer>
-			<Grid small="[5] [1]" medium="[6] [6]" large="[6] [6]">
+			<Grid small="[6]" medium="[6] [6]" large="[6] [6]">
 				<div>
 					<div>{footerCompanyBio && RichText(footerCompanyBio)}</div>
 					<FooterTextGrey>{copyright && RichText(copyright)}</FooterTextGrey>
