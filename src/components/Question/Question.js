@@ -15,26 +15,25 @@ const Input = styled.input`
 		${ typography.body }
 `
 const LinkStyles = `
+	cursor: pointer;	
 	font-size: inherit;
-	cursor: pointer;
-  text-decoration: none;
-  transition: color ${ animations.mediumSpeed } ease-in-out;
+	text-decoration: none;
+	transition: color ${ animations.mediumSpeed } ease-in-out;
 `
 const FakeLink = styled.div`
 	white-space:nowrap;
   ${ LinkStyles }
   color: ${ ({ white }) => white ? colors.white : colors.brightBlue };
-	span{
-		border-bottom: 2px solid ${ ({ white }) => white ? colors.white : colors.brightBlue };
-		transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+	span {
+		border-bottom: 2px solid currentColor;
 	}
   &:hover {
     color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.grey };
-		border-color: ${ ({ white, nohover }) => nohover ? (white ? colors.unofficialLightGrey : colors.grey) : (white ? colors.white : colors.brightblue) };
   }
 
 &::after {
-    content: '↗';
+		content: '↗';
+		color: currentColor;
     margin-left: 2px;
     line-height: 1em;
     font-size: 1.25em;
@@ -47,54 +46,62 @@ class Question extends React.Component {
 		super(props)
 		this.state = { value: null }
 	}
-	/* eslint-disable no-console */
+
+	htmlDecode (input) {
+		let e = document.createElement('div')
+		e.innerHTML = input
+		return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
+	}
+
 	render () {
-		const { required, name, description, values, label, type } = this.props
-		const descriptionMarkup = createMarkup(description)
-		const { onChange } = this.props
-		console.log(this.state.file)
+		const { onChange, required, label, description, fields } = this.props
 		const placeholder = label + (required ? '*' : '')
-		return (this.props.private ? ''
-			: <div style={{ padding: '10px 0px' }}>
-				{descriptionMarkup && <div style={{ color: 'red' }} dangerouslySetInnerHTML={descriptionMarkup} />}
-				{type === 'short_text' && <Input name={name} placeholder={placeholder} required={required} type={name === 'email' ? 'email' : 'text'}></Input>}
-				{type === 'attachment' && (
-					<div style={{ display: 'inline-block' }}>
-						<label htmlFor={name}>{label}</label>
-						<Dropzone multiple={false} onDrop={acceptedFiles => this.setState({ file: acceptedFiles[0] })}>
-							{({ getRootProps, getInputProps }) => (
-								<section>
-									<div {...getRootProps()}>
-										<input name={name} {...getInputProps()} />
-										<FakeLink><span>ATTACH</span></FakeLink>
-										{this.state.file && this.state.file.name}
-									</div>
-								</section>
-							)}
-						</Dropzone>
-					</div>
-				)}
-				{type === 'boolean' && (
-					<div>
-						<label htmlFor={name}>{label}</label>
-						<div style={{ padding: '10px 0' }}>
-							<Dropdown left name={name} title={'Yes / No'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
-						</div>
-					</div>
-				)}
-				{type === 'multi_select' && (
-					<div>
-						<label htmlFor={name}>{label}</label>
-						<div style={{ padding: '10px 0' }}>
-							<Dropdown left name={name} isMulti title={'Select Values'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
-						</div>
-					</div>
-				)}
+		return (
+			<div style={{ padding: '20px 0px' }}>
+				{/* {label && <div>{label}</div>} */}
+				{fields && fields.map(({ type, name, values }) => (
+					<React.Fragment>
+						{type === 'input_text' &&
+				<Input name={name} placeholder={placeholder} required={required} type={name === 'email' ? 'email' : 'text'}></Input>
+						}
+						{type === 'input_file' && (
+							<div style={{ display: 'inline-block' }}>
+								<label htmlFor={name}>{label}</label>
+								<Dropzone multiple={false} onDrop={acceptedFiles => this.setState({ file: acceptedFiles[0] })}>
+									{({ getRootProps, getInputProps }) => (
+										<section>
+											<div {...getRootProps()}>
+												<input name={name} {...getInputProps()} />
+												<FakeLink><span>ATTACH</span></FakeLink>
+												{this.state.file && this.state.file.name}
+											</div>
+										</section>
+									)}
+								</Dropzone>
+							</div>
+						)}
+						{type === 'multi_value_single_select' && (
+							<div>
+								<label htmlFor={name}>{label}</label>
+								<div style={{ padding: '10px 0' }}>
+									<Dropdown left name={name} title={'Select Value'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+								</div>
+							</div>
+						)}
+						{type === 'multi_value_multi_select' && (
+							<div>
+								<label htmlFor={name}>{label}</label>
+								<div style={{ padding: '10px 0' }}>
+									<Dropdown left name={name} isMulti title={'Select Values'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+								</div>
+							</div>
+						)}
+					</React.Fragment>
+				))}
+				{description && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(description) }} />}
 			</div>
 		)
 	}
 }
-
-const createMarkup = string => string ? { __html: string } : null
 
 export default Question

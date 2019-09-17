@@ -41,6 +41,11 @@ ul {
 }
 `
 
+const H2 = styled.div`
+	${ typography.h2 }
+	padding: 30px 0;
+`
+
 const ApplyTitle = styled.div`
 	${ typography.h2 }
 	padding-bottom: 20px;
@@ -106,9 +111,7 @@ class Job extends React.Component {
 
 	render () {
 		// eslint-disable-next-line no-unused-vars
-		const { ghid, job_id, questions, content, title, location } = this.props.jobData
-		console.log(content)
-		const markup = createMarkup(content)
+		const { ghid, job_id, questions, compliance, location_questions, content, title, location } = this.props.jobData
 		return (
 			<Wrapper>
 				<Container>
@@ -124,7 +127,7 @@ class Job extends React.Component {
 				<ContentBlock>
 					<Container>
 						<ScrollEntrance>
-							<MarkupContainer>{markup && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(content) }}/>}</MarkupContainer>
+							<MarkupContainer>{content && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(content) }}/>}</MarkupContainer>
 						</ScrollEntrance>
 					</Container>
 				</ContentBlock>
@@ -135,7 +138,38 @@ class Job extends React.Component {
 						<form onSubmit={e => this.handleSubmit(e)} encType='multipart/form-data'>
 							<input type="hidden" name="id" value={job_id} />
 							<input type="hidden" name="mapped_url_token" value="mosaic_website" />
-							{questions && questions.map((x, i) => <Question onChange={this.handleDropdownChange} dropdownValue={this.state[x.name]} key={(x.name || i) + i} {...x} />)}
+							{questions && questions.map((q, i) => (
+								<Question
+									onChange={this.handleDropdownChange}
+									dropdownValue={this.state[q.label]}
+									key={(q.label || i) + i} {...q}
+								/>
+							))}
+							<H2>Compliance</H2>
+							{compliance && compliance.map((item, index) => (
+								<div key={index + '_compliance'}>
+									<div>{item.description && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(item.description) }}/>}</div>
+									{item.questions && item.questions.map((q, i) => (
+										<Question
+											onChange={this.handleDropdownChange}
+											dropdownValue={this.state[q.label]}
+											key={(q.label || i) + i} {...q}
+										/>
+									))}
+								</div>
+							))}
+							{/* {location_questions && (
+								<div>
+									<H2>Location Questions</H2>
+									{location_questions.map((q, i) => (
+										<Question
+											onChange={this.handleDropdownChange}
+											dropdownValue={this.state[q.label]}
+											key={(q.label || i) + i} {...q}
+										/>
+									))}
+								</div>
+							)} */}
 							<div style={{ marginTop: 20 }}>
 								<Button style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
 							</div>
@@ -146,6 +180,5 @@ class Job extends React.Component {
 		)
 	}
 }
-const createMarkup = string => string ? { __html: string } : null
 
 export default Job

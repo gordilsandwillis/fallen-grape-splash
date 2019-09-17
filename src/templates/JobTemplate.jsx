@@ -88,32 +88,52 @@ export const JobQuery = graphql`
 		allGreenhouseJob(filter: {gh_Id:{eq: $id}}) {
 			edges {
 				node {
+					ghid: gh_Id
 					title
-					greenhouseId: gh_Id
+					content
 					location {
 						name
 					}
-					departments {
-						id
-						name
+					compliance {
+						description
+						type
+						questions {
+							required
+							label
+							fields {
+								name
+								type
+								values {
+									value
+									label
+								}
+							}
+						}
 					}
-					id
-					content
-					questions {
+					location_questions {
 						required
 						label
 						fields {
-							name
 							type
+							name
+						}
+					}
+					questions {
+						required
+						label
+						description
+						fields {
+							type
+							name
 							values {
-								label
 								value
+								label
 							}
 						}
-						description
 					}
 				}
 			}
+
 		}
 	}
 `
