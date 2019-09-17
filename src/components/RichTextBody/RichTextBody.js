@@ -8,7 +8,7 @@ const BoxedText = styled.span`
   font-style: normal !important;
 	display: inline-block;
 `
-const Paragraph = styled.div`
+const Paragraph = styled.p`
 	
 `
 

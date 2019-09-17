@@ -10,6 +10,7 @@ import FourUp from 'src/components/FourUp'
 import PressList from 'src/components/PressList'
 import ProductsGrid from 'src/components/ProductsGrid'
 import Slider from 'src/components/Slider'
+import LegalInfo from 'src/components/LegalInfo'
 
 const componentMap = {
 	ContentfulBlockAboveTheFold: ATF,
@@ -22,6 +23,7 @@ const componentMap = {
 	ContentfulBlockPressList: PressList,
 	ContentfulBlockProductsGrid: ProductsGrid,
 	ContentfulBlockSlider: Slider,
+	ContentfulBlockLegalInfo: LegalInfo,
 }
 
 export default ({ item }) => {
