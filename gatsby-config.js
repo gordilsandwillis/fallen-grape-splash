@@ -74,19 +74,10 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-source-greenhouse`,
+			resolve: 'gatsby-source-greenhouse-job-board',
 			options: {
-				apiToken: `${ process.env.GREENHOUSE_HARVEST_API_KEY }`,
-				jobPosts: {
-					live: true
-				}
-			},
-		},
-		// {
-		// 	resolve: 'gatsby-source-greenhouse-job-board',
-		// 	options: {
-		// 		boardToken: 'askapps'
-		// 	}
-		// }
+				boardToken: 'askapps'
+			}
+		}
 	],
 }

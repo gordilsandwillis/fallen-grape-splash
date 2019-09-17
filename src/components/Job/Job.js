@@ -22,10 +22,6 @@ const JobName = styled.div`
 	padding-bottom: 20px;
 `
 
-const CompanyName = styled.div`
-	${ typography.h2 }
-`
-
 const LocationName = styled.div`
 	${ typography.body }
 	color: ${ colors.grey };
@@ -105,7 +101,6 @@ class Job extends React.Component {
 	render () {
 		// eslint-disable-next-line no-unused-vars
 		const { greenhouseId, job_id, questions, content, internal_content, title, location } = this.props.jobData
-		const { companyName } = this.props
 		const markup = createMarkup(content || internal_content)
 		return (
 			<Wrapper>
@@ -115,7 +110,6 @@ class Job extends React.Component {
 				<ContentBlock>
 					<Container>
 						{title && <JobName>{title}</JobName>}
-						{companyName && <CompanyName>at {companyName}</CompanyName>}
 						{(location && location.name) && <LocationName>{location.name}</LocationName>}
 					</Container>
 				</ContentBlock>
