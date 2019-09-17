@@ -99,7 +99,7 @@ const AnimatedGradient = styled.div`
 		font-family: "Exo", sans-serif;
 		color: #fff;
 		background: linear-gradient(60deg, rgba(25,150,154, .9), rgba(110,178,177, .1), rgba(52,207,214, .75), rgba(166,172,160, .1));
-		background-size: 300% 300%;
+		background-size: 350% 350%;
 		animation: gradientBG 25s ease infinite;
 	}
 
