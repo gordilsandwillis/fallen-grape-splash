@@ -5,6 +5,7 @@ export const query = graphql`
     __typename
     id
     verticalTextAlignment
+    animatedGradientInsteadOfImage
     smallText {
       json
     }

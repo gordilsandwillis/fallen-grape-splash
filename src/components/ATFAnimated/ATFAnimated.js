@@ -60,64 +60,58 @@ const Block = styled.div`
 	` }
 `
 
-const BgImage = styled(Image)`
+const BgImage = styled.div`
 	height: 100%;
 
-	position: absolute;
-	left: 0;
-  right: 0;
-`
-
-const AnimatedGradient = styled.div`
-	height: 100%;
 	position: absolute;
 	left: 0;
 	right: 0;
 	font-family: "Exo", sans-serif;
 	color: #fff;
-	background: linear-gradient(-45deg, rgb(185,53,22), rgb(231,142,48), rgb(237, 79, 0), rgb(113,88,76));
+	background: linear-gradient(-45deg, rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
 	background-size: 400% 400%;
 	animation: gradientBG 25s ease infinite;
 
-	@keyframes gradientBG {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
 	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 
-	div {
-		margin: 0;
-		position: absolute;
-		width: 100%;
-		height: 100vh;
-		font-family: "Exo", sans-serif;
-		color: #fff;
-		background: linear-gradient(69deg, rgba(52,207,214, .5), rgba(110,178,177, 1), rgba(166,172,160, .3), rgba(32,193,197, .5));
-		background-size: 400% 400%;
-		animation: gradientBG 45s ease infinite;
-	}
+div {
+	margin: 0;
+  position: absolute;
+	width: 100%;
+	height: 100vh;
+	font-family: "Exo", sans-serif;
+	color: #fff;
+	background: linear-gradient(180deg, rgba(110,178,177, .1), rgba(52,207,214, 1), rgba(166,172,160, .1), rgba(25,150,154, 1));
+	background-size: 400% 400%;
+	animation: gradientBG 45s ease infinite;
+}
 
-	@keyframes gradientBG {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
 	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 `
 
 const Overlay = styled.div`
-	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+	/* background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); */
+	background: transparent;
 	opacity: .1;
 	
 	position: absolute;
@@ -171,7 +165,7 @@ const ButtonUppercase = styled(Button)`
 	text-transform: uppercase;
 `
 
-class ATF extends Component {
+class ATFAnimated extends Component {
 	constructor (props) {
 		super(props)
 		this.state = { isMobile: false }
@@ -198,7 +192,6 @@ class ATF extends Component {
 			horizontalTextAlignment,
 			verticalTextAlignment,
 			headline,
-			animatedGradientInsteadOfImage,
 			smallText,
 			winHeight,
 			horizontalBreak,
@@ -208,8 +201,7 @@ class ATF extends Component {
 		return (
 			<Fragment>
 				<Block isMobile={isMobile} full={smallText && headline} background winHeight={winHeight}>
-					{(image && !animatedGradientInsteadOfImage) && <BgImage image={image} />}
-					{animatedGradientInsteadOfImage && <AnimatedGradient><div></div></AnimatedGradient>}
+					<BgImage><div/></BgImage>
 					<Overlay />
 				</Block>
 				<Block isMobile={isMobile} full={smallText && headline} content="true" winHeight={winHeight}>
@@ -256,7 +248,7 @@ class ATF extends Component {
 	}
 }
 
-ATF.defaultProps = {
+ATFAnimated.defaultProps = {
 	horizontalTextAlignment: false,
 	verticalTextAlignment: false,
 	image: {},
@@ -267,7 +259,7 @@ ATF.defaultProps = {
 	// buttonLink,
 }
 
-ATF.propTypes = {
+ATFAnimated.propTypes = {
 	horizontalTextAlignment: PropTypes.bool.isRequired,
 	verticalTextAlignment: PropTypes.bool.isRequired,
 	image: PropTypes.object.isRequired,
@@ -278,4 +270,4 @@ ATF.propTypes = {
 	buttonLink: PropTypes.any,
 }
 
-export default ATF
+export default ATFAnimated
