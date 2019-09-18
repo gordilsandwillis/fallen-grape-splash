@@ -10,7 +10,7 @@ import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentBlock from 'src/components/ContentBlock'
 import Dropdown from 'src/components/Dropdown'
 import Link from 'src/components/Link'
-import { colors, animations, typography, mediaQueries as mq } from 'src/styles'
+import { colors, typography, mediaQueries as mq } from 'src/styles'
 
 const Wrapper = styled.div`
   color: ${ colors.black };
@@ -28,14 +28,6 @@ const JobName = styled.div`
 	${ typography.h2 };
 `
 
-const RowOrColumn = styled.div`
-		/* display:flex;
-	flex-direction:
-	${ mq.mediumAndBelow } {
-		flex-direction: column
-	} */
-`
-
 const JobItem = styled.div`
 ${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
 `
@@ -50,9 +42,6 @@ const LocationName = styled.div`
 	color: ${ colors.grey };
 	padding-top:3px;
 	padding-bottom:3px;
-`
-
-const AlignRight = styled.div`
 `
 
 class CareersList extends Component {
