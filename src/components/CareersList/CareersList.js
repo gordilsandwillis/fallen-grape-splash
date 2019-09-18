@@ -10,7 +10,7 @@ import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentBlock from 'src/components/ContentBlock'
 import Dropdown from 'src/components/Dropdown'
 import Link from 'src/components/Link'
-import { colors, typography, mediaQueries as mq } from 'src/styles'
+import { colors, typography } from 'src/styles'
 
 const Wrapper = styled.div`
   color: ${ colors.black };
