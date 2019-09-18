@@ -19,7 +19,7 @@
     "gatsby-image": "^2.0.41",
     "gatsby-plugin-emotion": "^4.0.7",
     "gatsby-plugin-env-variables": "^1.0.1",
-    "gatsby-plugin-layout": "^1.0.15",
+    "gatsby-plugin-layout": "^1.1.7",
     "gatsby-plugin-manifest": "^2.1.1",
     "gatsby-plugin-offline": "^2.1.0",
     "gatsby-plugin-react-helmet": "^3.0.12",
@@ -49,7 +49,7 @@
     "react-sizes": "^2.0.0",
     "react-slick": "^0.25.2",
     "react-svg-loader": "^3.0.3",
-    "react-transition-group": "^4.2.2",
+    "react-transition-group": "^4.3.0",
     "slash": "^3.0.0",
     "slick-carousel": "^1.8.1",
     "slug": "^1.1.0"
