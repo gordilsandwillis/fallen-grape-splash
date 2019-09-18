@@ -58,11 +58,11 @@ class Question extends React.Component {
 		this.state = { value: null }
 	}
 
-	htmlDecode (input) {
-		let e = document.createElement('div')
-		e.innerHTML = input
-		return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
-	}
+	// htmlDecode (input) {
+	// 	let e = document.createElement('div')
+	// 	e.innerHTML = input
+	// 	return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
+	// }
 
 	render () {
 		const { onChange, required, label, description, fields } = this.props
@@ -112,7 +112,7 @@ class Question extends React.Component {
 						)}
 					</div>
 				))}
-				{description && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(description) }} />}
+				{description && <div dangerouslySetInnerHTML={{ __html: decodeURI(description) }} />}
 			</div>
 		)
 	}

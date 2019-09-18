@@ -11,6 +11,7 @@ import Hr from 'src/components/Hr'
 import ContentBlock from 'src/components/ContentBlock'
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
+import parse from 'html-react-parser'
 import { colors, typography } from 'src/styles'
 
 const Wrapper = styled.div`
@@ -61,11 +62,9 @@ class Job extends React.Component {
 	handleSubmit = e => {
 		e.preventDefault()
 		if (this.state.loading) return
-		console.log(this.state.loading)
 		const formData = new FormData(e.target)
 		const { questions, compliance } = this.props.jobData
 		const allQuestions = compliance.reduce((acc, x) => { return acc.concat(x.questions) }, [...questions])
-		console.log(allQuestions)
 		allQuestions
 			.forEach(metaQ => {
 				metaQ.fields
@@ -85,7 +84,6 @@ class Job extends React.Component {
 
 		const { ghid } = this.props.jobData
 		const url = `${ 'http://localhost:3000/api/' }${ ghid }`
-		console.log(url)
 		this.setLoadingTimeout()
 		axios.post(url, formData, {
 			headers: {
@@ -106,12 +104,11 @@ class Job extends React.Component {
 	handleDropdownChange = ({ name, x }) => {
 		this.setState({ [name]: x })
 	}
-
-	htmlDecode (input) {
-		let e = document.createElement('div')
-		e.innerHTML = input
-		return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
-	}
+	// encodeHtml (input) {
+	// 	let e = document.createElement('div')
+	// 	e.innerHTML = input
+	// 	return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
+	// }
 
 	render () {
 		// eslint-disable-next-line no-unused-vars
@@ -131,7 +128,7 @@ class Job extends React.Component {
 				<ContentBlock>
 					<Container>
 						<ScrollEntrance>
-							<MarkupContainer>{content && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(content) }}/>}</MarkupContainer>
+							<MarkupContainer>{content && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(content)) }}/>}</MarkupContainer>
 						</ScrollEntrance>
 					</Container>
 				</ContentBlock>
@@ -152,7 +149,7 @@ class Job extends React.Component {
 							<H2>Compliance</H2>
 							{compliance && compliance.map((item, index) => (
 								<div key={index + '_compliance'}>
-									<div>{item.description && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(item.description) }}/>}</div>
+									<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
 									{item.questions && item.questions.map((q, i) => (
 										<Question
 											onChange={this.handleDropdownChange}
