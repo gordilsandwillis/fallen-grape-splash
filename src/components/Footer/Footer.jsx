@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import ContentBlock from 'src/components/ContentBlock'
 import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
@@ -65,7 +64,6 @@ const Footer = ({
 }) => (
 	<Wrapper isHomePage={isHomePage}>
 		{horizontalBreakInFooter && <Hr color={colors.black} />}
-		{/* <ContentBlock> */}
 		<FooterContainer>
 			<Grid small="[6]" medium="[6] [6]" large="[6] [6]">
 				<div>
@@ -77,7 +75,6 @@ const Footer = ({
 				</FooterTextRightAlign>
 			</Grid>
 		</FooterContainer>
-		{/* </ContentBlock> */}
 	</Wrapper>
 )
 
