@@ -84,10 +84,10 @@ const AnimatedGradient = styled.div`
 			background-position: 0% 20%;
 		}
 		50% {
-			background-position: 100% 50%;
+			background-position: 100% 80%;
 		}
 		100% {
-			background-position: 0% 80%;
+			background-position: 0% 20%;
 		}
 	}
 
@@ -108,10 +108,10 @@ const AnimatedGradient = styled.div`
 			background-position: 0% 80%;
 		}
 		50% {
-			background-position: 100% 50%;
+			background-position: 100% 20%;
 		}
 		100% {
-			background-position: 0% 20%;
+			background-position: 0% 80%;
 		}
 	}
 `
