@@ -19,23 +19,7 @@ class JobTemplate extends React.Component {
 		const { navigation, footerNavigation, footerCompanyBio, copyright, seoAppleTouchIcon, seoSocialShareImage, favicon } = site
 		const horizontalBreakInFooter = true
 
-		const jobData = _.get(data, 'allGreenhouseJobPost.edges[0].node')
-		let companyName = null
-		data.allGreenhouseDepartment.edges.find(d => {
-			return d.node.childrenGreenhouseJobPost.find(j => {
-				if (j.job_id === jobData.job_id) {
-					const result = data.allGreenhouseDepartment.edges.find(({ node }) => {
-						if (node.greenhouseId === (d.node.parent_id && d.node.parent_id.toString())) {
-							companyName = node.name
-							return node.name
-						}
-					})
-					if (result) return result
-					companyName = d.node && d.node.name
-					return companyName
-				}
-			})
-		})
+		const jobData = _.get(data, 'allGreenhouseJob.edges[0].node')
 		return (
 			<main>
 				<SEO
@@ -47,7 +31,7 @@ class JobTemplate extends React.Component {
 					description={''}
 				/>
 				<Header location={location} navigation={navigation} />
-				<Job companyName={companyName} jobData={jobData}/>
+				<Job jobData={jobData}/>
 				<Footer horizontalBreakInFooter={horizontalBreakInFooter} footerCompanyBio={footerCompanyBio} copyright={copyright} footerNavigation={footerNavigation} />
 			</main>
 		)
@@ -101,44 +85,55 @@ export const JobQuery = graphql`
 				}
 			}
 		}
-		allGreenhouseDepartment {
+		allGreenhouseJob(filter: {gh_Id:{eq: $id}}) {
 			edges {
 				node {
-					name
-					childrenGreenhouseJobPost {
-						job_id
-					}
-					parent_id
-					greenhouseId
-				}
-			}
-		}
-		allGreenhouseJobPost(filter: {job_id: {eq: $id}}) {
-			edges {
-				node {
-					greenhouseId
-					job_id
-					content
-					internal_content
+					ghid: gh_Id
 					title
-					questions {
-						required
-						private
-						name
-						description
-						label
-						values {
-							value
-							label
-						}
-						type
-					}
+					content
 					location {
 						name
-						id
+					}
+					compliance {
+						description
+						type
+						questions {
+							required
+							label
+							fields {
+								name
+								type
+								values {
+									value
+									label
+								}
+							}
+						}
+					}
+					location_questions {
+						required
+						label
+						fields {
+							type
+							name
+						}
+					}
+					questions {
+						required
+						label
+						description
+						fields {
+							type
+							name
+							values {
+								value
+								label
+							}
+						}
 					}
 				}
 			}
+
 		}
 	}
 `

@@ -68,6 +68,54 @@ const BgImage = styled(Image)`
   right: 0;
 `
 
+const AnimatedGradient = styled.div`
+	height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	font-family: "Exo", sans-serif;
+	color: #fff;
+	background: radial-gradient( rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
+	background-size: 500% 500%;
+	animation: gradientBG 75s ease infinite;
+
+	@keyframes gradientBG {
+		0% {
+			background-position: 0% 20%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 80%;
+		}
+	}
+
+	div {
+		margin: 0;
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		font-family: "Exo", sans-serif;
+		color: #fff;
+		background: radial-gradient(rgba(25,150,154, .9), rgba(110,178,177, .1), rgba(52,207,214, .75), rgba(166,172,160, .1));
+		background-size: 500% 500%;
+		animation: gradientBG 90s ease infinite;
+	}
+
+	@keyframes gradientBG {
+		0% {
+			background-position: 0% 80%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 20%;
+		}
+	}
+`
+
 const Overlay = styled.div`
 	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
 	opacity: .1;
@@ -150,6 +198,7 @@ class ATF extends Component {
 			horizontalTextAlignment,
 			verticalTextAlignment,
 			headline,
+			animatedGradientInsteadOfImage,
 			smallText,
 			winHeight,
 			horizontalBreak,
@@ -159,7 +208,8 @@ class ATF extends Component {
 		return (
 			<Fragment>
 				<Block isMobile={isMobile} full={smallText && headline} background winHeight={winHeight}>
-					<BgImage image={image} />
+					{(image && !animatedGradientInsteadOfImage) && <BgImage image={image} />}
+					{animatedGradientInsteadOfImage && <AnimatedGradient><div></div></AnimatedGradient>}
 					<Overlay />
 				</Block>
 				<Block isMobile={isMobile} full={smallText && headline} content="true" winHeight={winHeight}>

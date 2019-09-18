@@ -11,6 +11,7 @@ import Hr from 'src/components/Hr'
 import ContentBlock from 'src/components/ContentBlock'
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
+import parse from 'html-react-parser'
 import { colors, typography } from 'src/styles'
 
 const Wrapper = styled.div`
@@ -20,10 +21,6 @@ const Wrapper = styled.div`
 const JobName = styled.div`
 	${ typography.h1 }
 	padding-bottom: 20px;
-`
-
-const CompanyName = styled.div`
-	${ typography.h2 }
 `
 
 const LocationName = styled.div`
@@ -45,6 +42,11 @@ ul {
 }
 `
 
+const H2 = styled.div`
+	${ typography.h2 }
+	padding: 30px 0;
+`
+
 const ApplyTitle = styled.div`
 	${ typography.h2 }
 	padding-bottom: 20px;
@@ -61,52 +63,56 @@ class Job extends React.Component {
 		e.preventDefault()
 		if (this.state.loading) return
 		const formData = new FormData(e.target)
-		const data = this.props.jobData.questions
-			.reduce((acc, q) => {
-				const value = formData.get(q.name || 'Career')
-				switch (q.type) {
-				case 'short_text':
-					if (value) acc[q.name] = value
-					break
-				case 'attachment':
-					if (value) acc[q.name] = value
-					break
-				case 'boolean':
-					if (this.state[q.name].value) acc[q.name] = this.state[q.name].value
-					break
-				case 'multi_select':
-					break
-				default:
-					break
-				}
-				return acc
-			}, {})
-		const { job_id } = this.props.jobData
-		const url = `${ 'http://localhost:3000/api/' }${ job_id }`
-		console.log(url)
-		this.setState({ loading: true })
-		axios.post(url, data, {
+		const { questions, compliance } = this.props.jobData
+		const allQuestions = compliance.reduce((acc, x) => { return acc.concat(x.questions) }, [...questions])
+		allQuestions
+			.forEach(metaQ => {
+				metaQ.fields
+					.forEach(q => {
+						switch (q.type) {
+						case 'multi_value_single_select':
+							if (this.state[q.name] && this.state[q.name].value) formData.append(q.name, this.state[q.name].value)
+							break
+						case 'multi_value_multi_select':
+							if (this.state[q.name] && this.state[q.name].value) formData.append(q.name, this.state[q.name].value)
+							break
+						default:
+							break
+						}
+					})
+			})
+
+		const { ghid } = this.props.jobData
+		const url = `${ 'http://localhost:3000/api/' }${ ghid }`
+		this.setLoadingTimeout()
+		axios.post(url, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
 		}).then(res => {
 			console.log(res)
-			this.setState({ loading: false })
 		}).catch(e => {
 			console.log(e)
-			this.setState({ loading: false })
 		})
+	}
+
+	setLoadingTimeout () {
+		this.setState({ loading: true })
+		setTimeout(() => this.setState({ loading: false }), 10000)
 	}
 
 	handleDropdownChange = ({ name, x }) => {
 		this.setState({ [name]: x })
 	}
+	// encodeHtml (input) {
+	// 	let e = document.createElement('div')
+	// 	e.innerHTML = input
+	// 	return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
+	// }
 
 	render () {
 		// eslint-disable-next-line no-unused-vars
-		const { greenhouseId, job_id, questions, content, internal_content, title, location } = this.props.jobData
-		const { companyName } = this.props
-		const markup = createMarkup(content || internal_content)
+		const { ghid, questions, compliance, content, title, location } = this.props.jobData
 		return (
 			<Wrapper>
 				<Container>
@@ -115,7 +121,6 @@ class Job extends React.Component {
 				<ContentBlock>
 					<Container>
 						{title && <JobName>{title}</JobName>}
-						{companyName && <CompanyName>at {companyName}</CompanyName>}
 						{(location && location.name) && <LocationName>{location.name}</LocationName>}
 					</Container>
 				</ContentBlock>
@@ -123,7 +128,7 @@ class Job extends React.Component {
 				<ContentBlock>
 					<Container>
 						<ScrollEntrance>
-							<MarkupContainer>{markup && <div dangerouslySetInnerHTML={markup}/>}</MarkupContainer>
+							<MarkupContainer>{content && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(content)) }}/>}</MarkupContainer>
 						</ScrollEntrance>
 					</Container>
 				</ContentBlock>
@@ -132,9 +137,40 @@ class Job extends React.Component {
 					<Container>
 						<ApplyTitle>Apply for this Job</ApplyTitle>
 						<form onSubmit={e => this.handleSubmit(e)} encType='multipart/form-data'>
-							<input type="hidden" name="id" value={job_id} />
+							<input type="hidden" name="id" value={ghid} />
 							<input type="hidden" name="mapped_url_token" value="mosaic_website" />
-							{questions && questions.map((x, i) => <Question onChange={this.handleDropdownChange} dropdownValue={this.state[x.name]} key={(x.name || i) + i} {...x} />)}
+							{questions && questions.map((q, i) => (
+								<Question
+									onChange={this.handleDropdownChange}
+									dropdownValues={this.state[q.label]}
+									key={(q.label || i) + i} {...q}
+								/>
+							))}
+							<H2>Compliance</H2>
+							{compliance && compliance.map((item, index) => (
+								<div key={index + '_compliance'}>
+									<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
+									{item.questions && item.questions.map((q, i) => (
+										<Question
+											onChange={this.handleDropdownChange}
+											dropdownValues={this.state[q.label]}
+											key={(q.label || i) + i} {...q}
+										/>
+									))}
+								</div>
+							))}
+							{/* {location_questions && (
+								<div>
+									<H2>Location Questions</H2>
+									{location_questions.map((q, i) => (
+										<Question
+											onChange={this.handleDropdownChange}
+											dropdownValue={this.state[q.label]}
+											key={(q.label || i) + i} {...q}
+										/>
+									))}
+								</div>
+							)} */}
 							<div style={{ marginTop: 20 }}>
 								<Button style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
 							</div>
@@ -145,6 +181,5 @@ class Job extends React.Component {
 		)
 	}
 }
-const createMarkup = string => string ? { __html: string } : null
 
 export default Job

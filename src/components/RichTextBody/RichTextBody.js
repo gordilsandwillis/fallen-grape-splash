@@ -1,6 +1,6 @@
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
-import Link from 'src/components/Link'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import Link from 'src/components/Link'
 import styled from '@emotion/styled'
 
 const BoxedText = styled.span`
@@ -9,7 +9,7 @@ const BoxedText = styled.span`
   font-style: normal !important;
 	display: inline-block;
 `
-const Paragraph = styled.div`
+const Paragraph = styled.p`
 	
 `
 

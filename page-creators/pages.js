@@ -14,12 +14,19 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
           }
         }
 			}
-			allGreenhouseJobPost {
+			allGreenhouseJob {
 				edges {
 					node {
 						id
-						job_id
-						slug
+						title
+						greenhouseId: gh_Id
+						location {
+							name
+						}
+						departments {
+							id
+							name
+						}
 					}
 				}
 			}		
@@ -43,13 +50,13 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
 				},
 			})
 		})
-		result.data.allGreenhouseJobPost.edges.forEach(edge => {
+		result.data.allGreenhouseJob.edges.forEach(edge => {
 			const template = pageTemplateMap['job']
 			createPage({
-				path: `/careers/${ slug(edge.node.job_id) }/`,
+				path: `/careers/${ slug(edge.node.greenhouseId) }/`,
 				component: slash(template),
 				context: {
-					id: edge.node.job_id
+					id: edge.node.greenhouseId
 				}
 			})
 		})

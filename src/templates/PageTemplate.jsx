@@ -23,7 +23,7 @@ class PageTemplate extends React.Component {
 
 		const page = _.get(data, 'allContentfulPage.edges[0].node')
 		const { blocks, horizontalBreakInFooter, keywords } = page
-		const hasAtf = blocks.filter(item => item.__typename === 'ContentfulBlockAboveTheFold').length > 0 || false
+		const hasAtf = blocks.filter(item => ((item.__typename === 'ContentfulBlockAboveTheFold') || (item.__typename === 'ContentfulBlockAboveTheFoldAnimated'))).length > 0 || false
 		return (
 			<main>
 				<SEO
@@ -112,6 +112,7 @@ export const pageQuery = graphql`
 						...BlockCompanyPillars
 						...BlockCompanies
 						...BlockCareersList
+						...BlockLegalInfo
 					}
 				}
 			}
