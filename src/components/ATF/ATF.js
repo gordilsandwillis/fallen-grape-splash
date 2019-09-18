@@ -75,19 +75,19 @@ const AnimatedGradient = styled.div`
 	right: 0;
 	font-family: "Exo", sans-serif;
 	color: #fff;
-	background: linear-gradient(-45deg, rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
-	background-size: 400% 400%;
-	animation: gradientBG 15s ease infinite;
+	background: radial-gradient( rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
+	background-size: 500% 500%;
+	animation: gradientBG 75s ease infinite;
 
 	@keyframes gradientBG {
 		0% {
-			background-position: 0% 50%;
+			background-position: 0% 20%;
 		}
 		50% {
 			background-position: 100% 50%;
 		}
 		100% {
-			background-position: 0% 50%;
+			background-position: 0% 80%;
 		}
 	}
 
@@ -98,20 +98,20 @@ const AnimatedGradient = styled.div`
 		height: 100vh;
 		font-family: "Exo", sans-serif;
 		color: #fff;
-		background: linear-gradient(60deg, rgba(25,150,154, .9), rgba(110,178,177, .1), rgba(52,207,214, .75), rgba(166,172,160, .1));
-		background-size: 350% 350%;
-		animation: gradientBG 25s ease infinite;
+		background: radial-gradient(rgba(25,150,154, .9), rgba(110,178,177, .1), rgba(52,207,214, .75), rgba(166,172,160, .1));
+		background-size: 500% 500%;
+		animation: gradientBG 90s ease infinite;
 	}
 
 	@keyframes gradientBG {
 		0% {
-			background-position: 0% 50%;
+			background-position: 0% 80%;
 		}
 		50% {
 			background-position: 100% 50%;
 		}
 		100% {
-			background-position: 0% 50%;
+			background-position: 0% 20%;
 		}
 	}
 `
