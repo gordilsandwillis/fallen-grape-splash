@@ -17,7 +17,8 @@ const Title = styled.div`
 `
 
 const Body = styled.div`
-${ typography.body }
+	${ typography.body }
+	overflow: hidden;
 `
 
 const LegalInfo = ({ title, showTitle, subtitle, bodyTextBeforeBreak, bodyTextAfterBreak }) => (
