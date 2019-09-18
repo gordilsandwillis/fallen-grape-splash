@@ -17,7 +17,10 @@ const Wrapper = styled.footer`
   right: 0;
   color: ${ colors.black };
   z-index: 3;
-  /* ${ typography.responsiveStyles('height', 70, 70, 70, 75) } */
+  height: 95px;
+  ${ mq.mediumAndBelow } {
+    height: 120px;
+  }
 `
 
 const FooterContainer = styled(Container)`
@@ -62,19 +65,19 @@ const Footer = ({
 }) => (
 	<Wrapper isHomePage={isHomePage}>
 		{horizontalBreakInFooter && <Hr color={colors.black} />}
-		<ContentBlock>
-			<FooterContainer>
-				<Grid small="[6]" medium="[6] [6]" large="[6] [6]">
-					<div>
-						<div>{footerCompanyBio && RichText(footerCompanyBio)}</div>
-						<FooterTextGrey>{copyright && RichText(copyright)}</FooterTextGrey>
-					</div>
-					<FooterTextRightAlign>
-						{footerNavigation && footerNavigation.map(({ slug, title }, index) => <FooterLink key={slug + index} to={slug}>{title}</FooterLink>)}
-					</FooterTextRightAlign>
-				</Grid>
-			</FooterContainer>
-		</ContentBlock>
+		{/* <ContentBlock> */}
+		<FooterContainer>
+			<Grid small="[6]" medium="[6] [6]" large="[6] [6]">
+				<div>
+					<div>{footerCompanyBio && RichText(footerCompanyBio)}</div>
+					<FooterTextGrey>{copyright && RichText(copyright)}</FooterTextGrey>
+				</div>
+				<FooterTextRightAlign>
+					{footerNavigation && footerNavigation.map(({ slug, title }, index) => <FooterLink key={slug + index} to={slug}>{title}</FooterLink>)}
+				</FooterTextRightAlign>
+			</Grid>
+		</FooterContainer>
+		{/* </ContentBlock> */}
 	</Wrapper>
 )
 
