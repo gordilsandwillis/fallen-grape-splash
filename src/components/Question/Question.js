@@ -14,6 +14,17 @@ const Input = styled.input`
     padding: 10px 0;
 		${ typography.body }
 `
+
+const FullInput = styled.textarea`
+	background: none;
+	width: 100%;
+	max-width: 650px;
+	min-height: 300px;
+	border: 2px solid black;
+	padding: 10px 0;
+	margin: 10px 0;
+	${ typography.body }
+`
 const LinkStyles = `
 	cursor: pointer;	
 	font-size: inherit;
@@ -59,17 +70,20 @@ class Question extends React.Component {
 		return (
 			<div style={{ padding: '20px 0px' }}>
 				{/* {label && <div>{label}</div>} */}
-				{fields && fields.map(({ type, name, values }) => (
-					<React.Fragment>
+				{fields && fields.map(({ type, name, values }, index) => (
+					<div key={name + index}>
 						{type === 'input_text' &&
 				<Input name={name} placeholder={placeholder} required={required} type={name === 'email' ? 'email' : 'text'}></Input>
+						}
+						{type === 'textarea' &&
+						(!this.state.file && <FullInput name={name} placeholder={label + ' Text'} type={'textarea'}/>)
 						}
 						{type === 'input_file' && (
 							<div style={{ display: 'inline-block' }}>
 								<label htmlFor={name}>{label}</label>
 								<Dropzone multiple={false} onDrop={acceptedFiles => this.setState({ file: acceptedFiles[0] })}>
 									{({ getRootProps, getInputProps }) => (
-										<section>
+										<section style={{ outline: 'none' }}>
 											<div {...getRootProps()}>
 												<input name={name} {...getInputProps()} />
 												<FakeLink><span>ATTACH</span></FakeLink>
@@ -84,7 +98,7 @@ class Question extends React.Component {
 							<div>
 								<label htmlFor={name}>{label}</label>
 								<div style={{ padding: '10px 0' }}>
-									<Dropdown left name={name} title={'Select Value'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+									<Dropdown left name={name} title={'Select Value'} items={values} onChange={x => onChange({ label, name, x })} value={this.props.dropdownValues && this.props.dropdownValues[name]}/>
 								</div>
 							</div>
 						)}
@@ -92,11 +106,11 @@ class Question extends React.Component {
 							<div>
 								<label htmlFor={name}>{label}</label>
 								<div style={{ padding: '10px 0' }}>
-									<Dropdown left name={name} isMulti title={'Select Values'} items={values} onChange={x => onChange({ name, x })} value={this.props.dropdownValue}/>
+									<Dropdown left name={name} isMulti title={'Select Values'} items={values} onChange={x => onChange({ label, name, x })} value={this.props.dropdownValues && this.props.dropdownValues[name]}/>
 								</div>
 							</div>
 						)}
-					</React.Fragment>
+					</div>
 				))}
 				{description && <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(description) }} />}
 			</div>

@@ -61,42 +61,46 @@ class Job extends React.Component {
 	handleSubmit = e => {
 		e.preventDefault()
 		if (this.state.loading) return
+		console.log(this.state.loading)
 		const formData = new FormData(e.target)
-		const data = this.props.jobData.questions
-			.reduce((acc, q) => {
-				const value = formData.get(q.name || 'Career')
-				switch (q.type) {
-				case 'short_text':
-					if (value) acc[q.name] = value
-					break
-				case 'attachment':
-					if (value) acc[q.name] = value
-					break
-				case 'boolean':
-					if (this.state[q.name].value) acc[q.name] = this.state[q.name].value
-					break
-				case 'multi_select':
-					break
-				default:
-					break
-				}
-				return acc
-			}, {})
-		const { job_id } = this.props.jobData
-		const url = `${ 'http://localhost:3000/api/' }${ job_id }`
+		const { questions, compliance } = this.props.jobData
+		const allQuestions = compliance.reduce((acc, x) => { return acc.concat(x.questions) }, [...questions])
+		console.log(allQuestions)
+		allQuestions
+			.forEach(metaQ => {
+				metaQ.fields
+					.forEach(q => {
+						switch (q.type) {
+						case 'multi_value_single_select':
+							if (this.state[q.name] && this.state[q.name].value) formData.append(q.name, this.state[q.name].value)
+							break
+						case 'multi_value_multi_select':
+							if (this.state[q.name] && this.state[q.name].value) formData.append(q.name, this.state[q.name].value)
+							break
+						default:
+							break
+						}
+					})
+			})
+
+		const { ghid } = this.props.jobData
+		const url = `${ 'http://localhost:3000/api/' }${ ghid }`
 		console.log(url)
-		this.setState({ loading: true })
-		axios.post(url, data, {
+		this.setLoadingTimeout()
+		axios.post(url, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
 		}).then(res => {
 			console.log(res)
-			this.setState({ loading: false })
 		}).catch(e => {
 			console.log(e)
-			this.setState({ loading: false })
 		})
+	}
+
+	setLoadingTimeout () {
+		this.setState({ loading: true })
+		setTimeout(() => this.setState({ loading: false }), 10000)
 	}
 
 	handleDropdownChange = ({ name, x }) => {
@@ -111,7 +115,7 @@ class Job extends React.Component {
 
 	render () {
 		// eslint-disable-next-line no-unused-vars
-		const { ghid, job_id, questions, compliance, location_questions, content, title, location } = this.props.jobData
+		const { ghid, questions, compliance, content, title, location } = this.props.jobData
 		return (
 			<Wrapper>
 				<Container>
@@ -136,12 +140,12 @@ class Job extends React.Component {
 					<Container>
 						<ApplyTitle>Apply for this Job</ApplyTitle>
 						<form onSubmit={e => this.handleSubmit(e)} encType='multipart/form-data'>
-							<input type="hidden" name="id" value={job_id} />
+							<input type="hidden" name="id" value={ghid} />
 							<input type="hidden" name="mapped_url_token" value="mosaic_website" />
 							{questions && questions.map((q, i) => (
 								<Question
 									onChange={this.handleDropdownChange}
-									dropdownValue={this.state[q.label]}
+									dropdownValues={this.state[q.label]}
 									key={(q.label || i) + i} {...q}
 								/>
 							))}
@@ -152,7 +156,7 @@ class Job extends React.Component {
 									{item.questions && item.questions.map((q, i) => (
 										<Question
 											onChange={this.handleDropdownChange}
-											dropdownValue={this.state[q.label]}
+											dropdownValues={this.state[q.label]}
 											key={(q.label || i) + i} {...q}
 										/>
 									))}
