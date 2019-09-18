@@ -84,10 +84,10 @@ const AnimatedGradient = styled.div`
 			background-position: 0% 20%;
 		}
 		50% {
-			background-position: 100% 50%;
+			background-position: 100% 80%;
 		}
 		100% {
-			background-position: 0% 80%;
+			background-position: 0% 20%;
 		}
 	}
 
@@ -95,7 +95,7 @@ const AnimatedGradient = styled.div`
 		margin: 0;
 		position: absolute;
 		width: 100%;
-		height: 100vh;
+		height: 100%;
 		font-family: "Exo", sans-serif;
 		color: #fff;
 		background: radial-gradient(rgba(25,150,154, .9), rgba(110,178,177, .1), rgba(52,207,214, .75), rgba(166,172,160, .1));
@@ -108,10 +108,10 @@ const AnimatedGradient = styled.div`
 			background-position: 0% 80%;
 		}
 		50% {
-			background-position: 100% 50%;
+			background-position: 100% 20%;
 		}
 		100% {
-			background-position: 0% 20%;
+			background-position: 0% 80%;
 		}
 	}
 `
