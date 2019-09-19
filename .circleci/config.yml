@@ -39,7 +39,7 @@ jobs:
             else
               ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
               git remote add staging dokku@mgnt.work:mosaic
-              git push staging master
+              git push -f staging master
             fi
 
   # deploy:
