@@ -31,10 +31,12 @@ jobs:
       - deploy:
         name: Push to Dokku
         command: |
-          if [[ "$CIRCLE_BRANCH" != "master"  ]]; then exit 0; fi
-          ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
-          git remote add staging dokku@mgnt.work:mosaic
-          git push staging master
+          if [[ "$CIRCLE_BRANCH" != "master"  ]]; then exit 0;
+          else
+            ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
+            git remote add staging dokku@mgnt.work:mosaic
+            git push staging master
+          fi
 
   # deploy:
   #   machine:
