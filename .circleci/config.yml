@@ -38,9 +38,9 @@ jobs:
               exit 0
             else
               ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
-              git commit --allow-empty -m "Empty Commit to setup deployments"
               git config --global user.email "app@dillonpetito.com"
               git config --global user.name "Dokku"
+              git commit --allow-empty -m "Empty Commit to setup deployments"
               git remote add staging dokku@mgnt.work:mosaic
               git push -f staging master
             fi
