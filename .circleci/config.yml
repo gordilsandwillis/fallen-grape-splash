@@ -31,6 +31,8 @@ jobs:
       - deploy:
           name: Push to Dokku
           command: |
+            echo $CIRCLE_BRANCH
+            echo $CONTENTFUL_ENVIORNMENT_ID
             if [[ "$CIRCLE_BRANCH" != "master" && "$CONTENTFUL_ENVIRONMENT_ID" != "master" ]]; then
               exit 0
             else
