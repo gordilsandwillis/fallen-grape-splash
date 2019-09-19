@@ -27,28 +27,39 @@ jobs:
       - run:
           name: Build
           command: npm run build
-
-  deploy:
-    machine:
-        enabled: true
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
+      
+      - deploy:
           name: Push to Dokku
           command: |
-            ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
-            git remote add staging dokku@mgnt.work:mosaic
-            git push staging master
+            if [[ "$CIRCLE_BRANCH" != "master"  ]]; then
+              exit 0
+            else
+              ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
+              git remote add staging dokku@mgnt.work:mosaic
+              git push staging master
+            fi
+
+  # deploy:
+  #   machine:
+  #       enabled: true
+  #   working_directory: ~/repo
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Push to Dokku
+  #         command: |
+  #           ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
+  #           git remote add staging dokku@mgnt.work:mosaic
+  #           git push staging master
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-              - build
-          filters:
-            branches:
-              only: master
+      # - deploy:
+      #     requires:
+      #         - build
+      #     filters:
+      #       branches:
+      #         only: master
