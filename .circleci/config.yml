@@ -31,7 +31,7 @@ jobs:
       - deploy:
           name: Push to Dokku
           command: |
-            if [[ "$CIRCLE_BRANCH" != "master"  ]]; then
+            if [[ "$CIRCLE_BRANCH" != "master" && "$CIRCLE_TAG" != "deploy" ]]; then
               exit 0
             else
               ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
