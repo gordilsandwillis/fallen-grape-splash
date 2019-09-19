@@ -30,23 +30,22 @@ jobs:
           name: Build
           command: npm run build
       
-      - do-exclusively/do-exclusively:
-        name: Push to Dokku
-        token: $CIRCLE_TOKEN
-        command: |
-          echo $CIRCLE_BRANCH
-          echo $SHOULD_DEPLOY
-          if [[ "$CIRCLE_BRANCH" != "master" && "$SHOULD_DEPLOY" != "true" ]]; then
-            echo "not deploying"
-            exit 0
-          else
-            ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
-            git config --global user.email "app@dillonpetito.com"
-            git config --global user.name "Dokku"
-            git commit --allow-empty -m "Empty Commit to setup deployments"
-            git remote add staging dokku@mgnt.work:mosaic
-            git push -f staging master
-          fi
+      - deploy:
+          name: Push to Dokku
+          command: |
+            echo $CIRCLE_BRANCH
+            echo $SHOULD_DEPLOY
+            if [[ "$CIRCLE_BRANCH" != "master" && "$SHOULD_DEPLOY" != "true" ]]; then
+              echo "not deploying"
+              exit 0
+            else
+              ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
+              git config --global user.email "app@dillonpetito.com"
+              git config --global user.name "Dokku"
+              git commit --allow-empty -m "Empty Commit to setup deployments"
+              git remote add staging dokku@mgnt.work:mosaic
+              chmod +x .circleci/do-exclusively.sh && .circleci/do-exclusively.sh git push -f staging master
+            fi
 
   # deploy:
   #   machine:
