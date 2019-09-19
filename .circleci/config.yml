@@ -34,6 +34,7 @@ jobs:
             echo $CIRCLE_BRANCH
             echo $SHOULD_DEPLOY
             if [[ "$CIRCLE_BRANCH" != "master" && "$SHOULD_DEPLOY" != "true" ]]; then
+              echo "not deploying"
               exit 0
             else
               ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
