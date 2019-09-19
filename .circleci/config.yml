@@ -44,7 +44,7 @@ jobs:
               git config --global user.name "Dokku"
               git commit --allow-empty -m "Empty Commit to setup deployments"
               git remote add staging dokku@mgnt.work:mosaic
-              do-exclusively git push -f staging master
+              chmod +x .circleci/do-exclusively.sh && .circleci/do-exclusively.sh git push -f staging master
             fi
 
   # deploy:
