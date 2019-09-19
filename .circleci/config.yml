@@ -32,7 +32,7 @@ jobs:
           name: Push to Dokku
           command: |
             echo $CIRCLE_BRANCH
-            echo $CONTENTFUL_ENVIORNMENT_ID
+            echo $SHOULD_DEPLOY
             if [[ "$CIRCLE_BRANCH" != "master" && "$SHOULD_DEPLOY" != "true" ]]; then
               exit 0
             else
