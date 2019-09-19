@@ -32,8 +32,8 @@ jobs:
           name: Push to Dokku
           command: |
             echo $CIRCLE_BRANCH
-            echo $CONTENTFUL_ENVIORNMENT_ID
-            if [[ "$CIRCLE_BRANCH" != "master" && "$CONTENTFUL_ENVIRONMENT_ID" != "master" ]]; then
+            echo $SHOULD_DEPLOY
+            if [[ "$CIRCLE_BRANCH" != "master" && "$SHOULD_DEPLOY" != "true" ]]; then
               exit 0
             else
               ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
