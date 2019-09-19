@@ -71,19 +71,17 @@ class Link extends Component {
 	render () {
 		let { to, external, fakeExternal, white, noHoverColor, target, children, className, dark, underlined } = this.props
 		if (external) {
-			return (
-				<StyledLinkElement
-					className={className}
-					href={to}
-					target={target || '_blank'}
-					rel="noopener"
-					rel="noreferrer"
-					white={white}
-					nohover={noHoverColor}
-				>
-					<span>{children}</span>
-				</StyledLinkElement >
-			)
+			return (<StyledLinkElement
+				className={className}
+				href={to}
+				target={target || '_blank'}
+				rel="noopener"
+				rel="noreferrer"
+				white={white}
+				nohover={noHoverColor}
+			>
+				<span>{children}</span>
+			</StyledLinkElement >)
 		} else if (fakeExternal) {
 			if (to[0] !== '/') to = '/' + to
 			return (

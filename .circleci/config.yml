@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  do-exclusively: miyajan/do-exclusively@0.1.0
 jobs:
   build:
     docker:
@@ -42,7 +44,7 @@ jobs:
               git config --global user.name "Dokku"
               git commit --allow-empty -m "Empty Commit to setup deployments"
               git remote add staging dokku@mgnt.work:mosaic
-              git push -f staging master
+              do-exclusively git push -f staging master
             fi
 
   # deploy:
