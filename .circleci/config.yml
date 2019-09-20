@@ -1,6 +1,4 @@
-version: 2.1
-orbs:
-  do-exclusively: miyajan/do-exclusively@0.1.0
+version: 2
 jobs:
   build:
     docker:
@@ -30,8 +28,8 @@ jobs:
           name: Build
           command: npm run build
       
-      - do-exclusively/do-exclusively:
-          token: $CIRCLE_TOKEN
+      - deploy:
+          name: Push to Dokku
           command: |
             echo $CIRCLE_BRANCH
             echo $SHOULD_DEPLOY
@@ -71,4 +69,3 @@ workflows:
       #     filters:
       #       branches:
       #         only: master
-
