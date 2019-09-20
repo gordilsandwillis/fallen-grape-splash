@@ -152,6 +152,7 @@ class Job extends React.Component {
 	render () {
 		const { ghid, questions, compliance, content, title, location } = this.props.jobData
 		const { loading, success, error } = this.state
+		const complianceLength = compliance && compliance.length
 		return (
 			<Wrapper>
 				<Container>
@@ -206,8 +207,8 @@ class Job extends React.Component {
 											key={(q.label || i) + i} {...q}
 										/>
 									))}
-									{(compliance && compliance.length) && <H2>Compliance</H2>}
-									{(compliance && compliance.length) && compliance.map((item, index) => (
+									{complianceLength && <H2>Compliance</H2>}
+									{complianceLength && compliance.map((item, index) => (
 										<div key={index + '_compliance'}>
 											<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
 											{item.questions && item.questions.map((q, i) => (
