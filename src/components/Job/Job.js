@@ -128,7 +128,6 @@ class Job extends React.Component {
 				'Content-Type': 'multipart/form-data'
 			}
 		}).then(res => {
-			console.log(res.data)
 			this.setState({
 				success: res.data.success ? res.data.success : null,
 				error: res.data.error ? res.data.error : null
@@ -151,6 +150,7 @@ class Job extends React.Component {
 
 	render () {
 		const { ghid, questions, compliance, content, title, location } = this.props.jobData
+		console.log(compliance)
 		const { loading, success, error } = this.state
 		return (
 			<Wrapper>
