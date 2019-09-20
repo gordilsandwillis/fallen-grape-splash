@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable camelcase */
 import React from 'react'
 import styled from '@emotion/styled'
@@ -9,13 +8,16 @@ import Button from 'src/components/Button'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import Hr from 'src/components/Hr'
 import ContentBlock from 'src/components/ContentBlock'
-// eslint-disable-next-line no-unused-vars
 import axios from 'axios'
 import parse from 'html-react-parser'
 import { colors, typography } from 'src/styles'
 
 const Wrapper = styled.div`
   color: ${ colors.black };
+`
+
+const ErrorMessage = styled.p`
+  color: ${ colors.alert };
 `
 
 const JobName = styled.div`
@@ -53,15 +55,16 @@ const ApplyTitle = styled.div`
 `
 
 class Job extends React.Component {
-	constructor (props) {
-		super(props)
-		this.state = {
-			loading: false
-		}
+	state = {
+		loading: false,
+		error: null,
+		success: null
 	}
+
 	handleSubmit = e => {
 		e.preventDefault()
 		if (this.state.loading) return
+
 		const formData = new FormData(e.target)
 		const { questions, compliance } = this.props.jobData
 		const allQuestions = compliance.reduce((acc, x) => { return acc.concat(x.questions) }, [...questions])
@@ -83,16 +86,23 @@ class Job extends React.Component {
 			})
 
 		const { ghid } = this.props.jobData
-		const url = `${ 'http://localhost:3000/api/' }${ ghid }`
+		const url = ` ${ process.env.GREENHOUSE_JOB_API_HOST }/api/${ process.env.GREENHOUSE_BOARD_TOKEN }/${ ghid }`
 		this.setLoadingTimeout()
+
 		axios.post(url, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
 		}).then(res => {
-			console.log(res)
-		}).catch(e => {
-			console.log(e)
+			console.log(res.data)
+			this.setState({
+				success: res.data.success ? res.data.succs : null,
+				error: res.data.error ? res.data.error : null
+			})
+		}).catch(err => {
+			console.log(err)
+		}).finally(() => {
+			this.setState({ loading: false })
 		})
 	}
 
@@ -101,18 +111,13 @@ class Job extends React.Component {
 		setTimeout(() => this.setState({ loading: false }), 10000)
 	}
 
-	handleDropdownChange = ({ name, x }) => {
-		this.setState({ [name]: x })
+	handleDropdownChange = ({ name, value }) => {
+		this.setState({ [name]: value })
 	}
-	// encodeHtml (input) {
-	// 	let e = document.createElement('div')
-	// 	e.innerHTML = input
-	// 	return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
-	// }
 
 	render () {
-		// eslint-disable-next-line no-unused-vars
 		const { ghid, questions, compliance, content, title, location } = this.props.jobData
+		const { loading, error } = this.state
 		return (
 			<Wrapper>
 				<Container>
@@ -172,8 +177,9 @@ class Job extends React.Component {
 								</div>
 							)} */}
 							<div style={{ marginTop: 20 }}>
-								<Button style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
+								<Button loading={loading} style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
 							</div>
+							{error && (<ErrorMessage>{error}</ErrorMessage>)}
 						</form>
 					</Container>
 				</ContentBlock>
