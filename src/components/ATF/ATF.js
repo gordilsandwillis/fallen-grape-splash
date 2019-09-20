@@ -77,7 +77,7 @@ const AnimatedGradient = styled.div`
 	left: 0;
 	right: 0;
 	color: #fff;
-	background: radial-gradient( rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
+	background: radial-gradient( rgb(255,150,40), rgb(255,203,148), rgb(253, 70, 40), rgb(209,59,42));
 	background-size: 500% 500%;
 	animation: gradientBG 75s ease infinite;
 
@@ -100,7 +100,7 @@ const AnimatedGradient = styled.div`
 		height: 100%;
 		font-family: "Exo", sans-serif;
 		color: #fff;
-		background: radial-gradient(rgba(25,150,154, .9), rgba(110,178,177, .1), rgba(52,207,214, .75), rgba(166,172,160, .1));
+		background: radial-gradient(rgba(255,163,148, .5), rgba(41,130,255, .0), rgba(41,130,255, .7), rgba(41,130,255, .9));
 		background-size: 500% 500%;
 		animation: gradientBG 90s ease infinite;
 	}

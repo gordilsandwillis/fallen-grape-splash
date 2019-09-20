@@ -1,16 +1,17 @@
+/* eslint-disable no-console */
 /* eslint-disable camelcase */
 import React from 'react'
 import styled from '@emotion/styled'
 import Question from 'src/components/Question'
 import Container from 'src/components/Container'
-import Link from 'src/components/Link'
 import Button from 'src/components/Button'
+import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import Hr from 'src/components/Hr'
 import ContentBlock from 'src/components/ContentBlock'
 import axios from 'axios'
 import parse from 'html-react-parser'
-import { colors, typography } from 'src/styles'
+import { colors, typography, mediaQueries as mq } from 'src/styles'
 
 const Wrapper = styled.div`
   color: ${ colors.black };
@@ -50,6 +51,33 @@ ul {
 }
 `
 
+const TrueCenteredContainer = styled.div`
+min-height:700px;
+${ mq.mediumAndBelow } {
+	min-height:350px;
+}
+text-align: center;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+`
+
+const H1 = styled.div`
+	${ typography.h1 }
+	padding-bottom: 30px;
+`
+
+const PaddedParagraph = styled.div`
+	${ typography.h2 }
+	max-width: 23em;
+	padding-bottom:10px;
+`
+
+const ButtonContainer = styled.div`
+	margin-top: 30px;
+`
+
 const H2 = styled.div`
 	${ typography.h2 }
 	padding: 30px 0;
@@ -76,7 +104,7 @@ class Job extends React.Component {
 		const allQuestions = compliance.reduce((acc, x) => { return acc.concat(x.questions) }, [...questions])
 		allQuestions
 			.forEach(metaQ => {
-				metaQ.fields
+				metaQ && metaQ.fields
 					.forEach(q => {
 						switch (q.type) {
 						case 'multi_value_single_select':
@@ -123,54 +151,75 @@ class Job extends React.Component {
 
 	render () {
 		const { ghid, questions, compliance, content, title, location } = this.props.jobData
-		const { loading, error } = this.state
+		const { loading, success, error } = this.state
 		return (
 			<Wrapper>
 				<Container>
 					<LinkStyled dark to={'careers'}><LinkArrow>←</LinkArrow> All Jobs</LinkStyled>
 				</Container>
-				<ContentBlock>
-					<Container>
-						{title && <JobName>{title}</JobName>}
-						{(location && location.name) && <LocationName>{location.name}</LocationName>}
-					</Container>
-				</ContentBlock>
-				<Hr full color={colors.black}/>
-				<ContentBlock>
-					<Container>
-						<ScrollEntrance>
-							<MarkupContainer>{content && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(content)) }}/>}</MarkupContainer>
-						</ScrollEntrance>
-					</Container>
-				</ContentBlock>
-				<Hr full color={colors.black}/>
-				<ContentBlock>
-					<Container>
-						<ApplyTitle>Apply for this Job</ApplyTitle>
-						<form onSubmit={e => this.handleSubmit(e)} encType='multipart/form-data'>
-							<input type="hidden" name="id" value={ghid} />
-							<input type="hidden" name="mapped_url_token" value="mosaic_website" />
-							{questions && questions.map((q, i) => (
-								<Question
-									onChange={this.handleDropdownChange}
-									dropdownValues={this.state[q.label]}
-									key={(q.label || i) + i} {...q}
-								/>
-							))}
-							<H2>Compliance</H2>
-							{compliance && compliance.map((item, index) => (
-								<div key={index + '_compliance'}>
-									<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
-									{item.questions && item.questions.map((q, i) => (
+				{ success
+					? <ContentBlock>
+						<Container>
+							<TrueCenteredContainer>
+								<ScrollEntrance>
+									<H1>Thank you for applying!</H1>
+									<PaddedParagraph>Your application has been received and a member of our team will review it as soon as possible.</PaddedParagraph>
+									<ButtonContainer>
+										<Link noHoverColor to='/careers'>
+											<div style={{ color: colors.black }}>
+												<Button style={{ color: colors.black }}>
+														BACK TO CAREERS
+												</Button>
+											</div>
+										</Link>
+									</ButtonContainer>
+								</ScrollEntrance>
+							</TrueCenteredContainer>
+						</Container>
+					</ContentBlock>
+					: <React.Fragment>
+						<ContentBlock>
+							<Container>
+								{title && <JobName>{title}</JobName>}
+								{(location && location.name) && <LocationName>{location.name}</LocationName>}
+							</Container>
+						</ContentBlock>
+						<Hr full color={colors.black}/>
+						<ContentBlock>
+							<Container>
+								<ScrollEntrance>
+									<MarkupContainer>{content && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(content)) }}/>}</MarkupContainer>
+								</ScrollEntrance>
+							</Container>
+						</ContentBlock>
+						<Hr full color={colors.black}/>
+						<ContentBlock>
+							<Container>
+								<ApplyTitle>Apply for this Job</ApplyTitle>
+								<form onSubmit={e => this.handleSubmit(e)} encType='multipart/form-data'>
+									<input type="hidden" name="id" value={ghid} />
+									<input type="hidden" name="mapped_url_token" value="mosaic_website" />
+									{questions && questions.map((q, i) => (
 										<Question
 											onChange={this.handleDropdownChange}
 											dropdownValues={this.state[q.label]}
 											key={(q.label || i) + i} {...q}
 										/>
 									))}
-								</div>
-							))}
-							{/* {location_questions && (
+									<H2>Compliance</H2>
+									{compliance && compliance.map((item, index) => (
+										<div key={index + '_compliance'}>
+											<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
+											{item.questions && item.questions.map((q, i) => (
+												<Question
+													onChange={this.handleDropdownChange}
+													dropdownValues={this.state[q.label]}
+													key={(q.label || i) + i} {...q}
+												/>
+											))}
+										</div>
+									))}
+									{/* {location_questions && (
 								<div>
 									<H2>Location Questions</H2>
 									{location_questions.map((q, i) => (
@@ -182,13 +231,15 @@ class Job extends React.Component {
 									))}
 								</div>
 							)} */}
-							<div style={{ marginTop: 20 }}>
-								<Button loading={loading} style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
-							</div>
-							{error && (<ErrorMessage>{error}</ErrorMessage>)}
-						</form>
-					</Container>
-				</ContentBlock>
+									<div style={{ marginTop: 20 }}>
+										<Button loading={loading} style={{ color: colors.black }}>SUBMIT APPLICATION</Button>
+									</div>
+									{error && (<ErrorMessage>{error}</ErrorMessage>)}
+								</form>
+							</Container>
+						</ContentBlock>
+					</React.Fragment>
+				}
 			</Wrapper>
 		)
 	}
