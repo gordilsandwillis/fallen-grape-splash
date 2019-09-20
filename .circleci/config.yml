@@ -31,7 +31,7 @@ jobs:
           command: npm run build
       
       - do-exclusively/do-exclusively:
-          token: $CIRCLE_TOKEN
+          # token: $CIRCLE_TOKEN
           command: |
             echo $CIRCLE_BRANCH
             echo $SHOULD_DEPLOY
