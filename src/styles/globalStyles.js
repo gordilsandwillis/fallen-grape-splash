@@ -50,6 +50,10 @@ export default `
     font-weight: bold;
   }
 
+  ul, ol {
+    margin-left: 30px;
+  }
+
   h1, h2, h3, h4, h5, h6, blockquote, p, ul, ol {
     font-weight: normal;
     margin: 0 0 0.5em;
