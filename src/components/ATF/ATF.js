@@ -73,7 +73,6 @@ const AnimatedGradient = styled.div`
 	position: absolute;
 	left: 0;
 	right: 0;
-	font-family: "Exo", sans-serif;
 	color: #fff;
 	background: radial-gradient( rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
 	background-size: 500% 500%;
