@@ -9,7 +9,6 @@ import RichText from 'src/components/RichText'
 import { colors, typography, mediaQueries as mq } from 'src/styles'
 
 const Wrapper = styled.footer`
-  position: ${ ({ isHomePage }) => isHomePage ? 'absolute' : 'static' };
   background: ${ colors.offwhite };
   bottom: 0;
   left: 0;
@@ -17,8 +16,10 @@ const Wrapper = styled.footer`
   color: ${ colors.black };
   z-index: 3;
   height: 95px;
+  position: ${ ({ isHomePage }) => isHomePage ? 'absolute' : 'static' };
   ${ mq.mediumAndBelow } {
     height: 120px;
+    position: static;
   }
 `
 

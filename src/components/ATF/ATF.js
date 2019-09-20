@@ -44,6 +44,9 @@ const Block = styled.div`
 	height: ${ ({ winHeight, isMobile }) => winHeight ? winHeight + 'px' : isMobile ? '80vh' : '100vh' };
 	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
 	min-height: ${ ({ full }) => full ? 750 : 500 }px;
+	${ mq.mediumAndBelow } {
+		min-height: 650px;
+	}
 	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };
@@ -148,7 +151,7 @@ margin: 40px 0;
 `
 
 const ButtonContainer = styled.div`
-	margin-top: 36px;
+	margin-top: 30px;
 `
 
 const PaddedParagraph = styled.div`

@@ -34,7 +34,7 @@ ${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
 const DepartmentName = styled.div`
 	${ typography.body }
 	text-transform: uppercase;
-	${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
+	${ typography.responsiveStyles('padding-bottom', 20, 30, 30, 30) }
 `
 
 const LocationName = styled.div`
