@@ -107,7 +107,7 @@ const Name = styled.p`
 `
 
 const LinkStyled = styled(Link)`
-  ${ typography.responsiveStyles('font-size', 14, 14, 14, 18) };
+  ${ typography.body };
 `
 
 const ContainerStyled = styled(Container)`

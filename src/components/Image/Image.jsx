@@ -19,6 +19,12 @@ const StyledImage = styled(Img)`
 	` }
 `
 
+const StyledSvgContainer = styled.div`
+	svg {transition: opacity 1s ease-in-out;}
+	height:100%;
+	width: 100%;
+	`
+
 const ResponsiveImage = ({ image, small, medium, large, className }) => {
 	if (small || medium || large || image) {
 		let source = null
@@ -59,13 +65,15 @@ const ResponsiveImage = ({ image, small, medium, large, className }) => {
 }
 
 const Image = ({ small, medium, large, image, className }) => (
-	<ResponsiveImage
-		image={image}
-		small={small}
-		medium={medium}
-		large={large}
-		className={className}
-	/>
+	image && image.svgContent
+		? <StyledSvgContainer dangerouslySetInnerHTML={{ __html: image && image.svgContent }}/>
+		: <ResponsiveImage
+			image={image}
+			small={small}
+			medium={medium}
+			large={large}
+			className={className}
+		/>
 )
 
 export { ResponsiveImage, Image as default }

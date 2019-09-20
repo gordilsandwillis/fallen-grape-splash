@@ -12,6 +12,7 @@ export const query = graphql`
         json
       }
       logo {
+        svgContent
         file {
           url
           fileName
