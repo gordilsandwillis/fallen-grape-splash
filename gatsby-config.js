@@ -17,9 +17,9 @@ module.exports = {
 		'gatsby-plugin-react-helmet',
 		{
 			resolve: `gatsby-plugin-env-variables`,
-			// options: {
-			//   whitelist: ['VIRAL_LOOPS_CAMPAIGN_ID']
-			// }
+			options: {
+			  whitelist: ['GREENHOUSE_JOB_API_HOST', 'GREENHOUSE_BOARD_TOKEN']
+			}
 		},
 		{
 			resolve: `gatsby-source-filesystem`,
@@ -42,18 +42,6 @@ module.exports = {
 				component: require.resolve(`./src/layout/index.js`),
 			},
 		},
-		// {
-		//   resolve: `gatsby-plugin-manifest`,
-		//   options: {
-		//     name: 'gatsby-starter-default',
-		//     short_name: 'starter',
-		//     start_url: '/',
-		//     background_color: '#663399',
-		//     theme_color: '#663399',
-		//     display: 'minimal-ui',
-		//     icon: 'src/assets/images/gatsby-icon.png', // This path is relative to the root of the site.
-		//   },
-		// },
 		'gatsby-transformer-remark',
 		'gatsby-transformer-sharp',
 		'gatsby-plugin-sharp',
@@ -77,7 +65,7 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-greenhouse-job-board',
 			options: {
-				boardToken: 'askapps'
+				boardToken: process.env.GREENHOUSE_BOARD_TOKEN
 			}
 		}
 	],
