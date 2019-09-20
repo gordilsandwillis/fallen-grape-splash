@@ -96,7 +96,7 @@ class Job extends React.Component {
 		}).then(res => {
 			console.log(res.data)
 			this.setState({
-				success: res.data.success ? res.data.succs : null,
+				success: res.data.success ? res.data.success : null,
 				error: res.data.error ? res.data.error : null
 			})
 		}).catch(err => {

@@ -22,12 +22,6 @@ export const query = graphql`
           url
           fileName
           contentType
-          details {
-            image {
-              width
-              height
-            }
-          }
         }
         fluid(maxWidth: 400, quality: 100) {
           base64
@@ -37,7 +31,6 @@ export const query = graphql`
           srcWebp
           srcSetWebp
           sizes
-          tracedSVG
         }
       }
       descriptionText: description

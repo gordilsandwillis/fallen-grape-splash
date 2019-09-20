@@ -12,20 +12,23 @@ import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const Wrapper = styled.div`
   background-color: ${ colors.offwhite };
-color: ${ colors.black };
+	color: ${ colors.black };
 `
 
 const LogoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
-  div {
-    max-width: 250px;
-  };
+	overflow: hidden;
+	flex-grow: 0;
+	flex-shrink: 0;
+	max-width: 250px;
 	img {
-		height: auto !important;
+		display: block;
+		margin: 0;
 	}
+	${ typography.responsiveStyles('margin-top', 0, 0, 0, 20) }
+	${ typography.responsiveStyles('margin-bottom', 0, 0, 20, 28) }
+	width: 100%;
+	margin:auto;
+
 `
 
 const Padding = styled.div`
@@ -35,9 +38,7 @@ const Padding = styled.div`
 	padding: 10px 0px;
 `
 const ImageStyled = styled(Image)`
-	width: 100%;
-	${ typography.responsiveStyles('margin-top', 0, 0, 0, 20) }
-	${ typography.responsiveStyles('margin-bottom', 0, 0, 20, 28) }
+	/* width: 100%;	 */
 `
 
 const H2 = styled.div`
