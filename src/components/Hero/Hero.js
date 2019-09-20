@@ -11,7 +11,6 @@ const Block = styled.div`
   position: relative;
   overflow: hidden;
   z-index: 1;
-  margin-bottom: 36px;
 `
 
 const BgImage = styled(Image)`
@@ -22,8 +21,8 @@ const BgImage = styled(Image)`
   right: 0;
 `
 
-const Hero = ({ image, testImage }) => (
-	<Block>
+const Hero = ({ image, margin, testImage }) => (
+	<Block margin={margin}>
 		{testImage
 			? <img src={testImage} />
 			: <BgImage image={image} />

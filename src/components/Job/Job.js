@@ -30,9 +30,15 @@ const LocationName = styled.div`
 	color: ${ colors.grey };
 `
 
+const LinkStyled = styled(Link)`
+* {   color: ${ ({ dark }) => dark ? colors.black : colors.white };}
+&:hover, &:hover * {
+    color: ${ ({ nohover }) => !nohover ? colors.grey : 'inherit' };
+  }
+`
+
 const LinkArrow = styled.span`
 	${ typography.responsiveStyles('font-size', 21, 21, 21, 21) }
-	${ typography.responsiveStyles('padding-bottom', 0, 0, 0, 2) }
 `
 
 const MarkupContainer = styled.div`
@@ -121,7 +127,7 @@ class Job extends React.Component {
 		return (
 			<Wrapper>
 				<Container>
-					<Link dark to={'careers'}><LinkArrow>←</LinkArrow> All Jobs</Link>
+					<LinkStyled dark to={'careers'}><LinkArrow>←</LinkArrow> All Jobs</LinkStyled>
 				</Container>
 				<ContentBlock>
 					<Container>
