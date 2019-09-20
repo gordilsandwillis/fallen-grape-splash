@@ -18,7 +18,7 @@ export const query = graphql`
           fileName
           contentType
         }
-        fluid(maxWidth: 800, quality: 100) {
+        fluid(maxWidth:250, quality: 100) {
           base64
           aspectRatio
           src
