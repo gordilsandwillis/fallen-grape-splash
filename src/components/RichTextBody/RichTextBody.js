@@ -1,6 +1,5 @@
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
+import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import Link from 'src/components/Link'
 import styled from '@emotion/styled'
 
 const BoxedText = styled.span`
