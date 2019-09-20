@@ -51,10 +51,8 @@ const customStyles = {
 }
 
 const SelectStyled = styled(Select)`
-  max-width:150px;
-	${ ({ left }) => !left && `
-	margin-right:0;
-	margin-left:auto;` }
+	max-width:${ ({ title }) => (title && title.length) ? (title.length * 15) + 'px' : '150px' };
+	margin: 5px 0;
 	div {
     color: ${ colors.black };
 		border: none;
@@ -63,8 +61,12 @@ const SelectStyled = styled(Select)`
     transition: color ${ animations.mediumSpeed } ease-in-out;
     background-color: ${ colors.offWhiteHighOpacity };
   }
-  div:hover {
-    color: ${ colors.grey }
+	&:hover >div:nth-child(1) div, &:hover >div:nth-child(2) div {
+    color: ${ colors.grey } !important;
+	}
+
+	div:hover {
+		color: ${ colors.black } !important;
   }
 	span {
 		background-color: transparent;
@@ -72,22 +74,23 @@ const SelectStyled = styled(Select)`
 `
 
 const DropdownArrowSvgStyled = styled(DropdownArrowSvg)`
-	height:16px;
-	width: 16px;
-	margin-bottom:-2px;
+	height:24px;
+	width: 24px;
+	margin-bottom:-7px;
 `
 const DropdownIndicator = () => <div><DropdownArrowSvgStyled/></div>
+const ClearIndicator = () => <div></div>
 class Dropdown extends React.Component {
 	componentWillReceiveProps (props) {
 		if (props.clearValue) this.setState({ value: null })
 	}
 
 	render () {
-		const { title, left, isMulti, items, onChange, value } = this.props
+		const { title, isMulti, items, onChange, value } = this.props
 		return <div>
 			<SelectStyled
-				left={left}
-				components={{ DropdownIndicator }}
+				title={title}
+				components={{ DropdownIndicator, ClearIndicator }}
 				arrowrenderer={this.arrowRenderer}
 				isMulti={isMulti}
 				value={value}

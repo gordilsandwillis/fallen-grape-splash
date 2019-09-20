@@ -151,7 +151,7 @@ const MobileNavLink = styled(Link)`
   z-index: 5;
   line-height: 100px;
   transition: ${ ({ orderNumber }) =>
-		`opacity ${ animations.mediumSpeed } ${ orderNumber / 20 }s ease-in-out,
+		`color: ${ animations.mediumSpeed } ease-in-out, opacity ${ animations.mediumSpeed } ${ orderNumber / 20 }s ease-in-out,
 		transform ${ animations.mediumSpeed } ${ orderNumber / 20 }s ease-in-out` };
   ${ ({ mobileNavOpen }) =>
 		mobileNavOpen
@@ -198,7 +198,7 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
   &.open {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.85);
   }
 `
 

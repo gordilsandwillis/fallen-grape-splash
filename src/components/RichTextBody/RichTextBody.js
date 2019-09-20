@@ -26,7 +26,9 @@ const options = {
 	},
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
-		[INLINES.HYPERLINK]: (node, children) => <Link external to={(node && node.data) && node.data.uri}>{children}</Link>
+		[BLOCKS.UL_LIST]: (node, children) => <ul style={{ marginLeft: 30, listStyleType: 'disc' }}>{children}</ul>,
+		[BLOCKS.OL_LIST]: (node, children) => <ol style={{ marginLeft: 30, listStyleType: 'decimal' }}>{children}</ol>
+		// [INLINES.HYPERLINK]: (node, children) => <Link external to={(node && node.data) && node.data.uri}>{children}</Link>
 	},
 	renderText: text => text
 }

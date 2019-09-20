@@ -4,6 +4,7 @@ import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
+import ContentBlock from 'src/components/ContentBlock'
 import { colors, typography } from 'src/styles'
 import RichText from 'src/components/RichText'
 
@@ -42,23 +43,25 @@ const LinkUppercase = styled(Link)`
 
 const ContactCopy = ({ title, smallText, showTitle, descriptionRichText, linksTitle, contactLinks }) => (
 	<ContainerStyled>
-		{(title && showTitle) && <Title>{title}</Title>}
-		<Grid small={'[6]'} medium={'[6] 2 [4]'} large={'[6] 2 [4]'} >
-			<ScrollEntrance>
-				{descriptionRichText && <Headline>{RichText(descriptionRichText)}</Headline>}
-			</ScrollEntrance>
-			<div>
+		<ContentBlock>
+			{(title && showTitle) && <Title>{title}</Title>}
+			<Grid small={'[6]'} medium={'[6] 2 [4]'} large={'[6] 2 [4]'} >
 				<ScrollEntrance>
-					{linksTitle && <LinksTitle>{linksTitle}</LinksTitle>}
-					{contactLinks && contactLinks.map(({ id, additionalLabel, text, url }, i) => (
-						<Paragraph key={id}>
-							{additionalLabel && <Pretext>{additionalLabel}</Pretext>}
-							<LinkUppercase external to={url}>{text}</LinkUppercase>
-						</Paragraph>
-					))}
+					{descriptionRichText && <Headline>{RichText(descriptionRichText)}</Headline>}
 				</ScrollEntrance>
-			</div>
-		</Grid>
+				<div>
+					<ScrollEntrance>
+						{linksTitle && <LinksTitle>{linksTitle}</LinksTitle>}
+						{contactLinks && contactLinks.map(({ id, additionalLabel, text, url }, i) => (
+							<Paragraph key={id}>
+								{additionalLabel && <Pretext>{additionalLabel}</Pretext>}
+								<LinkUppercase external to={url}>{text}</LinkUppercase>
+							</Paragraph>
+						))}
+					</ScrollEntrance>
+				</div>
+			</Grid>
+		</ContentBlock>
 	</ContainerStyled>
 )
 

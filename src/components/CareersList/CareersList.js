@@ -34,7 +34,7 @@ ${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
 const DepartmentName = styled.div`
 	${ typography.body }
 	text-transform: uppercase;
-	${ typography.responsiveStyles('padding-bottom', 20, 30, 40, 40) }
+	${ typography.responsiveStyles('padding-bottom', 20, 20, 20, 20) }
 `
 
 const LocationName = styled.div`
@@ -119,13 +119,12 @@ class CareersList extends Component {
 					<ScrollEntrance>
 						<Container>
 							<ContentBlock>
-								<div style={{ marginLeft: 'auto', width: 300 }}>
+								<div style={{ width: 300 }}>
 									<Grid small='[1]' medium='[1] [1]' large='[1] [1]'>
 										<Dropdown
 											value={officeFilter}
 											onChange={x => this.handleChangeFilter('officeFilter', x)}
 											clearValue={() => this.handleChangeFilter('officeFilter', null)}
-											align='left'
 											title="Location"
 											items={officesForDropdown}
 										/>
@@ -133,7 +132,6 @@ class CareersList extends Component {
 											value={departmentFilter}
 											onChange={x => this.handleChangeFilter('departmentFilter', x)}
 											clearValue={() => this.handleChangeFilter('departmentFilter', null)}
-											align='left'
 											title="Department"
 											items={departmentsForDropdown}
 										/>

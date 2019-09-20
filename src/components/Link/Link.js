@@ -21,7 +21,7 @@ const StyledLinkElement = styled.a`
   }
   &:hover {    
 		${ ({ nohover, white }) => nohover ? '' : `
-			color: ${ white ? colors.unofficialLightGrey : colors.grey };
+			color: ${ white ? colors.grey : colors.grey };
 		` }
   }
 &::after {
@@ -42,7 +42,7 @@ const StyledGatsbyLink = styled(GatsbyLink)`
 	}
 	transition: border-bottom-color ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
   &:hover {
-    color: ${ ({ nohover }) => !nohover ? colors.unofficialLightGrey : 'inherit' };
+    color: ${ ({ nohover }) => !nohover ? colors.grey : 'inherit' };
   }
 `
 
@@ -54,7 +54,7 @@ const StyledLinkElementFakeExternal = styled(GatsbyLink)`
 		border-bottom: 2px solid currentColor;
 	}
   &:hover {
-    color: ${ ({ white }) => white ? colors.unofficialLightGrey : colors.grey };
+    color: ${ ({ white }) => white ? colors.grey : colors.grey };
   }
 
 &::after {
