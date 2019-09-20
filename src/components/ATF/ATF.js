@@ -45,7 +45,7 @@ const Block = styled.div`
 	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
 	min-height: ${ ({ full }) => full ? 750 : 500 }px;
 	${ mq.mediumAndBelow } {
-		min-height: 650px;
+		min-height: ${ ({ full }) => full ? 750 : 650 }px;;
 	}
 	width: 100%;
 	position: relative;
