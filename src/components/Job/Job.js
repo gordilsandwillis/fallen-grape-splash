@@ -182,7 +182,7 @@ class Job extends React.Component {
 						<ContentBlock>
 							<Container>
 								{title && <JobName>{title}</JobName>}
-								{(location && location.name) && <LocationName>{location.name}</LocationName>}
+								{(location && location.name) ? <LocationName>{location.name}</LocationName> : ''}
 							</Container>
 						</ContentBlock>
 						<Hr full color={colors.black}/>
@@ -207,8 +207,8 @@ class Job extends React.Component {
 											key={(q.label || i) + i} {...q}
 										/>
 									))}
-									{complianceLength && <H2>Compliance</H2>}
-									{complianceLength && compliance.map((item, index) => (
+									{!complianceLength ? '' : <H2>Compliance</H2>}
+									{!complianceLength ? '' : compliance.map((item, index) => (
 										<div key={index + '_compliance'}>
 											<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
 											{item.questions && item.questions.map((q, i) => (
