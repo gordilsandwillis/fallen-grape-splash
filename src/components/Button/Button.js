@@ -48,7 +48,7 @@ const ButtonStyles = (state, shape, size, home) => (`
   text-transform: none;
   letter-spacing: 0;
   border-radius: 0;
-	color: currentcolor;
+	color: currentColor;
 	${ home && `color: ${ colors.white };` }
   font-style: normal;
   font-family: inherit;
