@@ -206,7 +206,7 @@ class Job extends React.Component {
 											key={(q.label || i) + i} {...q}
 										/>
 									))}
-									<H2>Compliance</H2>
+									{compliance && <H2>Compliance</H2>}
 									{compliance && compliance.map((item, index) => (
 										<div key={index + '_compliance'}>
 											<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
