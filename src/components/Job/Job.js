@@ -100,7 +100,8 @@ class Job extends React.Component {
 		if (this.state.loading) return
 
 		const formData = new FormData(e.target)
-		const { questions, compliance } = this.props.jobData
+		const { questions } = this.props.jobData
+		const compliance = this.props.jobData.compliance
 		const allQuestions = compliance.reduce((acc, x) => { return acc.concat(x.questions) }, [...questions])
 		allQuestions
 			.forEach(metaQ => {
@@ -151,6 +152,7 @@ class Job extends React.Component {
 	render () {
 		const { ghid, questions, compliance, content, title, location } = this.props.jobData
 		console.log(compliance)
+		console.log(this.props.jobData)
 		const { loading, success, error } = this.state
 		return (
 			<Wrapper>
