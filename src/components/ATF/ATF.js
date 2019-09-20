@@ -73,7 +73,6 @@ const AnimatedGradient = styled.div`
 	position: absolute;
 	left: 0;
 	right: 0;
-	font-family: "Exo", sans-serif;
 	color: #fff;
 	background: radial-gradient( rgb(231,142,48), rgb(185,53,22), rgb(237, 79, 0), rgb(113,88,76));
 	background-size: 500% 500%;
@@ -157,7 +156,7 @@ const PaddedParagraph = styled.div`
 	margin-top: 0;
 	padding-top: 15px;
 	max-width: 25em;
-	${ typography.responsiveStyles('padding-bottom', 50, 30, 0, 0) }
+	${ typography.responsiveStyles('padding-bottom', 15, 15, 5, 5) }
 `
 
 const H1 = styled.h1`

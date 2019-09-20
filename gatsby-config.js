@@ -10,6 +10,7 @@ module.exports = {
 		author: '@dillon',
 	},
 	plugins: [
+		`gatsby-transformer-inline-svg`,
 		{
 			resolve: `gatsby-plugin-emotion`,
 		},

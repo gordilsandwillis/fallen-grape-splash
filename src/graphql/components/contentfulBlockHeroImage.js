@@ -6,6 +6,7 @@ export const query = graphql`
     id
     title
     image {
+      svgContent
       file {
         url
         fileName

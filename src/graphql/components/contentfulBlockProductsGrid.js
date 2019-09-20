@@ -17,10 +17,17 @@ export const query = graphql`
         id
       }
       icon {
+        svgContent
         file {
           url
           fileName
           contentType
+          details {
+            image {
+              width
+              height
+            }
+          }
         }
         fluid(maxWidth: 400, quality: 100) {
           base64
@@ -30,6 +37,7 @@ export const query = graphql`
           srcWebp
           srcSetWebp
           sizes
+          tracedSVG
         }
       }
       descriptionText: description
