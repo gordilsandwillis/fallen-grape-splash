@@ -210,8 +210,8 @@ class Job extends React.Component {
 									{!complianceLength ? '' : <H2>Compliance</H2>}
 									{!complianceLength ? '' : compliance.map((item, index) => (
 										<div key={index + '_compliance'}>
-											<div>{item.description && <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
-											{item.questions && item.questions.map((q, i) => (
+											<div>{!item.description ? '' : <div dangerouslySetInnerHTML={{ __html: parse(decodeURI(item.description)) }}/>}</div>
+											{!item.questions ? '' : item.questions.map((q, i) => (
 												<Question
 													onChange={this.handleDropdownChange}
 													dropdownValues={this.state[q.label]}
