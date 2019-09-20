@@ -16,6 +16,7 @@ export const query = graphql`
       title
       mediaOrganizationsLogo {
         id
+        svgContent
         fluid(maxWidth: 1440, quality: 100) {
           base64
           aspectRatio
@@ -40,6 +41,7 @@ export const query = graphql`
         id
         coverImage {
           id
+          svgContent
           fluid(maxWidth: 1440, quality: 100) {
             base64
             aspectRatio
@@ -53,6 +55,7 @@ export const query = graphql`
       }
       inlineImage {
         id
+        svgContent
         fluid(maxWidth: 1440, quality: 100) {
           base64
           aspectRatio

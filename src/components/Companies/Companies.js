@@ -29,8 +29,8 @@ const LogoContainer = styled.div`
 `
 
 const Padding = styled.div`
-	${ ({ notFirst }) => notFirst && typography.responsiveStyles('padding-top', 40, 40, 40, 35) }
-	${ ({ notLast }) => notLast && typography.responsiveStyles('padding-bottom', 40, 40, 40, 35) }
+	${ ({ notFirst }) => notFirst && typography.responsiveStyles('padding-top', 50, 45, 45, 40) }
+	${ ({ notLast }) => notLast && typography.responsiveStyles('padding-bottom', 50, 45, 45, 40) }
 	width: 100%;
 	padding: 10px 0px;
 `
