@@ -46,12 +46,12 @@ jobs:
               echo "not deploying"
               exit 0
             else
-              ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
+              ./do-exclusively ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
               git config --global user.email "app@dillonpetito.com"
               git config --global user.name "Dokku"
               git commit --allow-empty -m "Empty Commit to setup deployments"
               git remote add staging dokku@mgnt.work:mosaic
-              ./do-exclusively --branch master git push -f staging master
+              --branch master git push -f staging master
             fi
 workflows:
   version: 2
