@@ -1,4 +1,12 @@
 version: 2
+dependencies:
+  override:
+    - sudo apt-add-repository -y ppa:duggan/bats
+    - sudo apt-get update; sudo apt-get install -y bats
+    - |
+      curl -L -o ~/bin/jq \
+      https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
+      chmod +x ~/bin/jq
 jobs:
   build:
     docker:
@@ -43,30 +51,10 @@ jobs:
               git config --global user.name "Dokku"
               git commit --allow-empty -m "Empty Commit to setup deployments"
               git remote add staging dokku@mgnt.work:mosaic
-              git push -f staging master
+              ./do-exclusively --branch master git push -f staging master
             fi
-
-  # deploy:
-  #   machine:
-  #       enabled: true
-  #   working_directory: ~/repo
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Push to Dokku
-  #         command: |
-  #           ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
-  #           git remote add staging dokku@mgnt.work:mosaic
-  #           git push staging master
-
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
-      # - deploy:
-      #     requires:
-      #         - build
-      #     filters:
-      #       branches:
-      #         only: master
