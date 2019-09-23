@@ -6,13 +6,15 @@ const slash = require(`slash`)
 const createContentfulPages = (graphql, createPage) => new Promise((resolve, reject) => {
 	graphql(`
     query {
-      allContentfulPage {
-        edges {
-          node {
-            id
-            slug
-          }
-        }
+			allContentfulSite {
+				edges {
+					node {
+						pages {
+							id
+							slug
+						}
+					}
+				}
 			}
 			allGreenhouseJob {
 				edges {
@@ -29,7 +31,7 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
 						}
 					}
 				}
-			}		
+			}	
     }
   `).then(result => {
 		if (result.errors) {
@@ -40,13 +42,13 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
 			page: path.resolve('./src/templates/PageTemplate.jsx'),
 			job: path.resolve('./src/templates/JobTemplate.jsx')
 		}
-		result.data.allContentfulPage.edges.forEach(edge => {
-			const template = pageTemplateMap[edge.node.type] || pageTemplateMap['page']
+		result.data.allContentfulSite.edges[0].node.pages.forEach(page => {
+			const template = pageTemplateMap[page.type] || pageTemplateMap['page']
 			createPage({
-				path: `${ edge.node.slug }`,
+				path: `${ page.slug }`,
 				component: template,
 				context: {
-					id: edge.node.id
+					id: page.id
 				},
 			})
 		})

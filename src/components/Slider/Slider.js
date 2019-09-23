@@ -176,7 +176,7 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 					<Title>{title}</Title>
 				</Container>
 			)}
-			<SlickSliderDark accessibility horizontalTextAlignCentered={!items[0].imageInSlider} {...settings}>
+			<SlickSliderDark accessibility horizontalTextAlignCentered={items && !items[0].imageInSlider} {...settings}>
 				{items && items.map(({ id, titleInSlider, award, companyName, linkInSlider, imageInSlider }, index) => (
 					<RelativeDiv key={id}>
 						{imageInSlider && <BgImage image={imageInSlider}/>}
