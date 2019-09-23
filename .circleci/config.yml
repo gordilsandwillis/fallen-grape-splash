@@ -7,7 +7,6 @@ dependencies:
       curl -L -o ~/bin/jq \
       https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
       chmod +x ~/bin/jq
-    - sudo chmod +x ./do-exclusively
 jobs:
   build:
     docker:
@@ -47,6 +46,7 @@ jobs:
               echo "not deploying"
               exit 0
             else
+              sudo chmod +x ./do-exclusively
               ./do-exclusively ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
               git config --global user.email "app@dillonpetito.com"
               git config --global user.name "Dokku"
