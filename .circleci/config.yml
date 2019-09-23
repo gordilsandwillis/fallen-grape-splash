@@ -53,28 +53,8 @@ jobs:
               git remote add staging dokku@mgnt.work:mosaic
               ./do-exclusively --branch master git push -f staging master
             fi
-
-  # deploy:
-  #   machine:
-  #       enabled: true
-  #   working_directory: ~/repo
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Push to Dokku
-  #         command: |
-  #           ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
-  #           git remote add staging dokku@mgnt.work:mosaic
-  #           git push staging master
-
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
-      # - deploy:
-      #     requires:
-      #         - build
-      #     filters:
-      #       branches:
-      #         only: master
