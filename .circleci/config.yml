@@ -47,12 +47,12 @@ jobs:
               exit 0
             else
               sudo chmod +x ./do-exclusively
-              ./do-exclusively ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
+              ./do-exclusively --branch master ssh-keyscan -H mgnt.work >> ~/.ssh/known_hosts
               git config --global user.email "app@dillonpetito.com"
               git config --global user.name "Dokku"
               git commit --allow-empty -m "Empty Commit to setup deployments"
               git remote add staging dokku@mgnt.work:mosaic
-              --branch master git push -f staging master
+              git push -f staging master
             fi
 workflows:
   version: 2
