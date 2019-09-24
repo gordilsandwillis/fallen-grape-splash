@@ -54,40 +54,9 @@ class CareersList extends Component {
 		}
 	}
 
-	handleComplexDropdownChange = ({ value, label, category, nameInState }) => {}
-
-	filterByDepartment = jobs => jobs.filter(job => {
-		const { departmentFilter } = this.state
-		if (departmentFilter && job.departmentName !== departmentFilter.value) return false
-		return true
-	})
-
-	filterByLocation = jobs => jobs.filter(job => {
-		const { officeFilter } = this.state
-		if (officeFilter && job.locationName !== officeFilter.value) return false
-		return true
-	})
-
 	handleChangeFilter = (name, x) => {
 		this.setState({ [name]: x })
 	}
-
-	getDepartmentDropdownItems = departments => Object.values(departments)
-		.filter(({ jobs }) => jobs && jobs.length > 0)
-		.map(({ departmentName }) => ({ label: departmentName, value: departmentName }))
-
-	getLocationDropdownItems = departments => Object.values(
-		departments && Object.keys(departments)
-			.reduce((acc, dKey) => {
-				if (departments[dKey].jobs && Object.keys(departments[dKey].jobs).length > 0) {
-					Object.values(departments[dKey].jobs)
-						.forEach(j => {
-							acc[j.locationName] = { label: j.locationName, value: j.locationName }
-						})
-				}
-				return acc
-			}, {})
-	)
 
 	render () {
 		const { selectedJobId, officeFilter, departmentFilter } = this.state
@@ -119,8 +88,8 @@ class CareersList extends Component {
 					<ScrollEntrance>
 						<Container>
 							<ContentBlock>
-								<div style={{ width: 300 }}>
-									<Grid small='[1]' medium='[1] [1]' large='[1] [1]'>
+								<div style={{ maxWidth: 300 }}>
+									<Grid small='[1] [1]' medium='[1] [1]' large='[1] [1]'>
 										<Dropdown
 											value={officeFilter}
 											onChange={x => this.handleChangeFilter('officeFilter', x)}
@@ -152,7 +121,6 @@ class CareersList extends Component {
 													<JobItem key={j.ghid}>
 														<div>
 															{j.title && <JobName>{j.title}</JobName>}
-
 															{j.offices &&
 															<LocationName>
 																{j.offices.map((o, i) => (
