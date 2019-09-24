@@ -30,7 +30,8 @@ const customStyles = {
 		color: state.isSelected ? colors.black : `${ colors.grey } !important`,
 		padding: 3,
 		margin: 0,
-		fontSize: 12
+		fontSize: 12,
+		marginLeft: 7
 	}),
 	control: provided => ({
 		...provided,
@@ -61,8 +62,13 @@ const SelectStyled = styled(Select)`
     transition: color ${ animations.mediumSpeed } ease-in-out;
     background-color: ${ colors.offWhiteHighOpacity };
   }
-	&:hover >div:nth-child(1) div, &:hover >div:nth-child(2) div {
+	polyline {
+		stroke: currentColor;
+		transition: color ${ animations.mediumSpeed } ease-in-out, stroke ${ animations.mediumSpeed } ease-in-out, 
+	}
+	&:hover >div:nth-child(1) div, &:hover >div:nth-child(2) div, &:hover polyline {
     color: ${ colors.grey } !important;
+		transition: color ${ animations.mediumSpeed } ease-in-out
 	}
 
 	div:hover {

@@ -43,7 +43,7 @@ const ImageStyled = styled(Image)`
 
 const H2 = styled.div`
 	${ typography.h2 }
-	padding-bottom: 30px;
+	padding-bottom: 50px;
 `
 
 const Body = styled.div`
