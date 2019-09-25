@@ -19,18 +19,17 @@ const PageCheat = styled.div`
 const lightStyles = `
   position: static;
   background-color: ${ colors.offwhite };
-  color: ${ colors.black }
 `
 
 const transparentStyles = `
   position: absolute;
   background-color: transparent;
   top: 0;
-  color: ${ colors.white };
 `
 
 const Wrapper = styled.header`
   ${ ({ hasAtf, scrolled }) => (hasAtf && !scrolled) ? transparentStyles : lightStyles };
+	color: ${ ({ clicked, hasAtf, scrolled }) => (clicked || (hasAtf && !scrolled)) ? colors.white : colors.black };
   ${ typography.body }
   left: 0;
   transition: height ${ animations.mediumSpeed } ease-in-out,
@@ -176,12 +175,13 @@ const MobileDetect = styled.div`
 `
 
 const HamburgerContainer = styled.div`
-  margin-top:2px;
+	margin-top:2px;
 	align-self: flex-end;
   justify-self: flex-end;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
   cursor: pointer;
   ${ typography.responsiveStyles('height', 40, 36, 32, 24) }
 `
@@ -315,7 +315,7 @@ class Header extends Component {
   								</Overlay>
   							</MobileDetect>
   							<MobileDetect scrolled={scrolled} center>
-  								<Link to={location.pathname}>
+  								<Link dark={!((mobileNavOpen || (hasAtf && !scrolled)))} to={location.pathname}>
   								<HamburgerContainer onClick={this.toggleNav}>
   									<HamburgerIcon
   										clicked={mobileNavOpen}
