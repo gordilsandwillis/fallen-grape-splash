@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors, animations } from 'src/styles'
+import { animations } from 'src/styles'
 
 const MenuLink = styled.div`
   display: inline-block;
@@ -37,8 +37,8 @@ const MenuIcon = styled.div`
   display: block;
   width: 30px;
   height: 20px;
-  transition: transform ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
-  color: ${ ({ clicked, hasAtf, scrolled }) => (clicked || (hasAtf && !scrolled)) ? colors.white : colors.black };
+  transition: transform ${ animations.mediumSpeed } ease-in-out;
+  color: currentColor;
 
   &:before,
   &:after,
@@ -50,10 +50,10 @@ const MenuIcon = styled.div`
     height: 2px;
     position: absolute;
     background-color: currentColor;
-    transition: transform ${ animations.mediumSpeed } ease-in-out,
-                opacity ${ animations.mediumSpeed } ease-in-out,
-                width ${ animations.mediumSpeed } ease-in-out,
-                background-color ${ animations.mediumSpeed } ease-in-out;
+    /* transition: transform ${ animations.mediumSpeed } ease-in-out, */
+                /* opacity ${ animations.mediumSpeed } ease-in-out, */
+                /* width ${ animations.mediumSpeed } ease-in-out, */
+                /* background-color ${ animations.mediumSpeed } ease-in-out; */
   }
   &:before {
     top: 0;

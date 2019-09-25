@@ -2,12 +2,13 @@ import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
+import { DefaultPlayer as Video } from 'react-html5video'
 import Image from 'src/components/Image'
 import Hr from 'src/components/Hr'
 import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import { colors, gridSettings, typography, mediaQueries as mq } from 'src/styles'
+import { colors, animations, gridSettings, typography, mediaQueries as mq } from 'src/styles'
 import RichText from 'src/components/RichText'
 import MobileDetect from 'mobile-detect'
 import PropTypes from 'prop-types'
@@ -65,10 +66,32 @@ const Block = styled.div`
 
 const BgImage = styled(Image)`
 	height: 100%;
-
 	position: absolute;
 	left: 0;
   right: 0;
+`
+
+const VideoContainer = styled.div`
+   position: absolute;
+	 background-color: ${ colors.black };
+	 left: 0;
+	 width: 100%;
+   height: 100%;
+   z-index: -1;
+   pointer-events: none;
+   overflow: hidden;
+	video {
+		opacity: ${ ({ loading }) => loading ? 0 : 1 };
+		transition: opacity ${ animations.slowSpeed } ease-in-out; 
+		width: 120vw;
+    height: 61.875vw; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
+    min-height: 110vh;
+    min-width: 195.547vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	}
 `
 
 const AnimatedGradient = styled.div`
@@ -130,6 +153,21 @@ const Overlay = styled.div`
 	z-index: 6;
 `
 
+const VideoOverlay = styled.div`
+	background: ${ colors.black };
+	opacity: ${ ({ loading }) => loading ? 1 : 0 };
+	transition: opacity ${ animations.slowSpeed } ease-in-out;
+	position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: -1;
+   pointer-events: none;
+   overflow: hidden;
+	z-index: 7;
+`
+
 const MainContent = styled.div`
 padding: ${ gridSettings.containerLargeMargins } 0;
 width: 100%;
@@ -173,10 +211,23 @@ const ButtonUppercase = styled(Button)`
 	text-transform: uppercase;
 `
 
+const VideoStyled = styled(Video)`
+	z-index: -10;
+	.rh5v-DefaultPlayer_controls {
+    position: absolute;
+		bottom: 0;
+		display: none;
+		visibility: hidden;
+    right: 0;
+    left: 0;
+    height: 0;
+}
+`
+
 class ATF extends Component {
 	constructor (props) {
 		super(props)
-		this.state = { isMobile: false }
+		this.state = { isMobile: false, loading: true }
 	}
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
@@ -192,15 +243,20 @@ class ATF extends Component {
 		const md = new MobileDetect(window.navigator.userAgent)
 		const isMobile = md.is('iPhone')
 		this.setState({ isMobile })
+
+		const video = document.getElementsByTagName('video')[0]
+		if (video) video.addEventListener('play', () => { this.setState({ loading: false }) })
+		else setTimeout(() => this.setState({ loading: false }), 3000)
 	}
 
 	render () {
 		const {
 			image,
+			video,
+			animatedGradientInsteadOfImage,
 			horizontalTextAlignment,
 			verticalTextAlignment,
 			headline,
-			animatedGradientInsteadOfImage,
 			smallText,
 			winHeight,
 			horizontalBreak,
@@ -210,7 +266,23 @@ class ATF extends Component {
 		return (
 			<Fragment>
 				<Block isMobile={isMobile} full={smallText && headline} background winHeight={winHeight}>
-					{(image && !animatedGradientInsteadOfImage) && <BgImage image={image} />}
+					{((image && !video) && !animatedGradientInsteadOfImage) && <BgImage image={image} />}
+					{((!image && video) && !animatedGradientInsteadOfImage) &&
+						<React.Fragment>
+							<VideoOverlay loading={this.state.loading} />
+							<VideoContainer>
+								<VideoStyled
+									loop
+									autoPlay
+									playsInline
+									muted
+									controls={['PlayPause']}
+								>
+									<source src={video.file.url} type="video/mp4"/>
+								</VideoStyled>
+							</VideoContainer>
+						</React.Fragment>
+					}
 					{animatedGradientInsteadOfImage && <AnimatedGradient><div></div></AnimatedGradient>}
 					<Overlay />
 				</Block>
@@ -272,7 +344,7 @@ ATF.defaultProps = {
 ATF.propTypes = {
 	horizontalTextAlignment: PropTypes.bool.isRequired,
 	verticalTextAlignment: PropTypes.bool.isRequired,
-	image: PropTypes.object.isRequired,
+	// image: PropTypes.object,
 	headline: PropTypes.object.isRequired,
 	horizontalBreak: PropTypes.bool.isRequired,
 	text: PropTypes.string,

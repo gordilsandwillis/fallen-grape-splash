@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { mediaQueries as mq, gridSettings } from 'src/styles'
 
 const ContentBlockStyles = styled.div`
-	max-width: 2500px;
+	max-width: 2350px;
 	margin: 0 auto;
   height: 100%;
   padding: ${ gridSettings.containerLargeMargins } 0;
