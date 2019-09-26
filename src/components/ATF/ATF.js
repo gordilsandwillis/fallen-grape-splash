@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
+import withSizes from 'react-sizes'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
 import { DefaultPlayer as Video } from 'react-html5video'
@@ -80,13 +81,22 @@ const VideoContainer = styled.div`
    z-index: -1;
    pointer-events: none;
    overflow: hidden;
+	 >div>div span {
+		 display: none;
+	 }
 	video {
 		opacity: ${ ({ loading }) => loading ? 0 : 1 };
 		transition: opacity ${ animations.slowSpeed } ease-in-out; 
-		width: 120vw;
-    height: 61.875vw; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
+		width: 120vh;
+    height: 61.875vh; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
     min-height: 110vh;
     min-width: 195.547vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
+		@media(orientation: landscape) {
+			width: 120vw;
+			height: 61.875vw; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
+			min-height: 110vw;
+			min-width: 195.547vw; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
+		}
     position: absolute;
     top: 50%;
     left: 50%;
@@ -155,7 +165,7 @@ const Overlay = styled.div`
 
 const VideoOverlay = styled.div`
 	background: ${ colors.black };
-	opacity: ${ ({ loading }) => loading ? 1 : 0 };
+	opacity: ${ ({ isLoading }) => isLoading ? 1 : 0 };
 	transition: opacity ${ animations.slowSpeed } ease-in-out;
 	position: absolute;
    top: 0;
@@ -232,7 +242,7 @@ class ATF extends Component {
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
 		const isMobile = md.is('iPhone')
-		if (isMobile && prevProps.winHeight !== this.props.winHeight) {
+		if ((isMobile && prevProps.winHeight !== this.props.winHeight) && prevProps.winWidth === this.props.winWidth) {
 			return false
 		}
 
@@ -259,6 +269,7 @@ class ATF extends Component {
 			headline,
 			smallText,
 			winHeight,
+			winWidth,
 			horizontalBreak,
 			button,
 		} = this.props
@@ -269,8 +280,8 @@ class ATF extends Component {
 					{((image && !video) && !animatedGradientInsteadOfImage) && <BgImage image={image} />}
 					{((!image && video) && !animatedGradientInsteadOfImage) &&
 						<React.Fragment>
-							<VideoOverlay loading={this.state.loading} />
-							<VideoContainer>
+							<VideoOverlay isLoading={this.state.loading} />
+							<VideoContainer heightIsLarger={winHeight > winWidth}>
 								<VideoStyled
 									ref={ref => { this.videoRef = ref }}
 									loop
@@ -353,4 +364,4 @@ ATF.propTypes = {
 	buttonLink: PropTypes.any,
 }
 
-export default ATF
+export default withSizes(({ width, height }) => ({ winWidth: width, winHeight: height }))(ATF)
