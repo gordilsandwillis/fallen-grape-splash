@@ -20,6 +20,12 @@ export const query = graphql`
         sizes
       }
     }
+    video {
+      id
+      file {
+        url
+      }
+    }
     horizontalTextAlignment
     horizontalBreak
     headline {
