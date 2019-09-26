@@ -244,9 +244,9 @@ class ATF extends Component {
 		const isMobile = md.is('iPhone')
 		this.setState({ isMobile })
 
-		const video = document.getElementsByTagName('video')[0]
-		if (video) video.addEventListener('play', () => { this.setState({ loading: false }) })
-		else setTimeout(() => this.setState({ loading: false }), 3000)
+		// const video = this.videoRef.videoEl
+		// if (video) video.addEventListener('play', () => { this.setState({ loading: false }) })
+		setTimeout(() => this.setState({ loading: false }), 3000)
 	}
 
 	render () {
@@ -272,6 +272,7 @@ class ATF extends Component {
 							<VideoOverlay loading={this.state.loading} />
 							<VideoContainer>
 								<VideoStyled
+									ref={ref => { this.videoRef = ref }}
 									loop
 									autoPlay
 									playsInline

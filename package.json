@@ -38,6 +38,7 @@
     "jest-emotion": "^10.0.10",
     "lodash": "^4.17.15",
     "mobile-detect": "^1.4.3",
+    "patch-package": "^6.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -84,6 +85,7 @@
   ],
   "license": "UNLICENSED",
   "scripts": {
+    "postinstall": "patch-package",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
