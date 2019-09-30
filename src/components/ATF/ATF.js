@@ -46,13 +46,9 @@ const Block = styled.div`
 	height: ${ ({ winHeight, isMobile }) => winHeight ? winHeight + 'px' : isMobile ? '80vh' : '100vh' };
 	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
 	min-height: ${ ({ full }) => full ? 750 : 500 }px;
-	${ mq.mediumAndBelow } {
-		min-height: ${ ({ full }) => full ? 750 : 650 }px;;
-	}
 	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };
-
 	${ ({ background }) => background && `
 		position: absolute;
 		overflow: hidden;
@@ -85,22 +81,25 @@ const VideoContainer = styled.div`
 		 display: none;
 	 }
 	video {
-		opacity: ${ ({ loading }) => loading ? 0 : 1 };
-		transition: opacity ${ animations.slowSpeed } ease-in-out; 
-		width: 120vh;
-    height: 61.875vh; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
-    min-height: 110vh;
-    min-width: 195.547vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
-		@media(orientation: landscape) {
-			width: 120vw;
-			height: 61.875vw; /* Given a 16:9 aspect ratio, 9/16*100 = 56.25 */
-			min-height: 110vw;
-			min-width: 195.547vw; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
-		}
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+		opacity: ${ ({ loading }) => loading ? 0 : 1 };
+		transition: opacity ${ animations.slowSpeed } ease-in-out; 
+		height: 100vh;
+    width: 177.77vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
+		@media(orientation: landscape) {
+			width: 177.77vh;
+			height: 100vh;
+			min-height: 500px;
+			min-width: 1333.3333335px;
+		${ mq.mediumAndBelow } {
+			width: 177.77vh;
+			min-width: 1333.3333335px;
+			min-height: 500px;
+		}
+		}
 	}
 `
 
@@ -165,7 +164,8 @@ const Overlay = styled.div`
 
 const VideoOverlay = styled.div`
 	background: ${ colors.black };
-	opacity: ${ ({ isLoading }) => isLoading ? 1 : 0 };
+	/* opacity: ${ ({ isLoading }) => isLoading ? 1 : 0 }; */
+	opacity: 0;
 	transition: opacity ${ animations.slowSpeed } ease-in-out;
 	position: absolute;
    top: 0;
