@@ -16,9 +16,10 @@ const Wrapper = styled.footer`
   z-index: 3;
   height: 95px;
   position: ${ ({ isHomePage }) => isHomePage ? 'absolute' : 'static' };
-  bottom: inherit;
-  @media screen and ( height: 750px ) {
-    bottom: 0;
+  ${ mq.largeAndUp } {
+    @media ( min-height: 500px ) {
+      bottom: 0;
+    }
   }
   ${ mq.mediumAndBelow } {
     height: 120px;
