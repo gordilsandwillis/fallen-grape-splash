@@ -70,7 +70,7 @@ const BgImage = styled(Image)`
 
 const VideoContainer = styled.div`
    position: absolute;
-	 background-color: ${ colors.black };
+	 /* background-color: ${ colors.black }; */
 	 left: 0;
 	 width: 100%;
    height: 100%;
@@ -90,8 +90,8 @@ const VideoContainer = styled.div`
 		height: 100vh;
     width: 177.77vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
 		@media(orientation: landscape) {
-			width: 177.77vh;
-			height: 100vh;
+			width: 177.77vw;
+			height: 100vw;
 			min-height: 500px;
 			min-width: 1333.3333335px;
 		${ mq.mediumAndBelow } {
