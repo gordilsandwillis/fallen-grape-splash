@@ -169,7 +169,7 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 		slidesToScroll: 1,
 		// autoplay: true,
 	}
-	return (
+	return (items && items.length) && (
 		<Wrapper>
 			{(title && showTitle) && (
 				<Container>
