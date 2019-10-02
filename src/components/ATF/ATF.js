@@ -73,10 +73,7 @@ const VideoContainer = styled.div`
   top: 0;
   bottom: 0;
   width: 100%;
-	height: calc(100% - 95px);
-	${ mq.mediumAndBelow } {
-		height: 100%;
-	}
+  height: 100%;
   overflow: hidden;
 	z-index: -1;
 	pointer-events: none;
