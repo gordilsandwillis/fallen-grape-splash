@@ -69,37 +69,38 @@ const BgImage = styled(Image)`
 `
 
 const VideoContainer = styled.div`
-   position: absolute;
-	 /* background-color: ${ colors.black }; */
-	 left: 0;
-	 width: 100%;
-   height: 100%;
-   z-index: -1;
-   pointer-events: none;
-   overflow: hidden;
-	 >div>div span {
-		 display: none;
-	 }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
+	z-index: -1;
+	pointer-events: none;
+
+	>div>div span {
+		display: none;
+	}
+	
 	video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+		@media (min-aspect-ratio: 16/9) {
+			width:100%;
+			height: auto;
+		}
+		@media (max-aspect-ratio: 16/9) {
+			width:auto;
+			height: 100%;
+		}
+
+		
+		/* Center the video */
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+
 		opacity: ${ ({ loading }) => loading ? 0 : 1 };
 		transition: opacity ${ animations.slowSpeed } ease-in-out; 
-		height: 100vh;
-    width: 177.77vh; /* Given a 16:9 aspect ratio, 16/9*100 = 177.77 */
-		@media(orientation: landscape) {
-			width: 177.77vw;
-			height: 100vw;
-			min-height: 500px;
-			min-width: 1333.3333335px;
-		${ mq.mediumAndBelow } {
-			width: 177.77vh;
-			min-width: 1333.3333335px;
-			min-height: 500px;
-		}
-		}
 	}
 `
 
