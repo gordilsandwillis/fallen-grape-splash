@@ -299,11 +299,11 @@ class ATF extends Component {
 									loop
 									autoPlay
 									playsInline
-									onCanPlay={() => {
+									onCanPlayThrough={() => {
 										setTimeout(() => {
-											// if not playing after .5 seconds, replace it with background image
+											// if fully loaded and not playing after 1 second, replace it with background image
 											if (this.videoRef.state.currentTime === 0) this.setState({ videoFailed: true })
-										}, 500)
+										}, 1000)
 									}}
 									muted
 									controls={['PlayPause']}
