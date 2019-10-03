@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Select from 'react-select'
-import { colors, animations } from 'src/styles'
+import { colors, animations, mediaQueries as mq } from 'src/styles'
 import DropdownArrowSvg from 'src/assets/images/dropdown_arrow.svg'
 // const TextAlign = styled.div`
 //   text-align: ${ ({ align }) => align };
@@ -52,7 +52,10 @@ const customStyles = {
 }
 
 const SelectStyled = styled(Select)`
-	max-width:${ ({ title }) => (title && title.length) ? (title.length * 15) + 'px' : '150px' };
+	max-width:${ ({ title }) => (title && title.length) ? ((title.length * 10) + 40) + 'px' : '150px' };
+	${ mq.mediumAndBelow } {
+		max-width: 150px;
+	}
 	margin: 5px 0;
 	div {
     color: ${ colors.black };
