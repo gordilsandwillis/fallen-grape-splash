@@ -24,6 +24,13 @@ const Wrapper = styled.div`
 	}
 `
 
+const ResponsiveRightAlign = styled.div`
+ max-width: 300;
+ ${ mq.mediumAndUp } {
+	 margin-left: auto;
+ }
+`
+
 const JobFilters = styled.div`
 	flex: 1;
 	display: flex;
@@ -154,7 +161,7 @@ class CareersList extends Component {
 			return acc
 		}, {})
 		const allCompanies = allCompaniesDictionary && Object.values(allCompaniesDictionary)
-		const allCompaniesForDropdown = [{ value: null, label: 'All Companies' }].concat(allCompanies.map(x => ({ value: x, label: x })))
+		const allCompaniesForDropdown = [{ value: null, label: 'All Jobs' }].concat(allCompanies.map(x => ({ value: x, label: x })))
 		const allDepartments = unfilteredDepartments.filter(x => (x.jobs && x.jobs.length))
 		const departmentsWithCompanyFiltered = allDepartments
 			.reduce((acc, d) => {
@@ -194,35 +201,36 @@ class CareersList extends Component {
 				<ScrollEntrance>
 					<Container>
 						<ContentBlock>
-							<Grid small='[1] [1]' medium='[1] [1]' large='[1] [1]'>
-								<JobFilters>
-									{/* only appears on desktop */}
-									<JobButton tabindex="-1" underlined={!companyFilter} onClick={() => this.setState({ companyFilter: null, departmentFilter: null, officeFilter: null })}>All Jobs</JobButton>
-									{allCompanies && allCompanies.map(company =>
-										<JobButton
-											key={company}
-											tabindex="-1"
-											underlined={companyFilter === company}
-											onClick={() => this.setState({ companyFilter: company, departmentFilter: null, officeFilter: null })}
-										>
-											{company}
-										</JobButton>
-									)}
-								</JobFilters>
-								<MobileOnly>
-									{/* only appears on mobile */}
-									<Dropdown
-										value={companyFilter ? { value: companyFilter, label: companyFilter } : null}
-										onChange={x => this.handleChangeFilter('companyFilter', x.value)}
-										clearValue={() => this.handleChangeFilter('companyFilter', null)}
-										title="All Companies"
-										items={allCompaniesForDropdown}
-									/>
-								</MobileOnly>
-
+							<Grid small='[1]' medium='[1] [1]' large='[1] [1]'>
+								<div style={{ alignSelf: 'center' }}>
+									<JobFilters>
+										{/* only appears on desktop */}
+										<JobButton tabindex="-1" underlined={!companyFilter} onClick={() => this.setState({ companyFilter: null, departmentFilter: null, officeFilter: null })}>All Jobs</JobButton>
+										{allCompanies && allCompanies.map(company =>
+											<JobButton
+												key={company}
+												tabindex="-1"
+												underlined={companyFilter === company}
+												onClick={() => this.setState({ companyFilter: company, departmentFilter: null, officeFilter: null })}
+											>
+												{company}
+											</JobButton>
+										)}
+									</JobFilters>
+									<MobileOnly>
+										{/* only appears on mobile */}
+										<Dropdown
+											value={companyFilter ? { value: companyFilter, label: companyFilter } : null}
+											onChange={x => { this.handleChangeFilter('companyFilter', x.value); this.setState({ departmentFilter: null, officeFilter: null }) }}
+											clearValue={() => this.handleChangeFilter('companyFilter', null)}
+											title="All Jobs"
+											items={allCompaniesForDropdown}
+										/>
+									</MobileOnly>
+								</div>
 								<div>
-									<div style={{ maxWidth: 300, marginLeft: 'auto' }}>
-										<Grid small='[1] [1]' medium='[1] [1]' large='[1] [1]'>
+									<ResponsiveRightAlign>
+										<Grid small='[1]' medium='[1] [1]' large='[1] [1]'>
 											<Dropdown
 												value={officeFilter}
 												onChange={x => this.handleChangeFilter('officeFilter', x.value ? x : null)}
@@ -238,7 +246,7 @@ class CareersList extends Component {
 												items={departmentsForDropdown}
 											/>
 										</Grid>
-									</div>
+									</ResponsiveRightAlign>
 								</div>
 							</Grid>
 						</ContentBlock>
