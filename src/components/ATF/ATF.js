@@ -42,6 +42,11 @@ const AlignedText = styled.div`
 `
 
 const Block = styled.div`
+	.hide {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
   display: block;
 	height: ${ ({ winHeight, isMobile }) => winHeight ? winHeight + 'px' : isMobile ? '80vh' : '100vh' };
 	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
@@ -62,6 +67,8 @@ const Block = styled.div`
 `
 
 const BgImage = styled(Image)`
+	transition: all ${ animations.mediumSpeed } ease-in-out;;
+	${ ({ video }) => video && `opacity: 0;` }
 	height: 100%;
 	position: absolute;
 	left: 0;
@@ -69,7 +76,8 @@ const BgImage = styled(Image)`
 `
 
 const VideoContainer = styled.div`
-  position: absolute;
+	transition: opacity ${ animations.mediumSpeed } ease-in-out;
+	position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
@@ -238,7 +246,7 @@ const VideoStyled = styled(Video)`
 class ATF extends Component {
 	constructor (props) {
 		super(props)
-		this.state = { isMobile: false, loading: true }
+		this.state = { isMobile: false, loading: true, videoFailed: false }
 	}
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
@@ -274,20 +282,29 @@ class ATF extends Component {
 			horizontalBreak,
 			button,
 		} = this.props
-		const { isMobile } = this.state
+		const { isMobile, videoFailed } = this.state
 		return (
 			<Fragment>
 				<Block isMobile={isMobile} full={smallText && headline} background winHeight={winHeight}>
-					{((image && !video) && !animatedGradientInsteadOfImage) && <BgImage image={image} />}
-					{((!image && video) && !animatedGradientInsteadOfImage) &&
+					{((image && !video) && !animatedGradientInsteadOfImage) && (
+						<BgImage image={image} />
+					)}
+					{(video && image) && <BgImage className={!videoFailed && 'hide'} image={image}/>}
+					{(video && !animatedGradientInsteadOfImage) &&
 						<React.Fragment>
-							<VideoOverlay isLoading={this.state.loading} />
-							<VideoContainer heightIsLarger={winHeight > winWidth}>
+							<VideoOverlay videoFailed={videoFailed} isLoading={this.state.loading} />
+							<VideoContainer videoFailed={videoFailed} heightIsLarger={winHeight > winWidth}>
 								<VideoStyled
 									ref={ref => { this.videoRef = ref }}
 									loop
 									autoPlay
 									playsInline
+									onCanPlay={() => {
+										setTimeout(() => {
+											// if not playing after .5 seconds, replace it with background image
+											if (this.videoRef.state.currentTime === 0) this.setState({ videoFailed: true })
+										}, 500)
+									}}
 									muted
 									controls={['PlayPause']}
 								>
