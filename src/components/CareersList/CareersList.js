@@ -5,7 +5,6 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
-import Job from 'src/components/Job'
 import Hr from 'src/components/Hr'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentBlock from 'src/components/ContentBlock'
@@ -128,7 +127,6 @@ class CareersList extends Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-			selectedJobId: null,
 			officeFilter: null,
 			departmentFilter: null,
 			companyFilter: null,
@@ -140,7 +138,7 @@ class CareersList extends Component {
 	}
 
 	render () {
-		const { selectedJobId, officeFilter, departmentFilter, companyFilter } = this.state
+		const { officeFilter, departmentFilter, companyFilter } = this.state
 		const { unfilteredOffices, unfilteredDepartments } = this.props
 		const allCompaniesDictionary = unfilteredDepartments.reduce((acc, department, departmentIndex) => {
 			department.jobs && department.jobs.forEach((job, jobIndex) => {
@@ -191,94 +189,92 @@ class CareersList extends Component {
 			}, [])
 			.filter(d => (d.jobs && d.jobs.length))
 
-		return selectedJobId
-			? <Job job={selectedJobId} />
-			: (
-				<Wrapper>
-					<ScrollEntrance>
-						<Container>
-							<ContentBlock>
-								<Grid small='[1] [1]' medium='[1] [1]' large='[1] [1]'>
-									<JobFilters>
-										{/* only appears on desktop */}
-										<JobButton tabindex="-1" underlined={!companyFilter} onClick={() => this.setState({ companyFilter: null, departmentFilter: null, officeFilter: null })}>All Jobs</JobButton>
-										{allCompanies && allCompanies.map(company =>
-											<JobButton
-												key={company}
-												tabindex="-1"
-												underlined={companyFilter === company}
-												onClick={() => this.setState({ companyFilter: company, departmentFilter: null, officeFilter: null })}
-											>
-												{company}
-											</JobButton>
-										)}
-									</JobFilters>
-									<MobileOnly>
-										{/* only appears on mobile */}
-										<Dropdown
-											value={companyFilter ? { value: companyFilter, label: companyFilter } : null}
-											onChange={x => this.handleChangeFilter('companyFilter', x.value)}
-											clearValue={() => this.handleChangeFilter('companyFilter', null)}
-											title="All Companies"
-											items={allCompaniesForDropdown}
-										/>
-									</MobileOnly>
+		return (
+			<Wrapper>
+				<ScrollEntrance>
+					<Container>
+						<ContentBlock>
+							<Grid small='[1] [1]' medium='[1] [1]' large='[1] [1]'>
+								<JobFilters>
+									{/* only appears on desktop */}
+									<JobButton tabindex="-1" underlined={!companyFilter} onClick={() => this.setState({ companyFilter: null, departmentFilter: null, officeFilter: null })}>All Jobs</JobButton>
+									{allCompanies && allCompanies.map(company =>
+										<JobButton
+											key={company}
+											tabindex="-1"
+											underlined={companyFilter === company}
+											onClick={() => this.setState({ companyFilter: company, departmentFilter: null, officeFilter: null })}
+										>
+											{company}
+										</JobButton>
+									)}
+								</JobFilters>
+								<MobileOnly>
+									{/* only appears on mobile */}
+									<Dropdown
+										value={companyFilter ? { value: companyFilter, label: companyFilter } : null}
+										onChange={x => this.handleChangeFilter('companyFilter', x.value)}
+										clearValue={() => this.handleChangeFilter('companyFilter', null)}
+										title="All Companies"
+										items={allCompaniesForDropdown}
+									/>
+								</MobileOnly>
 
-									<div>
-										<div style={{ maxWidth: 300, marginLeft: 'auto' }}>
-											<Grid small='[1] [1]' medium='[1] [1]' large='[1] [1]'>
-												<Dropdown
-													value={officeFilter}
-													onChange={x => this.handleChangeFilter('officeFilter', x.value ? x : null)}
-													clearValue={() => this.handleChangeFilter('officeFilter', null)}
-													title="Location"
-													items={officesForDropdown}
-												/>
-												<Dropdown
-													value={departmentFilter}
-													onChange={x => this.handleChangeFilter('departmentFilter', x.value ? x : null)}
-													clearValue={() => this.handleChangeFilter('departmentFilter', null)}
-													title="Department"
-													items={departmentsForDropdown}
-												/>
-											</Grid>
-										</div>
+								<div>
+									<div style={{ maxWidth: 300, marginLeft: 'auto' }}>
+										<Grid small='[1] [1]' medium='[1] [1]' large='[1] [1]'>
+											<Dropdown
+												value={officeFilter}
+												onChange={x => this.handleChangeFilter('officeFilter', x.value ? x : null)}
+												clearValue={() => this.handleChangeFilter('officeFilter', null)}
+												title="Location"
+												items={officesForDropdown}
+											/>
+											<Dropdown
+												value={departmentFilter}
+												onChange={x => this.handleChangeFilter('departmentFilter', x.value ? x : null)}
+												clearValue={() => this.handleChangeFilter('departmentFilter', null)}
+												title="Department"
+												items={departmentsForDropdown}
+											/>
+										</Grid>
 									</div>
-								</Grid>
-							</ContentBlock>
-						</Container>
-						<Hr full color={colors.black}/>
-						{departmentsWithJobsFiltered && departmentsWithJobsFiltered.map(({ name, ghid, jobs }, index) => (
-							<React.Fragment key={(ghid + index)}>
-								{index > 0 && <Hr color={colors.black}/>}
-								<Container>
-									<ContentBlock>
-										<Grid small="[6]" medium="[4] [8]" large="[4] [8]">
-											<DepartmentName>{name}</DepartmentName>
-											<div>
-												{(jobs && jobs.length > 0) && jobs.map(j => (
-													<JobItem key={j.ghid}>
-														<div>
-															{j.title && <JobName>{j.title} <Grey>{j.company && `at ${ j.company }`}</Grey></JobName>}
-															{j.offices &&
+								</div>
+							</Grid>
+						</ContentBlock>
+					</Container>
+					<Hr full color={colors.black}/>
+					{departmentsWithJobsFiltered && departmentsWithJobsFiltered.map(({ name, ghid, jobs }, index) => (
+						<React.Fragment key={(ghid + index)}>
+							{index > 0 && <Hr color={colors.black}/>}
+							<Container>
+								<ContentBlock>
+									<Grid small="[6]" medium="[4] [8]" large="[4] [8]">
+										<DepartmentName>{name}</DepartmentName>
+										<div>
+											{(jobs && jobs.length > 0) && jobs.map(j => (
+												<JobItem key={j.ghid}>
+													<div>
+														{j.title && <JobName>{j.title} <Grey>{j.company && `at ${ j.company }`}</Grey></JobName>}
+														{j.offices &&
 															<LocationName>
 																{j.offices.map((o, i) => (
 																	o.name + ((i < j.offices.length - 1) ? ', ' : '')))
 																}</LocationName>}
-															<Link to={j.absolute_url} external><span>LEARN MORE</span></Link>
-														</div>
-													</JobItem>
-												))}
-											</div>
-										</Grid>
-									</ContentBlock>
-								</Container>
-							</React.Fragment>
-						))}
-					</ScrollEntrance>
-					<div style={{ height: 60 }}/>
-				</Wrapper>
-			)
+														<Link to={j.absolute_url} external><span>LEARN MORE</span></Link>
+													</div>
+												</JobItem>
+											))}
+										</div>
+									</Grid>
+								</ContentBlock>
+							</Container>
+						</React.Fragment>
+					))}
+				</ScrollEntrance>
+				<div style={{ height: 60 }}/>
+			</Wrapper>
+		)
 	}
 }
 
