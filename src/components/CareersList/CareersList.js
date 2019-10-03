@@ -265,7 +265,7 @@ class CareersList extends Component {
 																{j.offices.map((o, i) => (
 																	o.name + ((i < j.offices.length - 1) ? ', ' : '')))
 																}</LocationName>}
-															<Link to={`careers/${ j.ghid }`} fakeExternal><span>LEARN MORE</span></Link>
+															<Link to={j.absolute_url} external><span>LEARN MORE</span></Link>
 														</div>
 													</JobItem>
 												))}
@@ -294,6 +294,7 @@ export default () => (
 							jobs {
 								title
 								ghid: gh_Id
+								absolute_url
 								metadata {
 									name
 									value
