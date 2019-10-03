@@ -94,6 +94,10 @@ export const JobQuery = graphql`
 					location {
 						name
 					}
+					metadata {
+						name
+						value
+					}
 					compliance {
 						description
 						type

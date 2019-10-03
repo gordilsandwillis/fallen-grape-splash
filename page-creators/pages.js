@@ -22,6 +22,10 @@ const createContentfulPages = (graphql, createPage) => new Promise((resolve, rej
 						id
 						title
 						greenhouseId: gh_Id
+						metadata {
+							name
+							value
+						}
 						location {
 							name
 						}

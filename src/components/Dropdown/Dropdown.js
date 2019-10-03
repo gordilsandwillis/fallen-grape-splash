@@ -52,7 +52,7 @@ const customStyles = {
 }
 
 const SelectStyled = styled(Select)`
-	max-width:${ ({ title }) => (title && title.length) ? (title.length * 15) + 'px' : '150px' };
+	max-width:${ ({ title }) => (title && title.length) ? ((title.length * 10) + 40) + 'px' : '150px' };
 	margin: 5px 0;
 	div {
     color: ${ colors.black };
