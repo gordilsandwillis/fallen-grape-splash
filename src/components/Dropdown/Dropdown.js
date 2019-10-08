@@ -57,6 +57,9 @@ const SelectStyled = styled(Select)`
 		max-width: 150px;
 	}
 	margin: 5px 0;
+	${ mq.largeAndUp } {
+		${ ({ rightAlign }) => rightAlign && 'margin-left: auto;' }
+	}
 	div {
     color: ${ colors.black };
 		border: none;
@@ -95,7 +98,7 @@ class Dropdown extends React.Component {
 	}
 
 	render () {
-		const { title, isMulti, items, onChange, value } = this.props
+		const { title, isMulti, items, onChange, value, rightAlign } = this.props
 		return <div>
 			<SelectStyled
 				title={title}
@@ -108,6 +111,7 @@ class Dropdown extends React.Component {
 				options={items.filter(x => x.label)}
 				placeholder={title}
 				onChange={onChange}
+				rightAlign={rightAlign}
 			/>
 		</div>
 	}

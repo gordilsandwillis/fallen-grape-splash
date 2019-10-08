@@ -237,6 +237,7 @@ class CareersList extends Component {
 												clearValue={() => this.handleChangeFilter('officeFilter', null)}
 												title="Location"
 												items={officesForDropdown}
+												rightAlign
 											/>
 											<Dropdown
 												value={departmentFilter}
@@ -244,6 +245,7 @@ class CareersList extends Component {
 												clearValue={() => this.handleChangeFilter('departmentFilter', null)}
 												title="Department"
 												items={departmentsForDropdown}
+												rightAlign
 											/>
 										</Grid>
 									</ResponsiveRightAlign>
