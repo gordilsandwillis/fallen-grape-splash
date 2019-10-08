@@ -19,6 +19,9 @@ height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: ${ ({ verticalTextAlignment }) => verticalTextAlignment ? 'flex-end' : 'center' };
+	${ mq.smallAndBelow } {
+		align-items: flex-start;
+	}
 	${ typography.responsiveStyles('padding-top', 70, 70, 70, 75) }
 	${ typography.responsiveStyles('padding-bottom', 70, 70, 70, 75) }
 `
@@ -50,7 +53,7 @@ const Block = styled.div`
   display: block;
 	height: ${ ({ winHeight, isMobile }) => winHeight ? winHeight + 'px' : isMobile ? '80vh' : '100vh' };
 	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
-	min-height: ${ ({ full }) => full ? 750 : 500 }px;
+	min-height: ${ ({ full }) => full ? 800 : 500 }px;
 	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };
