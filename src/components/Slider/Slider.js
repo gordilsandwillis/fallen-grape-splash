@@ -167,7 +167,7 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		// autoplay: true,
+		autoplay: true,
 	}
 	return (items && items.length) && (
 		<Wrapper>
