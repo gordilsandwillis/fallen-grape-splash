@@ -6,7 +6,7 @@ import { typography } from 'src/styles'
 const Block = styled.div`
   display: flex;
   align-items: center;
-  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }
+  ${ typography.responsiveStyles('height', 900, 500, 400, 400) }
   width: 100%;
   position: relative;
   overflow: hidden;
