@@ -10,13 +10,17 @@ import { colors, typography, mediaQueries as mq } from 'src/styles'
 
 const Wrapper = styled.footer`
   background: ${ colors.offwhite };
-  bottom: 0;
   left: 0;
   right: 0;
   color: ${ colors.black };
   z-index: 3;
   height: 95px;
   position: ${ ({ isHomePage }) => isHomePage ? 'absolute' : 'static' };
+  ${ mq.largeAndUp } {
+    @media ( min-height: 500px ) {
+      bottom: 0;
+    }
+  }
   ${ mq.mediumAndBelow } {
     height: 120px;
     position: static;

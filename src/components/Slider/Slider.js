@@ -124,7 +124,7 @@ const ContainerStyled = styled(Container)`
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }` };
+  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 900, 500, 400, 400) }` };
   ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
@@ -139,7 +139,7 @@ const DivStyled = styled.div`
   align-items: flex-start;
   outline: none;
   height: 100%;
-  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 600, 500, 400, 400) }` };
+  ${ ({ imageInSlider }) => imageInSlider && `  ${ typography.responsiveStyles('height', 900, 500, 400, 400) }` };
   ${ ({ imageInSlider }) => imageInSlider ? 'padding: 40px' : 'padding: 0px' };
   ${ typography.responsiveStyles('padding-top', 0, 0, 0, 20) }
   background: url(${ ({ src }) => src }) no-repeat center center;
@@ -173,9 +173,9 @@ const Slider = ({ items, windowWidth, title, showTitle, dots = true, arrows = fa
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		// autoplay: true,
+		autoplay: true,
 	}
-	return (
+	return (items && items.length) && (
 		<Wrapper>
 			{(title && showTitle) && (
 				<Container>

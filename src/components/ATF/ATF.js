@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
+import withSizes from 'react-sizes'
 import Grid from 'src/components/Grid'
 import Container from 'src/components/Container'
+import { DefaultPlayer as Video } from 'react-html5video'
 import Image from 'src/components/Image'
 import Hr from 'src/components/Hr'
 import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import { colors, gridSettings, typography, mediaQueries as mq } from 'src/styles'
+import { colors, animations, gridSettings, typography, mediaQueries as mq } from 'src/styles'
 import RichText from 'src/components/RichText'
 import MobileDetect from 'mobile-detect'
 import PropTypes from 'prop-types'
@@ -17,6 +19,9 @@ height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: ${ ({ verticalTextAlignment }) => verticalTextAlignment ? 'flex-end' : 'center' };
+	${ mq.smallAndBelow } {
+		align-items: flex-start;
+	}
 	${ typography.responsiveStyles('padding-top', 70, 70, 70, 75) }
 	${ typography.responsiveStyles('padding-bottom', 70, 70, 70, 75) }
 `
@@ -40,17 +45,18 @@ const AlignedText = styled.div`
 `
 
 const Block = styled.div`
+	.hide {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
   display: block;
 	height: ${ ({ winHeight, isMobile }) => winHeight ? winHeight + 'px' : isMobile ? '80vh' : '100vh' };
 	max-height: ${ ({ winHeight }) => winHeight ? winHeight + 'px' : '100vh' };
-	min-height: ${ ({ full }) => full ? 750 : 500 }px;
-	${ mq.mediumAndBelow } {
-		min-height: ${ ({ full }) => full ? 750 : 650 }px;;
-	}
+	min-height: ${ ({ full }) => full ? 800 : 500 }px;
 	width: 100%;
 	position: relative;
 	color: ${ colors.bgColor };
-
 	${ ({ background }) => background && `
 		position: absolute;
 		overflow: hidden;
@@ -64,11 +70,49 @@ const Block = styled.div`
 `
 
 const BgImage = styled(Image)`
+	transition: all ${ animations.mediumSpeed } ease-in-out;;
+	${ ({ video }) => video && `opacity: 0;` }
 	height: 100%;
-
 	position: absolute;
 	left: 0;
   right: 0;
+`
+
+const VideoContainer = styled.div`
+	transition: opacity ${ animations.mediumSpeed } ease-in-out;
+	position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+	z-index: -1;
+	pointer-events: none;
+
+	>div>div span {
+		display: none;
+	}
+	
+	video {
+		@media (min-aspect-ratio: 16/9) {
+			width:100%;
+			height: auto;
+		}
+		@media (max-aspect-ratio: 16/9) {
+			width:auto;
+			height: 100%;
+		}
+
+		
+		/* Center the video */
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+
+		opacity: ${ ({ loading }) => loading ? 0 : 1 };
+		transition: opacity ${ animations.slowSpeed } ease-in-out; 
+	}
 `
 
 const AnimatedGradient = styled.div`
@@ -130,6 +174,22 @@ const Overlay = styled.div`
 	z-index: 6;
 `
 
+const VideoOverlay = styled.div`
+	background: ${ colors.black };
+	/* opacity: ${ ({ isLoading }) => isLoading ? 1 : 0 }; */
+	opacity: 0;
+	transition: opacity ${ animations.slowSpeed } ease-in-out;
+	position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: -1;
+   pointer-events: none;
+   overflow: hidden;
+	z-index: 7;
+`
+
 const MainContent = styled.div`
 padding: ${ gridSettings.containerLargeMargins } 0;
 width: 100%;
@@ -173,15 +233,28 @@ const ButtonUppercase = styled(Button)`
 	text-transform: uppercase;
 `
 
+const VideoStyled = styled(Video)`
+	z-index: -10;
+	.rh5v-DefaultPlayer_controls {
+    position: absolute;
+		bottom: 0;
+		display: none;
+		visibility: hidden;
+    right: 0;
+    left: 0;
+    height: 0;
+}
+`
+
 class ATF extends Component {
 	constructor (props) {
 		super(props)
-		this.state = { isMobile: false }
+		this.state = { isMobile: false, loading: true, videoFailed: false }
 	}
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
 		const isMobile = md.is('iPhone')
-		if (isMobile && prevProps.winHeight !== this.props.winHeight) {
+		if ((isMobile && prevProps.winHeight !== this.props.winHeight) && prevProps.winWidth === this.props.winWidth) {
 			return false
 		}
 
@@ -192,25 +265,57 @@ class ATF extends Component {
 		const md = new MobileDetect(window.navigator.userAgent)
 		const isMobile = md.is('iPhone')
 		this.setState({ isMobile })
+
+		// const video = this.videoRef.videoEl
+		// if (video) video.addEventListener('play', () => { this.setState({ loading: false }) })
+		setTimeout(() => this.setState({ loading: false }), 3000)
 	}
 
 	render () {
 		const {
 			image,
+			video,
+			animatedGradientInsteadOfImage,
 			horizontalTextAlignment,
 			verticalTextAlignment,
 			headline,
-			animatedGradientInsteadOfImage,
 			smallText,
 			winHeight,
+			winWidth,
 			horizontalBreak,
 			button,
 		} = this.props
-		const { isMobile } = this.state
+		const { isMobile, videoFailed } = this.state
 		return (
 			<Fragment>
 				<Block isMobile={isMobile} full={smallText && headline} background winHeight={winHeight}>
-					{(image && !animatedGradientInsteadOfImage) && <BgImage image={image} />}
+					{((image && !video) && !animatedGradientInsteadOfImage) && (
+						<BgImage image={image} />
+					)}
+					{(video && image) && <BgImage className={!videoFailed && 'hide'} image={image}/>}
+					{(video && !animatedGradientInsteadOfImage) &&
+						<React.Fragment>
+							<VideoOverlay videoFailed={videoFailed} isLoading={this.state.loading} />
+							<VideoContainer videoFailed={videoFailed} heightIsLarger={winHeight > winWidth}>
+								<VideoStyled
+									ref={ref => { this.videoRef = ref }}
+									loop
+									autoPlay
+									playsInline
+									onCanPlayThrough={() => {
+										setTimeout(() => {
+											// if fully loaded and not playing after 1 second, replace it with background image
+											if (this.videoRef.state.currentTime === 0) this.setState({ videoFailed: true })
+										}, 1000)
+									}}
+									muted
+									controls={['PlayPause']}
+								>
+									<source src={video.file.url} type="video/mp4"/>
+								</VideoStyled>
+							</VideoContainer>
+						</React.Fragment>
+					}
 					{animatedGradientInsteadOfImage && <AnimatedGradient><div></div></AnimatedGradient>}
 					<Overlay />
 				</Block>
@@ -272,7 +377,7 @@ ATF.defaultProps = {
 ATF.propTypes = {
 	horizontalTextAlignment: PropTypes.bool.isRequired,
 	verticalTextAlignment: PropTypes.bool.isRequired,
-	image: PropTypes.object.isRequired,
+	// image: PropTypes.object,
 	headline: PropTypes.object.isRequired,
 	horizontalBreak: PropTypes.bool.isRequired,
 	text: PropTypes.string,
@@ -280,4 +385,4 @@ ATF.propTypes = {
 	buttonLink: PropTypes.any,
 }
 
-export default ATF
+export default withSizes(({ width, height }) => ({ winWidth: width, winHeight: height }))(ATF)
