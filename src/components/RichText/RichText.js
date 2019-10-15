@@ -10,7 +10,7 @@ const BoxedText = styled.span`
 	display: inline-block;
 `
 const Paragraph = styled.div`
-
+	white-space: pre-wrap;
 `
 
 const Bold = ({ children }) => <span style={{ fontWeight: 'bold' }}>{children}</span>
