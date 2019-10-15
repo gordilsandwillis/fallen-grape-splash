@@ -10,13 +10,15 @@ const BoxedText = styled.span`
 	display: inline-block;
 `
 const Paragraph = styled.div`
-	
+
 `
 
 const Bold = ({ children }) => <span style={{ fontWeight: 'bold' }}>{children}</span>
 const Italic = ({ children }) => <i>{children}</i>
 const Code = ({ children }) => <BoxedText>{children}</BoxedText>
 const Text = ({ children }) => <Paragraph>{children}</Paragraph>
+const OrderedList = ({ children }) => <ol style={{ listStyleType: 'decimal', paddingLeft: 20 }}>{children}</ol>
+const UnorderedList = ({ children }) => <ul style={{ listStyleType: 'disc', paddingLeft: 20 }}>{children}</ul>
 
 const options = {
 	renderMark: {
@@ -25,6 +27,8 @@ const options = {
 		[MARKS.ITALIC]: text => <Italic>{text}</Italic>
 	},
 	renderNode: {
+		[BLOCKS.OL_LIST]: (node, children) => <OrderedList>{children}</OrderedList>,
+  	[BLOCKS.UL_LIST]: (node, children) => <UnorderedList>{children}</UnorderedList>,
 		[BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
 		[INLINES.HYPERLINK]: (node, children) => <Link external to={(node && node.data) && node.data.uri}>{children}</Link>
 	},
