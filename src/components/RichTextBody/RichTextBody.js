@@ -10,6 +10,7 @@ const BoxedText = styled.span`
 	display: inline-block;
 `
 const Paragraph = styled.p`
+	white-space: pre-wrap;
 `
 
 const CustomLink = styled.a`
