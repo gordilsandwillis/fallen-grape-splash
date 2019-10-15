@@ -28,7 +28,7 @@ const SlickSliderDark = styled(SlickSlider)`
   outline: none;
   }
   ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `position: relative;` };
-  
+
   .slick-dots li.slick-active button:before {
     color: ${ colors.white };
   }
@@ -44,11 +44,13 @@ const SlickSliderDark = styled(SlickSlider)`
   .slick-slide {
     outline: none;
   }
-  
+
   .slick-dots {
     position: ${ ({ horizontalTextAlignCentered }) => horizontalTextAlignCentered ? 'static' : 'absolute' };
     padding-bottom: 70px;
     padding-top:0px;
+    width: auto;
+    right: 0;
     ${ ({ horizontalTextAlignCentered }) => (!horizontalTextAlignCentered) && `
       display: flex !important;
       justify-content: flex-end;
@@ -108,6 +110,10 @@ const Name = styled.p`
 
 const LinkStyled = styled(Link)`
   ${ typography.body };
+  &:hover {
+    color: ${ colors.white };
+    border-: ${ colors.white };
+  }
 `
 
 const ContainerStyled = styled(Container)`
