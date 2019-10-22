@@ -168,7 +168,6 @@ class CareersList extends Component {
 					let jobs = []
 					if ((acc[x.name.trim()] && acc[x.name.trim()].jobs)) jobs = jobs.concat(acc[x.name.trim()].jobs)
 					if (x.jobs) jobs = jobs.concat(x.jobs)
-					console.log(jobs)
 					acc[x.name.trim()] = {
 						ghid: x.ghid,
 						name: x.name.trim(),
