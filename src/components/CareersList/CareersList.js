@@ -162,7 +162,21 @@ class CareersList extends Component {
 		}, {})
 		const allCompanies = allCompaniesDictionary && Object.values(allCompaniesDictionary)
 		const allCompaniesForDropdown = [{ value: null, label: 'All Jobs' }].concat(allCompanies.map(x => ({ value: x, label: x })))
-		const allDepartments = unfilteredDepartments.filter(x => (x.jobs && x.jobs.length))
+		const allDepartments = Object.values(
+			unfilteredDepartments.filter(x => (x.jobs && x.jobs.length))
+				.reduce((acc, x) => {
+					let jobs = []
+					if ((acc[x.name.trim()] && acc[x.name.trim()].jobs)) jobs = jobs.concat(acc[x.name.trim()].jobs)
+					if (x.jobs) jobs = jobs.concat(x.jobs)
+					console.log(jobs)
+					acc[x.name.trim()] = {
+						ghid: x.ghid,
+						name: x.name.trim(),
+						jobs: jobs
+					}
+					return acc
+				}, {})
+		)
 		const departmentsWithCompanyFiltered = allDepartments
 			.reduce((acc, d) => {
 				if (companyFilter) {
@@ -178,15 +192,15 @@ class CareersList extends Component {
 			}, [])
 			.filter(d => d.jobs && d.jobs.length)
 		const allOffices = unfilteredOffices.filter(x => (x.jobs && x.jobs.length))
-		const officesForDropdown = [{ value: null, label: 'All Locations' }].concat(allOffices.map(x => ({ value: x.ghid, label: x.name })))
-		const departmentsForDropdown = [{ value: null, label: 'All Departments' }].concat(departmentsWithCompanyFiltered.map(x => ({ value: x.ghid, label: x.name })))
+		const officesForDropdown = [{ value: null, label: 'All Locations' }].concat(allOffices.map(x => ({ value: x.name.trim(), label: x.name.trim() })))
+		const departmentsForDropdown = [{ value: null, label: 'All Departments' }].concat(departmentsWithCompanyFiltered.map(x => ({ value: x.name.trim(), label: x.name.trim() })))
 		const departmentsWithJobsFiltered = departmentsWithCompanyFiltered
-			.filter(d => (!departmentFilter || departmentFilter.value === d.ghid))
+			.filter(d => (!departmentFilter || departmentFilter.value === d.name))
 			.reduce((acc, d) => {
 				if (officeFilter || companyFilter) {
 					const jobs = d.jobs.filter(j => {
-						const found = !officeFilter || (j.offices && j.offices.filter(o => o.ghid === officeFilter.value))
-						if (found) return true
+						const found = !officeFilter || (j.offices && j.offices.filter(o => o.name === officeFilter.value))
+						if (!officeFilter || found.length) return true
 					})
 					acc = [...acc, { ...d, jobs }]
 				} else {
