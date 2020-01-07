@@ -3,16 +3,22 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Grid from './Grid'
 import styled from '@emotion/styled'
+import { typography } from 'src/styles'
 
 const Column = styled.div`
-	background: rgba(220, 220, 220, 0.8);
-	border: 1px solid rgba(0,0,0,0.3);
-	border-radius: 3px;
-	margin: 8px 0;
+	background: rgba(0, 0, 0, 0.05);
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	border-radius: 2px;
 	min-height: 80px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	${ ({ height }) => height === 'tall' && `min-height: 200px;` }
+	${ ({ height }) => height === 'short' && `min-height: 60px;` }
+`
+
+const Notes = styled.div`
+	${ typography.storyNotes }
 `
 
 class GridStory extends React.Component {
@@ -21,7 +27,7 @@ class GridStory extends React.Component {
 	}
 
 	render () {
-		const { title, ...rest } = this.props
+		const { title, notes, ...rest } = this.props
 		const { showOverlay } = this.state
 		return (
 			<div>
@@ -29,9 +35,12 @@ class GridStory extends React.Component {
 					style={{
 						display: 'flex',
 						justifyContent: 'space-between',
+						alignItems: 'baseline',
 					}}
 				>
-					<p>{title}</p>
+					<h4 style={{ marginTop: 0, marginBottom: '3rem' }}>
+						{title}
+					</h4>
 
 					<label>
 						<input
@@ -42,7 +51,7 @@ class GridStory extends React.Component {
 							}
 						/>
 						Show Overlay
-  				</label>
+					</label>
 				</header>
 
 				<Grid
@@ -50,23 +59,26 @@ class GridStory extends React.Component {
 					{...rest}
 				/>
 
+				{notes && (<Notes>{notes}</Notes>)}
+
 				<br />
 				<hr />
-				<br />
 			</div>
 		)
 	}
 }
 
 storiesOf(`Styleguide`, module).add(`Grid`, () => (
-	<div>
+	<div style={{ padding: '5%' }}>
 		<GridStory
-			title="All Columns"
-			small="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
-			medium="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
-			large="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
+			title="Different Columns at Different Breakpoints"
+			small="[1] [1] [1] [1]"
+			medium="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
+			large="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
+			extraLarge="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
+			notes={<p><code>small</code>, <code>medium</code>, <code>large</code>, and <code>extraLarge</code> are used to configure the columns. The format for a column is <code>[1]</code> and the format for a gap is <code>1</code>. ie: <code>1 [4] [4] [4] 1</code> is a 14 column grid with a space of 1 column on each side. <em>Only <code>small</code> is required.</em></p>}
 		>
-			{_.range(24).map(i => (
+			{_.range(28).map(i => (
 				<Column
 					key={i}
 				>
@@ -78,8 +90,13 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 		<GridStory
 			title="4 → 2 → 1"
 			small="[12]"
-			medium="[8] [8]"
-			large="[6] [6] [6] [6]"
+			medium="[2] [2]"
+			large="[1] [1] [1] [1]"
+			notes={<p>
+				<code>small="[1]"</code><br/>
+				<code>medium="[2] [2]"</code><br/>
+				<code>large="[1] [1] [1] [1]"</code>
+			</p>}
 		>
 			<Column>
 				1
@@ -100,6 +117,11 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			small="[4] 4 [4]"
 			medium="[6] 4 [6]"
 			large="[8] 8 [8]"
+			notes={<p>
+				<code>small="[4] 4 [4]"</code><br/>
+				<code>medium="[6] 4 [6]"</code><br/>
+				<code>large="[8] 8 [8]"</code>
+			</p>}
 		>
 			<Column>
 				large 8
@@ -111,45 +133,53 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 		</GridStory>
 
 		<GridStory
-			title="Multiple Offsets"
-			small="3 [3] 3 [3]"
-			medium="4 [4] 4 [4]"
-			large="6 [6] 6 [6]"
+			title="Grid Direction"
+			small="1 [12] 1"
+			medium="1 [5] 1 [6] 1"
+			large="1 [5] 1 [6] 1"
+			gridDirection="rtl"
+			notes={<p><code>gridDirection: 'rtl'</code></p>}
 		>
-			<Column>
-				large 6
+			<Column height="tall">
+				1st in DOM
 			</Column>
 
-			<Column>
-				large 6
+			<Column height="short">
+				2nd in DOM
 			</Column>
 		</GridStory>
 
 		<GridStory
 			title="Centered"
 			small="1 [10] 1"
-			medium="3 [8] 3"
-			large="6 [12] 6"
+			medium="1 [3] [3] [6] 1"
+			large="1 [3] [5] [4] 1"
+			vAlign="center"
+			notes={<p><code>vAlign="center"</code></p>}
 		>
 			<Column>
-				large 12
+				col
+			</Column>
+			<Column height="tall">
+				col
+			</Column>
+			<Column height="short">
+				col
 			</Column>
 		</GridStory>
 
 		<GridStory
-			title="Centered"
-			small="[1]"
-			medium="[6] [6]"
-			large="[6] [6]"
-			colGap={['0.5rem', '1rem', '2rem']}
-			rowGap={['0.5rem']}
+			title="Column and Row Gaps"
+			small="1 [1] 1"
+			medium="1 [6] [6] 1"
+			large="1 [3] [3] [3] [3] 1"
+			colGap={['.75rem', '1.5rem', '2rem']}
+			rowGap={['1.5rem', '3rem', '4rem']}
 		>
-			<Column>
-				12 columns
-			</Column>
-			<Column>
-				12 columns
-			</Column>
+			<Column>col</Column>
+			<Column>col</Column>
+			<Column>col</Column>
+			<Column>col</Column>
 		</GridStory>
 
 	</div>

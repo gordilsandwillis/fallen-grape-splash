@@ -1,23 +1,24 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { mediaQueries as mq, gridSettings } from 'src/styles'
+import * as mq from 'src/styles/mediaQueries'
+import * as globals from 'src/styles/gridSettings'
 
 const ContainerStyles = styled.div`
-	max-width: 2350px;
-	width: calc(100% - ${ gridSettings.containerLargeMargins } * 2);
+	max-width: 2500px;
+	width: calc(100% - ${ globals.containerLargeMargins } * 2);
 	margin: 0 auto;
   height: 100%;
 
 	${ mq.largeAndBelow } {
-		width: calc(100% - ${ gridSettings.containerMediumMargins } * 2);
+		width: calc(100% - ${ globals.containerMediumMargins } * 2);
 	}
 
 	${ mq.mediumAndBelow } {
-		width: calc(100% - ${ gridSettings.containerMediumMargins } * 2);
+		width: calc(100% - ${ globals.containerMediumMargins } * 2);
 	}
 
 	${ mq.smallAndBelow } {
-		width: calc(100% - ${ gridSettings.containerSmallMargins } * 2);
+		width: calc(100% - ${ globals.containerSmallMargins } * 2);
 	}
 `
 

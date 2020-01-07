@@ -1,34 +1,26 @@
-// greyscale
+import { lighten, darken, rgba } from 'polished'
+
 export const black = '#000'
-export const unofficialLightGrey = '#bbb'
-export const grey = '#6E6E6C'
-export const white = '#FFF'
-export const whiteLowOpacity = 'rgba(255, 255, 255, .3)'
-export const offWhiteHighOpacity = 'rgba(249, 249, 239, .75)'
-export const offwhite = '#F9F9EF'
+export const white = '#fff'
 
-// secondary
-export const darkRed = '#D13B2A'
-export const brightRed = '#FC4529'
-export const lightRed = '#FFA394'
+// Site Specific Colors
+export const yellow = '#FACC02'
+export const red = '#FF4438'
+export const green = '#00C771'
 
-export const orange = '#D37D2E'
-export const brightOrange = '#FF9629'
-export const lightOrange = '#FFCC94'
+// Basic Colors
+export const transparent = 'transparent'
+export const currentcolor = 'currentcolor'
+export const bgColor = white
+export const mainColor = red
+export const alert = red
+export const notify = yellow
+export const success = green
+export const textColor = black
+export const lightTextColor = rgba(textColor, 0.4)
+export const lightGrey = '#F2F2F2'
+export const hrColor = rgba(textColor, 0.1)
 
-export const darkTeal = '#1BAFAE'
-export const brightTeal = '#00D1D1'
-export const lightTeal = '#80E8E8'
-
-export const darkBlue = '#276FD2'
-export const brightBlue = '#2982FF'
-export const lightBlue = '#94C2FF'
-
-export const darkPurple = '#8E68D2'
-export const brightPurple = '#AB78FF'
-export const lightPurple = '#D4BDFF'
-
-// util
-export const link = darkBlue
-export const alert = darkRed
-export const primaryColor = white
+// Color Variations
+export const mainColorDarken = darken(0.07, mainColor)
+export const mainColorLighten = lighten(0.07, mainColor)

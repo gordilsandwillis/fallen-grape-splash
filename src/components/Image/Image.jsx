@@ -28,9 +28,11 @@ const StyledSvgContainer = styled.div`
 const ResponsiveImage = ({ image, small, medium, large, className }) => {
 	if (small || medium || large || image) {
 		let source = null
-		if (image) {
+		if (image && image.fluid) {
 			source = image.fluid
+			console.log('STILL using image')
 		} else {
+			console.log('NOT using image')
 			source = [
 				{
 					...large.fluid,

@@ -1,19 +1,12 @@
 import * as mq from './mediaQueries'
+import { rgba } from 'polished'
+import * as colors from './colors'
 
-import {
-	SuisseIntlLight,
-	SuisseIntlRegular,
-	SuisseIntlSemiBold,
-	LyonDisplayLight
-} from './fonts'
+import './fonts'
 
 // Place global Typography in this file
-export const titleFontFamily = `${ LyonDisplayLight }, -apple-system, Helvetica, sans-serif`
-
-// supply a different font family if necessary
-export const bodyFontFamilyLight = `${ SuisseIntlLight }, -apple-system, Helvetica, sans-serif`
-export const bodyFontFamilyRegular = `${ SuisseIntlRegular }, -apple-system, Helvetica, sans-serif`
-export const bodyFontFamilyBold = `${ SuisseIntlSemiBold }, -apple-system, Helvetica, sans-serif`
+export const primaryFont = `Portrait, -apple-system, serif`
+export const secondaryFont = `Trade Gothic, -apple-system, serif`
 
 export const linearInterpolation = (maxInput, minInput, maxWidth, minWidth) => {
 	let slope = (maxInput - minInput) / (maxWidth - minWidth)
@@ -33,87 +26,99 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 	}
 `
 
+export const bodyLarge = `
+	${ responsiveStyles('font-size', 24, 22, 20, 18) }
+	line-height: 1.4;
+	font-family: ${ secondaryFont };
+	font-weight: 600;
+	letter-spacing: -.01em;
+`
+export const bodyMedium = `
+	${ responsiveStyles('font-size', 20, 18, 18, 16) }
+	line-height: 1.5;
+	font-family: ${ primaryFont };
+	letter-spacing: -.01em;
+`
 export const body = `
-${ responsiveStyles('font-size', 18, 16, 16, 18) }
-line-height: 1.5em;
-	font-family: ${ bodyFontFamilyRegular };
+	${ responsiveStyles('font-size', 20, 16, 16, 14) }
+	line-height: 1.6;
+	font-family: ${ primaryFont };
+	letter-spacing: -.01em;
 `
-export const bodyLight = `
-${ responsiveStyles('font-size', 18, 16, 16, 18) }
-	line-height: 1.5em;
-	letter-spacing: 0.33px;
-	font-family: ${ bodyFontFamilyLight };
-`
-
-export const bodyBold = `
-${ responsiveStyles('font-size', 18, 16, 16, 18) }
-line-height: 1.5em;
-font-family: ${ bodyFontFamilyBold };
+export const bodySmall = `
+	${ responsiveStyles('font-size', 18, 14, 14, 14) }
+	line-height: 1.6;
+	font-family: ${ primaryFont };
+	letter-spacing: -.01em;
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 60, 54, 48, 34) }
-	font-family: ${ titleFontFamily };
-	font-weight: lighter;
-	letter-spacing: ${ -10 / 1000 }em;
-	line-height: 1.2;
-`
-
-export const h2 = `
-	${ responsiveStyles('font-size', 34, 30, 30, 22) }
-	line-height: 1.285em;
-	${ responsiveStyles('letter-spacing', 20 / 1000, 20 / 1000, 20 / 1000, -20 / 1000) }
-	font-family: ${ bodyFontFamilyLight };
-`
-export const h3 = `
-	${ responsiveStyles('font-size', 14, 14, 14, 18) }
-	letter-spacing: ${ 20 / 1000 }em;
-	line-height: 1.285em;
-	font-family: ${ bodyFontFamilyRegular };
-	font-weight: 500;
-`
-
-export const h4 = `
-${ responsiveStyles('font-size', 20, 20, 18, 18) }
-font-family: ${ bodyFontFamilyRegular };
-line-height: 1.3333;
-letter-spacing: 0.33px;
-
-`
-
-export const h5 = `
-	${ responsiveStyles('font-size', 20, 20, 18, 18) }
-	font-family: ${ bodyFontFamilyRegular };
-	line-height: 1.3333;
-	letter-spacing: 0.33px;
-`
-export const h6 = `
-	${ responsiveStyles('font-size', 13, 13, 13, 13) }
-	font-family: ${ titleFontFamily };
-	font-weight: bold;
-	line-height: 1.1482;
-	letter-spacing: 1.75px;
+	${ responsiveStyles('font-size', 80, 70, 55, 40) }
+	line-height: 1.25;
+	font-family: ${ secondaryFont };
+	font-weight: normal;
+	letter-spacing: .015em;
 	text-transform: uppercase;
 `
 
-export const caption = `
-	${ responsiveStyles('font-size', 20, 16, 16, 14) }
-	line-height: 1.75;
-	letter-spacing: 0.33px;
+export const h2 = `
+	${ responsiveStyles('font-size', 60, 44, 36, 30) }
+	line-height: 1.25;
+	font-family: ${ secondaryFont };
+	font-weight: normal;
+	letter-spacing: .015em;
+	text-transform: uppercase;
 `
 
-export const button = `
-	${ responsiveStyles('font-size', 18, 16, 16, 18) }
-	font-family: ${ bodyFontFamilyRegular };
-	line-height: ${ 16 / 14 };
-	letter-spacing: ${ 20 / 1000 }em;
-  text-transform: uppercase;
-  padding: 0 2em 1px;
+export const h3 = `
+	${ responsiveStyles('font-size', 46, 36, 30, 24) }
+	line-height: 1.25;
+	font-family: ${ secondaryFont };
+	font-weight: normal;
+	letter-spacing: .015em;
+	text-transform: uppercase;
 `
 
-export const footer = `
-	${ responsiveStyles('font-size', 14, 10, 10, 12) }
-	${ responsiveStyles('line-height', 18, 12, 12, 14) }
-	letter-spacing: ${ 20 / 1000 }em;
-	font-family: ${ bodyFontFamilyRegular };
+export const h4 = `
+	${ responsiveStyles('font-size', 36, 30, 26, 20) }
+	line-height: 1.25;
+	font-family: ${ secondaryFont };
+	font-weight: normal;
+	letter-spacing: .015em;
+	text-transform: uppercase;
+`
+
+export const h5 = `
+	${ responsiveStyles('font-size', 30, 24, 20, 16) }
+	font-family: ${ secondaryFont };
+	font-weight: normal;
+	line-height: 1.25;
+	letter-spacing: .015em;
+	text-transform: uppercase;
+`
+export const h6 = `
+	${ responsiveStyles('font-size', 16, 14, 14, 13) }
+	font-family: ${ secondaryFont };
+	font-weight: normal;
+	line-height: 1.25;
+	letter-spacing: .015em;
+	text-transform: uppercase;
+`
+
+export const buttonStyle = `
+	${ h6 }
+	line-height: 1em;
+`
+
+export const storyNotes = `
+	max-width: 750px;
+	p {
+		code {
+			background: ${ rgba(colors.textColor, 0.1) };
+			color: ${ colors.textColor };
+			border-radius: 3px;
+			padding: .05em .35em .15em;
+			font-style: normal;
+		}
+	}
 `

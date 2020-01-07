@@ -1,17 +1,16 @@
-export const containerLargeMargins = '36px'
-export const containerMediumMargins = '36px'
-export const containerSmallMargins = '36px'
+export const containerLargeMargins = '5vw'
+export const containerMediumMargins = '5vw'
+export const containerSmallMargins = '20px'
 
-const colSpacingSmall = '12px'
-const colSpacingMedium = '12px'
-const colSpacingLarge = '12px'
+const colSpacingSmall = '0'
+const colSpacingMedium = '0'
+const colSpacingLarge = '0'
 
 const rowSpacingSmall = colSpacingSmall
 const rowSpacingMedium = colSpacingMedium
 const rowSpacingLarge = colSpacingLarge
 
 const gridSettings = {
-	baseColCount: 12,
 	colGap: [colSpacingSmall, colSpacingMedium, colSpacingLarge],
 	rowGap: [rowSpacingSmall, rowSpacingMedium, rowSpacingLarge]
 }

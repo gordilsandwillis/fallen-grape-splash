@@ -1,57 +1,54 @@
 import * as typography from './typography'
 import * as mediaQueries from './mediaQueries'
 import * as colors from './colors'
+import * as animations from './animations'
+import * as helpers from './helpers'
 import * as fonts from './fonts'
+import { slick } from './slick'
+import { rgba } from 'polished'
 
 const { responsiveStyles } = typography
 
-//
-/**
- * All global styles
- */
+// All global styles
 export default `
-
   ${ fonts.MaterialIconsFont }
-
-  ${ fonts.SuisseIntlLightFont }
-  ${ fonts.SuisseIntlRegularFont }
-  ${ fonts.SuisseIntlSemiBoldFont }
-  ${ fonts.LyonDisplayLightFont }
+  ${ fonts.MaterialIconsFont }
+  ${ fonts.TradeGothicFont }
+  ${ fonts.PortraitFont }
+  ${ fonts.PortraitItalicFont }
+  ${ fonts.PortraitBoldFont }
 
   * {
     box-sizing: border-box;
   }
 
   html {
-    -webkit-font-smoothing: antialiased;
     font-display: block;
-    background: ${ colors.offwhite };
+    background: ${ colors.bgColor };
+    color: ${ colors.textColor };
+    ${ helpers.fontSmoothing }
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    padding: 0;
+    margin: 0;
+    background-attachment: fixed;
     &.page-lock {
       position: relative;
       overflow: hidden;
       height: 100%;
     }
-    ${ mediaQueries.mediumAndBelow } {
-      &.m-page-lock, &.m-page-lock body {
-        position: relative;
-        overflow: hidden;
-        height: 100%;
-      }
-    }
   }
 
   body {
     ${ typography.body }
-    color: ${ colors.primaryColor };
+    color: ${ colors.textColor };
+    background: ${ colors.bgColor };
+    padding: 0;
+    margin: 0;
   }
 
   b, strong {
-    font-family: ${ typography.bodyFontFamilyBold };
-    font-weight: bold;
-  }
-
-  ul, ol {
-    margin-left: 30px;
+    font-weight: 600;
   }
 
   h1, h2, h3, h4, h5, h6, blockquote, p, ul, ol {
@@ -59,28 +56,42 @@ export default `
     margin: 0 0 0.5em;
   }
 
+  h1, h2, h3, h4, h5, h6, blockquote {
+    b, strong {
+      font-weight: 600;
+    }
+  }
+
   p {
     ${ typography.body }
-    ${ responsiveStyles('margin-top', 24, 16, 14, 8) }
-    ${ responsiveStyles('margin-bottom', 8, 8, 6, 8) }
-    ${ responsiveStyles('max-width', 1200, 800, 800, 600) }
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    &.small {
+      ${ typography.bodySmall }
+    }
+    &.medium {
+      ${ typography.bodyMedium }
+    }
+    &.large {
+      ${ typography.bodyLarge }
+    }
   }
 
   h1, .h1 {
     ${ typography.h1 }
-    ${ responsiveStyles('margin-top', 32, 24, 16, 8) }
+    ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
     ${ responsiveStyles('margin-bottom', 8, 8, 6, 8) }
   }
 
   h2, .h2 {
     ${ typography.h2 }
-    ${ responsiveStyles('margin-top', 32, 24, 16, 8) }
+    ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
     ${ responsiveStyles('margin-bottom', 8, 8, 6, 8) }
   }
 
   h3, .h3 {
     ${ typography.h3 }
-    ${ responsiveStyles('margin-top', 32, 24, 16, 8) }
+    ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
     ${ responsiveStyles('margin-bottom', 0, 0, 6, 8) }
   }
 
@@ -93,51 +104,48 @@ export default `
   h5, .h5 {
     ${ typography.h5 }
     ${ responsiveStyles('margin-top', 24, 16, 16, 8) }
+    font-weight: 700;
+    line-height: 1.25em;
     margin-bottom: 0;
   }
 
   h6, .h6 {
     ${ typography.h6 }
     margin-top: 0;
-    ${ responsiveStyles('margin-bottom', 0, 0, 0, 8) }
+    ${ responsiveStyles('margin-bottom', 24, 16, 16, 8) }
   }
 
   figcaption {
     ${ responsiveStyles('margin-top', 20, 12, 10, 4) }
     ${ responsiveStyles('margin-bottom', 4, 4, 2, 4) }
-    ${ typography.caption }
-    color: ${ colors.link };
-    text-transform: uppercase;
-    font-weight: bold;
-    &.black {
-      color: ${ colors.black };
-      text-transform: none;
-    }
+    ${ typography.bodySmall }
   }
 
   hr {
     margin: 2em auto;
     border: 0;
-    border-bottom: 2px solid ${ colors.grey };
+    display: block;
+    border-bottom: 1px solid ${ colors.hrColor };
   }
 
   a {
     color: inherit;
     cursor: pointer;
     text-decoration: none;
-    .notouch &:hover,
-    .pointerevents &:hover {
-      color: ${ colors.black };
-    }
+    transition:   color ${ animations.mediumSpeed } ease-in-out,
+                  border ${ animations.mediumSpeed } ease-in-out,
+                  background ${ animations.mediumSpeed } ease-in-out,
+                  opacity ${ animations.mediumSpeed } ease-in-out,
+                  transform ${ animations.mediumSpeed } ease-in-out;
     &.text-link {
       font-size: 14px;
       line-height: 16px;
       font-weight: bold;
       text-decoration: none;
       letter-spacing: 1.75px;
-      border-bottom: 1px solid ${ colors.link };
+      border-bottom: 1px solid ${ colors.mainColor };
       text-transform: uppercase;
-      color: ${ colors.link };
+      color: ${ colors.mainColor };
       padding-bottom: 3px;
     }
   }
@@ -149,33 +157,19 @@ export default `
 
   img {
     max-width: 100%;
+    height: auto;
+    vertical-align: top;
   }
 
   time {
-    color: ${ colors.grey };
+    ${ typography.bodySmall };
   }
 
-  .material-icons {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;  /* Preferred icon size */
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'liga';
+  ::selection {
+    background: ${ rgba(colors.notify, 0.9) };
+    color: ${ colors.darkBrown };
   }
-
-  .material-icons.md-18 { font-size: 18px; }
-  .material-icons.md-24 { font-size: 24px; }
-  .material-icons.md-36 { font-size: 36px; }
-  .material-icons.md-48 { font-size: 48px; }
+  
+  ${ slick }
 
 `

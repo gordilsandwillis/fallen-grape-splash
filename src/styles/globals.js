@@ -15,8 +15,3 @@ export const verticalPadding = `
 	${ typography.responsiveStyles('padding-top', 120, 90, 70, 40) }
 	${ typography.responsiveStyles('padding-bottom', 120, 90, 70, 40) }
 `
-
-export const verticalPaddingHalf = `
-	${ typography.responsiveStyles('padding-top', 120, 90, 70, 40) }
-	${ typography.responsiveStyles('padding-bottom', 120, 90, 70, 40) }
-`

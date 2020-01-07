@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
+import { lighten, rgba } from 'polished'
 
 import { fontSmoothing } from 'src/styles/helpers'
-import { animations, colors, typography } from 'src/styles'
-
+import { colors, typography, animations } from 'src/styles'
 import MaterialIcon from 'src/components/MaterialIcon'
 
 import Link from 'src/components/Link'
 
 const buttonSizes = {
-	tiny: '24px',
-	small: '30px',
-	medium: '50px',
-	large: '66px',
+	tiny: '36px',
+	small: '48px',
+	medium: '60px',
+	large: '72px',
 }
 
 const getState = (loading, error, success, disabled) => {
@@ -30,90 +30,103 @@ const getState = (loading, error, success, disabled) => {
 	return buttonState
 }
 
-const ButtonStyles = (state, shape, size, home) => (`
-	padding: 30px 0;
+const setButtonTheme = theme => `
+	background: ${ colors[theme] };
+	${ theme === 'white' || theme === 'bgColor' ? `
+		color: ${ colors.textColor };
+	` : `
+		color: ${ colors.bgColor };
+	` }
+	&:hover {
+		background: ${ lighten(0.07, colors[theme]) };
+		border-color: ${ lighten(0.07, colors[theme]) };
+		${ theme === 'white' || theme === 'bgColor' ? `
+			color: ${ colors.green };
+		` : `
+			color: ${ colors.bgColor };
+		` }
+	}
+`
+
+const DisabledButtonStyles = () => `
+	&[disabled],
+	&:disabled {
+		opacity: .4;
+		background: ${ colors.textColor };
+		color: ${ rgba(colors.bgColor, 0.6) };
+		cursor: not-allowed;
+	}
+`
+
+const ButtonStyles = (state, shape, size, theme) => (`
 	appearance: none;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-touch-callout: none;
-  outline: none;
-  display: inline-block;
-  vertical-align: middle;
-	background: transparent;
-	border: 2px solid currentColor;
-  ${ home && `border: 2px solid ${ colors.red };` }
-	${ typography.responsiveStyles('height', 50, 40, 40, 45) }
-	height: ${ buttonSizes.small };
-  cursor: pointer;
-  line-height: 1em;
-  text-transform: none;
-  letter-spacing: 0;
-  border-radius: 0;
-	color: currentColor;
-	${ home && `color: ${ colors.white };` }
-  font-style: normal;
-  font-family: inherit;
-  ${ typography.button }
-  min-width: 100px;
-  text-align: center;
-  box-shadow: none;
-  ${ fontSmoothing }
-  transition: background ${ animations.mediumSpeed } ease-in-out,
-              color ${ animations.mediumSpeed } ease-in-out,
-              border ${ animations.mediumSpeed } ease-in-out,
-              box-shadow ${ animations.mediumSpeed } ease-in-out,
-              transform ${ animations.mediumSpeed } ease-in-out,
-              opacity ${ animations.mediumSpeed } ease-in-out;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+	outline: none;
+	display: inline-block;
+	vertical-align: middle;
+	border: none;
+	height: ${ buttonSizes.medium };
+	padding-top: 0;
+	padding-bottom: 3px; // offset text
+	padding-left: calc(${ buttonSizes.medium } * .4);
+	padding-right: calc(${ buttonSizes.medium } * .4);
+	cursor: pointer;
+	text-transform: none;
+	letter-spacing: 0;
+	border-radius: 0;
+	${ typography.responsiveStyles('font-size', 20, 16, 15, 13) }
+	text-align: center;
+	box-shadow: none;
+	${ typography.buttonStyle }
+	${ fontSmoothing }
+	transition: background ${ animations.mediumSpeed } ease-in-out,
+							color ${ animations.mediumSpeed } ease-in-out,
+							border ${ animations.mediumSpeed } ease-in-out,
+							box-shadow ${ animations.mediumSpeed } ease-in-out,
+							transform ${ animations.mediumSpeed } ease-in-out,
+							opacity ${ animations.mediumSpeed } ease-in-out;
 	// Button States
-	${ state === 'disabled' ? `cursor: not-allowed;` : `` }
 	${ state === 'loading' ? `cursor: wait;` : `` }
-	${ state === 'error' ? `cursor: default;` : `` }
-	${ state !== 'disabled' ? `
-		&:hover {
-			
-			${ home && `background: ${ colors.whiteLowOpacity } !important;` }
-			background: ${ colors.white } !important;
-			${ home && `color: ${ colors.white };` }
-			color: ${ '#000' } !important;
-			${ home && `border-color: ${ colors.white } !important;` }
-		}
-	` : `` }
+	${ state === 'error' || state === 'success' ? `cursor: default;` : `` }
 
-	${ shape === 'circle' || shape === 'square' ? `
-		padding: 0;
-		min-width: 0;
-		width: ${ buttonSizes.medium };
-		min-width: ${ buttonSizes.medium };
-		${ size === 'tiny' ? `
-			width: ${ buttonSizes.tiny };
-			min-width: ${ buttonSizes.tiny };
-		` : `` }
-		${ size === 'small' ? `
-			width: ${ buttonSizes.small };
-			min-width: ${ buttonSizes.small };
-		` : `` }
-		${ size === 'large' ? `
-			width: ${ buttonSizes.large };
-			min-width: ${ buttonSizes.large };
-		` : `` }
-	` : `` }
+	${ size ? `
+		padding-left: calc(${ buttonSizes[size] } * .4);
+		padding-right: calc(${ buttonSizes[size] } * .4);
+		height: ${ buttonSizes[size] };
+		min-width: calc(${ buttonSizes[size] } * 2);
+	` : `
+		min-width: calc(${ buttonSizes.medium } * 2);
+	` }
 
-	${ shape === 'circle' ? `border-radius: 50%;` : `` }
+	${ setButtonTheme(theme) }
+	${ state === 'disabled' ? `${ DisabledButtonStyles() }` : `` }
 
-	${ size === 'tiny' ? `
-		height: ${ buttonSizes.tiny };
-		${ typography.responsiveStyles('font-size', 16, 14, 13, 13) }
-	` : `` }
-	${ size === 'small' ? `
-		height: ${ buttonSizes.small };
-	` : `` }
-	${ size === 'large' ? `
-		height: ${ buttonSizes.large };
-	` : `` }
+	${ shape && `
+		${ shape.includes('circle') || shape.includes('square') ? `
+			padding-top: 0;
+			padding-bottom: 0;
+			padding-left: 0;
+			padding-right: 0;
+			${ size ? `
+				width: ${ buttonSizes[size] };
+				min-width: ${ buttonSizes[size] };
+			` : `
+				width: ${ buttonSizes.medium };
+				min-width: ${ buttonSizes.medium };
+			` }
+		` : `` }
+	` }
+
+	${ shape && shape.includes('circle') ? `border-radius: 50%;` : `` }
+
+	margin-left: 6px;
+	margin-right: 6px;
+
 `)
 
 const ButtonContent = styled.div`
 	display: flex;
-	${ typography.responsiveStyles('padding-top', 3, 3, 3, 3) }
 	align-items: center;
 	justify-content: center;
 	height: 100%;
@@ -125,11 +138,11 @@ const ButtonContent = styled.div`
 `
 
 const StyledButtonLink = styled(Link)`
-	${ props => ButtonStyles(getState(props.loading, props.error, props.success, props.disabled), props.shape, props.size, props.home) }
+	${ ({ loading, error, success, disabled, shape, size, theme }) => ButtonStyles(getState(loading, error, success, disabled), shape, size, theme) }
 `
 
 const StyledButtonElement = styled.button`
-	${ props => ButtonStyles(getState(props.loading, props.error, props.success, props.disabled), props.shape, props.size, props.home) }
+	${ ({ loading, error, success, disabled, shape, size, theme }) => ButtonStyles(getState(loading, error, success, disabled), shape, size, theme) }
 `
 
 class Button extends Component {
@@ -143,11 +156,34 @@ class Button extends Component {
 		return renderedIcon
 	}
 
+	renderButtonContent = () => {
+		const { loading, error, success, children, icon, iconPosition } = this.props
+		if (loading) {
+			return <ButtonContent>
+				...
+			</ButtonContent>
+		} else if (error) {
+			return <ButtonContent>
+				big ole error
+			</ButtonContent>
+		} else if (success) {
+			return <ButtonContent>
+				yes!
+			</ButtonContent>
+		} else {
+			return <ButtonContent>
+				{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
+				{children}
+				{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
+			</ButtonContent>
+		}
+	}
+
 	render () {
-		const { to,
+		const {
+			to,
 			external,
 			target,
-			children,
 			icon,
 			iconPosition,
 			loading,
@@ -155,18 +191,17 @@ class Button extends Component {
 			success,
 			disabled,
 			onClick,
-			theme,
+			setTheme,
 			className,
 			shape,
-			size,
-			home
+			size
 		} = this.props
 
 		if (to) {
 			return (
 				<StyledButtonLink
-					className={className}
-					href={to}
+					className={'button ' + className}
+					to={to}
 					target={target}
 					external={external}
 					icon={icon}
@@ -176,23 +211,17 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={theme}
+					theme={setTheme}
 					shape={shape}
 					size={size}
-					home={home}
 				>
-					<ButtonContent>
-						{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
-						{children}
-						{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
-					</ButtonContent>
+					{this.renderButtonContent()}
 				</StyledButtonLink>
 			)
 		} else {
 			return (
 				<StyledButtonElement
-					className={className}
-					home={home}
+					className={'button ' + className}
 					icon={icon}
 					iconPosition={iconPosition}
 					loading={loading}
@@ -200,18 +229,19 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={theme}
+					theme={setTheme}
 					shape={shape}
 					size={size}
 				>
-					<ButtonContent>
-						{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
-						{children}
-						{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
-					</ButtonContent>
+					{this.renderButtonContent()}
 				</StyledButtonElement>
 			)
 		}
 	}
 }
+
+Button.defaultProps = {
+	setTheme: 'textColor'
+}
+
 export default Button

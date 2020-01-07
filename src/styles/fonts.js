@@ -1,19 +1,19 @@
 import MaterialIconsWoff from '../assets/fonts/icons/material-icons-regular.woff'
 import MaterialIconsWoff2 from '../assets/fonts/icons/material-icons-regular.woff2'
 
-import SuisseIntlLightWoff from '../assets/fonts/suisseintl/SuisseIntl-Light.woff'
-import SuisseIntlLightWoff2 from '../assets/fonts/suisseintl/SuisseIntl-Light.woff2'
+import TradeGothicWoff from '../assets/fonts/trade-gothic/trade-gothic-bold-extended.woff'
+import TradeGothicWoff2 from '../assets/fonts/trade-gothic/trade-gothic-bold-extended.woff2'
 
-import SuisseIntlRegularWoff from '../assets/fonts/suisseintl/SuisseIntl-Regular.woff'
-import SuisseIntlRegularWoff2 from '../assets/fonts/suisseintl/SuisseIntl-Regular.woff2'
+import PortraitWoff from '../assets/fonts/portrait/portrait-text-web-regular.woff'
+import PortraitWoff2 from '../assets/fonts/portrait/portrait-text-web-regular.woff2'
 
-import SuisseIntlSemiBoldWoff from '../assets/fonts/suisseintl/SuisseIntl-SemiBold.woff'
-import SuisseIntlSemiBoldWoff2 from '../assets/fonts/suisseintl/SuisseIntl-SemiBold.woff2'
+import PortraitBoldWoff from '../assets/fonts/portrait/portrait-web-bold.woff'
+import PortraitBoldWoff2 from '../assets/fonts/portrait/portrait-web-bold.woff2'
 
-import LyonDisplayLightWoff from '../assets/fonts/lyondisplay/LyonDisplay-Light.woff'
-import LyonDisplayLightWoff2 from '../assets/fonts/lyondisplay/LyonDisplay-Light.woff2'
+import PortraitItalicWoff from '../assets/fonts/portrait/portrait-text-web-regular-italic.woff'
+import PortraitItalicWoff2 from '../assets/fonts/portrait/portrait-text-web-regular-italic.woff2'
 
-export const fontFace = (fontName, woff, woff2, fontWeight = 'normal') => `
+export const fontFace = (fontName, woff, woff2, fontWeight = 'normal', fontStyle = 'normal') => `
 	@font-face {
 		font-family: '${ fontName }';
 		src:  url('${ woff }') format('woff'),
@@ -25,14 +25,14 @@ export const fontFace = (fontName, woff, woff2, fontWeight = 'normal') => `
 export const MaterialIcons = 'Material Icons'
 export const MaterialIconsFont = fontFace(MaterialIcons, MaterialIconsWoff, MaterialIconsWoff2)
 
-export const SuisseIntlLight = 'SuisseIntlLight'
-export const SuisseIntlLightFont = fontFace(SuisseIntlLight, SuisseIntlLightWoff, SuisseIntlLightWoff2, '100')
+export const TradeGothic = 'Trade Gothic'
+export const TradeGothicFont = fontFace(TradeGothic, TradeGothicWoff, TradeGothicWoff2)
 
-export const SuisseIntlRegular = 'SuisseIntlRegular'
-export const SuisseIntlRegularFont = fontFace(SuisseIntlRegular, SuisseIntlRegularWoff, SuisseIntlRegularWoff2)
+export const Portrait = 'Portrait'
+export const PortraitFont = fontFace(Portrait, PortraitWoff, PortraitWoff2)
 
-export const SuisseIntlSemiBold = 'SuisseIntlSemiBold'
-export const SuisseIntlSemiBoldFont = fontFace(SuisseIntlSemiBold, SuisseIntlSemiBoldWoff, SuisseIntlSemiBoldWoff2)
+export const PortraitItalic = 'Portrait'
+export const PortraitItalicFont = fontFace(PortraitItalic, PortraitItalicWoff, PortraitItalicWoff2, 'normal', 'italic')
 
-export const LyonDisplayLight = 'LyonDisplayLight'
-export const LyonDisplayLightFont = fontFace(LyonDisplayLight, LyonDisplayLightWoff, LyonDisplayLightWoff2, '100')
+export const PortraitBold = 'Portrait'
+export const PortraitBoldFont = fontFace(PortraitBold, PortraitBoldWoff, PortraitBoldWoff2, 'bold')
