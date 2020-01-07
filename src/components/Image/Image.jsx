@@ -4,78 +4,71 @@ import Img from 'gatsby-image/withIEPolyfill'
 import { mediaQueries as mq } from 'src/styles'
 
 const StyledImage = styled(Img)`
-	img {
-		transition: opacity 1s ease-in-out;
-	}
-	${ ({ image }) =>
-		!image &&
-		`
-		${ mq.largeAndBelow } {
-			padding-bottom: ${ ({ fluid }) => 100.0 / fluid[1].aspectRatio }%;
-		}
-		${ mq.mediumAndBelow } {
-			padding-bottom: ${ ({ fluid }) => 100.0 / fluid[2].aspectRatio }%;
+	${ ({ fluid }) => `
+		> div {
+			${ fluid && fluid[1] && `
+				${ mq.largeAndBelow } {
+					padding-bottom: ${ 100.0 / fluid[1].aspectRatio }% !important;
+				}
+			` }
+			${ fluid && fluid[2] && `
+				${ mq.mediumAndBelow } {
+					padding-bottom: ${ 100.0 / fluid[2].aspectRatio }% !important;
+				}
+			` }
 		}
 	` }
 `
 
-const StyledSvgContainer = styled.div`
-	svg {transition: opacity 1s ease-in-out;}
-	height:100%;
-	width: 100%;
-	`
-
 const ResponsiveImage = ({ image, small, medium, large, className }) => {
 	if (small || medium || large || image) {
 		let source = null
-		if (image && image.fluid) {
+		if (image) {
 			source = image.fluid
-			console.log('STILL using image')
 		} else {
-			console.log('NOT using image')
 			source = [
 				{
 					...large.fluid,
-					media: `(min-width: ${ mq.largeBreakpoint }px)`,
+					media: `(min-width: ${ mq.largeBreakpoint + 1 }px)`,
 				},
 				{
 					...medium.fluid,
-					aspectRatio: medium.fluid.aspectRatio,
-					media: `(min-width: ${ mq.mediumBreakpoint }px)`,
+					media: `(min-width: ${ mq.mediumBreakpoint + 1 }px)`,
 				},
 				{
 					...small.fluid,
-					aspectRatio: small.fluid.aspectRatio,
 					media: `(min-width: 1px)`,
-				},
+				}
 			]
 		}
-
 		return (
 			<StyledImage
 				className={className}
 				fluid={source}
 				placeholderStyle={{ display: 'none' }}
-				durationFadeIn={2000}
+				durationFadeIn={1000}
 				// objectFit="cover"
 				// objectPosition="50% 50%"
-			/>
+			>
+				<div style={{ boxShadow: '-14px 16px 5px 5px green' }}/>
+			</StyledImage>
 		)
 	} else {
 		return false
 	}
 }
 
-const Image = ({ small, medium, large, image, className }) => (
-	image && image.svgContent
-		? <StyledSvgContainer dangerouslySetInnerHTML={{ __html: image && image.svgContent }}/>
-		: <ResponsiveImage
-			image={image}
-			small={small}
-			medium={medium}
-			large={large}
-			className={className}
-		/>
+const Image = ({ useMultipleImages, small, medium, large, image, className }) => (
+	<ResponsiveImage
+		image={!useMultipleImages && image}
+		small={small}
+		medium={medium}
+		large={large}
+		className={className}
+	/>
 )
 
-export { ResponsiveImage, Image as default }
+export {
+	ResponsiveImage,
+	Image as default
+}

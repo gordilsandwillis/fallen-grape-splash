@@ -166,8 +166,8 @@ export default `
   }
 
   ::selection {
-    background: ${ rgba(colors.notify, 0.9) };
-    color: ${ colors.darkBrown };
+    background: ${ rgba(colors.mainColor, 0.9) };
+    color: ${ colors.bgColor };
   }
   
   ${ slick }

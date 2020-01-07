@@ -28,32 +28,39 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 
 export const bodyLarge = `
 	${ responsiveStyles('font-size', 24, 22, 20, 18) }
-	line-height: 1.4;
-	font-family: ${ secondaryFont };
-	font-weight: 600;
+	line-height: 1.5;
+	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
+	text-transform: none;
+	font-weight: normal;
 `
 export const bodyMedium = `
 	${ responsiveStyles('font-size', 20, 18, 18, 16) }
 	line-height: 1.5;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
+	text-transform: none;
+	font-weight: normal;
 `
 export const body = `
 	${ responsiveStyles('font-size', 20, 16, 16, 14) }
 	line-height: 1.6;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
+	text-transform: none;
+	font-weight: normal;
 `
 export const bodySmall = `
 	${ responsiveStyles('font-size', 18, 14, 14, 14) }
 	line-height: 1.6;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
+	text-transform: none;
+	font-weight: normal;
 `
 
 export const h1 = `
-	${ responsiveStyles('font-size', 80, 70, 55, 40) }
+	${ responsiveStyles('font-size', 80, 70, 50, 40) }
 	line-height: 1.25;
 	font-family: ${ secondaryFont };
 	font-weight: normal;

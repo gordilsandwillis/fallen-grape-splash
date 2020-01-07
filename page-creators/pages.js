@@ -1,41 +1,39 @@
 const Promise = require(`bluebird`)
 const path = require(`path`)
 
-const createContentfulPages = (graphql, createPage) => new Promise((resolve, reject) => {
+const createPages = (graphql, createPage) => new Promise((resolve, reject) => {
 	graphql(`
-    query {
-			allContentfulSite {
+		{
+			allContentfulPage {
 				edges {
 					node {
-						pages {
-							id
-							slug
-						}
+						id
+						path
 					}
 				}
-			}	
-    }
-  `).then(result => {
+			}
+		}
+	`).then(result => {
 		if (result.errors) {
 			reject(result.errors)
 		}
 
-		const pageTemplateMap = {
-			page: path.resolve('./src/templates/PageTemplate.jsx'),
-		}
-		result.data.allContentfulSite.edges[0].node.pages.forEach(page => {
-			const template = pageTemplateMap[page.type] || pageTemplateMap['page']
-			createPage({
-				path: `${ page.slug }`,
-				component: template,
-				context: {
-					id: page.id
-				},
+		const template = path.resolve('./src/templates/PageTemplate.jsx')
+
+		result.data.allContentfulPage.edges
+			.filter(edge => !edge.node.path.includes('PLACEHOLDER'))
+			.forEach(edge => {
+				createPage({
+					path: `${ edge.node.path }`,
+					component: template,
+					context: {
+						id: edge.node.id
+					},
+				})
 			})
-		})
 
 		resolve()
 	})
 })
 
-module.exports = createContentfulPages
+module.exports = createPages

@@ -4,8 +4,8 @@ import { withKnobs, text, boolean, optionsKnob } from '@storybook/addon-knobs'
 import ATF from './ATF'
 import * as mock from 'src/mock'
 
-const placeholderHeadline = `Discover the magic of Wah-Nee`
-const placeholderTagline = `The 10 months for the best 2`
+const placeholderHeadline = `Where great food, great people, and good times happen`
+const placeholderTagline = `Upper west side, NYC`
 
 const hAlignmentOptions = {
 	center: 'center',
@@ -19,12 +19,13 @@ const vAlignmentOptions = {
 	bottom: 'bottom'
 }
 
-const stories = storiesOf(`Components`, module)
+const stories = storiesOf(`Blocks`, module)
 
 stories.addDecorator(withKnobs)
 
 stories.add(`ATF`, () => (
 	<ATF
+		headlineSize="h3"
 		headline={text('Headline', placeholderHeadline)}
 		text={text('Tagline', placeholderTagline)}
 		textAlignment={ optionsKnob('Text Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }

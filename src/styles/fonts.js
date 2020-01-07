@@ -19,7 +19,7 @@ export const fontFace = (fontName, woff, woff2, fontWeight = 'normal', fontStyle
 		src:  url('${ woff }') format('woff'),
 					url('${ woff2 }') format('woff2');
 		font-weight: ${ fontWeight };
-		font-style: normal;
+		font-style: ${ fontStyle };
 	}
 `
 export const MaterialIcons = 'Material Icons'

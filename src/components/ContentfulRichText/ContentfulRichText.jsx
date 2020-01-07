@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
-// import BalanceText from 'react-balance-text'
+import BalanceText from 'react-balance-text'
 
 const RichTextWrapper = styled.div`
 	> *:first-child {
@@ -17,7 +17,7 @@ const RichTextWrapper = styled.div`
 	}
 `
 
-const Heading1 = ({ children }) => <h1>{children}</h1>
+const Heading1 = ({ children }) => <h1><BalanceText>{children}</BalanceText></h1>
 
 const options = {
 	renderMark: {

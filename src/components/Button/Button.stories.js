@@ -18,7 +18,7 @@ const Notes = styled.div`
 	${ typography.storyNotes }
 `
 
-storiesOf('Styleguide', module)
+storiesOf(`Styleguide`, module)
 	.add('Buttons', () => (
 		<div style={{ padding: '5%' }}>
 			<h4>Default Button</h4>

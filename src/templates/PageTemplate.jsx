@@ -1,5 +1,4 @@
-import _ from 'lodash'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { graphql } from 'gatsby'
 import * as PropTypes from 'prop-types'
 
@@ -14,31 +13,32 @@ const propTypes = {
 
 class PageTemplate extends React.Component {
 	render () {
-		const {
-			data,
-			location = '/'
-		} = this.props
-		const site = _.get(data, 'allContentfulSite.edges[0].node')
-		const { navigation, footerNavigation, footerCompanyBio, copyright, seoAppleTouchIcon, seoSocialShareImage, favicon } = site
-
-		const page = _.get(data, 'allContentfulPage.edges[0].node')
-		const { blocks, horizontalBreakInFooter, keywords } = page
-		const hasAtf = blocks.filter(item => ((item.__typename === 'ContentfulBlockAboveTheFold') || (item.__typename === 'ContentfulBlockAboveTheFoldAnimated'))).length > 0 || false
+		const site = this.props.data.allContentfulSiteSettings.edges.filter(edge => !edge.node.title.includes('PLACEHOLDER'))[0].node
+		const page = this.props.data.allContentfulPage.edges[0].node
+		const { sections } = page
+		const hasAtf = sections && sections[0].__typename === 'ContentfulAboveTheFold'
 		return (
-			<main>
+			<Fragment >
 				<SEO
-					seoAppleTouchIcon={seoAppleTouchIcon}
-					seoSocialShareImage={seoSocialShareImage}
-					favicon={favicon}
-					keywords={keywords}
 					title={page.title}
-					siteTitle={site.title}
-					description={page.seoDescription.seoDescription}
+					description={page.seoDescription}
 				/>
-				<Header hasAtf={hasAtf} navigation={navigation} location={location} />
-				{blocks.map(b => <ComponentRenderer key={b.id} item={b} />)}
-				<Footer horizontalBreakInFooter={horizontalBreakInFooter} isHomePage={page.slug === '/'} footerCompanyBio={footerCompanyBio} copyright={copyright} footerNavigation={footerNavigation}/>
-			</main>
+				{/*<Header
+					headerNavigation={site.headerNavigation}
+					headerDrawerBottomLinks={site.headerDrawerBottomLinks}
+					headerLinks={site.headerLinks}
+					headerButtons={site.headerButtons}
+					hasAtf={hasAtf}
+				/>*/}
+				{sections.map((section, index) => {
+					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme
+					const nextTheme = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].theme
+					return (
+						<ComponentRenderer prevTheme={prevTheme} nextTheme={nextTheme} key={section.id} item={section} />
+					)
+				})}
+				<Footer {...site} />
+			</Fragment>
 		)
 	}
 }
@@ -47,44 +47,10 @@ PageTemplate.propTypes = propTypes
 
 export const pageQuery = graphql`
   query($id: String!) {
-		allContentfulSite(limit: 1) {
+		allContentfulSiteSettings {
 			edges {
 				node {
-					id
-					title
-					favicon {
-						fixed(width: 32, height: 32, quality: 100, toFormat: PNG) {
-							src
-						}
-					}
-					seoSocialShareImage {
-						fixed(width: 180, height: 180, quality: 100, toFormat: PNG) {
-							src
-						}
-					}
-					seoAppleTouchIcon {
-						fixed(width: 180, height: 180, quality: 100, toFormat: PNG) {
-							src
-						}
-					}
-					navigation {
-						...on ContentfulPage {
-							title
-							slug
-						}
-					}
-					copyright {
-						json
-					}
-					footerCompanyBio {
-						json
-					}
-					footerNavigation {
-						...on ContentfulPage {
-							title
-							slug
-						}
-					}
+					...SiteSettings
 				}
 			}
 		}
@@ -92,27 +58,16 @@ export const pageQuery = graphql`
 			edges {
 				node {
 					id
-					slug
+					path
 					title
-					horizontalBreakInFooter
-					seoDescription {
-						seoDescription
-					}
-					childContentfulPageSeoDescriptionTextNode {
-						seoDescription
-					}
-					blocks {
-						...BlockAboveTheFold
-						...BlockSlider
-						...BlockProductsGrid
-						...BlockPressList
-						...BlockLeadership
-						...BlockHeroImage
-						...BlockContactInformation
-						...BlockCompanyPillars
-						...BlockCompanies
-						...BlockCareersList
-						...BlockLegalInfo
+					seoDescription
+					sections {
+						...AboveTheFold
+						...CenterAlignedText
+						...FiftyFifty
+						...TwoColumnText
+						...WideImageVideo
+						...TwoUpImages
 					}
 				}
 			}

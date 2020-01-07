@@ -69,7 +69,7 @@ class GridStory extends React.Component {
 }
 
 storiesOf(`Styleguide`, module).add(`Grid`, () => (
-	<div style={{ padding: '5%' }}>
+	<div>
 		<GridStory
 			title="Different Columns at Different Breakpoints"
 			small="[1] [1] [1] [1]"

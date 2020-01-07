@@ -6,7 +6,7 @@ const qbf = 'The quick brown fox jumps over the lazy dog'
 const lorem = `lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.`
 const longLorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et iaculis nisi, vel auctor ipsum. Integer finibus, sem id fringilla tincidunt, quam quam auctor leo, hendrerit accumsan neque metus eu sapien. In suscipit sapien id orci tempor ornare. Nullam nunc velit, molestie quis leo ac, ultrices tempus nulla. Pellentesque finibus nibh vel dui tempus suscipit. Nullam justo sapien, ullamcorper at augue sit amet, pellentesque lobortis ex. Integer in nunc sapien. Aliquam eu elit sagittis odio tristique tristique. Aenean vel neque mattis, pellentesque ipsum sit amet, condimentum felis. Suspendisse ac molestie ex. Proin tristique lorem eu pharetra molestie.`
 
-storiesOf('Styleguide', module)
+storiesOf(`Styleguide`, module)
 	.add('Typography', () => (
 		<div style={{ padding: '5%' }}>
 			<h1>H1 {qbf}</h1>
@@ -59,7 +59,7 @@ storiesOf('Styleguide', module)
 
 			<h4>Text Link</h4>
 
-			<a href="http://ginlane.com">Text Link</a>
+			<a href="http://gordilsandwillis.com">Text Link</a>
 
 			<hr />
 

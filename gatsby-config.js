@@ -5,9 +5,9 @@ require('dotenv').config({
 
 module.exports = {
 	siteMetadata: {
-		title: 'Mosiac',
-		description: 'Mosiac',
-		author: '@dillon',
+		title: 'The Hugh',
+		description: 'The Hugh',
+		author: '@mattgordils',
 	},
 	plugins: [
 		`gatsby-transformer-inline-svg`,
@@ -54,19 +54,22 @@ module.exports = {
 			}
 		},
 		{
+	    resolve: `gatsby-source-instagram`,
+	    options: {
+	      // username: `cervezamonopolio`,
+	      access_token: process.env.INSTAGRAM_ACCESS_TOKEN,
+				instagram_id: process.env.INSTAGRAM_CLIENT_ID,
+				instagram_user_id: process.env.INSTAGRAM_USER_ID
+	    },
+	  },
+		{
 			resolve: `gatsby-source-contentful`,
 			options: {
-				spaceId: process.env.CONTENTFUL_SPACE_ID,
-				accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-				environment: 'master',
-				host: 'cdn.contentful.com'
+				spaceId: process.env.CONTENTFUL_SPACE,
+				accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+				host: process.env.CONTENTFUL_HOST,
+				environment: process.env.CONTENTFUL_ENVIRONMENT
 			},
-		},
-		{
-			resolve: 'gatsby-source-greenhouse-job-board',
-			options: {
-				boardToken: process.env.GREENHOUSE_BOARD_TOKEN
-			}
 		}
 	],
 }
