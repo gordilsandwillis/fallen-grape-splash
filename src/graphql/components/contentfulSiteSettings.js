@@ -10,6 +10,11 @@ export const query = graphql`
         src
       }
     }
+    touchIcon {
+      fixed(width: 120, quality: 100) {
+        src
+      }
+    }
     defaultShareImage {
       fixed(width: 250, quality: 100) {
         src

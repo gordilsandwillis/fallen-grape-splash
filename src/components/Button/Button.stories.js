@@ -26,6 +26,7 @@ storiesOf(`Styleguide`, module)
 				<Button>Button</Button>
 				<Button to="/">Button Link</Button>
 			</SpaceOut>
+			<hr/>
 			<h4>Button States</h4>
 			<SpaceOut>
 				<Button loading={true} icon="close" iconPosition="left">loading</Button>
@@ -33,6 +34,7 @@ storiesOf(`Styleguide`, module)
 				<Button success>Success</Button>
 				<Button disabled>disabled</Button>
 			</SpaceOut>
+			<hr/>
 			<h4>Button Sizes & Themes</h4>
 			<Notes>
 				<p>The <code>size</code> props can be <code>tiny</code>, <code>small</code>, <code>medium</code>, or <code>large</code> and the <code>setTheme</code> prop take the name of any color variable as a string (ie: 'mainColor')</p>
@@ -55,11 +57,13 @@ storiesOf(`Styleguide`, module)
 				<Button to="/" shape="circle" icon="check"/>
 				<Button to="/" shape="circle" size="large" icon="check"/>
 			</SpaceOut>
+			<hr/>
 			<h4>Button Shapes</h4>
 			<SpaceOut>
 				<Button to="/" shape="circle" icon="check"/>
 				<Button to="/" shape="square" icon={<TestIcon size={18}/>}/>
 			</SpaceOut>
+			<hr/>
 			<h4>Links</h4>
 			<SpaceOut>
 				<Link to="/">Internal Link</Link>

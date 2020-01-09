@@ -17,6 +17,7 @@ export default `
   ${ fonts.PortraitFont }
   ${ fonts.PortraitItalicFont }
   ${ fonts.PortraitBoldFont }
+  ${ fonts.PortraitBoldItalicFont }
 
   * {
     box-sizing: border-box;
@@ -75,30 +76,37 @@ export default `
     &.large {
       ${ typography.bodyLarge }
     }
+    a {
+      border-bottom: 1px solid ${ colors.hrColor };
+      padding-bottom: .2em;
+      &:hover {
+        border-color: ${ colors.mainColor };
+      }
+    }
   }
 
   h1, .h1 {
     ${ typography.h1 }
     ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 8, 8, 6, 8) }
+    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
   }
 
   h2, .h2 {
     ${ typography.h2 }
     ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 8, 8, 6, 8) }
+    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
   }
 
   h3, .h3 {
     ${ typography.h3 }
     ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 0, 0, 6, 8) }
+    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
   }
 
   h4, .h4 {
     ${ typography.h4 }
     ${ responsiveStyles('margin-top', 24, 16, 16, 8) }
-    ${ responsiveStyles('margin-bottom', 0, 0, 0, 4) }
+    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
   }
 
   h5, .h5 {
@@ -119,6 +127,8 @@ export default `
     ${ responsiveStyles('margin-top', 20, 12, 10, 4) }
     ${ responsiveStyles('margin-bottom', 4, 4, 2, 4) }
     ${ typography.bodySmall }
+    font-style: italic;
+    letter-spacing: 0.03em;
   }
 
   hr {
@@ -153,6 +163,10 @@ export default `
   // Remove grey rectangle from iOS taps
   a, input, button {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+
+  blockquote {
+    ${ typography.blockquote };
   }
 
   img {

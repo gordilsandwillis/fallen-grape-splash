@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import { lighten } from 'polished'
 
 import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
@@ -36,6 +37,19 @@ const FooterLogo = styled(Logo)`
 	}
 `
 
+const FooterSection = styled.div`
+	${ mq.mediumAndBelow } {
+		${ ({ firstSection }) => !firstSection && `
+			border-top: 1px solid currentcolor;
+			padding-top: 1.4rem;
+		` }
+	}
+`
+
+const SectionHeader = styled.h6`
+	${ typography.responsiveStyles('margin-bottom', 30, 30, 10, 5) }
+`
+
 const LinkList = styled.ul`
 	${ typography.body }
 	${ mq.extraExtraLargeAndUp } {
@@ -49,9 +63,7 @@ const LinkList = styled.ul`
 		a {
 			position: relative;
 			display: inline-block;
-			color: ${ colors.bgColor };
 			&:hover {
-				color: ${ colors.mainColor };
 				&:after {
 					transform: scaleX(1);
 				}
@@ -72,25 +84,13 @@ const LinkList = styled.ul`
 	}
 `
 
-const FooterSection = styled.div`
-	${ ({ firstSection }) => firstSection ? `
-		${ typography.responsiveStyles('margin-bottom', 30, 30, 10, 5) }
-	` : `
-		${ typography.responsiveStyles('margin-bottom', 50, 40, 30, 26) }
-	` }
-	${ mq.mediumAndBelow } {
-		${ ({ firstSection }) => !firstSection && `
-			border-top: 1px solid currentcolor;
-			padding-top: 1.4rem;
-		` }
-	}
-`
+const LinkListItem = styled.li``
 
 const FooterBottom = styled.div`
 	position: relative;
 	${ typography.responsiveStyles('padding-top', 50, 40, 30, 26) }
 	${ typography.responsiveStyles('padding-bottom', 50, 40, 30, 26) }
-	background: ${ colors.lightGrey };
+	background: ${ lighten(0.1, colors.black) };
 `
 
 const Copyright = styled.div`
@@ -143,29 +143,35 @@ class Footer extends Component {
 			title
 		} = this.props
 		return (
-			<Wrapper setTheme="darkBrown">
+			<Wrapper setTheme="black">
 				<FooterContainer>
 					<Grid
 						small="1 [12] 1"
 						medium="1 [4] [4] [4] 1"
 						large="1 [4] [4] [4] 1"
-						extraLarge="1 [3] [6] [3] 1"
+						extraLarge="1 [3] [3] 2 [4] 1"
+						rowGap="7vw"
 					>
-						<FooterSection firstSection>
-							Footer Section
-						</FooterSection>
+						{footerSections.map((section, index) => (
+								<FooterSection firstSection={index === 0}>
+									<SectionHeader>{section.displayTitle}</SectionHeader>
+									<LinkList>
+										{section.items.map((item, index) => (
+											<LinkListItem>
+												<Link to={item.to} external={item.external}>{item.label}</Link>
+											</LinkListItem>
+										))}
+									</LinkList>
+								</FooterSection>
+						))}
 
-						<div>
-							<FooterSection>
-								<h4>{footerNewsletterTitle}</h4>
-								<ConditionalRender condition={footerNewsletterRichText}>
-									<p>
-										<ContentfulRichText richText={footerNewsletterRichText.json}/>
-									</p>
-								</ConditionalRender>
-								<MailchimpSignup />
-							</FooterSection>
-						</div>
+						<FooterSection>
+							<SectionHeader>{footerNewsletterTitle}</SectionHeader>
+							<ConditionalRender condition={footerNewsletterRichText}>
+								<ContentfulRichText richText={footerNewsletterRichText.json}/>
+							</ConditionalRender>
+							<MailchimpSignup />
+						</FooterSection>
 
 					</Grid>
 				</FooterContainer>

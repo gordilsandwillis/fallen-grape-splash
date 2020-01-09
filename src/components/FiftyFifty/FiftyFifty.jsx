@@ -4,14 +4,9 @@ import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
 import ConditionalRender from 'src/components/ConditionalRender'
 import Image from 'src/components/Image'
-import LeftAlignedText from 'src/components/LeftAlignedText'
+import Video from 'src/components/Video'
+import TextLockup from 'src/components/TextLockup'
 import { colors, mediaQueries as mq } from 'src/styles'
-const RowItem = styled.div`
-	${ mq.mediumAndUp } {
-	${ ({ padding }) => `margin-${ padding }: 15px;` }
-	flex: 1;
-	}
-`
 
 const FiftyFifty = ({
 	theme,
@@ -20,78 +15,104 @@ const FiftyFifty = ({
 	eyebrow,
 	headline,
 	text,
-	imageOnLeftSide,
+	imagePosition,
 	image,
 	video,
 	buttons
-}) => (
-	<Section
-		setTheme={theme}
-		prevTheme={prevTheme}
-		nextTheme={nextTheme}
-		buttons={buttons}
-	>
-		<Grid
-			small="1 [12] 1"
-			medium="1 [5] [5] 1"
-			large="1 [5] [5] 1"
-			extraLarge="2 [4] 1 [4] 2"
+}) => {
+
+	let gridSetup = {
+		small: '1 [12] 1',
+		medium: '1 [6] 1 [5] 1',
+		large: '2 [11] 2 [11] 2',
+		extraLarge: '3 [10] 2 [10] 3',
+		imagePosition: 'ltr',
+		textGrid: '[1]'
+	}
+
+	if (imagePosition === 'right') {
+		gridSetup = {
+			small: '1 [12] 1',
+			medium: '1 [6] 1 [5] 1',
+			large: '2 [11] 2 [11] 2',
+			extraLarge: '3 [10] 2 [10] 3',
+			imagePosition: 'rtl',
+			textGrid: '[1]'
+		}
+	} else if (imagePosition === 'hangLeft') {
+		gridSetup = {
+			small: '[13] 1',
+			medium: '[7] 1 [5] 1',
+			large: '[13] 2 [11] 2',
+			extraLarge: '[13] 2 [10] 3',
+			imagePosition: 'ltr',
+			textGrid: '[12] 1'
+		}
+	} else if (imagePosition === 'hangRight') {
+		gridSetup = {
+			small: '[13] 1',
+			medium: '[7] 1 [5] 1',
+			large: '[13] 2 [11] 2',
+			extraLarge: '[13] 2 [10] 3',
+			imagePosition: 'rtl',
+			textGrid: '[12] 1'
+		}
+	}
+
+	return (
+		<Section
+			setTheme={theme}
+			prevTheme={prevTheme}
+			nextTheme={nextTheme}
 		>
-			<ConditionalRender condition={imageOnLeftSide !== false}>
-				<RowItem padding="right">
+			<Grid
+				small={gridSetup.small}
+				medium={gridSetup.medium}
+				large={gridSetup.large}
+				extraLarge={gridSetup.extraLarge}
+				gridDirection={gridSetup.imagePosition}
+				rowGap="7vw"
+				vAlign="center"
+			>	
+				<div>
 					<ConditionalRender condition={image && !video}>
 						<div>
-							{/* TODO: add light blue background shadow */}
-							<Image {...image} backgroundColor={colors.hrColor} alt={(image && image.description) || (image && image.title)}/>
-							<div style={{ height: 25 }}/>
+							<Image
+								image={image.image}
+								small={image.small}
+								medium={image.medium}
+								large={image.large}
+								alt={(image && image.description) || (image && image.title)}
+							/>
 						</div>
 					</ConditionalRender>
 					<ConditionalRender condition={video}>
 						<div>
-							<video style={{ outline: 'none' }} width="100%" controls>
-								<source src={video && video.file.url} type="video/mp4"/>
-							</video>
+							<Video url={video && video.file.url} playing={true} loop={true}/>
 						</div>
 					</ConditionalRender>
-				</RowItem>
-				<RowItem padding="left">
-					<LeftAlignedText
+				</div>
+				<Grid
+					small={gridSetup.textGrid}
+					medium="[1]"
+				>
+					<TextLockup
+						alignment="left"
 						specialList
 						headline={headline}
 						text={text}
 						eyebrow={eyebrow}
+						buttons={buttons}
+						theme={theme}
 					/>
-				</RowItem>
-			</ConditionalRender>
-			<ConditionalRender condition={imageOnLeftSide === false}>
-				<RowItem padding="right">
-					<LeftAlignedText
-						specialList
-						headline={headline}
-						text={text}
-						eyebrow={eyebrow}
-					/>
-				</RowItem>
-				<RowItem padding="left">
-					<div>
-						<ConditionalRender condition={image && !video}>
-							<div>
-								{/* TODO: add blue background */ }
-								<Image {...image} backgroundColor={colors.hrColor} alt={(image && image.description) || (image && image.title)}/>
-							</div>
-						</ConditionalRender>
-						<ConditionalRender condition={video}>
-							<div>
-								<video style={{ outline: 'none' }} width="100%" controls>
-									<source src={video && video.file.url} type="video/mp4"/>
-								</video>
-							</div>
-						</ConditionalRender>
-					</div>
-				</RowItem>
-			</ConditionalRender>
-		</Grid>
-	</Section>
-)
+				</Grid>
+			</Grid>
+		</Section>
+	)
+}
+
+FiftyFifty.defaultProps = {
+	imagePosition: 'left'
+}
 
 export default FiftyFifty

@@ -31,7 +31,11 @@ const getState = (loading, error, success, disabled) => {
 }
 
 const setButtonTheme = theme => `
-	background: ${ colors[theme] };
+	${ theme === 'default' ? `
+		background: ${ colors.textColor };
+	` : `
+		background: ${ colors[theme] };
+	` }
 	${ theme === 'white' || theme === 'bgColor' ? `
 		color: ${ colors.textColor };
 	` : `
@@ -68,7 +72,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	border: none;
 	height: ${ buttonSizes.medium };
 	padding-top: 0;
-	padding-bottom: 3px; // offset text
+	padding-bottom: 0px; // offset text if necessary
 	padding-left: calc(${ buttonSizes.medium } * .4);
 	padding-right: calc(${ buttonSizes.medium } * .4);
 	cursor: pointer;

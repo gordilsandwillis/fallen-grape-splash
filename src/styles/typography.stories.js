@@ -8,36 +8,37 @@ const longLorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed 
 
 storiesOf(`Styleguide`, module)
 	.add('Typography', () => (
-		<div style={{ padding: '5%' }}>
-			<h1>H1 {qbf}</h1>
+		<div style={{ padding: '5%', maxWidth: '1300px' }}>
+			<h1>H1: {qbf}</h1>
 			<hr/>
-
-			<h2>H2 {qbf}</h2>
+			<h2>H2: {qbf}</h2>
 			<hr/>
-
-			<h3>H3 {qbf}</h3>
+			<h3>H3: {qbf}</h3>
 			<hr/>
-
-			<h4>H4 {qbf}</h4>
+			<h4>H4: {qbf}</h4>
 			<hr/>
-
-			<h5>H5 {qbf}</h5>
+			<h5>H5: {qbf}</h5>
 			<hr/>
-
-			<h6>H6 {qbf}</h6>
-			<hr/>
+			<h6>H6: {qbf}</h6>
+			<hr />
 
 			<h4>Small Body Copy</h4>
 			<p className="small">{longLorem}</p>
 			<p className="small">{lorem}</p>
 
+			<hr />
+
 			<h4>Body Copy</h4>
 			<p>{longLorem}</p>
 			<p>{lorem}</p>
 
+			<hr />
+
 			<h4>Medium Body Copy</h4>
 			<p className="medium">{longLorem}</p>
 			<p className="medium">{lorem}</p>
+
+			<hr />
 
 			<h4>Large Body Copy</h4>
 			<p className="large">{longLorem}</p>

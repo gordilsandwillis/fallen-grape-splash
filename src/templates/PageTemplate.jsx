@@ -22,19 +22,20 @@ class PageTemplate extends React.Component {
 				<SEO
 					title={page.title}
 					description={page.seoDescription}
+					siteSettings={site}
 				/>
-				{/*<Header
-					headerNavigation={site.headerNavigation}
-					headerDrawerBottomLinks={site.headerDrawerBottomLinks}
-					headerLinks={site.headerLinks}
-					headerButtons={site.headerButtons}
+				<Header
+					// headerNavigation={site.headerNavigation}
+					// headerDrawerBottomLinks={site.headerDrawerBottomLinks}
+					// headerLinks={site.headerLinks}
+					// headerButtons={site.headerButtons}
 					hasAtf={hasAtf}
-				/>*/}
+				/>
 				{sections.map((section, index) => {
 					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme
 					const nextTheme = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].theme
 					return (
-						<ComponentRenderer prevTheme={prevTheme} nextTheme={nextTheme} key={section.id} item={section} />
+						<ComponentRenderer prevTheme={prevTheme} nextTheme={nextTheme} key={section.id} item={section} index={index} />
 					)
 				})}
 				<Footer {...site} />

@@ -4,8 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-import onRouteUpdate from './segment/onRouteUpdate'
-
 const transitionDelay = 750
 
 const shouldUpdateScroll = ({
@@ -24,4 +22,4 @@ const shouldUpdateScroll = ({
 	return false
 }
 
-export { onRouteUpdate, shouldUpdateScroll }
+export { shouldUpdateScroll }

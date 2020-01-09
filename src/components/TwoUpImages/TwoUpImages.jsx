@@ -27,7 +27,7 @@ const TwoUpImages = ({
 				{images.map(({ id, caption, ...image }, index) => (
 					<ScrollEntrance key={id + '_' + index}>
 						<div>
-							<Image {...image}></Image>
+							<Image image={image.image}></Image>
 						</div>
 						<ConditionalRender condition={caption}>
 							<Caption>{caption}</Caption>

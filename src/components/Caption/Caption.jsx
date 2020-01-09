@@ -7,9 +7,7 @@ const Wrapper = styled.div`
 	padding-top: 1em;
 	align-items: baseline;
 	padding-left: 2px;
-	p {
-		${ typography.bodySmall };
-		font-style: italic;
+	figcaption {
 		padding-left: 1em;
 		margin: 0;
 		flex-grow: 1;
@@ -32,7 +30,7 @@ const Bullet = styled.div`
 const Caption = ({ className, children, bulletColor }) => (
   <Wrapper className={className}>
   	<Bullet color={bulletColor} />
-  	<p>{children}</p>
+  	<figcaption>{children}</figcaption>
   </Wrapper>
 )
 

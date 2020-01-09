@@ -30,15 +30,10 @@ const Headline = styled.h3`
 	margin-right: auto;
 `
 
-const Text = styled.p`
+const Text = styled.div`
 	p {
 		${ typography.bodyMedium }
-		max-width: 32em;
-		margin-bottom: 0;
-		margin-top: 1em;
-		${ mq.mediumAndUp } {
-			width: 80%;
-		}
+		max-width: 38em;
 	}
 `
 
@@ -68,16 +63,9 @@ const TwoColumnText = ({
 	buttons,
 }) => {
 	let dividerColor = 'currentcolor'
-	let buttonColor = 'mainColor'
 
 	if (theme === 'white' || theme === 'bgColor' || !theme) {
-		dividerColor = 'mainColor'
-	} else if (theme === 'green' || theme === 'darkBrown') {
-		dividerColor = 'lightGreen'
-	}
-
-	if (theme === 'red' || theme === 'mainColor' || theme === 'green') {
-		buttonColor = 'bgColor'
+		dividerColor = 'default'
 	}
 
 	return (
@@ -89,8 +77,8 @@ const TwoColumnText = ({
 			<TextContainer>
 				<Grid
 					small="1 [10] 1"
-					medium="1 [5] [5] 1"
-					large="1 [5] [5] 1"
+					medium="1 [5] 1 [6] 1"
+					large="1 [5] 1 [6] 1"
 				>
 					<div>
 						<ConditionalRender condition={eyebrow}>
@@ -121,7 +109,7 @@ const TwoColumnText = ({
 									<Button
 										key={'button-' + index}
 										to={to}
-										setTheme={theme || buttonColor}
+										setTheme={theme}
 										external={external || false}
 										target={target || ''}
 									>

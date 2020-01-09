@@ -3,5 +3,3 @@
  *
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
-
-exports.onRenderBody = (require(`./segment/onRenderBody`)).default

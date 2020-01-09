@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-function SEO ({ description, lang, meta, keywords, title, shareImage }) {
-	const { site, favicon, appleTouchIcon, socialShareImage } = useStaticQuery(
+function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettings }) {
+	const { site, favicon, appleTouchIcon, socialShareImage, allContentfulSiteSettings } = useStaticQuery(
 		graphql`
 			query {
 				site {
@@ -14,12 +14,28 @@ function SEO ({ description, lang, meta, keywords, title, shareImage }) {
 						author
 					}
 				}
+				allContentfulSiteSettings {
+					
+						nodes {
+							favicon {
+								fixed {
+									src
+								}
+							}
+							touchIcon {
+								fixed {
+									src
+								}
+							}
+						}
+					
+				}
 				favicon: file(relativePath:{eq: "images/favicon.png"}) {
 					publicURL
 				}
 				appleTouchIcon: file(relativePath: { eq: "images/touch-icon.png" }) {
 					publicURL
-				},
+				}
 				socialShareImage: file(relativePath: { eq: "images/share-image.png" }) {
 					publicURL
 					absolutePath
@@ -31,6 +47,9 @@ function SEO ({ description, lang, meta, keywords, title, shareImage }) {
 	const metaDescription = description || site.siteMetadata.description
 	const metaShareImage = shareImage || socialShareImage.publicURL
 	const host = process.env.HOST
+
+	const contentfulFavicon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
+	const contentfultouchIcon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
 
 	return (
 		<Helmet
@@ -95,8 +114,8 @@ function SEO ({ description, lang, meta, keywords, title, shareImage }) {
 				)
 				.concat(meta)}
 			link={[
-				{ rel: 'icon', type: 'image/png', sizes: '32x32', href: favicon.publicURL },
-				{ rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120', href: appleTouchIcon.publicURL }
+				{ rel: 'icon', type: 'image/png', sizes: '32x32', href: contentfulFavicon },
+				{ rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120', href: contentfultouchIcon }
 			]}
 		/>
 	)

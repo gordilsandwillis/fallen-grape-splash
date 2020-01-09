@@ -16,6 +16,7 @@ import { MdPlayArrow, MdArrowDownward } from 'react-icons/md'
 const Wrapper = styled.div`
 	position: relative;
 	background: ${ colors.black };
+	color: ${ colors.bgColor };
 `
 
 const Eyebrow = styled.h6`
@@ -30,10 +31,10 @@ const AlignmentContainer = styled.div`
 	display: flex;
 	align-items: ${ ({ vAlignment }) => vAlignment };
 	min-height: ${ ({ fullHeight, winHeight }) => fullHeight ? winHeight + 'px' : '70vh' };
-	${ ({ fullHeight, winHeight }) => fullHeight ? `
+	${ ({ fullHeight, winHeight, showArrow }) => fullHeight ? `
 		min-height: ${ fullHeight ? winHeight + 'px' : '70vh' };
 		padding-top: 105px;
-		padding-bottom: calc(95px + 65px);
+		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw`};
 	` : `
 		min-height: ${ fullHeight ? winHeight + 'px' : '70vh' };
 		padding-top: 105px;
@@ -50,7 +51,6 @@ const Block = styled.div`
 	display: block;
 	width: 100%;
 	position: relative;
-	color: ${ colors.bgColor };
 
 	${ ({ background }) => background && `
 		position: absolute;
@@ -76,17 +76,22 @@ const ATFDownArrow = styled.div`
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 60px;
-	background: ${ colors.mainColor };
+	padding-bottom: 60px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 `
 
-const DownArrow = styled(MdArrowDownward)`
+const DownArrow = styled.div`
 	animation: ${ animations.bounceMinor } 2s infinite;
-	* {
-		fill: ${ colors.bgColor };
+	text-align: ${ ({ alignment }) => alignment };
+	line-height: 1;
+	svg {
+		display: inline-block;
+		vertical-align: top;
+		* {
+			fill: currentColor;
+		}
 	}
 `
 
@@ -101,15 +106,6 @@ const Overlay = styled.div`
 	max-height: 300px;
 	min-height: 100px;
 	z-index: 3;
-`
-
-const ButtonActions = styled.div`
-	margin-left: -14px;
-	margin-right: -14px;
-	a, button {
-		min-width: 200px;
-		margin: 10px 20px;
-	}
 `
 
 const VideoContainer = styled.div`
@@ -167,7 +163,7 @@ const Divider = styled.div`
 	margin: 1.25em 0;
 	${ ({ position }) => position === 'lower' && `margin-top: .75em;` }
 	* {
-		fill: currentColor
+		fill: currentColor;
 	}
 `
 
@@ -222,7 +218,8 @@ class ATF extends Component {
 			winHeight,
 			winWidth,
 			eyebrow,
-			showArrow
+			showArrow,
+			index
 		} = this.props
 
 		const {
@@ -238,13 +235,11 @@ class ATF extends Component {
 
 		const hAlignmentGrid = {
 			center: '1 [12] 1',
-			left: '1 [7] 6',
-			right: '6 [7] 1'
+			left: '1 [6] 7',
+			right: '7 [6] 1'
 		}
 
 		const verticalAligment = vAlignOptions[vAlignment]
-
-		console.log(text)
 
 		return (
 			<Wrapper>
@@ -271,16 +266,16 @@ class ATF extends Component {
 					</ConditionalRender>
 					<ConditionalRender condition={!video && image || small}>
 						<BgImage
-							image={image}
-							small={small}
-							medium={medium}
-							large={large}
+							image={image.image}
+							small={image.small}
+							medium={image.medium}
+							large={image.large}
 						/>
 					</ConditionalRender>
-					<Overlay />
+					{index === 0 && <Overlay />}
 				</Block>
 				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
-					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight}>
+					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight} showArrow={showArrow}>
 						<Content hAlignment={hAlignment}>
 							<Grid
 								small="1 [12] 1"
@@ -293,28 +288,11 @@ class ATF extends Component {
 										eyebrow={eyebrow}
 										alignment={textAlignment}
 										headlineSize={headlineSize}
+										headlineElement="h1"
 										headline={headline}
 										text={text}
+										buttons={buttons}
 									/>
-									<ButtonActions>
-										{buttons && buttons.map(({
-											id,
-											theme,
-											to,
-											label,
-											external,
-										}) => (
-											<Button
-												key={id}
-												to={to}
-												size={winWidth > mq.largeBreakpoint ? 'large' : 'medium'}
-												external={external}
-												setTheme={theme}
-											>
-												{label}
-											</Button>
-										))}
-									</ButtonActions>
 								</ScrollEntrance>
 							</Grid>
 						</Content>
@@ -323,7 +301,15 @@ class ATF extends Component {
 
 				<ConditionalRender condition={fullHeight && showArrow}>
 					<ATFDownArrow>
-						<DownArrow size={24} />
+						<Grid
+							small="1 [12] 1"
+							medium="1 [12] 1"
+							large={hAlignmentGrid[hAlignment]}
+						>
+						<DownArrow alignment={textAlignment}>
+								<MdArrowDownward size={24} />
+							</DownArrow>
+						</Grid>
 					</ATFDownArrow>
 				</ConditionalRender>
 

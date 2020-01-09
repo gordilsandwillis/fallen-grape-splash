@@ -12,6 +12,16 @@ import Image from 'src/components/Image'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import Button from 'src/components/Button'
 
+const Wrapper = styled.div`
+	${ ({ hasCoverImage }) => hasCoverImage && `
+		position: relative;
+	`}
+	img, video {
+		display: block;
+		margin: 0;
+	}
+`
+
 const Eyebrow = styled.h5`
 	color: ${ colors.bgColor };
 	margin: 0 0 8px;
@@ -23,12 +33,8 @@ const BlockTitle = styled.h5`
 	color: ${ colors.bgColor };
 `
 
-const VideoWrap = styled.div`
+const CoverImageWrap = styled.div`
 	position: relative;
-	img {
-		display: block;
-		margin: 0;
-	}
 `
 
 const PlayButton = styled(Button)`
@@ -49,54 +55,20 @@ const PlayButton = styled(Button)`
 `
 
 const VideoWrapper = styled.div`
-	position: fixed;
-	z-index: 10;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
 	transition: opacity .5s ease-in-out;
 	background: #000;
+	${ ({ hasCoverImage }) => hasCoverImage && `
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	` }
 	${ ({ transitionStatus }) => transitionStatus === 'entered' ? `
 		opacity: 1;
 	` : `
 		opacity: 0;
 	` }
-`
-
-const VideoOverlay = styled.div`
-	position: fixed;
-	z-index: 11;
-	background: transparent;
-	top: 0;
-	right: 0;
-	width: 100%;
-	height: 60%;
-`
-
-const CloseButton = styled.a`
-	position: fixed;
-	background: ${ colors.textColor };
-	color: white;
-	padding: 14px;
-	top: 20px;
-	right: 20px;
-	border-radius: 50%;
-	transition: background ${ animations.mediumSpeed } ease-in-out;
-	span {
-		vertical-align: top;
-	}
-	&:hover {
-		background: ${ colors.mainColor };
-	}
-	${ mq.mediumAndBelow } {
-		padding: 10px;
-		.material-icons {
-			font-size: 18px;
-		}
-	}
 `
 
 const FullScreenVideo = styled(ReactPlayer)`
@@ -106,42 +78,40 @@ const FullScreenVideo = styled(ReactPlayer)`
 
 class Video extends Component {
 	state = {
-		videoOpen: false
+		playing: this.props.coverImage ? false : this.props.playing
 	}
 
 	openVideo = () => {
-		this.setState({ videoOpen: true })
+		this.setState({ playing: true })
 	}
 
 	closeVideo = () => {
-		this.setState({ videoOpen: false })
+		this.setState({ playing: false })
 	}
 
 	render () {
-		const { coverImage, url } = this.props
-		const { videoOpen } = this.state
+		const { coverImage, url, loop } = this.props
+		const { playing } = this.state
 
 		if (!url) {
 			return false
 		}
 
 		return (
-			<Fragment>
-				<div>
-					<div>
-						<VideoWrap onClick={this.openVideo}>
-							<Image image={coverImage}/>
-							<PlayButton>
-								<Button shape="circle">
-									<MdPlayArrow size="36" onClick={this.openVideo} />
-								</Button>
-							</PlayButton>
-						</VideoWrap>
-					</div>
-				</div>
+			<Wrapper hasCoverImage={coverImage}>
+				{coverImage && (
+					<CoverImageWrap onClick={this.openVideo}>
+						<Image image={coverImage}/>
+						<PlayButton>
+							<Button shape="circle">
+								<MdPlayArrow size="36" onClick={this.openVideo} />
+							</Button>
+						</PlayButton>
+					</CoverImageWrap>
+				)}
 
 				<Transition
-					in={videoOpen}
+					in={playing}
 					timeout={{
 						appear: 500,
 						enter: 0,
@@ -152,13 +122,11 @@ class Video extends Component {
 					appear={true}
 				>
 					{transitionStatus => (
-						<VideoWrapper transitionStatus={transitionStatus}>
-							<VideoOverlay>
-								<CloseButton onClick={this.closeVideo}><span className="material-icons"><MaterialIcon size="36px">close</MaterialIcon></span></CloseButton>
-							</VideoOverlay>
+						<VideoWrapper transitionStatus={transitionStatus} hasCoverImage={coverImage}>
 							<FullScreenVideo
 								url={url}
-								playing={videoOpen}
+								playing={playing}
+								loop={loop}
 								width="100%"
 								height="100%"
 								config={{
@@ -176,9 +144,14 @@ class Video extends Component {
 						</VideoWrapper>
 					)}
 				</Transition>
-			</Fragment>
+			</Wrapper>
 		)
 	}
+}
+
+Video.defaultProps = {
+	playing: false,
+	loop: false
 }
 
 export default Video

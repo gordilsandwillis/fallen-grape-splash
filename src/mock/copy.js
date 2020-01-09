@@ -14,170 +14,235 @@ export const list = [
 ]
 
 export const contentfulRichText = {
-	data: {},
-	content: [
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Miserum hominem! Si dolor summum malum est, dici aliter non potest.',
-					nodeType: 'text'
-				}
-			],
-			nodeType: 'heading-1'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur, non potest. Quodsi ipsam honestatem undique pertectam atque absolutam. Duo Reges: constructio interrete. ',
-					nodeType: 'text'
-				},
-				{
-					data: {
-						uri: 'http://loripsum.net/'
+	json: {
+		data: {},
+		content: [
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Miserum hominem! Si dolor summum malum est, dici aliter non potest.',
+						nodeType: 'text'
+					}
+				],
+				nodeType: 'heading-1'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliter enim explicari, quod quaeritur, non potest. Quodsi ipsam honestatem undique pertectam atque absolutam. Duo Reges: constructio interrete. ',
+						nodeType: 'text'
 					},
-					content: [
-						{
-							data: {},
-							marks: [],
-							value: 'Efficiens dici potest.',
-							nodeType: 'text'
-						}
-					],
-					nodeType: 'hyperlink'
-				},
-				{
-					data: {},
-					marks: [],
-					value: ' Ille vero, si insipiens-quo certe, quoniam tyrannus -, numquam beatus; Omnis enim est natura diligens sui. Non quaeritur autem quid naturae tuae consentaneum sit, sed quid disciplinae. An est aliquid per se ipsum flagitiosum, etiamsi nulla comitetur infamia? ',
-					nodeType: 'text'
-				},
-				{
-					data: {
-						uri: 'http://loripsum.net/'
+					{
+						data: {
+							uri: 'http://loripsum.net/'
+						},
+						content: [
+							{
+								data: {},
+								marks: [],
+								value: 'Efficiens dici potest.',
+								nodeType: 'text'
+							}
+						],
+						nodeType: 'hyperlink'
 					},
-					content: [
-						{
-							data: {},
-							marks: [],
-							value: 'Quorum altera prosunt, nocent altera.',
-							nodeType: 'text'
-						}
-					],
-					nodeType: 'hyperlink'
-				},
-			],
-			nodeType: 'paragraph'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. ',
-					nodeType: 'text'
-				},
-				{
-					data: {},
-					marks: [{
-						type: 'bold'
-					}],
-					value: 'Id Sextilius factum negabat.',
-					nodeType: 'text'
-				}
-			],
-			nodeType: 'paragraph'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Tum mihi Piso: Quid ergo? summum malum est, dici aliter non potest.',
-					nodeType: 'text'
-				}
-			],
-			nodeType: 'heading-2'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
-					nodeType: 'text'
-				},
-			],
-			nodeType: 'paragraph'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
-					nodeType: 'text'
-				},
-			],
-			nodeType: 'paragraph'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Summum malum est, dici aliter Tum mihi Piso: Quid ergo?',
-					nodeType: 'text'
-				}
-			],
-			nodeType: 'heading-3'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
-					nodeType: 'text'
-				},
-			],
-			nodeType: 'paragraph'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
-					nodeType: 'text'
-				},
-			],
-			nodeType: 'blockquote'
-		},
-		{
-			data: {},
-			content: [
-				{
-					data: {},
-					marks: [],
-					value: 'Tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur.',
-					nodeType: 'text'
-				},
-			],
-			nodeType: 'paragraph'
-		},
-	],
-	nodeType: 'document'
+					{
+						data: {},
+						marks: [],
+						value: ' Ille vero, si insipiens-quo certe, quoniam tyrannus -, numquam beatus; Omnis enim est natura diligens sui. Non quaeritur autem quid naturae tuae consentaneum sit, sed quid disciplinae. An est aliquid per se ipsum flagitiosum, etiamsi nulla comitetur infamia? ',
+						nodeType: 'text'
+					},
+					{
+						data: {
+							uri: 'http://loripsum.net/'
+						},
+						content: [
+							{
+								data: {},
+								marks: [],
+								value: 'Quorum altera prosunt, nocent altera.',
+								nodeType: 'text'
+							}
+						],
+						nodeType: 'hyperlink'
+					},
+				],
+				nodeType: 'paragraph'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. ',
+						nodeType: 'text'
+					},
+					{
+						data: {},
+						marks: [{
+							type: 'bold'
+						}],
+						value: 'Id Sextilius factum negabat.',
+						nodeType: 'text'
+					}
+				],
+				nodeType: 'paragraph'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Tum mihi Piso: Quid ergo? summum malum est, dici aliter non potest.',
+						nodeType: 'text'
+					}
+				],
+				nodeType: 'heading-2'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
+						nodeType: 'text'
+					},
+				],
+				nodeType: 'paragraph'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
+						nodeType: 'text'
+					},
+				],
+				nodeType: 'paragraph'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Summum malum est, dici aliter Tum mihi Piso: Quid ergo?',
+						nodeType: 'text'
+					}
+				],
+				nodeType: 'heading-3'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
+						nodeType: 'text'
+					},
+				],
+				nodeType: 'paragraph'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam.',
+						nodeType: 'text'
+					},
+				],
+				nodeType: 'blockquote'
+			},
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Tibi liber ille placet de beata vita? Ergo in utroque exercebantur, eaque disciplina effecit tantam illorum utroque in genere dicendi copiam. Theophrasti igitur, inquit, tibi liber ille placet de beata vita? Ergo in utroque exercebantur.',
+						nodeType: 'text'
+					},
+				],
+				nodeType: 'paragraph'
+			},
+		],
+		nodeType: 'document'
+	}
+}
+
+export const contentfulRichTextShort = {
+	json: {
+		data: {},
+		content: [
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quodsi ipsam honestatem undique pertectam atque absolutam. Duo Reges: constructio interrete. ',
+						nodeType: 'text'
+					},
+					{
+						data: {
+							uri: 'http://loripsum.net/'
+						},
+						content: [
+							{
+								data: {},
+								marks: [],
+								value: 'Efficiens dici potest.',
+								nodeType: 'text'
+							}
+						],
+						nodeType: 'hyperlink'
+					},
+					{
+						data: {},
+						marks: [],
+						value: ' Ille vero, si insipiens-quo certe. Non quaeritur autem quid naturae tuae consentaneum sit, sed quid disciplinae. An est aliquid per se ipsum flagitiosum, etiamsi nulla comitetur infamia? ',
+						nodeType: 'text'
+					},
+					{
+						data: {},
+						marks: [{
+							type: 'bold'
+						}],
+						value: 'Id Sextilius factum negabat. ',
+						nodeType: 'text'
+					},
+					{
+						data: {
+							uri: 'http://loripsum.net/'
+						},
+						content: [
+							{
+								data: {},
+								marks: [],
+								value: 'Quorum altera prosunt, nocent altera.',
+								nodeType: 'text'
+							}
+						],
+						nodeType: 'hyperlink'
+					},
+				],
+				nodeType: 'paragraph'
+			}
+		],
+		nodeType: 'document'
+	}
 }

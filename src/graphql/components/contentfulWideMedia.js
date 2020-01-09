@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment WideImageVideo on ContentfulWideImageVideo {
+  fragment WideImageVideo on ContentfulWideMedia {
     __typename
     id
     image {

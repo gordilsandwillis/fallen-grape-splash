@@ -10,6 +10,7 @@ import BalanceText from 'react-balance-text'
 
 const Wrapper = styled.div`
 	display: inline-block;
+	display: block;
 	vertical-align: top;
 	${ ({ alignment }) => alignment === 'center' && `
 		margin-left: auto;
@@ -19,6 +20,9 @@ const Wrapper = styled.div`
 		margin-right: auto;
 		}
 	` }
+	${ mq.mediumAndBelow } {
+		display: block;
+	}
 `
 const TextContainer = styled(ScrollEntrance)`
 	text-align: ${ ({ alignment }) => alignment };
@@ -37,16 +41,17 @@ const TextContainer = styled(ScrollEntrance)`
 `
 
 const Eyebrow = styled.h6`
-	margin-bottom: 1.75em;
+	margin-bottom: 1.2em;
+	${ typography.eyebrow }
 `
 
 const Headline = styled.h3`
 	${ ({ headlineSize }) => `
 		${ typography[headlineSize] }
 		${ headlineSize === 'h1' || headlineSize === 'h2' ? `
-			max-width: 15em;
+			max-width: 16em;
 		` : `
-			max-width: 23em;
+			max-width: 26em;
 		` }
 	` }
 	${ ({ alignment }) => alignment === 'center' && `
@@ -66,39 +71,26 @@ const Text = styled.div`
 	p {
 		${ typography.bodyMedium }
 		max-width: 32em;
-		margin-left: auto;
-		margin-right: auto;
 		margin-bottom: 0;
-		margin-top: 1em;
+		margin-top: 4em;
 		${ ({ alignment }) => alignment === 'center' && `
 			margin-left: auto;
 			margin-right: auto;
 		` }
-		${ mq.mediumAndUp } {
-			width: 80%;
-		}
+		${ ({ alignment }) => alignment === 'right' && `
+			margin-left: auto;
+		` }
 	}
 `
 
 const ButtonActions = styled.div`
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
 	margin-top: 30px;
+	text-align: ${ ({ alignment }) => alignment };
 	a, button {
-		${ ({ buttons, cards }) => {
-		if (buttons.length > 1) return `min-width: 250px;`
-		else if (cards) return `min-width: 200px;`
-	} }
-		margin: 10px 20px
-	}
-`
-
-const StyledCard = styled.div`
-	p {
-		max-width: 18em;
-		${ mq.largerAndUp } {
-			${ typography.bodyMedium }
+		${ ({ buttons }) => buttons.length > 1 && `min-width: 220px;`}
+		margin: 0 0 10px 20px;
+		&:first-child {
+			margin-left: 0;
 		}
 	}
 `
@@ -111,25 +103,8 @@ const StyledButton = styled(Button)`
 	}
 `
 
-const CardContent = styled.div`
-	${ typography.responsiveStyles('padding', 40, 30, 20, 10) }
-`
+const CenteredText = ({ theme, eyebrow, headline, headlineSize, text, buttons, className, icon, alignment, headlineElement }) => {
 
-const CardHeadline = styled.div`
-	${ typography.h3 }
-	${ typography.responsiveStyles('padding-bottom', 40, 20, 8, 5) }
-`
-
-const CardsWrapper = styled.div`
-	${ typography.responsiveStyles('margin-top', 50, 50, 30, 20) }
-`
-
-const CenteredText = ({ theme, eyebrow, headline, headlineSize, text, buttons, cards, className, icon, alignment }) => {
-	let buttonColor = 'mainColor'
-
-	if (theme === 'red' || theme === 'mainColor' || theme === 'green') {
-		buttonColor = 'bgColor'
-	}
 	return (
 		<Wrapper className={className} alignment={alignment}>
 			<div>
@@ -142,9 +117,9 @@ const CenteredText = ({ theme, eyebrow, headline, headlineSize, text, buttons, c
 					</ConditionalRender>
 
 					<ConditionalRender condition={headline}>
-						<Headline headlineSize={headlineSize} alignment={alignment}>
-							{headlineSize === 'h2' ? (
-								<BalanceText>{headline}</BalanceText>
+						<Headline headlineSize={headlineSize} as={headlineElement} alignment={alignment}>
+							{headlineSize === 'h1' || headlineSize === 'h2' || headlineSize === 'h3' ? (
+								headline
 							) : headline}
 						</Headline>
 					</ConditionalRender>
@@ -154,12 +129,12 @@ const CenteredText = ({ theme, eyebrow, headline, headlineSize, text, buttons, c
 					}
 
 					{buttons && (
-						<ButtonActions cards={cards} buttons={buttons}>
+						<ButtonActions buttons={buttons} alignment={alignment}>
 							{buttons.map((button, index) => (
 								<Button
 									key={'button-' + index}
 									to={button.to}
-									setTheme={button.theme || buttonColor}
+									setTheme={button.theme}
 									external={button.external || false}
 									target={button.target || ''}
 								>

@@ -28,7 +28,7 @@ export const responsiveStyles = (styleType, large, medium, small, tiny) => `
 
 export const bodyLarge = `
 	${ responsiveStyles('font-size', 24, 22, 20, 18) }
-	line-height: 1.5;
+	line-height: 1.5em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
@@ -36,7 +36,7 @@ export const bodyLarge = `
 `
 export const bodyMedium = `
 	${ responsiveStyles('font-size', 20, 18, 18, 16) }
-	line-height: 1.5;
+	line-height: 1.5em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
@@ -44,7 +44,7 @@ export const bodyMedium = `
 `
 export const body = `
 	${ responsiveStyles('font-size', 20, 16, 16, 14) }
-	line-height: 1.6;
+	line-height: 1.6em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
@@ -52,7 +52,7 @@ export const body = `
 `
 export const bodySmall = `
 	${ responsiveStyles('font-size', 18, 14, 14, 14) }
-	line-height: 1.6;
+	line-height: 1.6em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.01em;
 	text-transform: none;
@@ -61,7 +61,7 @@ export const bodySmall = `
 
 export const h1 = `
 	${ responsiveStyles('font-size', 80, 70, 50, 40) }
-	line-height: 1.25;
+	line-height: 1.25em;
 	font-family: ${ secondaryFont };
 	font-weight: normal;
 	letter-spacing: .015em;
@@ -70,7 +70,7 @@ export const h1 = `
 
 export const h2 = `
 	${ responsiveStyles('font-size', 60, 44, 36, 30) }
-	line-height: 1.25;
+	line-height: 1.25em;
 	font-family: ${ secondaryFont };
 	font-weight: normal;
 	letter-spacing: .015em;
@@ -78,8 +78,8 @@ export const h2 = `
 `
 
 export const h3 = `
-	${ responsiveStyles('font-size', 46, 36, 30, 24) }
-	line-height: 1.25;
+	${ responsiveStyles('font-size', 52, 36, 30, 24) }
+	line-height: 1.25em;
 	font-family: ${ secondaryFont };
 	font-weight: normal;
 	letter-spacing: .015em;
@@ -88,7 +88,7 @@ export const h3 = `
 
 export const h4 = `
 	${ responsiveStyles('font-size', 36, 30, 26, 20) }
-	line-height: 1.25;
+	line-height: 1.25em;
 	font-family: ${ secondaryFont };
 	font-weight: normal;
 	letter-spacing: .015em;
@@ -99,7 +99,7 @@ export const h5 = `
 	${ responsiveStyles('font-size', 30, 24, 20, 16) }
 	font-family: ${ secondaryFont };
 	font-weight: normal;
-	line-height: 1.25;
+	line-height: 1.25em;
 	letter-spacing: .015em;
 	text-transform: uppercase;
 `
@@ -107,13 +107,25 @@ export const h6 = `
 	${ responsiveStyles('font-size', 16, 14, 14, 13) }
 	font-family: ${ secondaryFont };
 	font-weight: normal;
-	line-height: 1.25;
-	letter-spacing: .015em;
+	line-height: 1.25em;
+	letter-spacing: .05em;
 	text-transform: uppercase;
+`
+
+export const blockquote = `
+	${ bodyLarge }
+	font-style: italic;
+`
+
+export const eyebrow = `
+	${ bodyMedium }
+	font-style: italic;
+	letter-spacing: .05em;
 `
 
 export const buttonStyle = `
 	${ h6 }
+	${ responsiveStyles('font-size', 14, 14, 14, 13) }
 	line-height: 1em;
 `
 

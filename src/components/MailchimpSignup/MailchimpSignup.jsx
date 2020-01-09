@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
+import styled from '@emotion/styled'
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
 import MaterialIcon from 'src/components/MaterialIcon'
 import MailchimpSubscribe from 'react-mailchimp-subscribe'
 
 const McUrl = '//gordilsandwillis.us18.list-manage.com/subscribe/post?u=59f368fb0e0e947c191b3b89d&amp;id=265fbc6b5b'
+
+const FormWrapper = styled.div`
+	display: flex;
+	width: 100%;
+`
 
 // a basic form
 const CustomForm = ({ status, message, onValidated, inputClassName, inputPlaceholder }) => {
@@ -35,13 +41,8 @@ const CustomForm = ({ status, message, onValidated, inputClassName, inputPlaceho
 
 	return (
 
-		<div style={{ display: 'flex' }}>
-			<div>
-				{/* <input
-					ref={node => (email = node)}
-					type="email"
-					placeholder={inputPlaceholder ? inputPlaceholder : "Email"}
-				/> */}
+		<FormWrapper>
+			<div style={{ flexGrow: 1, flexShrink: 0 }}>
 				<Input
 					size="small"
 					ref={node => (email = node)}
@@ -49,12 +50,14 @@ const CustomForm = ({ status, message, onValidated, inputClassName, inputPlaceho
 					placeholder={inputPlaceholder || 'Email'}
 				/>
 			</div>
-			<Button onClick={submit} shape="simple square" theme="brown" size="small">
-				<div>
-					{renderIcon(status)}
-				</div>
-			</Button>
-		</div>
+			<div style={{ flexGrow: 0, flexShrink: 0 }}>
+				<Button onClick={submit} shape="simple square" setTheme="mainColor" size="small">
+					<div>
+						{renderIcon(status)}
+					</div>
+				</Button>
+			</div>
+		</FormWrapper>
 	)
 }
 

@@ -6,6 +6,7 @@ export const query = graphql`
     id
     eyebrow
     headline
+    headlineSize
     text {
       text
       json

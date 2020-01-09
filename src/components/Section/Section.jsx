@@ -28,10 +28,12 @@ const SectionActions = styled.div`
 `
 
 const Section = ({ children, setTheme, prevTheme, nextTheme, zIndex, buttons, sectionid }) => {
-	let buttonColor = 'mainColor'
 
-	if (setTheme === 'red' || setTheme === 'mainColor' || setTheme === 'green') {
-		buttonColor = 'bgColor'
+	let buttonColors = {
+		textColor: 'bgColor',
+		black: 'bgColor',
+		mainColor: 'bgColor',
+		bgColor: 'default'
 	}
 
 	return (
@@ -48,7 +50,7 @@ const Section = ({ children, setTheme, prevTheme, nextTheme, zIndex, buttons, se
 						<Button
 							key={'button-' + index}
 							to={button.to}
-							setTheme={button.theme || buttonColor}
+							setTheme={button.theme || buttonColors[setTheme]}
 							external={button.external || false}
 							target={button.target || ''}
 						>

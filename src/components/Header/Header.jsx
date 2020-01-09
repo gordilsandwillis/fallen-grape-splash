@@ -63,6 +63,7 @@ const Wrapper = styled.header`
 	left: 0;
 	right: 0;
 	z-index: 4;
+	transition: background ${ animations.mediumSpeed } ease-in-out;
 	svg {
 		* {
 			fill: currentcolor;
@@ -72,7 +73,6 @@ const Wrapper = styled.header`
 		background: ${ colors.white };
 		color: ${ colors.textColor };
 	` : `
-		transition: background ${ animations.mediumSpeed } ease-in-out;
 		background: transparent;
 		${ !hasAtf ? `
 			color: ${ colors.textColor };
@@ -90,8 +90,8 @@ const HeaderContainer = styled.div`
 		padding-top: 18px;
 		padding-bottom: 14px;
 		${ typography.responsiveStyles('padding-top', 25, 18, 18, 15) }
-		${ typography.responsiveStyles('padding-bottom', 21, 14, 14, 11) }
-		box-shadow: 0 -10px 40px ${ rgba(colors.textColor, 0.4) }
+		${ typography.responsiveStyles('padding-bottom', 25, 18, 18, 15) }
+		box-shadow: 0 -10px 40px ${ rgba(colors.textColor, 0.15) }
 	` : `
 		${ typography.responsiveStyles('padding-top', 50, 40, 30, 10) }
 		${ typography.responsiveStyles('padding-bottom', 50, 40, 30, 10) }

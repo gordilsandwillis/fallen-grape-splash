@@ -13,6 +13,9 @@ import PortraitBoldWoff2 from '../assets/fonts/portrait/portrait-web-bold.woff2'
 import PortraitItalicWoff from '../assets/fonts/portrait/portrait-text-web-regular-italic.woff'
 import PortraitItalicWoff2 from '../assets/fonts/portrait/portrait-text-web-regular-italic.woff2'
 
+import PortraitBoldItalicWoff from '../assets/fonts/portrait/portrait-bold-italic.woff'
+import PortraitBoldItalicWoff2 from '../assets/fonts/portrait/portrait-bold-italic.woff2'
+
 export const fontFace = (fontName, woff, woff2, fontWeight = 'normal', fontStyle = 'normal') => `
 	@font-face {
 		font-family: '${ fontName }';
@@ -36,3 +39,6 @@ export const PortraitItalicFont = fontFace(PortraitItalic, PortraitItalicWoff, P
 
 export const PortraitBold = 'Portrait'
 export const PortraitBoldFont = fontFace(PortraitBold, PortraitBoldWoff, PortraitBoldWoff2, 'bold')
+
+export const PortraitBoldItalic = 'Portrait'
+export const PortraitBoldItalicFont = fontFace(PortraitBoldItalic, PortraitBoldItalicWoff, PortraitBoldItalicWoff2, 'bold', 'italic')
