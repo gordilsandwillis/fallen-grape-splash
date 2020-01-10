@@ -15,7 +15,7 @@ An import file is included in the root of repo
 `/TBD BlocksToContentful.json`
 
 #### Run Contentful Import
-Run `contentful space import [Path to BlocksToContentful.json]` in terminal
+Run `contentful space import --content-file [Path to BlocksToContentful.json] --space-id [SPACE_ID]` in terminal
 
 To speed things up further, this import will also create a `Page` content model, as well as a `SiteSettings` model to be used across the site. It will also include a PLACEHOLDER version of each content model to avoid graphql problems.
 
