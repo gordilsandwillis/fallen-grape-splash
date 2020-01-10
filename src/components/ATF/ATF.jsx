@@ -227,7 +227,6 @@ class ATF extends Component {
 
 		return (
 			<Wrapper setTheme={theme} media={image || video}>
-				{theme}
 				<Block background winHeight={winHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>
