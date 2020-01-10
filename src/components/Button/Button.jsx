@@ -124,9 +124,6 @@ const ButtonStyles = (state, shape, size, theme) => (`
 
 	${ shape && shape.includes('circle') ? `border-radius: 50%;` : `` }
 
-	margin-left: 6px;
-	margin-right: 6px;
-
 `)
 
 const ButtonContent = styled.div`

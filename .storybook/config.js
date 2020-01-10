@@ -1,12 +1,19 @@
 import _ from 'lodash'
 import React from 'react'
-import { configure, addDecorator } from '@storybook/react';
+import { configure, addDecorator, addParameters } from '@storybook/react';
 import { Global } from '@emotion/core'
 import globalCss from '../src/styles/globalStyles'
 import background from './background.css'
+import theme from './theme';
 import {
   withKnobs,
 } from '@storybook/addon-knobs'
+
+addParameters({
+  options: {
+    theme: theme,
+  },
+})
 
 addDecorator(story => (
   <div>

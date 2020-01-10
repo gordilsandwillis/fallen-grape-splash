@@ -43,7 +43,7 @@ const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, n
 				prevTheme={prevTheme}
 			>
 				<Grid small="1 [12] 1">
-					<ConditionalRender condition={image && !video}>
+					{image && !video ? (
 						<Image
 							image={image.image}
 							small={image.small}
@@ -51,9 +51,9 @@ const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, n
 							large={image.large}
 							alt={image.description || image.title}
 						/>
-					</ConditionalRender>
+					) : false}
 					<ConditionalRender condition={video}>
-						<Video url={video && video.file.url} playing={true} loop={true}/>
+						<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false}/>
 					</ConditionalRender>
 					<ConditionalRender condition={caption}>
 						<Caption>{caption}</Caption>
@@ -66,7 +66,7 @@ const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, n
 	return (
 		<WideMediaWrap setTheme={nextTheme}>
 			<div>
-				<ConditionalRender condition={image && !video}>
+				{image && !video ? (
 					<Image
 						image={image.image}
 						small={image.small}
@@ -74,9 +74,9 @@ const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, n
 						large={image.large}
 						alt={image.description || image.title}
 					/>
-				</ConditionalRender>
+				) : false}
 				<ConditionalRender condition={video}>
-					<Video url={video && video.file.url} playing={true} loop={true}/>
+					<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false} />
 				</ConditionalRender>
 			</div>
 			<ConditionalRender condition={caption}>

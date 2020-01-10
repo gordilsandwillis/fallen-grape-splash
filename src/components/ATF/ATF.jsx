@@ -7,16 +7,19 @@ import Button from 'src/components/Button'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ContentfulRichText from 'src/components/ContentfulRichText'
 import TextLockup from 'src/components/TextLockup'
+import ThemeSelector from 'src/components/ThemeSelector'
 import withSizes from 'react-sizes'
 import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
 import MobileDetect from 'mobile-detect'
-import { DefaultPlayer as Video } from 'react-html5video'
+import Video from 'src/components/Video'
 import { MdPlayArrow, MdArrowDownward } from 'react-icons/md'
 
-const Wrapper = styled.div`
+const Wrapper = styled(ThemeSelector)`
 	position: relative;
-	background: ${ colors.black };
-	color: ${ colors.bgColor };
+	${ ({ media }) => media && `
+		background: ${ colors.black };
+		color: ${ colors.bgColor };
+	` }
 `
 
 const Eyebrow = styled.h6`
@@ -119,30 +122,10 @@ const VideoContainer = styled.div`
 	z-index: -1;
 	pointer-events: none;
 
-	>div>div span {
+	> div > div span {
 		display: none;
 	}
-	
-	video {
-		@media (min-aspect-ratio: 16/9) {
-			width:100%;
-			height: auto;
-		}
-		@media (max-aspect-ratio: 16/9) {
-			width:auto;
-			height: 100%;
-		}
 
-		
-		/* Center the video */
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%,-50%);
-
-		opacity: ${ ({ loading }) => loading ? 0 : 1 };
-		transition: opacity ${ animations.slowSpeed } ease-in-out; 
-	}
 `
 
 const VideoStyled = styled(Video)`
@@ -219,7 +202,8 @@ class ATF extends Component {
 			winWidth,
 			eyebrow,
 			showArrow,
-			index
+			index,
+			theme
 		} = this.props
 
 		const {
@@ -242,36 +226,29 @@ class ATF extends Component {
 		const verticalAligment = vAlignOptions[vAlignment]
 
 		return (
-			<Wrapper>
+			<Wrapper setTheme={theme} media={image || video}>
+				{theme}
 				<Block background winHeight={winHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
-						<VideoContainer heightIsLarger={winHeight > winWidth}>
+						<VideoContainer>
 							<VideoStyled
-								ref={ref => { this.videoRef = ref }}
-								loop
-								autoPlay
-								playsInline
-								onCanPlayThrough={() => {
-									setTimeout(() => {
-										// if fully loaded and not playing after 1 second, set state to failed
-										if (this.videoRef && this.videoRef.state.currentTime === 0) this.setState({ videoFailed: true })
-									}, 1000)
-								}}
-								muted
+								cover={true}
+								loop={true}
+								playing={true}
+								muted={true}
 								controls={['PlayPause']}
-							>
-								<source src={video && video.file.url} type="video/mp4"/>
-							</VideoStyled>
+								url={video && video.file.url}
+							/>
 						</VideoContainer>
 					</ConditionalRender>
-					<ConditionalRender condition={!video && image || small}>
+					{!video && image || small ? (
 						<BgImage
 							image={image.image}
 							small={image.small}
 							medium={image.medium}
 							large={image.large}
 						/>
-					</ConditionalRender>
+					) : false}
 					{index === 0 && <Overlay />}
 				</Block>
 				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
@@ -307,7 +284,7 @@ class ATF extends Component {
 							large={hAlignmentGrid[hAlignment]}
 						>
 						<DownArrow alignment={textAlignment}>
-								<MdArrowDownward size={24} />
+								<MdArrowDownward size={36} />
 							</DownArrow>
 						</Grid>
 					</ATFDownArrow>
@@ -323,7 +300,8 @@ ATF.defaultProps = {
 	hAlignment: 'center',
 	vAlignment: 'center',
 	showArrow: true,
-	headlineSize: 'h1'
+	headlineSize: 'h1',
+	theme: 'black'
 }
 
 const sizesToProps = ({ width, height }) => ({

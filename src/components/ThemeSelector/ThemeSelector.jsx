@@ -7,10 +7,8 @@ const ThemeWrapper = styled.div`
 		background-color: ${ colors[setTheme] };
 	` }
 	${ ({ 'data-theme': setTheme }) =>
-		setTheme === 'red' ||
-		setTheme === 'green' ||
-		setTheme === 'black' ||
-		setTheme === 'brown' ? `
+		setTheme === 'mainColor' ||
+		setTheme === 'black' ? `
 		color: ${ colors.bgColor };
 		h1, h2, h3, h4, h5, h6 {
 			color: ${ colors.bgColor };

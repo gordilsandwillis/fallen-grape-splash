@@ -23,7 +23,7 @@ const stories = storiesOf(`Blocks`, module)
 stories.add(`Fifty Fifty`, () => (
   <FiftyFifty
   	theme={ optionsKnob('Theme', themeOptions, 'bgColor', { display: 'radio' }) }
-		eyebrow={text('Headline', 'The Best Website in the World')}
+		eyebrow={text('Eyebrow', 'What is it?')}
 		headline={text('Headline', 'The Best Website in the World')}
 		text={mockCopy.contentfulRichTextShort}
   	image={{ image: mock.Placeholder169 }}

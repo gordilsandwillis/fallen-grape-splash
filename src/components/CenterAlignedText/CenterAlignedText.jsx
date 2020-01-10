@@ -2,6 +2,7 @@ import React from 'react'
 import Section from 'src/components/Section'
 import TextLockup from 'src/components/TextLockup'
 import Grid from 'src/components/Grid'
+import * as mockCopy from 'src/mock/copy'
 
 const CenterAlignedText = ({
 	id,
@@ -28,7 +29,7 @@ const CenterAlignedText = ({
 					theme={theme}
 					eyebrow={eyebrow}
 					headline={headline}
-					text={text}
+					text={mockCopy.contentfulRichTextShort}
 					icon={icon}
 					buttons={buttons}
 					cards={cards}

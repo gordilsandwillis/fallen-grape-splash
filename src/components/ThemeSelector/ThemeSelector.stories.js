@@ -4,16 +4,21 @@ import { storiesOf } from '@storybook/react'
 import ThemeSelector from './ThemeSelector'
 import Grid from 'src/components/Grid'
 import Button from 'src/components/Button'
+import { typography } from 'src/styles'
 const qbf = 'The quick brown fox jumps over the lazy dog'
 const lorem = `lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.`
+
+const Eyebrow = styled.h6 `
+	${ typography.eyebrow }
+`
 
 const themes = [
 	'default',
 	'black',
 	'lightGrey',
-	'red',
-	'green',
-	'yellow',
+	'mainColor',
+	'success',
+	'notify',
 ]
 
 const ThemePreview = styled(ThemeSelector)`
@@ -37,7 +42,7 @@ stories.add(`ThemeSelector`, () => (
 			}
 			return (
 				<ThemePreview setTheme={theme}>
-					<h6>{theme}</h6>
+					<Eyebrow>{theme}</Eyebrow>
 					<h3>{qbf}</h3>
 					<p>{lorem}</p>
 					<Button size="small" setTheme={ButtonTheme}>Button</Button>

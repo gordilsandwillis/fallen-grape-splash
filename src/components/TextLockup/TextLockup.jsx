@@ -73,9 +73,13 @@ const Text = styled.div`
 		max-width: 32em;
 		margin-bottom: 0;
 		margin-top: 4em;
+		&:first-of-type {
+			margin-top: 0;
+		}
 		${ ({ alignment }) => alignment === 'center' && `
 			margin-left: auto;
 			margin-right: auto;
+			max-width: 38em;
 		` }
 		${ ({ alignment }) => alignment === 'right' && `
 			margin-left: auto;
@@ -87,11 +91,12 @@ const ButtonActions = styled.div`
 	margin-top: 30px;
 	text-align: ${ ({ alignment }) => alignment };
 	a, button {
-		${ ({ buttons }) => buttons.length > 1 && `min-width: 220px;`}
-		margin: 0 0 10px 20px;
-		&:first-child {
-			margin-left: 0;
-		}
+		margin-bottom: 20px;
+		${ ({ buttons }) => buttons.length > 1 && `
+			min-width: 220px;
+			margin-left: 10px;
+			margin-right: 10px;
+		` }
 	}
 `
 
@@ -126,6 +131,10 @@ const CenteredText = ({ theme, eyebrow, headline, headlineSize, text, buttons, c
 
 					{text && text.json && /* ConditionalRender was not working for this */
 						<Text alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
+					}
+
+					{typeof text === 'string' &&
+						<Text alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
 					}
 
 					{buttons && (

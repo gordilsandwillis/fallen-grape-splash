@@ -10,14 +10,14 @@ const SectionWrapper = styled(ThemeSelector)`
 	z-index: ${ ({ zIndex }) => zIndex };
 	${ ({ prevTheme, nextTheme, setTheme }) => `
 		${ setTheme === prevTheme ? `
-			${ typography.responsiveStyles('padding-top', 91, 51, 27, 13) }
+			${ typography.responsiveStyles('padding-top', 91, 51, 33, 26) }
 		` : `
-			${ typography.responsiveStyles('padding-top', 182, 102, 54, 26) }
+			${ typography.responsiveStyles('padding-top', 182, 102, 66, 52) }
 		` }
 		${ setTheme === nextTheme ? `
-			${ typography.responsiveStyles('padding-bottom', 91, 51, 27, 13) }
+			${ typography.responsiveStyles('padding-bottom', 91, 51, 33, 26) }
 		` : `
-			${ typography.responsiveStyles('padding-bottom', 182, 102, 54, 26) }
+			${ typography.responsiveStyles('padding-bottom', 182, 102, 66, 52) }
 		` }
 	` }
 `
