@@ -30,6 +30,12 @@ const FooterContainer = styled.div`
 	}
 `
 
+const NewsletterText = styled(ContentfulRichText) `
+  > *:last-child {
+		margin-bottom: 1em;
+	}
+`
+
 const FooterLogo = styled(Logo)`
 	width: 30px;
 	${ mq.mediumAndBelow } {
@@ -73,7 +79,7 @@ const LinkList = styled.ul`
 				display: block;
 				position: absolute;
 				bottom: 0;
-				height: 2px;
+				height: 1px;
 				width: 100%;
 				background: ${ colors.mainColor };
 				transition: transform ${ animations.mediumSpeed } ease-in-out;
@@ -114,7 +120,7 @@ const SiteCredit = styled.div`
 		margin: 0;
 		max-width: none;
 		a {
-			opacity: .6;
+			opacity: 0.6;
 			&:hover {
 				opacity: 1;
 			}
@@ -129,7 +135,7 @@ const AddressSection = styled.div`
 
 const AddressHeader = styled.span`
 	margin-top: 0;
-	margin-bottom: .3em;
+	margin-bottom: 0.3em;
 	${ typography.h6 }
 	display: block;
 `
@@ -168,7 +174,7 @@ class Footer extends Component {
 						<FooterSection>
 							<SectionHeader>{footerNewsletterTitle}</SectionHeader>
 							<ConditionalRender condition={footerNewsletterRichText}>
-								<ContentfulRichText richText={footerNewsletterRichText.json}/>
+								<NewsletterText richText={footerNewsletterRichText.json}/>
 							</ConditionalRender>
 							<MailchimpSignup />
 						</FooterSection>

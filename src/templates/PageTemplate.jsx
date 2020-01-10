@@ -48,7 +48,7 @@ PageTemplate.propTypes = propTypes
 
 export const pageQuery = graphql`
   query($id: String!) {
-		allContentfulSiteSettings {
+		allContentfulSiteSettings(filter: {internalName: {nin: "PLACEHOLDER Site Settings"}}) {
 			edges {
 				node {
 					...SiteSettings

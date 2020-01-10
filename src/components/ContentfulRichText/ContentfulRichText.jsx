@@ -28,8 +28,8 @@ const options = {
 	},
 }
 
-const ContentfulRichText = ({ richText }) => (
-	<RichTextWrapper>
+const ContentfulRichText = ({ richText, className }) => (
+	<RichTextWrapper className={className}>
 		{documentToReactComponents(richText, options)}
 	</RichTextWrapper>
 )
