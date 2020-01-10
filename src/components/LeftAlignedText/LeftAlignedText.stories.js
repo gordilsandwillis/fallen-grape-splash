@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import LeftAlignedText from './LeftAlignedText'
 
 const stories = storiesOf(`Components/LeftAlignedText`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<LeftAlignedText
 		theme="darkBrown"
 		eyebrow="Wah-Nee Is the Greatest"

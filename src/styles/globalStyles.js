@@ -94,19 +94,19 @@ export default `
   h2, .h2 {
     ${ typography.h2 }
     ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
+    ${ responsiveStyles('margin-bottom', 10, 10, 8, 8) }
   }
 
   h3, .h3 {
     ${ typography.h3 }
     ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
+    ${ responsiveStyles('margin-bottom', 14, 12, 12, 10) }
   }
 
   h4, .h4 {
     ${ typography.h4 }
     ${ responsiveStyles('margin-top', 24, 16, 16, 8) }
-    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
+    ${ responsiveStyles('margin-bottom', 14, 12, 12, 10) }
   }
 
   h5, .h5 {

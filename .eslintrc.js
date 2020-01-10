@@ -13,7 +13,8 @@ module.exports = {
     "no-var": "error", // optional, recommended when using es6+
     "no-unused-vars": 1, // recommended
     "arrow-spacing": ["error", { before: true, after: true }], // recommended
-    indent: [2, "tab"],
+    indent: 0,
+    "no-mixed-spaces-and-tabs": 1,
     "no-tabs": 0,
     "comma-dangle": [
       "error",
@@ -57,10 +58,7 @@ module.exports = {
   },
   globals: {
     "graphql": true,
-    "browser": true,
-    "mina": true,
-    "campaign": true,
-    "VL": true
+    "browser": true
   },
   parserOptions: {
     ecmaVersion: 8, // optional, recommended 6+

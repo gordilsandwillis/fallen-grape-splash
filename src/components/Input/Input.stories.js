@@ -52,7 +52,7 @@ const inputs = [
 ]
 
 const stories = storiesOf(`Components/Input`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<div style={{ padding: '5%', background: colors.lightGrey }}>
 		<Grid
 			small="[1]"

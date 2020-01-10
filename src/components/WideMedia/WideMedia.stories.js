@@ -5,7 +5,7 @@ import * as mock from 'src/mock'
 import { boolean } from '@storybook/addon-knobs'
 
 const stories = storiesOf(`Blocks/Wide Media`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<WideMedia
 		image={{ image: mock.Placeholder169 }}
 		caption="caption"

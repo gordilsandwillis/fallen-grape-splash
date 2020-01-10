@@ -108,8 +108,19 @@ const StyledButton = styled(Button)`
 	}
 `
 
-const CenteredText = ({ theme, eyebrow, headline, headlineSize, text, buttons, className, icon, alignment, headlineElement }) => {
-
+const CenteredText = ({
+		theme,
+		eyebrow,
+		headline,
+		headlineSize,
+		text,
+		buttons,
+		className,
+		icon,
+		alignment,
+		headlineElement,
+		additions
+	}) => {
 	return (
 		<Wrapper className={className} alignment={alignment}>
 			<div>
@@ -136,6 +147,10 @@ const CenteredText = ({ theme, eyebrow, headline, headlineSize, text, buttons, c
 					{typeof text === 'string' &&
 						<Text alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
 					}
+
+					<ConditionalRender condition={additions}>
+						{additions}
+					</ConditionalRender>
 
 					{buttons && (
 						<ButtonActions buttons={buttons} alignment={alignment}>

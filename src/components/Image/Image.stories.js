@@ -4,7 +4,7 @@ import Image from './Image'
 import * as mock from 'src/mock'
 
 const stories = storiesOf(`Components/Image`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<Image image={mock.Placeholder169} />
 ))
 

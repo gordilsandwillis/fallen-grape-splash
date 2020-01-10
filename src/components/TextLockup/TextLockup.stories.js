@@ -10,7 +10,7 @@ const AlignmentOptions = {
 }
 
 const stories = storiesOf(`Components/TextLockup`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<TextLockup
 		theme="darkBrown"
 		eyebrow="Wah-Nee Is the Greatest"

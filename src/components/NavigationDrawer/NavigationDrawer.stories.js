@@ -120,7 +120,7 @@ const drawerFooterLinks = [
 ]
 
 const stories = storiesOf(`Components/NavigationDrawer`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<div>
 		<NavigationDrawer
 			title="Campers"

@@ -1,12 +1,12 @@
 import React from 'react'
-import styled from '@emotion/styled'
+// import styled from '@emotion/styled'
 import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
 import ConditionalRender from 'src/components/ConditionalRender'
 import Image from 'src/components/Image'
 import Video from 'src/components/Video'
 import TextLockup from 'src/components/TextLockup'
-import { colors, mediaQueries as mq } from 'src/styles'
+import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const FiftyFifty = ({
 	theme,
@@ -14,11 +14,13 @@ const FiftyFifty = ({
 	nextTheme,
 	eyebrow,
 	headline,
+	headlineSize,
 	text,
 	imagePosition,
 	image,
 	video,
-	buttons
+	buttons,
+	additions
 }) => {
 
 	let gridSetup = {
@@ -74,7 +76,7 @@ const FiftyFifty = ({
 				rowGap="7vw"
 				vAlign="center"
 			>	
-				<div>
+				<ScrollEntrance>
 					<ConditionalRender condition={image && !video}>
 						<div>
 							<Image
@@ -91,7 +93,7 @@ const FiftyFifty = ({
 							<Video url={video && video.file.url} playing={true} loop={true}/>
 						</div>
 					</ConditionalRender>
-				</div>
+				</ScrollEntrance>
 				<Grid
 					small={gridSetup.textGrid}
 					medium="[1]"
@@ -100,10 +102,12 @@ const FiftyFifty = ({
 						alignment="left"
 						specialList
 						headline={headline}
+						headlineSize={headlineSize}
 						text={text}
 						eyebrow={eyebrow}
 						buttons={buttons}
 						theme={theme}
+						additions={additions}
 					/>
 				</Grid>
 			</Grid>
@@ -112,7 +116,9 @@ const FiftyFifty = ({
 }
 
 FiftyFifty.defaultProps = {
-	imagePosition: 'left'
+	imagePosition: 'left',
+	additions: false,
+	headlineSize: 'h3'
 }
 
 export default FiftyFifty

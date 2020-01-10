@@ -26,7 +26,7 @@ const Description = styled.div`
 `
 
 const stories = storiesOf(`Components/ScrollEntrance`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<div style={{ padding: '70vh 0 50px', textAlign: 'center' }}>
 		<Description>
 			<h4>Default</h4>

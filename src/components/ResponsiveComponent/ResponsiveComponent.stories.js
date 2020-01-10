@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import ResponsiveComponent from './ResponsiveComponent'
 
 const stories = storiesOf(`Components/ResponsiveComponent`, module)
-stories.add(`default`, () => (
+stories.add(`Default`, () => (
 	<div style={{ padding: '30px' }}>
 		<ResponsiveComponent
 			small={<h3>👌 Render me at small breakpoint</h3>}
