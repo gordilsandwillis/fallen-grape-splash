@@ -6,6 +6,7 @@ export const query = graphql`
     id
     theme
     headline
+    headlineSize
     text {
       json
     }

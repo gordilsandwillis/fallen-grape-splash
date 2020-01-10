@@ -7,6 +7,7 @@ export const query = graphql`
     theme
     eyebrow
     headline
+    headlineSize
     imagePosition
     text {
       text

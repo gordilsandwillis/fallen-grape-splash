@@ -9,6 +9,7 @@ import Grid from 'src/components/Grid'
 import Caption from 'src/components/Caption'
 import ConditionalRender from 'src/components/ConditionalRender'
 import { colors, mediaQueries as mq } from 'src/styles'
+import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const WideMediaWrap = styled(ThemeSelector)`
 	position: relative;
@@ -42,7 +43,33 @@ const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, n
 				nextTheme={nextTheme}
 				prevTheme={prevTheme}
 			>
-				<Grid small="1 [12] 1">
+				<ScrollEntrance>
+					<Grid small="1 [12] 1">
+						{image && !video ? (
+							<Image
+								image={image.image}
+								small={image.small}
+								medium={image.medium}
+								large={image.large}
+								alt={image.description || image.title}
+							/>
+						) : false}
+						<ConditionalRender condition={video}>
+							<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false}/>
+						</ConditionalRender>
+						<ConditionalRender condition={caption}>
+							<Caption>{caption}</Caption>
+						</ConditionalRender>
+					</Grid>
+				</ScrollEntrance>
+			</Section>
+		)
+	}
+
+	return (
+		<ScrollEntrance>
+			<WideMediaWrap setTheme={nextTheme}>
+				<div>
 					{image && !video ? (
 						<Image
 							image={image.image}
@@ -53,42 +80,20 @@ const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, n
 						/>
 					) : false}
 					<ConditionalRender condition={video}>
-						<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false}/>
+						<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false} />
 					</ConditionalRender>
-					<ConditionalRender condition={caption}>
-						<Caption>{caption}</Caption>
-					</ConditionalRender>
-				</Grid>
-			</Section>
-		)
-	}
-
-	return (
-		<WideMediaWrap setTheme={nextTheme}>
-			<div>
-				{image && !video ? (
-					<Image
-						image={image.image}
-						small={image.small}
-						medium={image.medium}
-						large={image.large}
-						alt={image.description || image.title}
-					/>
-				) : false}
-				<ConditionalRender condition={video}>
-					<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false} />
+				</div>
+				<ConditionalRender condition={caption}>
+					<Grid small="1 [12] 1">
+						<div>
+							<CaptionBlock>
+								<Caption>{caption}</Caption>
+							</CaptionBlock>
+						</div>
+					</Grid>
 				</ConditionalRender>
-			</div>
-			<ConditionalRender condition={caption}>
-				<Grid small="1 [12] 1">
-					<div>
-						<CaptionBlock>
-							<Caption>{caption}</Caption>
-						</CaptionBlock>
-					</div>
-				</Grid>
-			</ConditionalRender>
-		</WideMediaWrap>
+			</WideMediaWrap>
+		</ScrollEntrance>
 	)
 }
 

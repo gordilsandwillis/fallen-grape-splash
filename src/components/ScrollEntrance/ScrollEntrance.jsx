@@ -17,11 +17,15 @@ const EnteranceWrap = styled.div`
 			transform: ${ transform };
 			opacity: 0;
 		` }
+
+		${ ({ delay }) => delay > 0 && `
+			transition-delay: ${ transitionDelay * (delay) }s;
+		` }
 		
-		${ ({ children }) => Array.isArray(children) ? `
-			${ children.map((item, index) => `
-				&:nth-child(${ index + 1 }) {
-					transition-delay: ${ transitionDelay * (index + 1) }s;
+		${ ({ items, delay }) => Array.isArray(items) ? `
+			${ items.map((item, index) => `
+				&:nth-child(${ index }) {
+					transition-delay: ${ transitionDelay * (index + delay) }s;
 				}
 			`) }
 		` : `` }
@@ -29,18 +33,30 @@ const EnteranceWrap = styled.div`
 	}
 `
 
-const ScrollEntrance = ({ children, className, transform }) => {
+const ScrollEntrance = ({ children, className, transform, delay }) => {
 	const [ref, inView] = useInView({ triggerOnce: true })
 
+	if (!children) {
+		return false
+	}
+
 	return (
-		<EnteranceWrap ref={ref} data-in-view={inView} transform={transform} className={className}>
+		<EnteranceWrap
+			ref={ref}
+			delay={delay}
+			data-in-view={inView}
+			transform={transform}
+			className={className}
+			items={children}
+		>
 			{children}
 		</EnteranceWrap>
 	)
 }
 
 ScrollEntrance.defaultProps = {
-	transform: 'translate3d(0, 40px, 0)'
+	transform: 'translate3d(0, 40px, 0)',
+	delay: 0
 }
 
 export default ScrollEntrance

@@ -59,6 +59,7 @@ const TwoColumnText = ({
 	nextTheme,
 	eyebrow,
 	headline,
+	headlineSize,
 	text,
 	buttons,
 }) => {
@@ -123,6 +124,10 @@ const TwoColumnText = ({
 			</TextContainer>
 		</Section>
 	)
+}
+
+TwoColumnText.defaultProps = {
+	headlineSize: 'h3'
 }
 
 export default TwoColumnText

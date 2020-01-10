@@ -11,7 +11,12 @@ stories.add(`Default`, () => (
 		caption="caption"
 		fullWidth={ boolean('Full Width', false) }
 	/>
-)).add(`Video`, () => (
+)).add(`HTML5 Video`, () => (
+	<WideMedia
+		fullWidth={ boolean('Full Width', true) }
+		video={{ file: { url: 'https://hightidesite.cdn.prismic.io/hightidesite%2F5d1b0cec-c72d-4b0b-80d7-52588efbd852_about_video.mp4' } }}
+	/>
+)).add(`Video Embed`, () => (
 	<WideMedia
 		fullWidth={ boolean('Full Width', true) }
 		video={{ file: { url: 'https://www.youtube.com/watch?v=_wUIexMVG9k' } }}

@@ -82,6 +82,8 @@ const StyledVideo = styled(ReactPlayer)`
 	height: auto;
 	min-width: 100%;
 	min-height: 100%;
+	width: 100% !important;
+	height: auto !important;
 	> div {
 		position: absolute;
 		width: 100%;
@@ -123,14 +125,15 @@ const StyledVideo = styled(ReactPlayer)`
 			min-width: 0;
 			min-height: 0;
 		` }
-		video, iframe {
+		iframe {
 			position: absolute;
 			top: 0;
 			left: 0;
 			width: 100% !important;
 			height: 100% !important;
 		}
-	` : `` }
+	` : `
+	` }
 `
 
 class Video extends Component {

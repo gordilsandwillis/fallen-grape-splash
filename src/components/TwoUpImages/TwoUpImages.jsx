@@ -25,7 +25,7 @@ const TwoUpImages = ({
 				rowGap={[ '30px', '40px', '60px' ]}
 			>
 				{images.map(({ id, caption, ...image }, index) => (
-					<ScrollEntrance key={id + '_' + index}>
+					<ScrollEntrance key={id + '_' + index} delay={index}>
 						<div>
 							<Image image={image.image}></Image>
 						</div>

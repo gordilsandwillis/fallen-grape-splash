@@ -29,15 +29,19 @@ const CenterAlignedText = ({
 					theme={theme}
 					eyebrow={eyebrow}
 					headline={headline}
+					headlineSize={headlineSize}
 					text={mockCopy.contentfulRichTextShort}
 					icon={icon}
 					buttons={buttons}
 					cards={cards}
-					headlineSize={headlineSize}
 				/>
 			</Grid>
 		</Section>
 	)
+}
+
+CenterAlignedText.defaultProps = {
+	headlineSize: 'h3'
 }
 
 export default CenterAlignedText
