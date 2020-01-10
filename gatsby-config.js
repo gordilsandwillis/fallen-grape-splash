@@ -5,9 +5,9 @@ require('dotenv').config({
 
 module.exports = {
 	siteMetadata: {
-		title: 'The Hugh',
-		description: 'The Hugh',
-		author: '@mattgordils',
+		title: 'GW Gatsby Blocks',
+		description: 'GW Gatsby Blocks',
+		author: '@mattgordils @robincwillis',
 	},
 	plugins: [
 		`gatsby-transformer-inline-svg`,

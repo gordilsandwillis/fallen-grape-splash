@@ -1,7 +1,7 @@
 {
-  "name": "the-hugh",
+  "name": "gw-gatsby-blocks",
   "private": true,
-  "description": "The Hugh Website",
+  "description": "Gordils & Willis base setup for Gatsby and Contentful using flexible blocks",
   "version": "0.1.0",
   "author": "@mattgordils @robincwillis",
   "dependencies": {
