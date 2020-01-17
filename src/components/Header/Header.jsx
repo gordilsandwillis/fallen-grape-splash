@@ -8,7 +8,7 @@ import Grid from 'src/components/Grid'
 import ResponsiveComponent from 'src/components/ResponsiveComponent'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
-import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
+import { colors, typography, animations, mq } from 'src/styles'
 import NavigationDrawer from 'src/components/NavigationDrawer'
 
 const NavLinkStyle = (scrolled, active) => `

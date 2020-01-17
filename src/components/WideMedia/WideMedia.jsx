@@ -8,7 +8,7 @@ import ThemeSelector from 'src/components/ThemeSelector'
 import Grid from 'src/components/Grid'
 import Caption from 'src/components/Caption'
 import ConditionalRender from 'src/components/ConditionalRender'
-import { colors, mediaQueries as mq } from 'src/styles'
+import { colors, mq } from 'src/styles'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 
 const WideMediaWrap = styled(ThemeSelector)`
@@ -27,7 +27,7 @@ const CaptionOverlay = styled.div`
 		bottom: auto;
 		top: 100%;
 		z-index: 1;
-		background: ${ colors.darkBrown };
+		background: ${ colors.black };
 		padding-top: 8px;
 	}
 `

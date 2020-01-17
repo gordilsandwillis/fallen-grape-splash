@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Img from 'gatsby-image/withIEPolyfill'
-import { mediaQueries as mq } from 'src/styles'
+import { mq } from 'src/styles'
 
 const StyledImage = styled(Img)`
 	${ ({ fluid }) => `

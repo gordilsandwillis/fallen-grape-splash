@@ -9,7 +9,7 @@ import ContentfulRichText from 'src/components/ContentfulRichText'
 import TextLockup from 'src/components/TextLockup'
 import ThemeSelector from 'src/components/ThemeSelector'
 import withSizes from 'react-sizes'
-import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
+import { colors, typography, animations } from 'src/styles'
 import MobileDetect from 'mobile-detect'
 import Video from 'src/components/Video'
 import { MdPlayArrow, MdArrowDownward } from 'react-icons/md'
@@ -60,7 +60,6 @@ const Block = styled.div`
 		height: 100%;
 		overflow: hidden;
 		z-index: 1;
-		background: ${ colors.darkBrown };
 		bottom: ${ ({ fullHeight }) => fullHeight ? `60px` : `0` };
 	` }
 

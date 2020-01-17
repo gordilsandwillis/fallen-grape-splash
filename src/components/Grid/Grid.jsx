@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
 import gridSettings from 'src/styles/gridSettings'
-import { mediaQueries as mq, colors } from 'src/styles'
+import { mq, colors } from 'src/styles'
 
 import withSizes from 'react-sizes'
 

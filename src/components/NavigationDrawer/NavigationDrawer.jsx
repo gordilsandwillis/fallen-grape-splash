@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import { rgba } from 'polished'
-import { colors, typography, mediaQueries as mq, animations } from 'src/styles'
+import { colors, typography, mq, animations } from 'src/styles'
 import Button from 'src/components/Button'
 import Link from 'src/components/Link'
 import ScrollEntrance from 'src/components/ScrollEntrance'
@@ -168,7 +168,7 @@ const LinkList = styled.ul`
 				transition: transform ${ animations.mediumSpeed } ease-in-out;
 			}
 			&:hover {
-				color: ${ colors.darkBrown };
+				color: ${ colors.black };
 				&:after {
 					transform: none;
 				}

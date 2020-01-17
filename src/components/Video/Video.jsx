@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import { Transition } from 'react-transition-group'
-import { colors, typography, animations, mediaQueries as mq } from 'src/styles'
+import { colors, typography, animations, mq } from 'src/styles'
 import ReactPlayer from 'react-player'
 
 import { MdPlayArrow } from 'react-icons/md'

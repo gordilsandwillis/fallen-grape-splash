@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Logomark from 'src/assets/images/logo.svg'
 
-import { mediaQueries as mq } from 'src/styles'
+import { mq } from 'src/styles'
 
 const StyledLogo = styled(Logomark)`
 	width: 50px;

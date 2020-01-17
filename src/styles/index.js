@@ -10,6 +10,7 @@ export {
 	colors,
 	typography,
 	mediaQueries,
+	mediaQueries as mq,
 	animations,
 	helpers,
 	globals,

@@ -5,7 +5,7 @@ import Button from 'src/components/Button'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
-import { typography, colors, mediaQueries as mq } from 'src/styles'
+import { typography, colors, mq } from 'src/styles'
 import BalanceText from 'react-balance-text'
 
 const Wrapper = styled.div`
