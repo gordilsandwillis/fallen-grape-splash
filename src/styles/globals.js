@@ -1,4 +1,4 @@
-import * as typography from './typography'
+import * as util from './util'
 
 export const containerStyles = `
 	width: 90%;
@@ -7,11 +7,11 @@ export const containerStyles = `
 `
 
 export const verticalMargins = `
-	${ typography.responsiveStyles('margin-top', 120, 90, 70, 40) }
-	${ typography.responsiveStyles('margin-bottom', 120, 90, 70, 40) }
+	${ util.responsiveStyles('margin-top', 120, 90, 70, 40) }
+	${ util.responsiveStyles('margin-bottom', 120, 90, 70, 40) }
 `
 
 export const verticalPadding = `
-	${ typography.responsiveStyles('padding-top', 120, 90, 70, 40) }
-	${ typography.responsiveStyles('padding-bottom', 120, 90, 70, 40) }
+	${ util.responsiveStyles('padding-top', 120, 90, 70, 40) }
+	${ util.responsiveStyles('padding-bottom', 120, 90, 70, 40) }
 `

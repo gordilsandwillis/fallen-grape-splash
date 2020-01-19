@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
 import { lighten, rgba } from 'polished'
-import { fontSmoothing } from 'src/styles/helpers'
+import { fontSmoothing } from 'src/styles/util'
 import { colors, typography, animations } from 'src/styles'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
@@ -91,7 +91,7 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
   ${ icon ? `
 		padding-${ iconPosition }: ${ inputVars.medium };
 		${ size === 'tiny' ? `
-			${ typography.responsiveStyles('font-size', 16, 14, 13, 13) }
+			${ util.responsiveStyles('font-size', 16, 14, 13, 13) }
 			padding-${ iconPosition }: ${ inputVars.tiny };
 		` : `` }
 		${ size === 'small' ? `
@@ -121,7 +121,7 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
 
 	${ size === 'tiny' ? `
 		height: ${ inputVars.tiny };
-		${ typography.responsiveStyles('font-size', 16, 14, 13, 13) }
+		${ util.responsiveStyles('font-size', 16, 14, 13, 13) }
 	` : `` }
 	${ size === 'small' ? `
 		height: ${ inputVars.small };
@@ -130,7 +130,7 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
 		height: ${ inputVars.large };
 	` : `` }
 
-	${ label ? `${ typography.responsiveStyles('padding-top', 18, 16, 16, 14) }` : `` }
+	${ label ? `${ util.responsiveStyles('padding-top', 18, 16, 16, 14) }` : `` }
 
 `)
 
@@ -207,7 +207,7 @@ const InputLabel = styled.label`
 		margin-${ iconPosition }: ${ inputVars.medium };
 		${ size === 'tiny' ? `
 			height: ${ inputVars.tiny };
-			${ typography.responsiveStyles('font-size', 16, 14, 13, 13) }
+			${ util.responsiveStyles('font-size', 16, 14, 13, 13) }
 			margin-${ iconPosition }: ${ inputVars.tiny };
 		` : `` }
 		${ size === 'small' ? `

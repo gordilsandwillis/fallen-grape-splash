@@ -11,7 +11,7 @@ export const query = graphql`
       json
     }
     buttons {
-      ...Button
+      ...Link
     }
   }
 `

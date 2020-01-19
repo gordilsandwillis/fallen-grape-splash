@@ -22,7 +22,7 @@ export const query = graphql`
       }
     }
     buttons {
-      ...Button
+      ...Link
     }
   }
 `

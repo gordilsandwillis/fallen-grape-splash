@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
 import Button from 'src/components/Button'
+import Link from 'src/components/Link'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
 		margin-right: auto;
 		> div {
 			margin-left: auto;
-		margin-right: auto;
+			margin-right: auto;
 		}
 	` }
 	${ mq.mediumAndBelow } {
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
 const TextContainer = styled(ScrollEntrance)`
 	text-align: ${ ({ alignment }) => alignment };
 	width: 100%;
+	max-width: 44rem;
 	${ ({ alignment }) => alignment === 'center' && `
 		margin-left: auto;
 		margin-right: auto;
@@ -154,17 +156,33 @@ const TextLockup = ({
 
 					{buttons && (
 						<ButtonActions buttons={buttons} alignment={alignment}>
-							{buttons.map((button, index) => (
-								<Button
-									key={'button-' + index}
-									to={button.to}
-									setTheme={button.theme}
-									external={button.external || false}
-									target={button.target || ''}
-								>
-									{button.label}
-								</Button>
-							))}
+							{buttons.map((button, index) => {
+								if (button.style === 'button') {
+									return (
+										<Button
+											key={'button-' + index}
+											to={button.to}
+											setTheme={button.theme}
+											external={button.external || false}
+											target={button.target || ''}
+										>
+											{button.label}
+										</Button>
+									)
+								} else {
+									return (
+										<Link
+											key={'button-' + index}
+											to={button.to}
+											setTheme={button.theme}
+											external={button.external || false}
+											target={button.target || ''}
+										>
+											{button.label}
+										</Link>
+									)
+								}
+							})}
 						</ButtonActions>
 					)}
 				</TextContainer>

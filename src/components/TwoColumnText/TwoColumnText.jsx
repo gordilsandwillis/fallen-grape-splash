@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
 import Button from 'src/components/Button'
+import Link from 'src/components/Link'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
@@ -106,17 +107,33 @@ const TwoColumnText = ({
 						}
 						<ConditionalRender condition={buttons}>
 							<ButtonActions buttons={buttons}>
-								{buttons.map(({ label, to, theme, external, target }, index) => (
-									<Button
-										key={'button-' + index}
-										to={to}
-										setTheme={theme}
-										external={external || false}
-										target={target || ''}
-									>
-										{label}
-									</Button>
-								))}
+								{buttons.map((button, index) => {
+									if (button.style === 'button') {
+										return (
+											<Button
+												key={'button-' + index}
+												to={button.to}
+												setTheme={button.theme}
+												external={button.external || false}
+												target={button.target || ''}
+											>
+												{button.label}
+											</Button>
+										)
+									} else {
+										return (
+											<Link
+												key={'button-' + index}
+												to={button.to}
+												setTheme={button.theme}
+												external={button.external || false}
+												target={button.target || ''}
+											>
+												{button.label}
+											</Link>
+										)
+									}
+								})}
 							</ButtonActions>
 						</ConditionalRender>
 					</div>

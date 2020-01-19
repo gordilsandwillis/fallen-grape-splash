@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { colors } from 'src/styles'
 
 const ThemeWrapper = styled.div`
+	transition: background-color 1s ease-in-out, color 1s ease-in-out;
 	${ ({ 'data-theme': setTheme }) => setTheme && `
 		background-color: ${ colors[setTheme] };
 	` }

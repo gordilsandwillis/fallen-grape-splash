@@ -2,12 +2,12 @@ import * as typography from './typography'
 import * as mediaQueries from './mediaQueries'
 import * as colors from './colors'
 import * as animations from './animations'
-import * as helpers from './helpers'
+import * as util from './util'
 import * as fonts from './fonts'
 import { slick } from './slick'
 import { rgba } from 'polished'
 
-const { responsiveStyles } = typography
+const responsiveStyles = util.responsiveStyles
 
 // All global styles
 export default `
@@ -27,7 +27,7 @@ export default `
     font-display: block;
     background: ${ colors.bgColor };
     color: ${ colors.textColor };
-    ${ helpers.fontSmoothing }
+    ${ util.fontSmoothing }
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
     padding: 0;

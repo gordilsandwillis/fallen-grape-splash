@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { helpers } from 'src/styles'
+import { util } from 'src/styles'
 
 const Icon = styled.span`
 	font-family: 'Material Icons';
@@ -13,7 +13,7 @@ const Icon = styled.span`
 	word-wrap: normal;
 	white-space: nowrap;
 	direction: ltr;
-	${ helpers.fontSmoothing }
+	${ util.fontSmoothing }
 	font-feature-settings: 'liga';
 	color: inherit;
 	// 24px is the Google prefered icon size

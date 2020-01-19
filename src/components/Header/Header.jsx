@@ -8,14 +8,13 @@ import Grid from 'src/components/Grid'
 import ResponsiveComponent from 'src/components/ResponsiveComponent'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
-import { colors, typography, animations, mq } from 'src/styles'
-import NavigationDrawer from 'src/components/NavigationDrawer'
+import { colors, typography, animations, mq, util } from 'src/styles'
 
 const NavLinkStyle = (scrolled, active) => `
 	display: block;
 	position: relative;
 	${ typography.h6 }
-	${ typography.responsiveStyles('margin-right', 60, 40, 32, 20) }
+	${ util.responsiveStyles('margin-right', 60, 40, 32, 20) }
 	padding: 10px 0;
 	&:after {
 		position: absolute;
@@ -89,12 +88,12 @@ const HeaderContainer = styled.div`
 	${ ({ scrolled }) => scrolled ? `
 		padding-top: 18px;
 		padding-bottom: 14px;
-		${ typography.responsiveStyles('padding-top', 25, 18, 18, 15) }
-		${ typography.responsiveStyles('padding-bottom', 25, 18, 18, 15) }
+		${ util.responsiveStyles('padding-top', 25, 18, 18, 15) }
+		${ util.responsiveStyles('padding-bottom', 25, 18, 18, 15) }
 		box-shadow: 0 -10px 40px ${ rgba(colors.textColor, 0.15) }
 	` : `
-		${ typography.responsiveStyles('padding-top', 50, 40, 30, 10) }
-		${ typography.responsiveStyles('padding-bottom', 50, 40, 30, 10) }
+		${ util.responsiveStyles('padding-top', 50, 40, 30, 10) }
+		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 10) }
 	` };
 `
 
@@ -108,12 +107,12 @@ const LogoCol = styled.div`
 		vertical-align: top;
 	}
 	svg {
-		${ typography.responsiveStyles('width', 90, 50, 50, 40) }
+		${ util.responsiveStyles('width', 90, 50, 50, 40) }
 		display: block;
 		transition: color ${ animations.mediumSpeed } ease-in-out, width ${ animations.mediumSpeed } ease-in-out;
 		${ ({ scrolled, hasAtf }) => scrolled ? `
 			color: ${ colors.mainColor };
-			${ typography.responsiveStyles('width', 60, 50, 50, 40) }
+			${ util.responsiveStyles('width', 60, 50, 50, 40) }
 		` : `
 			${ !hasAtf ? `
 				color: ${ colors.mainColor };
@@ -133,7 +132,7 @@ const NavLinks = styled.div`
 		margin-right: 0;
 	}
 	button {
-		${ typography.responsiveStyles('margin-left', 60, 40, 32, 20) }
+		${ util.responsiveStyles('margin-left', 60, 40, 32, 20) }
 		${ mq.mediumAndBelow } {
 			display: none;
 			border: 2px solid red;
@@ -168,7 +167,7 @@ const MenuIcon = styled.div`
 const HeaderPlaceholder = styled.div`
 	background: transparent;
 	width: 100%;
-	${ typography.responsiveStyles('height', 140, 95, 80, 80) }
+	${ util.responsiveStyles('height', 140, 95, 80, 80) }
 `
 
 class Header extends Component {
@@ -271,16 +270,6 @@ class Header extends Component {
 						</HeaderContent>
 					</HeaderContainer>
 				</Wrapper>
-
-				<NavigationDrawer
-					id=""
-					toggleDrawer={this.toggleDrawer}
-					open={drawerOpen}
-					closeDrawer={this.closeDrawer}
-					navList={navList}
-					items={headerNavigation}
-					footerLinks={headerDrawerBottomLinks}
-				/>
 
 				<ConditionalRender condition={!hasAtf}>
 					<HeaderPlaceholder />

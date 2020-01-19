@@ -64,7 +64,7 @@ export const pageQuery = graphql`
 					seoDescription
 					sections {
 						...AboveTheFold
-						...CenterAlignedText
+						...CalloutText
 						...FiftyFifty
 						...TwoColumnText
 						...WideImageVideo

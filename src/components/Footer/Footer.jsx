@@ -10,7 +10,7 @@ import ThemeSelector from 'src/components/ThemeSelector'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ContentfulRichText from 'src/components/ContentfulRichText'
 
-import { globals, typography, colors, animations, mq } from 'src/styles'
+import { globals, typography, colors, animations, mq, util } from 'src/styles'
 
 const Wrapper = styled(ThemeSelector)`
 	position: relative;
@@ -53,7 +53,7 @@ const FooterSection = styled.div`
 `
 
 const SectionHeader = styled.h6`
-	${ typography.responsiveStyles('margin-bottom', 20, 15, 10, 5) }
+	${ util.responsiveStyles('margin-bottom', 20, 15, 10, 5) }
 `
 
 const LinkList = styled.ul`
@@ -94,8 +94,8 @@ const LinkListItem = styled.li``
 
 const FooterBottom = styled.div`
 	position: relative;
-	${ typography.responsiveStyles('padding-top', 50, 40, 30, 26) }
-	${ typography.responsiveStyles('padding-bottom', 50, 40, 30, 26) }
+	${ util.responsiveStyles('padding-top', 50, 40, 30, 26) }
+	${ util.responsiveStyles('padding-bottom', 50, 40, 30, 26) }
 	background: ${ lighten(0.1, colors.black) };
 `
 

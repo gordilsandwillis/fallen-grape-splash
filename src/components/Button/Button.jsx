@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import { lighten, rgba } from 'polished'
 
-import { fontSmoothing } from 'src/styles/helpers'
+import * as util from 'src/styles/util'
 import { colors, typography, animations } from 'src/styles'
 import MaterialIcon from 'src/components/MaterialIcon'
 
@@ -79,11 +79,11 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	text-transform: none;
 	letter-spacing: 0;
 	border-radius: 0;
-	${ typography.responsiveStyles('font-size', 20, 16, 15, 13) }
+	${ util.responsiveStyles('font-size', 20, 16, 15, 13) }
 	text-align: center;
 	box-shadow: none;
 	${ typography.buttonStyle }
-	${ fontSmoothing }
+	${ util.fontSmoothing }
 	transition: background ${ animations.mediumSpeed } ease-in-out,
 							color ${ animations.mediumSpeed } ease-in-out,
 							border ${ animations.mediumSpeed } ease-in-out,

@@ -4,14 +4,14 @@ import Section from 'src/components/Section'
 import TextLockup from 'src/components/TextLockup'
 import Grid from 'src/components/Grid'
 import * as mockCopy from 'src/mock/copy'
-import { typography } from 'src/styles'
+import { util } from 'src/styles'
 
 const ContentWrapper = styled.div`
-	${ typography.responsiveStyles('padding-top', 91, 51, 33, 26) }
-	${ typography.responsiveStyles('padding-bottom', 91, 51, 33, 26) }
+	${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
+	${ util.responsiveStyles('padding-bottom', 91, 51, 33, 26) }
 `
 
-const CenterAlignedText = ({
+const CalloutText = ({
 	id,
 	theme,
 	prevTheme,
@@ -22,7 +22,8 @@ const CenterAlignedText = ({
 	text,
 	buttons,
 	cards,
-	icon
+	icon,
+	alignment
 }) => {
 	return (
 		<Section
@@ -38,10 +39,11 @@ const CenterAlignedText = ({
 						eyebrow={eyebrow}
 						headline={headline}
 						headlineSize={headlineSize}
-						text={mockCopy.contentfulRichTextShort}
+						text={text}
 						icon={icon}
 						buttons={buttons}
 						cards={cards}
+						alignment={alignment}
 					/>
 				</Grid>
 			</ContentWrapper>
@@ -49,8 +51,8 @@ const CenterAlignedText = ({
 	)
 }
 
-CenterAlignedText.defaultProps = {
+CalloutText.defaultProps = {
 	headlineSize: 'h3'
 }
 
-export default CenterAlignedText
+export default CalloutText

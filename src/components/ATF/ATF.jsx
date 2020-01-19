@@ -247,7 +247,7 @@ class ATF extends Component {
 							large={image.large}
 						/>
 					) : false}
-					{index === 0 && <Overlay />}
+					{index === 0 && video && image ? <Overlay /> : false}
 				</Block>
 				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
 					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight} showArrow={showArrow}>

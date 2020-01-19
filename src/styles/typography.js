@@ -1,30 +1,13 @@
 import * as mq from './mediaQueries'
 import { rgba } from 'polished'
 import * as colors from './colors'
+import { responsiveStyles } from './util'
 
 import './fonts'
 
 // Place global Typography in this file
 export const primaryFont = `Portrait, -apple-system, serif`
 export const secondaryFont = `Trade Gothic, -apple-system, serif`
-
-export const linearInterpolation = (maxInput, minInput, maxWidth, minWidth) => {
-	let slope = (maxInput - minInput) / (maxWidth - minWidth)
-	let yInterceptor = minInput - slope * minWidth
-	return `calc(${ slope * 100 }vw ${ yInterceptor < 0 ? '-' : '+' } ${ yInterceptor.toFixed(2) }px)`
-}
-
-export const responsiveStyles = (styleType, large, medium, small, tiny) => `
-	${ mq.largerAndUp } {
-		${ styleType }: ${ linearInterpolation(medium, large, mq.largerBreakpoint + 1, mq.extraExtraLargeBreakpoint) };
-	}
-	${ mq.largerAndBelow } {
-		${ styleType }: ${ linearInterpolation(small, medium, mq.mediumBreakpoint + 1, mq.largerBreakpoint) };
-	}
-	${ mq.mediumAndBelow } {
-		${ styleType }: ${ linearInterpolation(tiny, small, mq.tinyBreakpoint, mq.mediumBreakpoint) };
-	}
-`
 
 export const bodyLarge = `
 	${ responsiveStyles('font-size', 24, 22, 20, 18) }

@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment CenterAlignedText on ContentfulCenterAlignedText {
+  fragment CalloutText on ContentfulCalloutText {
     __typename
     id
     headlineSize
@@ -14,7 +14,8 @@ export const query = graphql`
     }
     theme
     buttons {
-      ...Button
+      ...Link
     }
+    alignment
   }
 `

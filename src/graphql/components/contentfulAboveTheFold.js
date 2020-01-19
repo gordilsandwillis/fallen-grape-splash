@@ -24,7 +24,8 @@ export const query = graphql`
     vAlignment
     fullHeight
     buttons {
-      ...Button
+      ...Link
     }
+    theme
   }
 `

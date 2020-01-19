@@ -7,5 +7,7 @@ export const query = graphql`
     to
     label
     external
+    theme
+    style
   }
 `

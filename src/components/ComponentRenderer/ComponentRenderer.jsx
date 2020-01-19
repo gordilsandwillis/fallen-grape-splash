@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ATF from 'src/components/ATF'
-import CenterAlignedText from 'src/components/CenterAlignedText'
+import CalloutText from 'src/components/CalloutText'
 import FiftyFifty from 'src/components/FiftyFifty'
 import TwoColumnText from 'src/components/TwoColumnText'
 import WideMedia from 'src/components/WideMedia'
@@ -9,7 +9,7 @@ import TwoUpImages from 'src/components/TwoUpImages'
 
 const componentMap = {
 	ContentfulAboveTheFold: ATF,
-	ContentfulCenterAlignedText: CenterAlignedText,
+	ContentfulCalloutText: CalloutText,
 	ContentfulFiftyFifty: FiftyFifty,
 	ContentfulTwoColumnText: TwoColumnText,
 	ContentfulWideMedia: WideMedia,
