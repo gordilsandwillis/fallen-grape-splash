@@ -72,6 +72,33 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 	<div>
 		<GridStory
 			title="Different Columns at Different Breakpoints"
+			small="[m] [1] m"
+			notes={<code>[m] [1] m</code>}
+		>
+			{_.range(6).map(i => (
+				<Column
+					key={i}
+				>
+					{i + 1}
+				</Column>
+			))}
+		</GridStory>
+		<GridStory
+			title="Different Columns at Different Breakpoints"
+			small="m [2] g [1] m [1] m"
+			notes={<code>m [2] g [1] m [1] m</code>}
+		>
+			{_.range(6).map(i => (
+				<Column
+					key={i}
+				>
+					{i + 1}
+				</Column>
+			))}
+		</GridStory>
+
+		<GridStory
+			title="Different Columns at Different Breakpoints"
 			small="[1] [1] [1] [1]"
 			medium="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
 			large="[1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1] [1]"
@@ -181,5 +208,6 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			<Column>col</Column>
 			<Column>col</Column>
 		</GridStory>
+*/}
 	</div>
 ))
