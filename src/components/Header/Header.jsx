@@ -108,6 +108,7 @@ const LogoCol = styled.div`
 	}
 	svg {
 		${ util.responsiveStyles('width', 90, 50, 50, 40) }
+		height: auto;
 		display: block;
 		transition: color ${ animations.mediumSpeed } ease-in-out, width ${ animations.mediumSpeed } ease-in-out;
 		${ ({ scrolled, hasAtf }) => scrolled ? `
@@ -247,7 +248,7 @@ class Header extends Component {
 								</NavLinks>
 							</div>
 							<LogoCol scrolled={scrolled} hasAtf={hasAtf}>
-								<Link to="/">
+								<Link to="/" style="none">
 									<Logo />
 								</Link>
 							</LogoCol>
