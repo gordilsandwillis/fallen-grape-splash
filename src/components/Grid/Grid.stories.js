@@ -208,6 +208,6 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			<Column>col</Column>
 			<Column>col</Column>
 		</GridStory>
-*/}
+
 	</div>
 ))
