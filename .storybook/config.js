@@ -3,7 +3,6 @@ import React from 'react'
 import { configure, addDecorator, addParameters } from '@storybook/react';
 import { Global } from '@emotion/core'
 import globalCss from '../src/styles/globalStyles'
-import background from './background.css'
 import theme from './theme';
 import {
   withKnobs,
