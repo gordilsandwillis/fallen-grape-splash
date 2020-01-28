@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
 import { lighten, rgba } from 'polished'
-import { fontSmoothing } from 'src/styles/util'
-import { colors, typography, animations } from 'src/styles'
+import { colors, typography, animations, util } from 'src/styles'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
 
@@ -17,6 +16,44 @@ const inputVars = {
 	borderRadius: '0px'
 }
 
+const themes = {
+		lightGrey: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.lightGrey
+		},
+		white: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.white
+		},
+		bgColor: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.bgColor
+		},
+		transparent: {
+			color: colors.textColor,
+			accent: colors.mainColor,
+			background: colors.transparent
+		},
+		textColor: {
+			color: colors.bgColor,
+			accent: colors.lightGreen,
+			background: colors.textColor
+		},
+		brown: {
+			color: colors.bgColor,
+			accent: colors.lightGreen,
+			background: colors.brown
+		},
+		darkBrown: {
+			color: colors.bgColor,
+			accent: colors.lightGreen,
+			background: colors.darkBrown
+		},
+	}
+
 const setInputTheme = theme => {
 	const inputColor = {
 		white: colors.textColor,
@@ -26,10 +63,10 @@ const setInputTheme = theme => {
 	}
 	return `
 		input {
-			background: ${ colors[theme] };
+			background: ${ themes[theme]['background'] };
 			border-color: ${ colors[theme] };
-			caret-color: ${ colors.mainColor };
-			color: ${ inputColor[theme] };
+			caret-color: ${ themes[theme]['color'] };
+			color: ${ themes[theme]['color'] };
 			&:hover, &:active, &:focus {
 				background: ${ lighten(0.07, colors[theme]) };
 				border-color: ${ colors.mainColor };
@@ -102,7 +139,7 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
 		` : `` }
 	` : `` }
   padding-bottom: 1px;
-  ${ fontSmoothing }
+  ${ util.fontSmoothing }
   transition: background ${ animations.mediumSpeed } ease-in-out,
               color ${ animations.mediumSpeed } ease-in-out,
               border ${ animations.mediumSpeed } ease-in-out,
@@ -313,7 +350,7 @@ class Input extends Component {
 Input.defaultProps = {
 	type: 'text',
 	iconPosition: 'left',
-	theme: 'white',
+	theme: 'lightGrey',
 	emojiIcon: false,
 	spellcheck: false
 }

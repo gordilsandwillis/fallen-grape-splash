@@ -4,15 +4,10 @@ import _ from 'lodash'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
-import gridSettings from 'src/styles/gridSettings'
-import { mq, colors } from 'src/styles'
+import gridSettings, { margin, gutter } from 'src/styles/gridSettings'
+import { mq, colors, globals } from 'src/styles'
 
 import withSizes from 'react-sizes'
-
-// Global Base Margins
-// Global Base Gutters
-const margin = '100px'
-const gutter = '2%'
 
 // Calculate how many columns the grid has
 const numberOfCols = gridSettings => {
@@ -87,6 +82,7 @@ const gridDefToCss = gridDef => {
 	let colCount = 1
 
 	const numColumns = _.filter(gridData, ({ isColumn }) => isColumn).length
+	console.log(gridData)
 
 	const columnCssDefinitions = _.map(gridData, ({ isColumn, size, isVariableColumn }) => {
 		let result = null
@@ -95,14 +91,14 @@ const gridDefToCss = gridDef => {
 			// don't have to
 			result = `
 				& > :nth-of-type(${ numColumns }n + ${ colCount }) {
-					grid-column: ${ colStart } / span ${ size };
+					grid-column: ${ colStart } / span ${ isVariableColumn ? 1 : size };
 				}
 			`
 			colCount++
 		}
 
 		if (isVariableColumn) {
-			colStart += 1
+			colStart ++
 		} else {
 			colStart += size
 		}

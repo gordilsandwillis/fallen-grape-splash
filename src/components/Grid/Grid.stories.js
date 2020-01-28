@@ -3,11 +3,12 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Grid from './Grid'
 import styled from '@emotion/styled'
-import { typography } from 'src/styles'
+import { typography, colors } from 'src/styles'
+import { rgba } from 'polished'
 
 const Column = styled.div`
-	background: rgba(0, 0, 0, 0.05);
-	border: 1px solid rgba(0, 0, 0, 0.05);
+	background: ${ rgba(colors.textColor, 0.05) };
+	border: 1px solid ${ rgba(colors.textColor, 0.05) };
 	border-radius: 2px;
 	min-height: 80px;
 	display: flex;
@@ -70,32 +71,6 @@ class GridStory extends React.Component {
 
 storiesOf(`Styleguide`, module).add(`Grid`, () => (
 	<div>
-		<GridStory
-			title="Different Columns at Different Breakpoints"
-			small="[m] [1] m"
-			notes={<code>[m] [1] m</code>}
-		>
-			{_.range(6).map(i => (
-				<Column
-					key={i}
-				>
-					{i + 1}
-				</Column>
-			))}
-		</GridStory>
-		<GridStory
-			title="Different Columns at Different Breakpoints"
-			small="m [2] g [1] m [1] m"
-			notes={<code>m [2] g [1] m [1] m</code>}
-		>
-			{_.range(6).map(i => (
-				<Column
-					key={i}
-				>
-					{i + 1}
-				</Column>
-			))}
-		</GridStory>
 
 		<GridStory
 			title="Different Columns at Different Breakpoints"
@@ -207,6 +182,20 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 			<Column>col</Column>
 			<Column>col</Column>
 			<Column>col</Column>
+		</GridStory>
+
+		<GridStory
+			title="Different Columns at Different Breakpoints"
+			small="m [1] g [1] g [1] m"
+			notes={<p>For advanced grid usage you may also use the characters <code>m</code> or <code>g</code> to add the global margin or gutter values defined in <code>styles/gridSettings.js</code>. ei: <code>m [1] g [1] g [1] m</code></p>}
+		>
+			{_.range(6).map(i => (
+				<Column
+					key={i}
+				>
+					{i + 1}
+				</Column>
+			))}
 		</GridStory>
 
 	</div>

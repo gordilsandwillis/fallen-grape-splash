@@ -14,15 +14,15 @@ const inputs = [
 		label: 'Label',
 		placeholder: 'Placeholder',
 		icon: 'person',
-		theme: 'mainColor',
-		description: 'Dark theme with icon'
+		// theme: 'lightGrey',
+		description: "'lightGrey' theme with icon"
 	},
 	{
 		label: false,
 		placeholder: 'Placeholder',
 		icon: 'phone',
 		iconPosition: 'right',
-		theme: 'mainColor',
+		// theme: 'textColor',
 		description: "iconPosition: 'right'"
 	},
 	{
@@ -53,16 +53,16 @@ const inputs = [
 
 const stories = storiesOf(`Components/Input`, module)
 stories.add(`Default`, () => (
-	<div style={{ padding: '5%', background: colors.lightGrey }}>
+	<div style={{ padding: '5%' }}>
 		<Grid
 			small="[1]"
 			medium="[1] [1]"
 			large="[1] [1] [1]"
-			colGap={['2px', '2px', '20px']}
-			rowGap={['2px', '2px', '20px']}
+			colGap={['20px', '5vw', '5vw']}
+			rowGap={['20px', '5vw', '5vw']}
 		>
 			{inputs.map(input => (
-				<div style={{ padding: '4rem 2.5rem', background: colors.bgColor, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'stretch' }}>
+				<div style={{ padding: '4rem 0', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'stretch' }}>
 					<Input
 						size={input.size}
 						label={input.label}
@@ -75,7 +75,16 @@ stories.add(`Default`, () => (
 						error={input.error}
 						disabled={input.disabled}
 					/>
-					<figcaption className="small" style={{ margin: 0, position: 'absolute', top: '10px', left: '12px', color: colors.lightTextColor }}>{input.description}</figcaption>
+					<figcaption className="small" style={{ 
+						margin: 0,
+						position: 'absolute',
+						top: '0',
+						left: '0',
+						right: '0',
+						paddingTop: '8px',
+						borderTop: '1px solid ' + colors.hrColor,
+						color: colors.lightTextColor
+					}}>{input.description}</figcaption>
 				</div>
 			))}
 		</Grid>

@@ -1,3 +1,6 @@
+export const margin = '6%'
+export const gutter = '2%'
+
 export const containerLargeMargins = '5vw'
 export const containerMediumMargins = '5vw'
 export const containerSmallMargins = '20px'
