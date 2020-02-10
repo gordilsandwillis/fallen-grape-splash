@@ -31,24 +31,16 @@ const getState = (loading, error, success, disabled) => {
 }
 
 const setButtonTheme = theme => `
-	${ theme === 'default' ? `
-		background: ${ colors.textColor };
+	${ theme === 'default' || !theme ? `
+		color: ${ colors.themes.default.color };
+		background: ${ colors.themes.default.background };
 	` : `
-		background: ${ colors[theme] };
-	` }
-	${ theme === 'white' || theme === 'bgColor' ? `
-		color: ${ colors.textColor };
-	` : `
-		color: ${ colors.bgColor };
+		color: ${ colors.themes[theme].color };
+		background: ${ colors.themes[theme].background };
 	` }
 	&:hover {
-		background: ${ lighten(0.07, colors[theme]) };
-		border-color: ${ lighten(0.07, colors[theme]) };
-		${ theme === 'white' || theme === 'bgColor' ? `
-			color: ${ colors.green };
-		` : `
-			color: ${ colors.bgColor };
-		` }
+		color: ${ colors.themes[theme].hoverColor };
+		background: ${ colors.themes[theme].hoverBackground };
 	}
 `
 
@@ -192,7 +184,7 @@ class Button extends Component {
 			success,
 			disabled,
 			onClick,
-			setTheme,
+			theme,
 			className,
 			shape,
 			size
@@ -212,7 +204,7 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={setTheme}
+					theme={theme}
 					shape={shape}
 					size={size}
 				>
@@ -230,7 +222,7 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={setTheme}
+					theme={theme}
 					shape={shape}
 					size={size}
 				>
@@ -242,7 +234,7 @@ class Button extends Component {
 }
 
 Button.defaultProps = {
-	setTheme: 'textColor'
+	theme: 'default'
 }
 
 export default Button

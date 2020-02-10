@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Grid from 'src/components/Grid'
 import Button from 'src/components/Button'
-import Link from 'src/components/Link'
+import TextLink from 'src/components/TextLink'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
@@ -28,7 +27,6 @@ const Wrapper = styled.div`
 const TextContainer = styled(ScrollEntrance)`
 	text-align: ${ ({ alignment }) => alignment };
 	width: 100%;
-	max-width: 44rem;
 	${ ({ alignment }) => alignment === 'center' && `
 		margin-left: auto;
 		margin-right: auto;
@@ -43,18 +41,13 @@ const TextContainer = styled(ScrollEntrance)`
 `
 
 const Eyebrow = styled.h6`
-	margin-bottom: 1.2em;
+	margin-bottom: 1.5em;
 	${ typography.eyebrow }
 `
 
 const Headline = styled.h3`
 	${ ({ headlineSize }) => `
 		${ typography[headlineSize] }
-		${ headlineSize === 'h1' || headlineSize === 'h2' ? `
-			max-width: 16em;
-		` : `
-			max-width: 26em;
-		` }
 	` }
 	${ ({ alignment }) => alignment === 'center' && `
 		margin-left: auto;
@@ -71,17 +64,14 @@ const Headline = styled.h3`
 
 const Text = styled.div`
 	p {
-		${ typography.bodyMedium }
-		max-width: 32em;
+		${ ({ textSize }) => typography[textSize] }
 		margin-bottom: 0;
-		margin-top: 4em;
 		&:first-of-type {
 			margin-top: 0;
 		}
 		${ ({ alignment }) => alignment === 'center' && `
 			margin-left: auto;
 			margin-right: auto;
-			max-width: 38em;
 		` }
 		${ ({ alignment }) => alignment === 'right' && `
 			margin-left: auto;
@@ -116,6 +106,7 @@ const TextLockup = ({
 		headline,
 		headlineSize,
 		text,
+		textSize,
 		buttons,
 		className,
 		icon,
@@ -142,12 +133,16 @@ const TextLockup = ({
 						</Headline>
 					</ConditionalRender>
 
-					{text && text.json && /* ConditionalRender was not working for this */
+					{text && text.json &&
 						<Text alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
 					}
 
 					{typeof text === 'string' &&
-						<Text alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
+						<Text textSize={textSize} alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
+					}
+
+					{text && typeof text !== 'string' && !text.json &&
+						<Text textSize={textSize} alignment={alignment}>{text}</Text>
 					}
 
 					<ConditionalRender condition={additions}>
@@ -171,7 +166,7 @@ const TextLockup = ({
 									)
 								} else {
 									return (
-										<Link
+										<TextLink
 											key={'button-' + index}
 											to={button.to}
 											setTheme={button.theme}
@@ -179,7 +174,7 @@ const TextLockup = ({
 											target={button.target || ''}
 										>
 											{button.label}
-										</Link>
+										</TextLink>
 									)
 								}
 							})}
@@ -193,7 +188,8 @@ const TextLockup = ({
 
 TextLockup.defaultProps = {
 	alignment: 'center',
-	headlineSize: 'h3'
+	headlineSize: 'h3',
+	textSize: 'body'
 }
 
 export default TextLockup

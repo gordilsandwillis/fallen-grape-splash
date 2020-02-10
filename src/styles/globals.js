@@ -1,11 +1,5 @@
 import * as util from './util'
 
-export const containerStyles = `
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-`
-
 export const verticalMargins = `
 	${ util.responsiveStyles('margin-top', 120, 90, 70, 40) }
 	${ util.responsiveStyles('margin-bottom', 120, 90, 70, 40) }

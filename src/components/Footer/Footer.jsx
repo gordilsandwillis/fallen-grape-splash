@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { lighten } from 'polished'
 
 import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
@@ -96,7 +95,6 @@ const FooterBottom = styled.div`
 	position: relative;
 	${ util.responsiveStyles('padding-top', 50, 40, 30, 26) }
 	${ util.responsiveStyles('padding-bottom', 50, 40, 30, 26) }
-	background: ${ lighten(0.1, colors.black) };
 `
 
 const Copyright = styled.div`

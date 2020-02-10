@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
-import Button from 'src/components/Button'
-import Link from 'src/components/Link'
+import TextLockup from 'src/components/TextLockup'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
 import { typography, colors, mq } from 'src/styles'
-import BalanceText from 'react-balance-text'
 import Section from 'src/components/Section'
 
 const TextContainer = styled(ScrollEntrance)`
@@ -62,6 +60,7 @@ const TwoColumnText = ({
 	headline,
 	headlineSize,
 	text,
+	textSize,
 	buttons,
 }) => {
 	let dividerColor = 'currentcolor'
@@ -83,59 +82,20 @@ const TwoColumnText = ({
 					large="1 [5] 1 [6] 1"
 				>
 					<div>
-						<ConditionalRender condition={eyebrow}>
-							<Eyebrow>{eyebrow}</Eyebrow>
-						</ConditionalRender>
-
-						<ConditionalRender condition={eyebrow && headline}>
-							<Divider theme={dividerColor} />
-						</ConditionalRender>
-
-						<ConditionalRender condition={headline}>
-							<Headline headlineSize='h3'>
-								{headline}
-							</Headline>
-						</ConditionalRender>
-
-						<ConditionalRender condition={!eyebrow && headline && text}>
-							<Divider theme={dividerColor} position="lower" />
-						</ConditionalRender>
+						<TextLockup
+							eyebrow={eyebrow}
+							headline={headline}
+							headlineSize={headlineSize}
+							alignment="left"
+						/>
 					</div>
 					<div>
-						{ text && text.json && /* ConditionalRender was not working for this */
-							<Text><ContentfulRichText richText={text.json}/></Text>
-						}
-						<ConditionalRender condition={buttons}>
-							<ButtonActions buttons={buttons}>
-								{buttons.map((button, index) => {
-									if (button.style === 'button') {
-										return (
-											<Button
-												key={'button-' + index}
-												to={button.to}
-												setTheme={button.theme}
-												external={button.external || false}
-												target={button.target || ''}
-											>
-												{button.label}
-											</Button>
-										)
-									} else {
-										return (
-											<Link
-												key={'button-' + index}
-												to={button.to}
-												setTheme={button.theme}
-												external={button.external || false}
-												target={button.target || ''}
-											>
-												{button.label}
-											</Link>
-										)
-									}
-								})}
-							</ButtonActions>
-						</ConditionalRender>
+						<TextLockup
+							text={text}
+							textSize={textSize}
+							buttons={buttons}
+							alignment="left"
+						/>
 					</div>
 				</Grid>
 			</TextContainer>
@@ -144,7 +104,8 @@ const TwoColumnText = ({
 }
 
 TwoColumnText.defaultProps = {
-	headlineSize: 'h3'
+	headlineSize: 'h3',
+	textSize: 'body'
 }
 
 export default TwoColumnText

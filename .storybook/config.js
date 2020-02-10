@@ -17,7 +17,7 @@ addParameters({
 addDecorator(story => (
   <div>
     <Global
-      styles={[globalCss, background]}
+      styles={[globalCss]}
     />
 
     {story()}

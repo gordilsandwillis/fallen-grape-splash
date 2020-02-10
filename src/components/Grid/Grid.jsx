@@ -4,8 +4,8 @@ import _ from 'lodash'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
-import gridSettings from 'src/styles/gridSettings'
-import { mq, colors } from 'src/styles'
+import gridSettings, { margin, gutter } from 'src/styles/gridSettings'
+import { mq, colors, globals } from 'src/styles'
 
 import withSizes from 'react-sizes'
 
@@ -20,23 +20,33 @@ const numberOfCols = gridSettings => {
 
 // is it wrapped with brackets?
 const isColumnDef = d => (
-	/\[[\s]*[\d]+[\s]*\]/g.test(d)
+	// /\[[\s]*[\d]+[\s]*\]/g.test(d)
+	// Add "m" and "g" characters to test
+	/\[[\s]*[\dmg/,/]+[\s]*\]/g.test(d)
 )
 
 // get the integer value the def
 const parseSize = d => {
 	const match = /([\d]+)/g.exec(d)
 	const val = _.get(match, 1)
-
 	return val ? parseInt(val, 10) : null
 }
 
 // parse a single grid item definition (eg. '1', '[3], etc.)
 const parseGridItemDef = d => {
-	const size = parseSize(d)
+	let size = parseSize(d)
+	let isVariableColumn = false
+	if (d === '[m]' || d === 'm') {
+		size = margin,
+		isVariableColumn = true
+	} else if (d === '[g]' || d === 'g') {
+		size = gutter,
+		isVariableColumn = true
+	}
 	return size !== null ? ({
 		isColumn: isColumnDef(d),
 		size,
+		isVariableColumn
 	}) : null
 }
 
@@ -47,7 +57,6 @@ const parseGridDef = gridDef => {
 		.replace(/\[[\s]+/g, '[') // remove whitespace inside opening bracket
 		.replace(/[\s]+\]/g, ']') // remove whitespace inside closing bracket
 		.split(' ')
-
 	return _.map(defs, parseGridItemDef).filter(_.identity)
 }
 
@@ -74,20 +83,24 @@ const gridDefToCss = gridDef => {
 
 	const numColumns = _.filter(gridData, ({ isColumn }) => isColumn).length
 
-	const columnCssDefinitions = _.map(gridData, ({ isColumn, size }) => {
+	const columnCssDefinitions = _.map(gridData, ({ isColumn, size, isVariableColumn }) => {
 		let result = null
 		if (isColumn) {
 			// use nth-child to define the children styles so the children
 			// don't have to
 			result = `
 				& > :nth-of-type(${ numColumns }n + ${ colCount }) {
-					grid-column: ${ colStart } / span ${ size };
+					grid-column: ${ colStart } / span ${ isVariableColumn ? 1 : size };
 				}
 			`
 			colCount++
 		}
 
-		colStart += size
+		if (isVariableColumn) {
+			colStart ++
+		} else {
+			colStart += size
+		}
 		return result
 	}).filter(_.identity) // remove any nulls
 
@@ -95,8 +108,21 @@ const gridDefToCss = gridDef => {
 		(acc, { size }) => (acc + size),
 		0
 	)
+
+	// repeat(${ gridWidth }, minmax(0, 1fr))
+	let width = ''
+
+	gridData.forEach((col) => {
+		if(col.isVariableColumn) {
+			width += col.size + ' '
+		} else {
+			width += 'repeat(' + col.size + ', minmax(0, 1fr)) '
+		}
+	})
+
 	return `
-		grid-template-columns: repeat(${ gridWidth }, minmax(0, 1fr));
+		// grid-template-columns: repeat(${ gridWidth }, minmax(0, 1fr));
+		grid-template-columns: ${ width };
 		${ columnCssDefinitions.join(' ') }
 	`
 }

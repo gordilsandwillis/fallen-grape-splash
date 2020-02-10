@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { storiesOf } from '@storybook/react'
 import Button from './Button'
-import Link from 'src/components/Link'
+import TextLink from 'src/components/TextLink'
 import { MdVolumeUp as TestIcon } from 'react-icons/md'
 import { typography } from 'src/styles'
 
@@ -43,7 +43,7 @@ storiesOf(`Styleguide`, module)
 				<Button size="tiny">Tiny</Button>
 				<Button setTheme="textColor" size="small">Small</Button>
 				<Button to="/">Default</Button>
-				<Button setTheme="green" size="large">Large</Button>
+				<Button setTheme="mainColor" size="large">Large</Button>
 			</SpaceOut>
 			<SpaceOut>
 				<Button to="/" shape="square" size="tiny" icon={<TestIcon size={18}/>}/>
@@ -66,9 +66,10 @@ storiesOf(`Styleguide`, module)
 			<hr/>
 			<h4>Links</h4>
 			<SpaceOut>
-				<Link to="/">Internal Link</Link>
-				<Link to="/" shape="square">Square Button</Link>
-				<Link to="http://gdubs.nyc/" external>External Link</Link>
+				<TextLink to="/">Text Link</TextLink>
+				<TextLink to="/" shape="square">With Theme</TextLink>
+				<TextLink to="http://gdubs.nyc/" external>External Link</TextLink>
 			</SpaceOut>
+
 		</div>
 	))
