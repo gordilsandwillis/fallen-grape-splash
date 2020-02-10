@@ -8,6 +8,7 @@ import Grid from 'src/components/Grid'
 import ResponsiveComponent from 'src/components/ResponsiveComponent'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
+import ScrollListener from 'src/components/ScrollListener'
 import { colors, typography, animations, mq, util } from 'src/styles'
 
 const NavLinkStyle = (scrolled, active) => `
@@ -62,7 +63,7 @@ const Wrapper = styled.header`
 	left: 0;
 	right: 0;
 	z-index: 4;
-	transition: background ${ animations.mediumSpeed } ease-in-out;
+	transition: background ${ animations.mediumSpeed } ease-in-out, transform ${ animations.mediumSpeed } ease-in-out;
 	svg {
 		* {
 			fill: currentcolor;
@@ -78,6 +79,9 @@ const Wrapper = styled.header`
 		` : `
 			color: ${ colors.bgColor };
 		` }
+	` }
+	${ ({ navVisible }) => navVisible && `
+			transform: translate3d(0, -101%, 0);
 	` }
 `
 
@@ -178,15 +182,6 @@ class Header extends Component {
 		drawerOpen: false
 	}
 
-	componentDidMount () {
-		this.handleScroll()
-		window.addEventListener('scroll', this.handleScroll)
-	}
-
-	componentWillUnmount () {
-		window.removeEventListener('scroll', this.handleScroll)
-	}
-
 	toggleDrawer = id => {
 		this.setState({ navList: id, drawerOpen: id })
 	}
@@ -196,19 +191,6 @@ class Header extends Component {
 		setTimeout(() => {
 			this.toggleDrawer(false)
 		}, 600) // timeout needs to match the navigation drawer exit speed
-	}
-
-	handleScroll = event => {
-		let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-		if (scrollTop > 10) {
-			if (!this.state.scrolled) {
-				this.setState({ scrolled: true })
-			}
-		} else {
-			if (this.state.scrolled) {
-				this.setState({ scrolled: false })
-			}
-		}
 	}
 
 	render () {
@@ -227,50 +209,59 @@ class Header extends Component {
 			pathname = location.pathname
 		}
 
+		console.log(this.props)
+
 		return (
 			<Fragment>
-				<Wrapper scrolled={scrolled} hasAtf={hasAtf}>
-					<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
-						<HeaderContent
-							small="1 [5] [2] [5] 1"
-							medium="1 [5] [2] [5] 1"
-							large="1 [9] [8] [9] 1"
-							vAlign="center"
-						>
-							<div>
-								<MenuIcon onClick={() => this.toggleDrawer(headerNavigation[0].id)}>
-									<MaterialIcon size="36px">menu</MaterialIcon>
-								</MenuIcon>
-								<NavLinks mediumHide>
-									{headerNavigation && headerNavigation.map(({ id, displayTitle }, index) => (
-										<NavTrigger key={index + '_' + id + 'header'} scrolled={scrolled} hasAtf={hasAtf} onClick={() => this.toggleDrawer(id)}>{displayTitle}</NavTrigger>
-									))}
-								</NavLinks>
-							</div>
-							<LogoCol scrolled={scrolled} hasAtf={hasAtf}>
-								<Link to="/" style="none">
-									<Logo />
-								</Link>
-							</LogoCol>
-							<div>
-								<NavLinks alignment="right">
-									{headerLinks && headerLinks.map(({ to, label, id }, index) => (
-										<NavLink key={index + '_' + id + 'nested-header'} scrolled={scrolled} hasAtf={hasAtf} to={to} active={pathname === to}>{label}</NavLink>
-									))}
-									{headerButtons && headerButtons.map(({ to, label, id, theme, alternateLabelSmall, alternateLabelMedium }, index) => (
-										<Button key={id + index} size="small" setTheme={theme}>
-											<ResponsiveComponent
-												small={alternateLabelSmall || label}
-												medium={alternateLabelMedium || label}
-												large={label}
-											/>
-										</Button>
-									))}
-								</NavLinks>
-							</div>
-						</HeaderContent>
-					</HeaderContainer>
-				</Wrapper>
+				<ScrollListener.Consumer>
+		      {({ scrolledToTop, scrolledToBottom, scrollY, scrolledUp, hasScrolled, pageHeight }) => {
+		      	const scrolled = !scrolledToTop
+		      	return (
+							<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp}>
+								<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
+									<HeaderContent
+										small="1 [5] [2] [5] 1"
+										medium="1 [5] [2] [5] 1"
+										large="1 [9] [8] [9] 1"
+										vAlign="center"
+									>
+										<div>
+											<MenuIcon onClick={() => this.toggleDrawer(headerNavigation[0].id)}>
+												<MaterialIcon size="36px">menu</MaterialIcon>
+											</MenuIcon>
+											<NavLinks mediumHide>
+												{headerNavigation && headerNavigation.map(({ id, displayTitle }, index) => (
+													<NavTrigger key={index + '_' + id + 'header'} scrolled={scrolled} hasAtf={hasAtf} onClick={() => this.toggleDrawer(id)}>{displayTitle}</NavTrigger>
+												))}
+											</NavLinks>
+										</div>
+										<LogoCol scrolled={scrolled} hasAtf={hasAtf}>
+											<Link to="/" style="none">
+												<Logo />
+											</Link>
+										</LogoCol>
+										<div>
+											<NavLinks alignment="right">
+												{headerLinks && headerLinks.map(({ to, label, id }, index) => (
+													<NavLink key={index + '_' + id + 'nested-header'} scrolled={scrolled} hasAtf={hasAtf} to={to} active={pathname === to}>{label}</NavLink>
+												))}
+												{headerButtons && headerButtons.map(({ to, label, id, theme, alternateLabelSmall, alternateLabelMedium }, index) => (
+													<Button key={id + index} size="small" setTheme={theme}>
+														<ResponsiveComponent
+															small={alternateLabelSmall || label}
+															medium={alternateLabelMedium || label}
+															large={label}
+														/>
+													</Button>
+												))}
+											</NavLinks>
+										</div>
+									</HeaderContent>
+								</HeaderContainer>
+							</Wrapper>
+						)
+					}}
+				</ScrollListener.Consumer>
 
 				<ConditionalRender condition={!hasAtf}>
 					<HeaderPlaceholder />

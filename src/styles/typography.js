@@ -97,13 +97,11 @@ export const h6 = `
 
 export const blockquote = `
 	${ bodyLarge }
-	font-style: italic;
+	font-style: normal;
 `
 
 export const eyebrow = `
-	${ bodyMedium }
-	font-style: italic;
-	letter-spacing: .05em;
+	${ h6 }
 `
 
 export const buttonStyle = `

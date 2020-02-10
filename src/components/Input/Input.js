@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
-import { lighten, rgba } from 'polished'
+import { lighten, darken, rgba } from 'polished'
 import { colors, typography, animations, util } from 'src/styles'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
+import { isEmoji } from 'src/util/validations'
 
 const inputVars = {
 	tiny: '36px',
@@ -13,7 +14,8 @@ const inputVars = {
 	large: '72px',
 	borderWidth: '2px',
 	backgroundColor: 'transparent',
-	borderRadius: '0px'
+	borderRadius: '0px',
+	hPadding: '1em'
 }
 
 const themes = {
@@ -62,17 +64,18 @@ const setInputTheme = theme => {
 		darkBrown: colors.bgColor
 	}
 	return `
+		color: ${ themes[theme]['color'] };
 		input {
 			background: ${ themes[theme]['background'] };
 			border-color: ${ colors[theme] };
 			caret-color: ${ themes[theme]['color'] };
 			color: ${ themes[theme]['color'] };
 			&:hover, &:active, &:focus {
-				background: ${ lighten(0.07, colors[theme]) };
-				border-color: ${ colors.mainColor };
+				background: ${ darken(0.05, themes[theme]['background']) };
+				border-color: ${ themes[theme]['accent'] };
 			}
 			::placeholder {
-				color: ${ rgba(colors.textColor, 0.4) };
+				color: ${ rgba(themes[theme]['color'], 0.5) };
 			}
 		}
 	`
@@ -124,7 +127,7 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
   line-height: inherit;
   text-align: left;
   box-shadow: none;
-  padding: 2px .75em 0;
+  padding: 2px ${ inputVars.hPadding } 0;
   ${ icon ? `
 		padding-${ iconPosition }: ${ inputVars.medium };
 		${ size === 'tiny' ? `
@@ -181,7 +184,8 @@ const StyledInput = styled.input`
 		icon,
 		iconPosition,
 		label,
-		theme
+		theme,
+		style,
 	}) => InputStyles(getState(loading, error, success, disabled), size, icon, iconPosition, theme, label) }
 `
 
@@ -230,7 +234,7 @@ const InputLabel = styled.label`
 	display: flex;
 	align-items: center;
 	pointer-events: none;
-	margin: 0 .75em;
+	margin: 0 ${ inputVars.hPadding };
 	color: ${ ({ error }) => error ? `${ colors.alert }` : `inherit` };
 	transition: transform ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
 	transform-origin: 0% 50%;
@@ -264,9 +268,10 @@ class Input extends Component {
 		hasValue: false
 	}
 
-	renderIcon = (icon, size, iconPosition, theme, emojiIcon) => {
+	renderIcon = (icon, size, iconPosition, theme) => {
 		let renderedIcon = false
-		if (emojiIcon) {
+		let isEmojiIcon = isEmoji(icon)
+		if (isEmojiIcon) {
 			renderedIcon = <InputIcon size={size} iconPosition={iconPosition} theme={theme} emojiIcon>{icon}</InputIcon>
 		} else if (typeof icon === 'string') {
 			renderedIcon = <InputIcon size={size} iconPosition={iconPosition} theme={theme}><MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon></InputIcon>
@@ -285,7 +290,6 @@ class Input extends Component {
 			value,
 			type,
 			icon,
-			emojiIcon,
 			iconPosition,
 			loading,
 			error,
@@ -318,7 +322,6 @@ class Input extends Component {
 					theme={theme}
 					shape={shape}
 					size={size}
-					theme={theme}
 					onFocus={() => this.setFocus(true)}
 					onBlur={() => this.setFocus(false)} // needs work
 					value={value}
@@ -339,9 +342,9 @@ class Input extends Component {
 						{label}
 					</InputLabel>
 				</ConditionalRender>
-				<ConditionalRender condition={icon}>
-					{this.renderIcon(icon, size, iconPosition, theme, emojiIcon)}
-				</ConditionalRender>
+				{icon && (
+					this.renderIcon(icon, size, iconPosition, theme)
+				)}
 			</InputWrap>
 		)
 	}
@@ -351,7 +354,6 @@ Input.defaultProps = {
 	type: 'text',
 	iconPosition: 'left',
 	theme: 'lightGrey',
-	emojiIcon: false,
 	spellcheck: false
 }
 

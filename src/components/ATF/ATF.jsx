@@ -9,7 +9,7 @@ import ContentfulRichText from 'src/components/ContentfulRichText'
 import TextLockup from 'src/components/TextLockup'
 import ThemeSelector from 'src/components/ThemeSelector'
 import withSizes from 'react-sizes'
-import { colors, typography, animations } from 'src/styles'
+import { colors, typography, animations, util } from 'src/styles'
 import MobileDetect from 'mobile-detect'
 import Video from 'src/components/Video'
 import { MdPlayArrow, MdArrowDownward } from 'react-icons/md'
@@ -48,6 +48,10 @@ const AlignmentContainer = styled.div`
 const Content = styled.div`
 	width: 100%;
 	text-align: ${ ({ hAlignment }) => hAlignment };
+`
+
+const TextArea = styled(TextLockup)`
+	${ util.responsiveStyles('max-width', 800, 750, 700, 600) }
 `
 
 const Block = styled.div`
@@ -149,16 +153,6 @@ const Divider = styled.div`
 	}
 `
 
-const PlayButton = styled.div`
-	margin: 30px;
-	cursor: pointer;
-	border: none;
-	background-color: none;
-	padding: none;
-	margin: none;
-	${ typography.h6 }
-	transition: opacity ${ animations.mediumSpeed } ease-in-out;
-`
 class ATF extends Component {
 	constructor (props) {
 		super(props)
@@ -202,7 +196,8 @@ class ATF extends Component {
 			eyebrow,
 			showArrow,
 			index,
-			theme
+			theme,
+			overlay
 		} = this.props
 
 		const {
@@ -247,7 +242,8 @@ class ATF extends Component {
 							large={image.large}
 						/>
 					) : false}
-					{index === 0 && video && image ? <Overlay /> : false}
+					{index === 0 && (video || image) ? <Overlay /> : false}
+					{overlay ? <ImageOverlay overlay={overlay} /> : false}
 				</Block>
 				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
 					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight} showArrow={showArrow}>
@@ -258,7 +254,7 @@ class ATF extends Component {
 								large={hAlignmentGrid[hAlignment]}
 							>
 								<ScrollEntrance>
-									<TextLockup
+									<TextArea
 										theme="bgColor"
 										eyebrow={eyebrow}
 										alignment={textAlignment}
@@ -299,7 +295,8 @@ ATF.defaultProps = {
 	vAlignment: 'center',
 	showArrow: true,
 	headlineSize: 'h1',
-	theme: 'black'
+	theme: 'black',
+	overlay: false
 }
 
 const sizesToProps = ({ width, height }) => ({

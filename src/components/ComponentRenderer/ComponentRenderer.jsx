@@ -5,7 +5,7 @@ import CalloutText from 'src/components/CalloutText'
 import FiftyFifty from 'src/components/FiftyFifty'
 import TwoColumnText from 'src/components/TwoColumnText'
 import WideMedia from 'src/components/WideMedia'
-import TwoUpImages from 'src/components/TwoUpImages'
+import MultipleImages from 'src/components/MultipleImages'
 
 const componentMap = {
 	ContentfulAboveTheFold: ATF,
@@ -13,7 +13,7 @@ const componentMap = {
 	ContentfulFiftyFifty: FiftyFifty,
 	ContentfulTwoColumnText: TwoColumnText,
 	ContentfulWideMedia: WideMedia,
-	ContentfulTwoUpImages: TwoUpImages
+	ContentfulMultipleImages: MultipleImages
 }
 
 export default ({ item, prevTheme, nextTheme, index }) => {

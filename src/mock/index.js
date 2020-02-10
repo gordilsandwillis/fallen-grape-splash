@@ -1,3 +1,18 @@
+export const themeOptions = {
+	bgColor: 'bgColor',
+	textColor: 'textColor',
+	mainColor: 'mainColor',
+	lightGrey: 'lightGrey',
+	black: 'black',
+	white: 'white'
+}
+
+export const alignmentOptions = {
+	left: 'left',
+	right: 'right',
+	center: 'center'
+}
+
 export const Placeholder21 = {
 	// 'childImageSharp': {
 		'fluid': {

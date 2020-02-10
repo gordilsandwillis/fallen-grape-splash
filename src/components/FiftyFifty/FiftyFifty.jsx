@@ -15,11 +15,13 @@ const FiftyFifty = ({
 	headline,
 	headlineSize,
 	text,
+	textSize,
 	imagePosition,
 	image,
 	video,
 	buttons,
-	additions
+	additions,
+	alignment
 }) => {
 
 	let gridSetup = {
@@ -102,7 +104,9 @@ const FiftyFifty = ({
 						specialList
 						headline={headline}
 						headlineSize={headlineSize}
+						alignment={alignment}
 						text={text}
+						textSize={textSize}
 						eyebrow={eyebrow}
 						buttons={buttons}
 						theme={theme}
@@ -117,7 +121,9 @@ const FiftyFifty = ({
 FiftyFifty.defaultProps = {
 	imagePosition: 'left',
 	additions: false,
-	headlineSize: 'h3'
+	headlineSize: 'h3',
+	alignment: 'left',
+	textSize: 'body'
 }
 
 export default FiftyFifty

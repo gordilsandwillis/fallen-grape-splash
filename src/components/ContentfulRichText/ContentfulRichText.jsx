@@ -5,11 +5,11 @@ import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import BalanceText from 'react-balance-text'
 
 const RichTextWrapper = styled.div`
-	> *:first-child {
+	> h1:first-child,
+	> h2:first-child,
+	> h3:first-child,
+	> h4:first-child {
 		margin-top: 0;
-	}
-	> *:last-child {
-		margin-bottom: 0;
 	}
 	white-space: pre-wrap;
 	* {
@@ -17,7 +17,7 @@ const RichTextWrapper = styled.div`
 	}
 `
 
-const Heading1 = ({ children }) => <h1><BalanceText>{children}</BalanceText></h1>
+const Heading1 = ({ children }) => <h1><div>{children}</div></h1>
 
 const options = {
 	renderMark: {

@@ -5,43 +5,21 @@ import { MdArrowForward } from 'react-icons/md'
 
 import { Link as GatsbyLink } from 'gatsby'
 
-const LinkStyles = (linkStyle, setTheme) => `
+const LinkStyles = (setTheme) => `
 	font-size: inherit;
 	text-decoration: none;
 	cursor: pointer;
-	${ linkStyle === 'textLink' || linkStyle === 'arrowLink' ? `
-		position: relative;
-		&:after {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 100%;
-			left: 0;
-			width: 100%;
-			height: 2px;
-			background: ${ colors[setTheme] };
-			transform: scaleX(0);
-			transform-origin: right center;
-			transition: transform ${ animations.mediumSpeed } ease-in-out;
-		}
-		&:hover {
-			&:after {
-				transform-origin: left center;
-				transform: scaleX(1);
-			}
-		}
-	` : `` }
 `
 
 const StyledLinkElement = styled.a`
-	${ ({ linkStyle, setTheme }) => `
-		${ LinkStyles(linkStyle, setTheme) }
+	${ ({ setTheme }) => `
+		${ LinkStyles(setTheme) }
 	` }
 `
 
 const StyledGatsbyLink = styled(GatsbyLink)`
-	${ ({ linkStyle, setTheme }) => `
-		${ LinkStyles(linkStyle, setTheme) }
+	${ ({ setTheme }) => `
+		${ LinkStyles(setTheme) }
 	` }
 `
 
@@ -54,7 +32,7 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, style, setTheme } = this.props
+		const { to, external, target, children, className, setTheme } = this.props
 
 		if (external) {
 			return (
@@ -62,13 +40,9 @@ class Link extends Component {
 					className={className}
 					href={to}
 					target={target}
-					linkStyle={style}
 					setTheme={setTheme}
 				>
 					{children}
-					{style === 'arrowLink' && (
-						<ArrowIcon size={18}/>
-					)}
 				</StyledLinkElement>
 			)
 		} else {
@@ -76,13 +50,9 @@ class Link extends Component {
 				<StyledGatsbyLink
 					className={className}
 					to={to}
-					linkStyle={style}
 					setTheme={setTheme}
 				>
 					{children}
-					{style === 'arrowLink' && (
-						<ArrowIcon size={18}/>
-					)}
 				</StyledGatsbyLink>
 			)
 		}
@@ -93,7 +63,6 @@ Link.defaultProps = {
 	to: '#',
 	external: false,
 	target: '',
-	style: 'textLink',
 	setTheme: 'alert'
 }
 

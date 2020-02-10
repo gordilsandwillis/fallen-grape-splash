@@ -2,14 +2,11 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { useInView } from 'react-intersection-observer'
 
-const transitionTiming = 'cubic-bezier(0.44, 0.24, 0.16, 1.00)'
-const transitionSpeed = '.65s'
-const transitionDelay = 0.075
-
 const EnteranceWrap = styled.div`
 	> * {
-		transition: 	transform ${ transitionSpeed } ${ transitionTiming },
-									opacity ${ transitionSpeed } ${ transitionTiming };
+		${ ({ timing, speed }) => `
+			transition: transform ${ speed + 'ms' } ${ timing }, opacity ${ speed + 'ms' } ${ timing };
+		` }
 		${ ({ 'data-in-view': inView, transform }) => inView ? `
 			transform: none;
 			opacity: 1;
@@ -18,14 +15,14 @@ const EnteranceWrap = styled.div`
 			opacity: 0;
 		` }
 
-		${ ({ delay }) => delay > 0 && `
-			transition-delay: ${ transitionDelay * (delay) }s;
+		${ ({ delay, speed }) => delay > 0 && `
+			transition-delay: ${ (speed * .115) * (delay) }ms;
 		` }
 		
-		${ ({ items, delay }) => Array.isArray(items) ? `
+		${ ({ items, delay, speed }) => Array.isArray(items) ? `
 			${ items.map((item, index) => `
 				&:nth-child(${ index }) {
-					transition-delay: ${ transitionDelay * (index + delay) }s;
+					transition-delay: ${ (speed * .115) * (index + delay) }ms;
 				}
 			`) }
 		` : `` }
@@ -33,7 +30,7 @@ const EnteranceWrap = styled.div`
 	}
 `
 
-const ScrollEntrance = ({ children, className, transform, delay }) => {
+const ScrollEntrance = ({ children, className, transform, speed, delay, timing }) => {
 	const [ref, inView] = useInView({ triggerOnce: true })
 
 	if (!children) {
@@ -48,6 +45,8 @@ const ScrollEntrance = ({ children, className, transform, delay }) => {
 			transform={transform}
 			className={className}
 			items={children}
+			timing={timing}
+			speed={speed}
 		>
 			{children}
 		</EnteranceWrap>
@@ -56,7 +55,9 @@ const ScrollEntrance = ({ children, className, transform, delay }) => {
 
 ScrollEntrance.defaultProps = {
 	transform: 'translate3d(0, 40px, 0)',
-	delay: 0
+	delay: 0,
+	timing: 'cubic-bezier(0.44, 0.24, 0.16, 1.00)',
+	speed: 650
 }
 
 export default ScrollEntrance

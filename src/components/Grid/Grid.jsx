@@ -82,7 +82,6 @@ const gridDefToCss = gridDef => {
 	let colCount = 1
 
 	const numColumns = _.filter(gridData, ({ isColumn }) => isColumn).length
-	console.log(gridData)
 
 	const columnCssDefinitions = _.map(gridData, ({ isColumn, size, isVariableColumn }) => {
 		let result = null

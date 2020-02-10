@@ -124,11 +124,7 @@ export default `
   }
 
   figcaption {
-    ${ responsiveStyles('margin-top', 20, 12, 10, 4) }
-    ${ responsiveStyles('margin-bottom', 4, 4, 2, 4) }
     ${ typography.bodySmall }
-    font-style: italic;
-    letter-spacing: 0.03em;
   }
 
   hr {

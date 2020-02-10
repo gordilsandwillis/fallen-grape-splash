@@ -3,12 +3,24 @@ import styled from '@emotion/styled'
 import Section from 'src/components/Section'
 import TextLockup from 'src/components/TextLockup'
 import Grid from 'src/components/Grid'
-import * as mockCopy from 'src/mock/copy'
 import { util } from 'src/styles'
 
 const ContentWrapper = styled.div`
-	${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
-	${ util.responsiveStyles('padding-bottom', 91, 51, 33, 26) }
+	${ util.responsiveStyles('padding-top', 60, 50, 30, 24) }
+	${ util.responsiveStyles('padding-bottom', 60, 50, 30, 24) }
+`
+
+const TextContent = styled(TextLockup)`
+	${ ({ alignment }) => alignment === 'center' ? `
+		margin-left: auto;
+		margin-right: auto;
+		${ util.responsiveStyles('max-width', 800, 750, 700, 600) }
+	` : `
+		${ util.responsiveStyles('max-width', 1200, 900, 750, 600) }
+	` }
+	${ ({ alignment }) => alignment === 'right' && `
+		margin-left: auto;
+	` }
 `
 
 const CalloutText = ({
@@ -34,7 +46,7 @@ const CalloutText = ({
 		>	
 			<ContentWrapper>
 				<Grid small="1 [12] 1">
-					<TextLockup
+					<TextContent
 						theme={theme}
 						eyebrow={eyebrow}
 						headline={headline}

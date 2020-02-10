@@ -3,9 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { withKnobs, text, boolean, optionsKnob } from '@storybook/addon-knobs'
 import ATF from './ATF'
 import * as mock from 'src/mock'
-
-const placeholderHeadline = `the greatest website in the world`
-const placeholderTagline = `By Gordils & Willis Inc.`
+import * as copy from 'src/mock/copy'
 
 const hAlignmentOptions = {
 	center: 'center',
@@ -41,8 +39,9 @@ stories.addDecorator(withKnobs)
 stories.add(`Image`, () => (
 	<ATF
 		headlineSize={ optionsKnob('Headline Size', headerSizeOptions, 'h2', { display: 'radio' }) }
-		headline={text('Headline', placeholderHeadline)}
-		text={text('Tagline', placeholderTagline)}
+		eyebrow={text('Eyebrow', copy.eyebrow)}
+		headline={text('Headline', copy.headline)}
+		text={text('Tagline', copy.lorem)}
 		textAlignment={ optionsKnob('Text Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		hAlignment={ optionsKnob('H-Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		vAlignment={ optionsKnob('V-Alignment', vAlignmentOptions, 'center', { display: 'inline-radio' }) }
@@ -57,8 +56,9 @@ stories.add(`Image`, () => (
 )).add(`HTML5 Video`, () => (
 	<ATF
 		headlineSize={ optionsKnob('Headline Size', headerSizeOptions, 'h2', { display: 'radio' }) }
-		headline={text('Headline', placeholderHeadline)}
-		text={text('Tagline', placeholderTagline)}
+		eyebrow={text('Eyebrow', copy.eyebrow)}
+		headline={text('Headline', copy.headline)}
+		text={text('Tagline', copy.lorem)}
 		textAlignment={ optionsKnob('Text Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		hAlignment={ optionsKnob('H-Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		vAlignment={ optionsKnob('V-Alignment', vAlignmentOptions, 'center', { display: 'inline-radio' }) }
@@ -69,8 +69,9 @@ stories.add(`Image`, () => (
 )).add(`Embeded Video`, () => (
 	<ATF
 		headlineSize={ optionsKnob('Headline Size', headerSizeOptions, 'h2', { display: 'radio' }) }
-		headline={text('Headline', placeholderHeadline)}
-		text={text('Tagline', placeholderTagline)}
+		eyebrow={text('Eyebrow', copy.eyebrow)}
+		headline={text('Headline', copy.headline)}
+		text={text('Tagline', copy.lorem)}
 		textAlignment={ optionsKnob('Text Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		hAlignment={ optionsKnob('H-Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		vAlignment={ optionsKnob('V-Alignment', vAlignmentOptions, 'center', { display: 'inline-radio' }) }
@@ -81,8 +82,9 @@ stories.add(`Image`, () => (
 )).add(`Color`, () => (
 	<ATF
 		headlineSize={ optionsKnob('Headline Size', headerSizeOptions, 'h2', { display: 'radio' }) }
-		headline={text('Headline', placeholderHeadline)}
-		text={text('Tagline', placeholderTagline)}
+		eyebrow={text('Eyebrow', copy.eyebrow)}
+		headline={text('Headline', copy.headline)}
+		text={text('Tagline', copy.lorem)}
 		textAlignment={ optionsKnob('Text Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		hAlignment={ optionsKnob('H-Alignment', hAlignmentOptions, 'center', { display: 'inline-radio' }) }
 		vAlignment={ optionsKnob('V-Alignment', vAlignmentOptions, 'center', { display: 'inline-radio' }) }

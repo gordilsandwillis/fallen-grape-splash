@@ -1,3 +1,7 @@
+export const headline = 'The Greatest Website in History'
+export const eyebrow = 'The Internet'
+export const lorem = "Lorum ipsum dolor sit amet, consectetur adipiscing elit. Quid Zeno? Cave putes quicquam esse verius. Peccata paria. Duo Reges: constructio interrete."
+
 export const list = [
 	{
 		text: 'Examine the high schools in your community. How well are they serving students? What gaps do you see? Are some local young people being left out of high school?'

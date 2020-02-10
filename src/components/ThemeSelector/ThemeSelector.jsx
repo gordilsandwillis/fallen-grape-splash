@@ -9,7 +9,8 @@ const ThemeWrapper = styled.div`
 	` }
 	${ ({ 'data-theme': setTheme }) =>
 		setTheme === 'mainColor' ||
-		setTheme === 'black' ? `
+		setTheme === 'black' ||
+		setTheme === 'textColor' ? `
 		color: ${ colors.bgColor };
 		h1, h2, h3, h4, h5, h6 {
 			color: ${ colors.bgColor };
@@ -24,7 +25,7 @@ const ThemeWrapper = styled.div`
 	` : `` }
 `
 
-const ThemeSelector = ({ className, setTheme, ...rest }) => (
+const ThemeSelector = ({ className, setTheme = 'bgColor', ...rest }) => (
 	<ThemeWrapper
 		data-theme={setTheme}
 		className={className}

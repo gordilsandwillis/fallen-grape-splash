@@ -3,6 +3,8 @@ import { StaticQuery, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import globalStyles from 'src/styles/globalStyles'
 import PageTransition from 'src/components/PageTransition'
+import ScrollListener from 'src/components/ScrollListener'
+import NavContext from 'src/contexts/NavContext'
 import { Global, css } from '@emotion/core'
 import './reset.css'
 
@@ -19,12 +21,14 @@ const Layout = ({ children, location }) => (
 		`}
 		render={data => (
 			<Fragment>
-				<Global
-					styles={css`${ globalStyles }`}
-				/>
-				<PageTransition location={location}>
-					{children}
-				</PageTransition>
+        <ScrollListener>
+					<Global
+						styles={css`${ globalStyles }`}
+					/>
+					<PageTransition location={location}>
+						{children}
+					</PageTransition>
+				</ScrollListener>
 			</Fragment>
 		)}
 	/>
