@@ -19,6 +19,6 @@ const componentMap = {
 export default ({ item, prevTheme, nextTheme, index }) => {
 	const Component = componentMap[item.__typename]
 	return Component ? (
-		<Component {...item} prevTheme={prevTheme} nextTheme={nextTheme} index={index}/>
+		<Component {...item} prevTheme={prevTheme} nextTheme={nextTheme} lastSection={lastSection} index={index}/>
 	) : null
 }

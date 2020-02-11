@@ -32,6 +32,7 @@ const CalloutText = ({
 	eyebrow,
 	headline,
 	text,
+	textSize,
 	buttons,
 	cards,
 	icon,
@@ -52,6 +53,7 @@ const CalloutText = ({
 						headline={headline}
 						headlineSize={headlineSize}
 						text={text}
+						textSize={textSize}
 						icon={icon}
 						buttons={buttons}
 						cards={cards}
@@ -64,7 +66,8 @@ const CalloutText = ({
 }
 
 CalloutText.defaultProps = {
-	headlineSize: 'h3'
+	headlineSize: 'h3',
+	textSize: 'bodyMedium'
 }
 
 export default CalloutText

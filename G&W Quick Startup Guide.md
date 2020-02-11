@@ -1,11 +1,12 @@
 # G&W Quick Startup Guide
 
 ## Out of the Box Block Types
-- ATF (Above the Fold)
-- CenterAlignedText
-- Fifty Fifty (Image and Text or Video)
-- Two Up Images
-- Two Up Text
+- ATF
+- Callout Text
+- Fifty Fifty
+- Multiple Images
+- Two Column Text
+- Wide Media
 
 ## Run Base Import
 

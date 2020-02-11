@@ -215,7 +215,7 @@ class Header extends Component {
 			<Fragment>
 				<ScrollListener.Consumer>
 		      {({ scrolledToTop, scrolledToBottom, scrollY, scrolledUp, hasScrolled, pageHeight }) => {
-		      	const scrolled = hasScrolled
+		      	const scrolled = !scrolledToTop
 		      	return (
 							<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp}>
 								<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>

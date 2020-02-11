@@ -134,7 +134,7 @@ const TextLockup = ({
 					</ConditionalRender>
 
 					{text && text.json &&
-						<Text alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
+						<Text textSize={textSize} alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
 					}
 
 					{typeof text === 'string' &&
@@ -157,7 +157,7 @@ const TextLockup = ({
 										<Button
 											key={'button-' + index}
 											to={button.to}
-											setTheme={button.theme}
+											theme={button.theme}
 											external={button.external || false}
 											target={button.target || ''}
 										>
@@ -169,7 +169,7 @@ const TextLockup = ({
 										<TextLink
 											key={'button-' + index}
 											to={button.to}
-											setTheme={button.theme}
+											theme={button.theme}
 											external={button.external || false}
 											target={button.target || ''}
 										>

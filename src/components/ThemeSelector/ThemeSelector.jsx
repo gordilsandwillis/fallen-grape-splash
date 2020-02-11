@@ -4,7 +4,7 @@ import { colors } from 'src/styles'
 
 const ThemeWrapper = styled.div`
 	transition: background-color 1s ease-in-out, color 1s ease-in-out;
-	${ ({ 'data-theme': setTheme }) => setTheme && `
+	${ ({ 'data-theme': setTheme }) => setTheme && setTheme !== 'bgColor' `
 		background-color: ${ colors[setTheme] };
 	` }
 	${ ({ 'data-theme': setTheme }) =>
