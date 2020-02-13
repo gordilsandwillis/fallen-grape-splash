@@ -19,6 +19,7 @@ const ScrubberWrap = styled.div`
 	align-items: center;
 	flex-grow: 1;
 	padding-left: 14px;
+	padding-right: 14px;
 `
 
 const Time = styled.div`
@@ -203,7 +204,7 @@ class AudioPlayer extends Component {
 								/>
 							</ScrubberTrack>
 						</Scrubber>
-						<Time duration={duration}>{this.secondsTohhmmss(Math.round(duration))}</Time>
+						<Time duration={duration} alignment="left">{this.secondsTohhmmss(Math.round(duration))}</Time>
 					</ScrubberWrap>
 					<Button onClick={this.muteUnmute} icon={muted ? 'volume_up' : 'volume_off'} size="tiny" shape="circle" />
 				</PlayerControls>

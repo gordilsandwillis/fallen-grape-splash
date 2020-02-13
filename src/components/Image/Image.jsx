@@ -49,9 +49,7 @@ const ResponsiveImage = ({ image, small, medium, large, className }) => {
 				durationFadeIn={1000}
 				// objectFit="cover"
 				// objectPosition="50% 50%"
-			>
-				<div style={{ boxShadow: '-14px 16px 5px 5px green' }}/>
-			</StyledImage>
+			/>
 		)
 	} else {
 		return false

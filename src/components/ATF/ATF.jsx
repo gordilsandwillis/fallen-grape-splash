@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Grid from 'src/components/Grid'
 import Image from 'src/components/Image'
-import ScrollEntrance from 'src/components/ScrollEntrance'
 import Button from 'src/components/Button'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ContentfulRichText from 'src/components/ContentfulRichText'
@@ -197,7 +196,8 @@ class ATF extends Component {
 			showArrow,
 			index,
 			theme,
-			overlay
+			overlay,
+			className
 		} = this.props
 
 		const {
@@ -220,7 +220,7 @@ class ATF extends Component {
 		const verticalAligment = vAlignOptions[vAlignment]
 
 		return (
-			<Wrapper setTheme={theme} media={image || video}>
+			<Wrapper setTheme={theme} media={image || video} className={className}>
 				<Block background winHeight={winHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>
@@ -253,18 +253,16 @@ class ATF extends Component {
 								medium="1 [12] 1"
 								large={hAlignmentGrid[hAlignment]}
 							>
-								<ScrollEntrance>
-									<TextArea
-										theme="bgColor"
-										eyebrow={eyebrow}
-										alignment={textAlignment}
-										headlineSize={headlineSize}
-										headlineElement="h1"
-										headline={headline}
-										text={text}
-										buttons={buttons}
-									/>
-								</ScrollEntrance>
+								<TextArea
+									theme="bgColor"
+									eyebrow={eyebrow}
+									alignment={textAlignment}
+									headlineSize={headlineSize}
+									headlineElement="h1"
+									headline={headline}
+									text={text}
+									buttons={buttons}
+								/>
 							</Grid>
 						</Content>
 					</AlignmentContainer>
@@ -296,7 +294,8 @@ ATF.defaultProps = {
 	showArrow: true,
 	headlineSize: 'h1',
 	theme: 'black',
-	overlay: false
+	overlay: false,
+	className: ''
 }
 
 const sizesToProps = ({ width, height }) => ({

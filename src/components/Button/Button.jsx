@@ -11,8 +11,14 @@ import Link from 'src/components/Link'
 const buttonSizes = {
 	tiny: '36px',
 	small: '48px',
-	medium: '60px',
+	medium: '50px',
 	large: '72px',
+}
+
+const buttonSettings = {
+	radius: '0px',
+	border: '2px solid',
+	transitionSpeed: animations.mediumSpeed
 }
 
 const getState = (loading, error, success, disabled) => {
@@ -41,7 +47,17 @@ const setButtonTheme = theme => `
 	&:hover {
 		color: ${ colors.themes[theme].hoverColor };
 		background: ${ colors.themes[theme].hoverBackground };
+		${ colors.themes[theme].borderHoverColor ? `
+			border-color: ${ colors.themes[theme].borderHoverColor };
+		` : `
+			border-color: ${ colors.themes[theme].hoverBackground };
+		` }
 	}
+	${ colors.themes[theme].borderColor ? `
+		border-color: ${ colors.themes[theme].borderColor };
+	` : `
+		border-color: ${ colors.themes[theme].background };
+	` }
 `
 
 const DisabledButtonStyles = () => `
@@ -61,34 +77,34 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	outline: none;
 	display: inline-block;
 	vertical-align: middle;
-	border: none;
+	border: ${ buttonSettings.border };
 	height: ${ buttonSizes.medium };
 	padding-top: 0;
-	padding-bottom: 0px; // offset text if necessary
-	padding-left: calc(${ buttonSizes.medium } * .4);
-	padding-right: calc(${ buttonSizes.medium } * .4);
+	padding-bottom: 2px; // offset text if necessary
+	padding-left: calc(${ buttonSizes.medium } * .6);
+	padding-right: calc(${ buttonSizes.medium } * .6);
 	cursor: pointer;
 	text-transform: none;
 	letter-spacing: 0;
-	border-radius: 0;
+	border-radius: ${ buttonSettings.radius };
 	${ util.responsiveStyles('font-size', 20, 16, 15, 13) }
 	text-align: center;
 	box-shadow: none;
 	${ typography.buttonStyle }
 	${ util.fontSmoothing }
-	transition: background ${ animations.mediumSpeed } ease-in-out,
-							color ${ animations.mediumSpeed } ease-in-out,
-							border ${ animations.mediumSpeed } ease-in-out,
-							box-shadow ${ animations.mediumSpeed } ease-in-out,
-							transform ${ animations.mediumSpeed } ease-in-out,
-							opacity ${ animations.mediumSpeed } ease-in-out;
+	transition: background ${ buttonSettings.transitionSpeed } ease-in-out,
+							color ${ buttonSettings.transitionSpeed } ease-in-out,
+							border ${ buttonSettings.transitionSpeed } ease-in-out,
+							box-shadow ${ buttonSettings.transitionSpeed } ease-in-out,
+							transform ${ buttonSettings.transitionSpeed } ease-in-out,
+							opacity ${ buttonSettings.transitionSpeed } ease-in-out;
 	// Button States
 	${ state === 'loading' ? `cursor: wait;` : `` }
 	${ state === 'error' || state === 'success' ? `cursor: default;` : `` }
 
 	${ size ? `
-		padding-left: calc(${ buttonSizes[size] } * .4);
-		padding-right: calc(${ buttonSizes[size] } * .4);
+		padding-left: calc(${ buttonSizes[size] } * .6);
+		padding-right: calc(${ buttonSizes[size] } * .6);
 		height: ${ buttonSizes[size] };
 		min-width: calc(${ buttonSizes[size] } * 2);
 	` : `
@@ -98,7 +114,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	${ setButtonTheme(theme) }
 	${ state === 'disabled' ? `${ DisabledButtonStyles() }` : `` }
 
-	${ shape && `
+	${ shape ? `
 		${ shape.includes('circle') || shape.includes('square') ? `
 			padding-top: 0;
 			padding-bottom: 0;
@@ -112,7 +128,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 				min-width: ${ buttonSizes.medium };
 			` }
 		` : `` }
-	` }
+	` : `` }
 
 	${ shape && shape.includes('circle') ? `border-radius: 50%;` : `` }
 
@@ -184,7 +200,7 @@ class Button extends Component {
 			success,
 			disabled,
 			onClick,
-			theme,
+			setTheme,
 			className,
 			shape,
 			size
@@ -193,7 +209,7 @@ class Button extends Component {
 		if (to) {
 			return (
 				<StyledButtonLink
-					className={'button ' + className}
+					className={className}
 					to={to}
 					target={target}
 					external={external}
@@ -204,7 +220,7 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={theme}
+					theme={setTheme}
 					shape={shape}
 					size={size}
 				>
@@ -214,7 +230,7 @@ class Button extends Component {
 		} else {
 			return (
 				<StyledButtonElement
-					className={'button ' + className}
+					className={className}
 					icon={icon}
 					iconPosition={iconPosition}
 					loading={loading}
@@ -222,7 +238,7 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={theme}
+					theme={setTheme}
 					shape={shape}
 					size={size}
 				>
@@ -234,7 +250,8 @@ class Button extends Component {
 }
 
 Button.defaultProps = {
-	theme: 'default'
+	setTheme: 'default',
+	size: 'medium'
 }
 
 export default Button

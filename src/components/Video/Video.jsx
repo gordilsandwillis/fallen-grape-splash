@@ -52,6 +52,7 @@ const PlayButton = styled(Button)`
 	align-items: center;
 	justify-content: center;
 	transition: background ${ animations.mediumSpeed } ease-in-out;
+	border: none;
 	&:hover {
 		background: rgba(0, 0, 0, .1);
 	}
@@ -171,7 +172,7 @@ class Video extends Component {
 				)}
 
 				<Transition
-					in={playing}
+					in={playing || !coverImage}
 					timeout={{
 						appear: 500,
 						enter: 0,

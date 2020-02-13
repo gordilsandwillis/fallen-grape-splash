@@ -19,6 +19,7 @@ export const slick = `
     display: block;
     margin: 0;
     padding: 0;
+    transition: height .3s ease-in-out;
 
     &:focus {
       outline: none;

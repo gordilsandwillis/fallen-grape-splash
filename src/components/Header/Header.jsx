@@ -140,7 +140,6 @@ const NavLinks = styled.div`
 		${ util.responsiveStyles('margin-left', 60, 40, 32, 20) }
 		${ mq.mediumAndBelow } {
 			display: none;
-			border: 2px solid red;
 		}
 	}
 	${ ({ mediumHide }) => mediumHide && `
@@ -151,7 +150,6 @@ const NavLinks = styled.div`
 	${ ({ smallHide }) => smallHide && `
 		${ mq.mediumAndBelow } {
 			display: none;
-			border: 2px solid red;
 		}
 	` }
 `
