@@ -24,25 +24,3 @@ export const hrColor = rgba(textColor, 0.1)
 // Color Variations
 export const mainColorDarken = darken(0.07, mainColor)
 export const mainColorLighten = lighten(0.07, mainColor)
-
-// Themes
-export const themes = {
-	default: {
-		color: bgColor,
-		background: mainColor,
-		hoverColor: bgColor,
-		hoverBackground: lighten(0.07, mainColor)
-	},
-	mainColor: {
-		color: bgColor,
-		background: mainColor,
-		hoverColor: bgColor,
-		hoverBackground: lighten(0.07, mainColor)
-	},
-	textColor: {
-		color: bgColor,
-		background: textColor,
-		hoverColor: bgColor,
-		hoverBackground: lighten(0.2, textColor)
-	}
-}

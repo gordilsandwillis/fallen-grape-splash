@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import TwoColumnText from './TwoColumnText'
 import { withKnobs, text, boolean, optionsKnob } from '@storybook/addon-knobs'
 import * as copy from 'src/mock/copy'
-import * as mock from 'src/mock'
+import themes from 'src/styles/themes'
 
 const HeadlineOptions = {
 	h1: 'h1',
@@ -19,10 +19,16 @@ const TextOptions = {
 	bodySmall: 'bodySmall'
 }
 
+let themeOptions = {}
+Object.keys(themes).map((theme) => {
+	const key = theme.toString()
+	themeOptions[key] = theme
+})
+
 const stories = storiesOf(`Blocks`, module)
 stories.add(`Two Column Text`, () => (
 	<TwoColumnText
-		theme={ optionsKnob('Theme', mock.themeOptions, 'bgColor', { display: 'select' })}
+		theme={ optionsKnob('Theme', themeOptions, 'bgColor', { display: 'select' })}
 		eyebrow={text('Eyebrow', copy.eyebrow)}
 		headline={text('Headline', copy.headline)}
 		headlineSize={ optionsKnob('Headline Size', HeadlineOptions, 'h3', { display: 'select' }) }

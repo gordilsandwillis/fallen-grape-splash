@@ -33,8 +33,8 @@ const ArrowIcon = styled(MdArrowForward)`
 class Link extends Component {
 	render () {
 		const { to, external, target, children, className, setTheme } = this.props
-
 		if (external) {
+			const externalLink = external.toString()
 			return (
 				<StyledLinkElement
 					className={className}

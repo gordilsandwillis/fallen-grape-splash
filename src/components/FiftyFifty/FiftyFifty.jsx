@@ -6,6 +6,7 @@ import Image from 'src/components/Image'
 import Video from 'src/components/Video'
 import TextLockup from 'src/components/TextLockup'
 import ScrollEntrance from 'src/components/ScrollEntrance'
+import { mq } from 'src/styles'
 
 const FiftyFifty = ({
 	theme,
@@ -86,6 +87,7 @@ const FiftyFifty = ({
 								medium={image.medium}
 								large={image.large}
 								alt={(image && image.description) || (image && image.title)}
+								sizes={"(max-width: " + mq.mediumBreakpoint + "px) 100vw, 50vw"}
 							/>
 						</div>
 					</ConditionalRender>

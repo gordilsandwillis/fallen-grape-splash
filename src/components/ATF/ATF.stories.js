@@ -4,6 +4,7 @@ import { withKnobs, text, boolean, optionsKnob } from '@storybook/addon-knobs'
 import ATF from './ATF'
 import * as mock from 'src/mock'
 import * as copy from 'src/mock/copy'
+import themes from 'src/styles/themes'
 
 const hAlignmentOptions = {
 	center: 'center',
@@ -24,13 +25,11 @@ const headerSizeOptions = {
 	h4: 'h4'
 }
 
-const themeOptions = {
-	mainColor: 'mainColor',
-	bgColor: 'bgColor',
-	white: 'white',
-	black: 'black',
-	lightGrey: 'lightGrey'
-}
+let themeOptions = {}
+Object.keys(themes).map((theme) => {
+	const key = theme.toString()
+	themeOptions[key] = theme
+})
 
 const stories = storiesOf(`Blocks/ATF`, module)
 

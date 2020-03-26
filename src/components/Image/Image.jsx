@@ -18,13 +18,19 @@ const StyledImage = styled(Img)`
 			` }
 		}
 	` }
+	img {
+		transition: opacity 1s ease-in-out !important;
+	}
 `
 
-const ResponsiveImage = ({ image, small, medium, large, className }) => {
+const ResponsiveImage = ({ image, small, medium, large, className, loading, customSizes }) => {
 	if (small || medium || large || image) {
 		let source = null
 		if (image) {
 			source = image.fluid
+			if (customSizes) {
+				source.sizes = customSizes
+			}
 		} else {
 			source = [
 				{
@@ -47,8 +53,8 @@ const ResponsiveImage = ({ image, small, medium, large, className }) => {
 				fluid={source}
 				placeholderStyle={{ display: 'none' }}
 				durationFadeIn={1000}
-				// objectFit="cover"
-				// objectPosition="50% 50%"
+				loading={loading}
+				customSizes={customSizes}
 			/>
 		)
 	} else {
@@ -56,15 +62,22 @@ const ResponsiveImage = ({ image, small, medium, large, className }) => {
 	}
 }
 
-const Image = ({ useMultipleImages, small, medium, large, image, className }) => (
+const Image = ({ small, medium, large, image, className, sizes, loading }) => (
 	<ResponsiveImage
-		image={!useMultipleImages && image}
+		image={image}
 		small={small}
 		medium={medium}
 		large={large}
 		className={className}
+		customSizes={sizes}
+		loading={loading}
 	/>
 )
+
+Image.defaultProps = {
+	loading: 'lazy',
+	sizes: false
+}
 
 export {
 	ResponsiveImage,

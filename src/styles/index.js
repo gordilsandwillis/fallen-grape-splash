@@ -1,4 +1,5 @@
 import * as colors from './colors'
+import * as themes from './themes'
 import * as typography from './typography'
 import * as mediaQueries from './mediaQueries'
 import * as animations from './animations'
@@ -8,6 +9,7 @@ import * as gridSettings from './gridSettings'
 
 export {
 	colors,
+	themes,
 	typography,
 	mediaQueries,
 	mediaQueries as mq,

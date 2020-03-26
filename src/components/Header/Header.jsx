@@ -207,15 +207,13 @@ class Header extends Component {
 			pathname = location.pathname
 		}
 
-		console.log(this.props)
-
 		return (
 			<Fragment>
 				<ScrollListener.Consumer>
 		      {({ scrolledToTop, scrolledToBottom, scrollY, scrolledUp, hasScrolled, pageHeight }) => {
-		      	const scrolled = !scrolledToTop
+		      	const scrolled = !scrolledToTop && hasScrolled
 		      	return (
-							<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp}>
+							<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp && !scrolledToTop}>
 								<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
 									<HeaderContent
 										small="1 [5] [2] [5] 1"

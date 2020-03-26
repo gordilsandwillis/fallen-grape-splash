@@ -32,13 +32,12 @@ const Headline = styled.h1`
 const AlignmentContainer = styled.div`
 	display: flex;
 	align-items: ${ ({ vAlignment }) => vAlignment };
-	min-height: ${ ({ fullHeight, winHeight }) => fullHeight ? winHeight + 'px' : '70vh' };
 	${ ({ fullHeight, winHeight, showArrow }) => fullHeight ? `
-		min-height: ${ fullHeight ? winHeight + 'px' : '70vh' };
+		min-height: ${ winHeight };
 		padding-top: 105px;
 		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw`};
 	` : `
-		min-height: ${ fullHeight ? winHeight + 'px' : '70vh' };
+		min-height: 56.25vw; // 16:9 Ratio
 		padding-top: 105px;
 		padding-bottom: 95px;
 	` };
@@ -156,9 +155,17 @@ class ATF extends Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-			videoFailed: false
+			mobile: false
 		}
 	}
+
+	componentDidMount () {
+		const md = new MobileDetect(window.navigator.userAgent)
+		if (md.os() === 'iOS') {
+			this.setState({ mobile: true })
+		}
+	}
+
 	shouldComponentUpdate (prevProps, prevState) {
 		const md = new MobileDetect(window.navigator.userAgent)
 		if (md.os() === 'iOS' && prevProps.winHeight !== this.props.winHeight) {
@@ -168,13 +175,6 @@ class ATF extends Component {
 		return true
 	}
 
-	playVideo = () => {
-		try {
-			document.getElementsByTagName('video')[0].play().then(() => {
-				this.setState({ videoFailed: false })
-			})
-		} catch {}
-	}
 	render () {
 		const {
 			headline,
@@ -201,7 +201,7 @@ class ATF extends Component {
 		} = this.props
 
 		const {
-			videoFailed
+			mobile
 		} = this.state
 
 		const vAlignOptions = {
@@ -219,9 +219,15 @@ class ATF extends Component {
 
 		const verticalAligment = vAlignOptions[vAlignment]
 
+		let windowHeight = '100vh'
+
+		if (mobile && this.props.index === 0) {
+			windowHeight = winHeight + 'px'
+		}
+
 		return (
 			<Wrapper setTheme={theme} media={image || video} className={className}>
-				<Block background winHeight={winHeight} fullHeight={fullHeight}>
+				<Block background winHeight={windowHeight} fullHeight={fullHeight}>
 					<ConditionalRender condition={video}>
 						<VideoContainer>
 							<VideoStyled
@@ -245,8 +251,8 @@ class ATF extends Component {
 					{index === 0 && (video || image) ? <Overlay /> : false}
 					{overlay ? <ImageOverlay overlay={overlay} /> : false}
 				</Block>
-				<Block content="true" winHeight={winHeight} fullHeight={fullHeight}>
-					<AlignmentContainer vAlignment={verticalAligment} winHeight={winHeight} fullHeight={fullHeight} showArrow={showArrow}>
+				<Block content="true" winHeight={windowHeight} fullHeight={fullHeight}>
+					<AlignmentContainer vAlignment={verticalAligment} winHeight={windowHeight} fullHeight={fullHeight} showArrow={showArrow}>
 						<Content hAlignment={hAlignment}>
 							<Grid
 								small="1 [12] 1"

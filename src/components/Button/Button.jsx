@@ -4,6 +4,7 @@ import { lighten, rgba } from 'polished'
 
 import * as util from 'src/styles/util'
 import { colors, typography, animations } from 'src/styles'
+import {buttonThemes as themes} from 'src/styles/themes'
 import MaterialIcon from 'src/components/MaterialIcon'
 
 import Link from 'src/components/Link'
@@ -38,33 +39,34 @@ const getState = (loading, error, success, disabled) => {
 
 const setButtonTheme = theme => `
 	${ theme === 'default' || !theme ? `
-		color: ${ colors.themes.default.color };
-		background: ${ colors.themes.default.background };
+		color: ${ themes.default.color };
+		background: ${ themes.default.background };
 	` : `
-		color: ${ colors.themes[theme].color };
-		background: ${ colors.themes[theme].background };
+		color: ${ themes[theme].color };
+		background: ${ themes[theme].background };
 	` }
 	&:hover {
-		color: ${ colors.themes[theme].hoverColor };
-		background: ${ colors.themes[theme].hoverBackground };
-		${ colors.themes[theme].borderHoverColor ? `
-			border-color: ${ colors.themes[theme].borderHoverColor };
+		color: ${ themes[theme].hoverColor };
+		background: ${ themes[theme].hoverBackground };
+		${ themes[theme].borderHoverColor ? `
+			border-color: ${ themes[theme].borderHoverColor };
 		` : `
-			border-color: ${ colors.themes[theme].hoverBackground };
+			border-color: ${ themes[theme].hoverBackground };
 		` }
 	}
-	${ colors.themes[theme].borderColor ? `
-		border-color: ${ colors.themes[theme].borderColor };
+	${ themes[theme].borderColor ? `
+		border-color: ${ themes[theme].borderColor };
 	` : `
-		border-color: ${ colors.themes[theme].background };
+		border-color: ${ themes[theme].background };
 	` }
 `
 
 const DisabledButtonStyles = () => `
 	&[disabled],
 	&:disabled {
-		opacity: .4;
+		opacity: .25;
 		background: ${ colors.textColor };
+		border-color: ${ colors.textColor };
 		color: ${ rgba(colors.bgColor, 0.6) };
 		cursor: not-allowed;
 	}
@@ -91,6 +93,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	text-align: center;
 	box-shadow: none;
 	${ typography.buttonStyle }
+	line-height: 1em;
 	${ util.fontSmoothing }
 	transition: background ${ buttonSettings.transitionSpeed } ease-in-out,
 							color ${ buttonSettings.transitionSpeed } ease-in-out,
@@ -139,6 +142,7 @@ const ButtonContent = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+	width: 100%;
 	svg {
 		* {
 			fill: currentcolor;

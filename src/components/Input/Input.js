@@ -5,7 +5,7 @@ import { lighten, darken, rgba } from 'polished'
 import { colors, typography, animations, util } from 'src/styles'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
-import { isEmoji } from 'src/util/validations'
+import { isEmoji } from 'src/utils/validations'
 
 const inputVars = {
 	tiny: '36px',
@@ -19,42 +19,37 @@ const inputVars = {
 }
 
 const themes = {
-		lightGrey: {
-			color: colors.textColor,
-			accent: colors.mainColor,
-			background: colors.lightGrey
-		},
-		white: {
-			color: colors.textColor,
-			accent: colors.mainColor,
-			background: colors.white
-		},
-		bgColor: {
-			color: colors.textColor,
-			accent: colors.mainColor,
-			background: colors.bgColor
-		},
-		transparent: {
-			color: colors.textColor,
-			accent: colors.mainColor,
-			background: colors.transparent
-		},
-		textColor: {
-			color: colors.bgColor,
-			accent: colors.lightGreen,
-			background: colors.textColor
-		},
-		brown: {
-			color: colors.bgColor,
-			accent: colors.lightGreen,
-			background: colors.brown
-		},
-		darkBrown: {
-			color: colors.bgColor,
-			accent: colors.lightGreen,
-			background: colors.darkBrown
-		},
+	default: {
+		color: colors.textColor,
+		accent: colors.mainColor,
+		background: colors.lightGrey
+	},
+	lightGrey: {
+		color: colors.textColor,
+		accent: colors.mainColor,
+		background: colors.lightGrey
+	},
+	white: {
+		color: colors.textColor,
+		accent: colors.mainColor,
+		background: colors.white
+	},
+	bgColor: {
+		color: colors.textColor,
+		accent: colors.mainColor,
+		background: colors.bgColor
+	},
+	transparent: {
+		color: colors.textColor,
+		accent: colors.mainColor,
+		background: colors.transparent
+	},
+	textColor: {
+		color: colors.bgColor,
+		accent: colors.lightGreen,
+		background: colors.textColor
 	}
+}
 
 const setInputTheme = theme => {
 	const inputColor = {
@@ -73,6 +68,13 @@ const setInputTheme = theme => {
 			&:hover, &:active, &:focus {
 				background: ${ darken(0.05, themes[theme]['background']) };
 				border-color: ${ themes[theme]['accent'] };
+			}
+			&:-internal-autofill-selected,
+			&:-webkit-autofill {
+				background: ${ darken(0.05, themes[theme]['background']) } !important;
+				border-color: ${ themes[theme]['accent'] };
+				-webkit-text-fill-color: ${ themes[theme]['color'] } !important;
+				color: ${ themes[theme]['color'] } !important;
 			}
 			::placeholder {
 				color: ${ rgba(themes[theme]['color'], 0.5) };
@@ -196,6 +198,7 @@ const InputIcon = styled.div`
 	justify-content: center;
 	top: 0;
 	pointer-events: none;
+	overflow: hidden;
 	${ ({ emojiIcon }) => emojiIcon && `
 		padding-top: .3em;
 		font-size: 18px;
@@ -302,7 +305,9 @@ class Input extends Component {
 			size,
 			placeholder,
 			label,
-			spellcheck
+			spellcheck,
+			name,
+			onChange
 		} = this.props
 
 		const { focused } = this.state
@@ -324,8 +329,10 @@ class Input extends Component {
 					size={size}
 					onFocus={() => this.setFocus(true)}
 					onBlur={() => this.setFocus(false)} // needs work
+					onChange={onChange}
 					value={value}
 					label={label}
+					name={name}
 					spellCheck={spellcheck}
 				/>
 				<ConditionalRender condition={label}>
@@ -336,8 +343,10 @@ class Input extends Component {
 						error={error}
 						theme={theme}
 						value={value}
+						htmlFor={name}
 						focused={focused}
 						placeholder={placeholder}
+						className={placeholder || value || focused ? 'focused' : 'unfocused' /* to select from styled component */}
 					>
 						{label}
 					</InputLabel>
@@ -353,8 +362,9 @@ class Input extends Component {
 Input.defaultProps = {
 	type: 'text',
 	iconPosition: 'left',
-	theme: 'lightGrey',
-	spellcheck: false
+	theme: 'default',
+	spellcheck: false,
+	onChange: () => {}
 }
 
 export default Input

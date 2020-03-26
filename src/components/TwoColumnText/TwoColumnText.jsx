@@ -5,7 +5,7 @@ import TextLockup from 'src/components/TextLockup'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ContentfulRichText from 'src/components/ContentfulRichText'
-import { typography, colors, mq } from 'src/styles'
+import { typography, mq } from 'src/styles'
 import Section from 'src/components/Section'
 
 const TextContainer = styled(ScrollEntrance)`

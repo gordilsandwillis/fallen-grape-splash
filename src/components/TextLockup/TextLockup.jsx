@@ -122,15 +122,19 @@ const TextLockup = ({
 						<div style={{ margin: 'auto', width: 50, height: 50, marginBottom: '1em' }} dangerouslySetInnerHTML={{ __html: icon && icon.svgContent }}/>
 					</ConditionalRender>
 					<ConditionalRender condition={eyebrow}>
-						<Eyebrow>{eyebrow}</Eyebrow>
+						<div>
+							<Eyebrow>{eyebrow}</Eyebrow>
+						</div>
 					</ConditionalRender>
 
 					<ConditionalRender condition={headline}>
-						<Headline headlineSize={headlineSize} as={headlineElement} alignment={alignment}>
-							{headlineSize === 'h1' || headlineSize === 'h2' || headlineSize === 'h3' ? (
-								headline
-							) : headline}
-						</Headline>
+						<div>
+							<Headline headlineSize={headlineSize} as={headlineElement} alignment={alignment}>
+								{headlineSize === 'h1' || headlineSize === 'h2' || headlineSize === 'h3' ? (
+									headline
+								) : headline}
+							</Headline>
+						</div>
 					</ConditionalRender>
 
 					{text && text.json &&
@@ -138,7 +142,7 @@ const TextLockup = ({
 					}
 
 					{typeof text === 'string' &&
-						<Text textSize={textSize} alignment={alignment}><p dangerouslySetInnerHTML={{__html: text}}></p></Text>
+						<Text textSize={textSize} alignment={alignment}><p>{text}</p></Text>
 					}
 
 					{text && typeof text !== 'string' && !text.json &&

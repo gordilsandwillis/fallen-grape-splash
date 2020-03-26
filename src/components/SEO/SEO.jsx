@@ -45,8 +45,8 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 	)
 
 	const metaDescription = description || site.siteMetadata.description
-	const metaShareImage = shareImage || socialShareImage.publicURL
-	const host = process.env.HOST
+	const host = process.env.HOST || process.env.GATSBY_HOST
+	const metaShareImage = shareImage ? shareImage : host + socialShareImage.publicURL
 
 	const contentfulFavicon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
 	const contentfultouchIcon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
@@ -77,7 +77,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					property: `og:image`,
-					content: `${ host }${ metaShareImage }`
+					content: `${ metaShareImage }`
 				},
 				{
 					property: `og:description`,
@@ -85,7 +85,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					name: `twitter:image`,
-					content: `${ host }${ metaShareImage }`
+					content: `${ metaShareImage }`
 				},
 				{
 					name: `twitter:card`,

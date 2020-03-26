@@ -1,27 +1,11 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors } from 'src/styles'
+import themes from 'src/styles/themes'
 
 const ThemeWrapper = styled.div`
-	transition: background-color 1s ease-in-out, color 1s ease-in-out;
-	${ ({ 'data-theme': setTheme }) => setTheme && setTheme !== 'bgColor' `
-		background-color: ${ colors[setTheme] };
-	` }
-	${ ({ 'data-theme': setTheme }) =>
-		setTheme === 'mainColor' ||
-		setTheme === 'black' ||
-		setTheme === 'textColor' ? `
-		color: ${ colors.bgColor };
-		h1, h2, h3, h4, h5, h6 {
-			color: ${ colors.bgColor };
-		}
-		p {
-			a {
-				&:hover {
-					color: ${ colors.white };
-				}
-			}
-		}
+	${ ({ 'data-theme': setTheme }) => setTheme && setTheme !== 'bgColor' ? `
+		background-color: ${ themes[setTheme].background };
+		color: ${ themes[setTheme].color };
 	` : `` }
 `
 

@@ -13,7 +13,7 @@ const FormWrapper = styled.div`
 `
 
 // a basic form
-const CustomForm = ({ status, message, onValidated, inputClassName, inputPlaceholder }) => {
+const CustomForm = ({ status, message, onValidated, className, placeholder, label, size }) => {
 	let email
 	const submit = () =>
 		email &&
@@ -41,17 +41,19 @@ const CustomForm = ({ status, message, onValidated, inputClassName, inputPlaceho
 
 	return (
 
-		<FormWrapper>
+		<FormWrapper className={className}>
 			<div style={{ flexGrow: 1, flexShrink: 0 }}>
 				<Input
-					size="small"
+					size={size}
 					ref={node => (email = node)}
 					type="email"
-					placeholder={inputPlaceholder || 'Email'}
+					placeholder={placeholder}
+					label={label}
+					name="email"
 				/>
 			</div>
 			<div style={{ flexGrow: 0, flexShrink: 0 }}>
-				<Button onClick={submit} shape="simple square" setTheme="mainColor" size="small">
+				<Button onClick={submit} shape="simple square" setTheme="mainColor" size={size}>
 					<div>
 						{renderIcon(status)}
 					</div>
@@ -71,8 +73,10 @@ class MailchimpSignup extends Component {
 						status={status}
 						message={message}
 						onValidated={formData => subscribe(formData)}
-						inputClassName={this.props.inputClassName}
-						inputPlaceholder={this.props.placeholder}
+						className={this.props.className}
+						placeholder={this.props.placeholder}
+						label={this.props.label}
+						size={this.props.size || 'small'}
 					/>
 				)}
 			/>

@@ -16,7 +16,7 @@ const componentMap = {
 	ContentfulMultipleImages: MultipleImages
 }
 
-export default ({ item, prevTheme, nextTheme, index }) => {
+export default ({ item, prevTheme, nextTheme, index, lastSection }) => {
 	const Component = componentMap[item.__typename]
 	return Component ? (
 		<Component {...item} prevTheme={prevTheme} nextTheme={nextTheme} lastSection={lastSection} index={index}/>

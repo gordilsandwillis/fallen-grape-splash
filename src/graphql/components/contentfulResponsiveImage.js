@@ -6,7 +6,7 @@ export const query = graphql`
     id
     caption
     image {
-      fluid {
+      fluid(maxWidth: 1800, quality: 100) {
         aspectRatio
         src
         srcSet
@@ -14,9 +14,8 @@ export const query = graphql`
         srcSetWebp
       }
     }
-    useMultipleImages
     small {
-      fluid {
+      fluid(maxWidth: 750, quality: 100) {
         aspectRatio
         src
         srcSet
@@ -25,7 +24,7 @@ export const query = graphql`
       }
     }
     medium {
-      fluid {
+      fluid(maxWidth: 1200, quality: 100) {
         aspectRatio
         src
         srcSet
@@ -34,7 +33,7 @@ export const query = graphql`
       }
     }
     large {
-      fluid {
+      fluid(maxWidth: 1800, quality: 100) {
         aspectRatio
         src
         srcSet

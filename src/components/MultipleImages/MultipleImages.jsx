@@ -6,6 +6,7 @@ import Image from 'src/components/Image'
 import Caption from 'src/components/Caption'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ConditionalRender from 'src/components/ConditionalRender'
+import { mq } from 'src/styles'
 
 const MultipleImages = ({
 	theme,
@@ -19,14 +20,16 @@ const MultipleImages = ({
 	let grid = {
 		small: "[1]",
 		medium: "[1] [1]",
-		large: "[1] [1]"
+		large: "[1] [1]",
+		sizes: "(max-width: " + mq.mediumBreakpoint + "px) 100vw, 50vw"
 	}
 
 	if (images.length === 3) {
 		grid = {
 			small: "[1]",
 			medium: "[1] [1] [1]",
-			large: "[1] [1] [1]"
+			large: "[1] [1] [1]",
+			sizes: "(max-width: " + mq.mediumBreakpoint + "px) 100vw, 33.333vw"
 		}
 	}
 
@@ -34,7 +37,26 @@ const MultipleImages = ({
 		grid = {
 			small: "[1]",
 			medium: "[1] [1]",
-			large: "[1] [1] [1] [1]"
+			large: "[1] [1] [1] [1]",
+			sizes: "(max-width: " + mq.mediumBreakpoint + "px) 100vw, 25vw"
+		}
+	}
+
+	if (images.length === 5) {
+		grid = {
+			small: "[1]",
+			medium: "[1] [1] [1]",
+			large: "[1] [1] [1] [1] [1]",
+			sizes: "(max-width: " + mq.mediumBreakpoint + "px) 100vw, 20vw"
+		}
+	}
+
+	if (images.length === 6) {
+		grid = {
+			small: "[1]",
+			medium: "[1] [1] [1]",
+			large: "[1] [1] [1] [1] [1] [1]",
+			sizes: "(max-width: " + mq.mediumBreakpoint + "px) 100vw, 17vw"
 		}
 	}
 
@@ -64,7 +86,7 @@ const MultipleImages = ({
 					{images.map(({ id, caption, ...image }, index) => (
 						<ScrollEntrance key={id + '_' + index} delay={index} type={image.type || 'normal'} maxWidth={image.type ? maxWidth[image.type] : '100%'}>
 							<div>
-								<Image image={image.image} type={image.type || 'normal'}></Image>
+								<Image image={image.image} type={image.type || 'normal'} sizes={grid.sizes}/>
 							</div>
 							<ConditionalRender condition={caption}>
 								<Caption>{caption}</Caption>

@@ -8,3 +8,17 @@ export const isEmoji = string => {
 		return false;
 	}
 }
+
+export const validateEmail = (email = '') => {
+	let re = /\S+@\S+\.\S+/
+	return re.test(email)
+}
+
+export const validateZipCode = (zipCode = '') => {
+	let re = /(^\d{5}$)|(^\d{5}-\d{4}$)/
+	return re.test(zipCode)
+}
+
+export const validatePhoneNumber = (phoneNumber = '') => {
+	return phoneNumber.match(/\d/g) ? phoneNumber.match(/\d/g).length === 10 : false
+}

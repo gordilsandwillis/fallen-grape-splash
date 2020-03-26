@@ -5,6 +5,7 @@ import ThemeSelector from './ThemeSelector'
 import Grid from 'src/components/Grid'
 import Button from 'src/components/Button'
 import { typography } from 'src/styles'
+import themes from 'src/styles/themes'
 const qbf = 'The quick brown fox jumps over the lazy dog'
 const lorem = `lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.`
 
@@ -12,14 +13,7 @@ const Eyebrow = styled.h6 `
 	${ typography.eyebrow }
 `
 
-const themes = [
-	'default',
-	'black',
-	'lightGrey',
-	'mainColor',
-	'success',
-	'notify',
-]
+const themeOptions = Object.keys(themes)
 
 const ThemePreview = styled(ThemeSelector)`
 	padding: 2em 2em 2.5em 2em;
@@ -35,7 +29,7 @@ stories.add(`ThemeSelector`, () => (
 		colGap="0"
 		rowGap="0"
 	>
-		{themes.map(theme => {
+		{themeOptions.map(theme => {
 			let ButtonTheme = 'textColor'
 			if (theme === 'black') {
 				ButtonTheme = 'white'

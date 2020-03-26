@@ -21,7 +21,7 @@ const EnteranceWrap = styled.div`
 		
 		${ ({ items, delay, speed }) => Array.isArray(items) ? `
 			${ items.map((item, index) => `
-				&:nth-child(${ index }) {
+				&:nth-of-type(${ index }) {
 					transition-delay: ${ (speed * .115) * (index + delay) }ms;
 				}
 			`) }

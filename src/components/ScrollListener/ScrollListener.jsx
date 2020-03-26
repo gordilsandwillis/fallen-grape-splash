@@ -6,7 +6,6 @@ import * as wndw from 'src/utils/wndw'
 const defaultValue = {
   scrolledToTop: true,
   scrolledToBottom: false,
-  pageHeight: 0,
   scrollY: 0,
   hasScrolled: true,
   scrolledUp: false,
@@ -18,11 +17,7 @@ const { Provider, Consumer } = React.createContext(defaultValue)
 class ScrollListener extends React.Component {
   static Consumer = Consumer;
 
-  state = {
-    ignoreScroll: false,
-    scrolledUp: true,
-    hasScrolled: false,
-  }
+  state = defaultValue
 
   componentDidMount () {
     this.observe()
@@ -53,21 +48,43 @@ class ScrollListener extends React.Component {
       return
     }
 
+    //
+    if (!this.state.hasScrolled && this.lastScrollY > 0) {
+      if (!this.state.hasScrolled) {
+        this.setState({ hasScrolled: true })
+      }
+    }
+
+    if (newScrollY === 0 && !this.state.scrolledToTop) {
+      if (!this.state.scrolledToTop) {
+        this.setState({ scrolledToTop: true })
+      }
+    } else {
+      if (this.state.scrolledToTop) {
+        this.setState({ scrolledToTop: false })
+      }
+    }
+
+    if (newScrollY >= document.body.clientHeight - window.innerHeight * 1.2) {
+      if (!this.state.scrolledToBottom) {
+        this.setState({ scrolledToBottom: true })
+      }
+    } else {
+      if (this.state.scrolledToBottom) {
+        this.setState({ scrolledToBottom: false })
+      }
+    }
+    //
+
     const newState = {}
     if (this.state.scrolledUp !== scrolledUp) {
-      newState.scrolledUp = scrolledUp
+      this.setState({ scrolledUp: scrolledUp })
     }
 
     if (!this.state.hasScrolled && this.lastScrollY > 0) {
-      newState.hasScrolled = true
+      this.setState({ hasScrolled: true })
     }
 
-    newState.scrolledToTop = newScrollY === 0
-    newState.scrolledToBottom = newScrollY >= pageHeight - window.innerHeight * 1.2
-    newState.scrollY = newScrollY
-    newState.pageHeight = pageHeight
-
-    this.setState(newState)
   }
 
   scrollHandler = _.throttle(this._scrollHandler, 100);
@@ -112,7 +129,6 @@ class ScrollListener extends React.Component {
       scrollY,
       scrolledUp,
       hasScrolled,
-      pageHeight,
     } = this.state
 
     const { children } = this.props
@@ -125,7 +141,6 @@ class ScrollListener extends React.Component {
           scrollY,
           scrolledUp,
           hasScrolled,
-          pageHeight,
           doScroll: this.doScroll,
         }}
       >
