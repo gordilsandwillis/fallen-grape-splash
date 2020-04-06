@@ -27,6 +27,12 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 									src
 								}
 							}
+							defaultShareImage {
+			          id
+			          file {
+			            url
+			          }
+			        }
 						}
 					
 				}
@@ -46,10 +52,15 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 
 	const metaDescription = description || site.siteMetadata.description
 	const host = process.env.HOST || process.env.GATSBY_HOST
-	const metaShareImage = shareImage ? shareImage : host + socialShareImage.publicURL
+	let metaShareImage = host + socialShareImage.publicURL
+	if (shareImage) {
+		metaShareImage = shareImage
+	} else if (allContentfulSiteSettings.nodes[0].defaultShareImage) {
+		metaShareImage = 'https:' + allContentfulSiteSettings.nodes[0].defaultShareImage.file.url
+	}
 
 	const contentfulFavicon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
-	const contentfultouchIcon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
+	const contentfultouchIcon = allContentfulSiteSettings.nodes[0].touchIcon.fixed.src
 
 	return (
 		<Helmet

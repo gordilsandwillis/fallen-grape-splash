@@ -6,11 +6,12 @@ import { colors, typography, animations, util } from 'src/styles'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
 import { isEmoji } from 'src/utils/validations'
+import { inputThemes as themes } from 'src/styles/themes'
 
 const inputVars = {
 	tiny: '36px',
 	small: '48px',
-	medium: '60px',
+	medium: '50px',
 	large: '72px',
 	borderWidth: '2px',
 	backgroundColor: 'transparent',
@@ -18,66 +19,31 @@ const inputVars = {
 	hPadding: '1em'
 }
 
-const themes = {
-	default: {
-		color: colors.textColor,
-		accent: colors.mainColor,
-		background: colors.lightGrey
-	},
-	lightGrey: {
-		color: colors.textColor,
-		accent: colors.mainColor,
-		background: colors.lightGrey
-	},
-	white: {
-		color: colors.textColor,
-		accent: colors.mainColor,
-		background: colors.white
-	},
-	bgColor: {
-		color: colors.textColor,
-		accent: colors.mainColor,
-		background: colors.bgColor
-	},
-	transparent: {
-		color: colors.textColor,
-		accent: colors.mainColor,
-		background: colors.transparent
-	},
-	textColor: {
-		color: colors.bgColor,
-		accent: colors.lightGreen,
-		background: colors.textColor
-	}
-}
-
 const setInputTheme = theme => {
-	const inputColor = {
-		white: colors.textColor,
-		bgColor: colors.textColor,
-		brown: colors.bgColor,
-		darkBrown: colors.bgColor
-	}
 	return `
-		color: ${ themes[theme]['color'] };
+		color: ${ themes[theme].color };
 		input {
-			background: ${ themes[theme]['background'] };
-			border-color: ${ colors[theme] };
-			caret-color: ${ themes[theme]['color'] };
-			color: ${ themes[theme]['color'] };
-			&:hover, &:active, &:focus {
-				background: ${ darken(0.05, themes[theme]['background']) };
-				border-color: ${ themes[theme]['accent'] };
+			background: ${ themes[theme].background };
+			border-color: ${ themes[theme].borderColor };
+			caret-color: ${ themes[theme].color };
+			color: ${ themes[theme].color };
+			&:active, &:focus {
+				background: ${ darken(0.05, themes[theme].focusBackground) };
+				border-color: ${ themes[theme].focusBorderColor };
+			}
+			&:hover {
+				background: ${ darken(0.05, themes[theme].hoverBackground) };
+				border-color: ${ themes[theme].hoverBorderColor };
 			}
 			&:-internal-autofill-selected,
 			&:-webkit-autofill {
-				background: ${ darken(0.05, themes[theme]['background']) } !important;
-				border-color: ${ themes[theme]['accent'] };
-				-webkit-text-fill-color: ${ themes[theme]['color'] } !important;
-				color: ${ themes[theme]['color'] } !important;
+				background: ${ darken(0.05, themes[theme].background) } !important;
+				border-color: ${ themes[theme].borderColor };
+				-webkit-text-fill-color: ${ themes[theme].color } !important;
+				color: ${ themes[theme].color } !important;
 			}
 			::placeholder {
-				color: ${ rgba(themes[theme]['color'], 0.5) };
+				color: ${ rgba(themes[theme].color, 1) };
 			}
 		}
 	`
@@ -102,7 +68,7 @@ const InputWrap = styled.div`
 	position: relative;
 	display: inline-block;
 	width: 100%;
-	${ typography.body }
+	${ typography.smallCaps }
 	${ ({ theme }) => setInputTheme(theme) }
 `
 
@@ -118,7 +84,7 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
   border: ${ inputVars.borderWidth } solid;
   height: ${ inputVars.medium };
   line-height: 1em;
-  text-transform: none;
+  text-transform: inherit;
   letter-spacing: 0;
   border-radius: ${ inputVars.borderRadius };
   color: inherit;
@@ -245,7 +211,7 @@ const InputLabel = styled.label`
 		transform: translate3d(0, -10px, 0) scale(.75);
 	` : `` }
 	${ props => props.focused ? `
-		color: ${ colors.mainColor };
+		color: ${ themes[props.theme].color };
 	` : `` }
 	${ ({ icon, iconPosition, size }) => icon ? `
 		margin-${ iconPosition }: ${ inputVars.medium };

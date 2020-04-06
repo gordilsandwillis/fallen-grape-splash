@@ -63,33 +63,32 @@ const LinkList = styled.ul`
 	margin-top: 1em;
 	list-style: none;
 	padding: 0;
-	li {
-		margin: 0;
-		a {
-			position: relative;
-			display: inline-block;
-			&:hover {
-				&:after {
-					transform: scaleX(1);
-				}
-			}
+`
+
+const LinkListItem = styled.li`
+	margin: 0;
+	a {
+		position: relative;
+		display: inline-block;
+		&:hover {
 			&:after {
-				content: '';
-				display: block;
-				position: absolute;
-				bottom: 0;
-				height: 1px;
-				width: 100%;
-				background: ${ colors.mainColor };
-				transition: transform ${ animations.mediumSpeed } ease-in-out;
-				transform: scaleX(0);
-				transform-origin: left center;
+				transform: scaleX(1);
 			}
+		}
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: 0;
+			height: 1px;
+			width: 100%;
+			background: ${ colors.mainColor };
+			transition: transform ${ animations.mediumSpeed } ease-in-out;
+			transform: scaleX(0);
+			transform-origin: left center;
 		}
 	}
 `
-
-const LinkListItem = styled.li``
 
 const FooterBottom = styled.div`
 	position: relative;

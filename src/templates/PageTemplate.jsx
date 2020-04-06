@@ -23,7 +23,7 @@ class PageTemplate extends React.Component {
 					title={page.title}
 					description={page.seoDescription}
 					siteSettings={site}
-					shareImage={page.shareImage ? 'https:' + page.shareImage.fixed.src : false}
+					shareImage={page.shareImage ? 'https:' + page.shareImage.file.url : false}
 				/>
 				<Header
 					// headerNavigation={site.headerNavigation}
@@ -72,11 +72,8 @@ export const pageQuery = graphql`
 					title
 					seoDescription
 					shareImage {
-	          fixed(width: 600, height: 450) {
-	            src
-	            srcSet
-	            srcWebp
-	            srcSetWebp
+	          file {
+	            url
 	          }
 	        }
 					sections {

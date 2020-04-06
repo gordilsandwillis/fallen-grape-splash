@@ -12,7 +12,6 @@ const responsiveStyles = util.responsiveStyles
 // All global styles
 export default `
   ${ fonts.MaterialIconsFont }
-  ${ fonts.MaterialIconsFont }
   ${ fonts.TradeGothicFont }
   ${ fonts.PortraitFont }
   ${ fonts.PortraitItalicFont }
@@ -112,8 +111,6 @@ export default `
   h5, .h5 {
     ${ typography.h5 }
     ${ responsiveStyles('margin-top', 24, 16, 16, 8) }
-    font-weight: 700;
-    line-height: 1.25em;
     margin-bottom: 0;
   }
 

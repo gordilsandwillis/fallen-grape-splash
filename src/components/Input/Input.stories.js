@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react'
 import Grid from 'src/components/Grid'
 import { colors } from 'src/styles'
 import Input from './Input'
+import { themes } from 'src/styles'
+import { optionsKnob } from '@storybook/addon-knobs'
 
 const inputs = [
 	{
@@ -13,7 +15,6 @@ const inputs = [
 		label: 'Label',
 		placeholder: 'Placeholder',
 		icon: 'person',
-		theme: 'textColor',
 		description: "'lightGrey' theme with icon"
 	},
 	{
@@ -48,6 +49,12 @@ const inputs = [
 	},
 ]
 
+let themeOptions = {}
+Object.keys(themes.inputThemes).map((theme) => {
+  const key = theme.toString()
+  themeOptions[key] = theme
+})
+
 const stories = storiesOf(`Components/Input`, module)
 stories.add(`Default`, () => (
 	<div style={{ padding: '5%' }}>
@@ -72,7 +79,7 @@ stories.add(`Default`, () => (
 						placeholder={input.placeholder}
 						icon={input.icon}
 						iconPosition={input.iconPosition}
-						theme={input.theme}
+						theme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) }
 						loading={input.loading}
 						error={input.error}
 						disabled={input.disabled}

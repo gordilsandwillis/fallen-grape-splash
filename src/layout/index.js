@@ -5,6 +5,7 @@ import globalStyles from 'src/styles/globalStyles'
 import PageTransition from 'src/components/PageTransition'
 import ScrollListener from 'src/components/ScrollListener'
 import { Global, css } from '@emotion/core'
+import IntersectionObserverPolyfill from 'src/components/IntersectionObserverPolyfill'
 import './reset.css'
 
 const Layout = ({ children, location }) => (
@@ -20,14 +21,16 @@ const Layout = ({ children, location }) => (
 		`}
 		render={data => (
 			<Fragment>
-        <ScrollListener>
-					<Global
-						styles={css`${ globalStyles }`}
-					/>
-					<PageTransition location={location}>
-						{children}
-					</PageTransition>
-				</ScrollListener>
+				<IntersectionObserverPolyfill>
+	        <ScrollListener>
+						<Global
+							styles={css`${ globalStyles }`}
+						/>
+						<PageTransition location={location}>
+							{children}
+						</PageTransition>
+					</ScrollListener>
+				</IntersectionObserverPolyfill>
 			</Fragment>
 		)}
 	/>

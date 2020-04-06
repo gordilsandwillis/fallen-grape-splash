@@ -12,6 +12,12 @@ const FormWrapper = styled.div`
 	width: 100%;
 `
 
+const MCInput = styled(Input)`
+	input.input {
+		padding-right: 0;
+	}
+`
+
 // a basic form
 const CustomForm = ({ status, message, onValidated, className, placeholder, label, size }) => {
 	let email
@@ -43,7 +49,7 @@ const CustomForm = ({ status, message, onValidated, className, placeholder, labe
 
 		<FormWrapper className={className}>
 			<div style={{ flexGrow: 1, flexShrink: 0 }}>
-				<Input
+				<MCInput
 					size={size}
 					ref={node => (email = node)}
 					type="email"

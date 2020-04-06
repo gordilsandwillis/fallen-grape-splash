@@ -87,4 +87,15 @@ export const buttonThemes = {
 	}
 }
 
+// Input Themes
+export const buttonThemes = {
+	default: {
+		color: colors.bgColor,
+		background: colors.mainColor,
+		accentColor: colors.bgColor,
+		hoverColor: colors.bgColor,
+		hoverBackground: lighten(0.07, colors.mainColor)
+	}
+}
+
 export default themes

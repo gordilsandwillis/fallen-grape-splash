@@ -4,7 +4,7 @@ import { lighten, rgba } from 'polished'
 
 import * as util from 'src/styles/util'
 import { colors, typography, animations } from 'src/styles'
-import {buttonThemes as themes} from 'src/styles/themes'
+import { buttonThemes as themes } from 'src/styles/themes'
 import MaterialIcon from 'src/components/MaterialIcon'
 
 import Link from 'src/components/Link'
@@ -13,7 +13,7 @@ const buttonSizes = {
 	tiny: '36px',
 	small: '48px',
 	medium: '50px',
-	large: '72px',
+	large: '72px'
 }
 
 const buttonSettings = {
