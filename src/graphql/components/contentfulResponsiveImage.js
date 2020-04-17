@@ -12,6 +12,7 @@ export const query = graphql`
         srcSet
         srcWebp
         srcSetWebp
+        sizes
       }
     }
     small {
@@ -21,6 +22,7 @@ export const query = graphql`
         srcSet
         srcWebp
         srcSetWebp
+        sizes
       }
     }
     medium {
@@ -30,6 +32,7 @@ export const query = graphql`
         srcSet
         srcWebp
         srcSetWebp
+        sizes
       }
     }
     large {
@@ -39,6 +42,7 @@ export const query = graphql`
         srcSet
         srcWebp
         srcSetWebp
+        sizes
       }
     }
   }

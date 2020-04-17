@@ -6,12 +6,20 @@ import SEO from 'src/components/SEO'
 import ComponentRenderer from 'src/components/ComponentRenderer'
 import Header from 'src/components/Header'
 import Footer from 'src/components/Footer'
+import ReactGA from 'react-ga'
 
 const propTypes = {
 	data: PropTypes.object.isRequired,
 }
 
 class PageTemplate extends React.Component {
+	componentDidMount () {
+		if (process.env.NODE_ENV === 'production' && process.env.GA_TRACKING_CODE) {
+	    ReactGA.initialize(process.env.GA_TRACKING_CODE);
+			ReactGA.pageview(window.location.pathname + window.location.search);
+		}
+	}
+	
 	render () {
 		const site = this.props.data.allContentfulSiteSettings.edges.filter(edge => !edge.node.title.includes('PLACEHOLDER'))[0].node
 		const page = this.props.data.allContentfulPage.edges[0].node

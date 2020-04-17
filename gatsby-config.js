@@ -6,10 +6,13 @@ require('dotenv').config({
 module.exports = {
 	siteMetadata: {
 		title: 'GW Gatsby Blocks',
+		siteUrl: process.env.GATSBY_HOST,
 		description: 'GW Gatsby Blocks',
 		author: '@mattgordils @robincwillis',
 	},
 	plugins: [
+		`gatsby-plugin-robots-txt`,
+		`gatsby-plugin-sitemap`,
 		`gatsby-transformer-inline-svg`,
 		{
 			resolve: `gatsby-plugin-emotion`,
@@ -61,6 +64,14 @@ module.exports = {
 				host: process.env.CONTENTFUL_HOST,
 				environment: process.env.CONTENTFUL_ENVIRONMENT
 			},
-		}
+		},
+		{
+			resolve: `gatsby-plugin-google-analytics`,
+			options: {
+        trackingId: process.env.GA_TRACKING_CODE,
+        head: false,
+        pageTransitionDelay: 700
+      },
+    }
 	],
 }

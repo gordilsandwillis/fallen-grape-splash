@@ -22,3 +22,6 @@ To speed things up further, this import will also create a `Page` content model,
 
 #### Documentation For Importing From File
 https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/
+
+#### Don't Forget To...
+Make sure to edit the `siteUrl` and `title` in gatsby-config.js
