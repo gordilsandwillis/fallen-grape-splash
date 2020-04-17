@@ -88,7 +88,7 @@ export const buttonThemes = {
 }
 
 // Input Themes
-export const buttonThemes = {
+export const inputThemes = {
 	default: {
 		color: colors.bgColor,
 		background: colors.mainColor,
