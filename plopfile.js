@@ -26,11 +26,11 @@ module.exports = function (plop) {
 				name: 'componentName',
 				message: 'component name please'
 			},
-			{
-				type: 'input',
-				name: 'path',
-				message: 'absolute path please. ex "src/components"'
-			},
+			// {
+			// 	type: 'input',
+			// 	name: 'path',
+			// 	message: 'absolute path please. ex "src/components"'
+			// },
 			{
 				type: 'input',
 				name: 'migrationName',
@@ -45,22 +45,22 @@ module.exports = function (plop) {
 		actions: [
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.jsx',
+				path: 'src/components/{{componentName}}/{{componentName}}.jsx',
 				templateFile: 'plop-templates/component/Component.jsx.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.stories.js',
+				path: 'src/components/{{componentName}}/{{componentName}}.stories.js',
 				templateFile: 'plop-templates/component/Component.stories.js.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.test.js',
+				path: 'src/components/{{componentName}}/{{componentName}}.test.js',
 				templateFile: 'plop-templates/component/Component.test.js.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/index.js',
+				path: 'src/components/{{componentName}}/index.js',
 				templateFile: 'plop-templates/export.js.hbs'
 			},
 			{
@@ -84,31 +84,31 @@ module.exports = function (plop) {
 				name: 'componentName',
 				message: 'component name please'
 			},
-			{
-				type: 'input',
-				name: 'path',
-				message: 'absolute path please. ex "src/components"'
-			}
+			// {
+			// 	type: 'input',
+			// 	name: 'path',
+			// 	message: 'absolute path please. ex "src/components"'
+			// }
 		],
 		actions: [
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.jsx',
+				path: 'src/components/{{componentName}}/{{componentName}}.jsx',
 				templateFile: 'plop-templates/component/Component.jsx.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.stories.js',
+				path: 'src/components/{{componentName}}/{{componentName}}.stories.js',
 				templateFile: 'plop-templates/component/Component.stories.js.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.test.js',
+				path: 'src/components/{{componentName}}/{{componentName}}.test.js',
 				templateFile: 'plop-templates/component/Component.test.js.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/index.js',
+				path: 'src/components/{{componentName}}/index.js',
 				templateFile: 'plop-templates/export.js.hbs'
 			}
 		]
@@ -122,26 +122,26 @@ module.exports = function (plop) {
 				name: 'componentName',
 				message: 'component name please'
 			},
-			{
-				type: 'input',
-				name: 'path',
-				message: 'absolute path please. ex "src/components"'
-			}
+			// {
+			// 	type: 'input',
+			// 	name: 'path',
+			// 	message: 'absolute path please. ex "src/components"'
+			// }
 		],
 		actions: [
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.jsx',
+				path: 'src/components/{{componentName}}/{{componentName}}.jsx',
 				templateFile: 'plop-templates/component/Component.jsx.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/{{componentName}}.test.js',
+				path: 'src/components/{{componentName}}/{{componentName}}.test.js',
 				templateFile: 'plop-templates/component/Component.test.js.hbs'
 			},
 			{
 				type: 'add',
-				path: '{{path}}/{{componentName}}/index.js',
+				path: 'src/components/{{componentName}}/index.js',
 				templateFile: 'plop-templates/export.js.hbs'
 			}
 		]

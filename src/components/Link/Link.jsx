@@ -32,7 +32,7 @@ const ArrowIcon = styled(MdArrowForward)`
 
 class Link extends Component {
 	render () {
-		const { to, external, target, children, className, setTheme } = this.props
+		const { to, external, target, children, label, className, setTheme } = this.props
 		if (external) {
 			const externalLink = external.toString()
 			return (
@@ -42,7 +42,7 @@ class Link extends Component {
 					target={target}
 					setTheme={setTheme}
 				>
-					{children}
+					{children || label}
 				</StyledLinkElement>
 			)
 		} else {
@@ -52,7 +52,7 @@ class Link extends Component {
 					to={to}
 					setTheme={setTheme}
 				>
-					{children}
+					{children || label}
 				</StyledGatsbyLink>
 			)
 		}

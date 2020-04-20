@@ -3,6 +3,17 @@ import styled from '@emotion/styled'
 import Img from 'gatsby-image/withIEPolyfill'
 import { mq } from 'src/styles'
 
+const SvgWrap = styled.div`
+	display: inline-block;
+	vertical-align: top;
+	color: red;
+	svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+`
+
 const StyledImage = styled(Img)`
 	${ ({ fluid }) => `
 		> div {
@@ -62,16 +73,26 @@ const ResponsiveImage = ({ image, small, medium, large, className, loading, cust
 	}
 }
 
-const Image = ({ small, medium, large, image, className, sizes, loading }) => (
-	<ResponsiveImage
-		image={image}
-		small={small}
-		medium={medium}
-		large={large}
-		className={className}
-		customSizes={sizes}
-		loading={loading}
-	/>
+const Image = ({ image, small, medium, className, sizes, loading, maxWidth }) => (
+	<div style={{
+		width: '100%',
+		maxWidth: maxWidth ? maxWidth : '100%',
+		display: 'inline-block',
+		verticalAlign: 'top'
+	}}>
+		{image.svgContent ? (
+			<SvgWrap className={className} dangerouslySetInnerHTML={{ __html: image.svgContent }}/>
+		) : (
+			<ResponsiveImage
+				image={image}
+				small={small}
+				medium={medium}
+				className={className}
+				customSizes={sizes}
+				loading={loading}
+			/>
+		)}
+	</div>
 )
 
 Image.defaultProps = {

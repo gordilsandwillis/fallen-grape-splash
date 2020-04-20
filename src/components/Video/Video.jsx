@@ -13,7 +13,7 @@ import ScrollEntrance from 'src/components/ScrollEntrance'
 import Button from 'src/components/Button'
 
 const Wrapper = styled.div`
-	${ ({ hasCoverImage }) => hasCoverImage && `
+	${ ({ hasPosterImage }) => hasPosterImage && `
 		position: relative;
 	`}
 	img, video {
@@ -36,7 +36,7 @@ const BlockTitle = styled.h5`
 	color: ${ colors.bgColor };
 `
 
-const CoverImageWrap = styled.div`
+const PosterImageWrap = styled.div`
 	position: relative;
 `
 
@@ -60,7 +60,7 @@ const PlayButton = styled(Button)`
 
 const VideoWrapper = styled.div`
 	transition: opacity .5s ease-in-out;
-	${ ({ hasCoverImage }) => hasCoverImage && `
+	${ ({ hasPosterImage }) => hasPosterImage && `
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -139,7 +139,7 @@ const StyledVideo = styled(ReactPlayer)`
 
 class Video extends Component {
 	state = {
-		playing: this.props.coverImage ? false : this.props.playing
+		playing: this.props.posterImage ? false : this.props.playing
 	}
 
 	openVideo = () => {
@@ -151,28 +151,28 @@ class Video extends Component {
 	}
 
 	render () {
-		const { coverImage, url, loop, cover, muted } = this.props
+		const { posterImage, video, loop, cover, muted } = this.props
 		const { playing } = this.state
-
-		if (!url) {
+		
+		if (!video || !video.file || !video.file.url) {
 			return false
 		}
 
 		return (
-			<Wrapper hasCoverImage={coverImage} cover={cover}>
-				{coverImage && (
-					<CoverImageWrap onClick={this.openVideo}>
-						<Image image={coverImage}/>
+			<Wrapper hasPosterImage={posterImage} cover={cover}>
+				{posterImage && (
+					<PosterImageWrap onClick={this.openVideo}>
+						<Image image={posterImage}/>
 						<PlayButton>
 							<Button shape="circle">
 								<MdPlayArrow size="36" onClick={this.openVideo} />
 							</Button>
 						</PlayButton>
-					</CoverImageWrap>
+					</PosterImageWrap>
 				)}
 
 				<Transition
-					in={playing || !coverImage}
+					in={playing || !posterImage}
 					timeout={{
 						appear: 500,
 						enter: 0,
@@ -183,7 +183,7 @@ class Video extends Component {
 					appear={true}
 				>
 					{transitionStatus => (
-						<VideoWrapper transitionStatus={transitionStatus} hasCoverImage={coverImage} cover={cover}>
+						<VideoWrapper transitionStatus={transitionStatus} hasPosterImage={posterImage} cover={cover}>
 							<StyledVideo
 								cover={cover}
 								url={url}

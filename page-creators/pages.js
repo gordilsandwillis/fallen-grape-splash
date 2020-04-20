@@ -8,7 +8,8 @@ const createPages = (graphql, createPage) => new Promise((resolve, reject) => {
 				edges {
 					node {
 						id
-						path
+						internalName
+						slug
 					}
 				}
 			}
@@ -21,10 +22,10 @@ const createPages = (graphql, createPage) => new Promise((resolve, reject) => {
 		const template = path.resolve('./src/templates/PageTemplate.jsx')
 
 		result.data.allContentfulPage.edges
-			.filter(edge => !edge.node.path.includes('PLACEHOLDER'))
+			.filter(edge => !edge.node.internalName.includes('PLACEHOLDER'))
 			.forEach(edge => {
 				createPage({
-					path: `${ edge.node.path }`,
+					path: `${ edge.node.slug }`,
 					component: template,
 					context: {
 						id: edge.node.id

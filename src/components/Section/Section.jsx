@@ -22,7 +22,17 @@ const SectionWrapper = styled(ThemeSelector)`
 	` }
 `
 
-const Section = ({ children, setTheme, prevTheme, nextTheme, zIndex, buttons, sectionid }) => {
+const Section = ({ 
+	children,
+	setTheme,
+	prevTheme,
+	nextTheme,
+	zIndex,
+	buttons,
+	padded,
+	sectionid,
+	className
+}) => {
 
 	let buttonColors = {
 		textColor: 'bgColor',
@@ -33,10 +43,12 @@ const Section = ({ children, setTheme, prevTheme, nextTheme, zIndex, buttons, se
 
 	return (
 		<SectionWrapper
+			className={className}
 			setTheme={setTheme}
 			prevTheme={prevTheme}
 			nextTheme={nextTheme}
 			zIndex={zIndex}
+			padded={padded}
 		>
 			{children}
 		</SectionWrapper>
@@ -47,7 +59,8 @@ Section.defaultProps = {
 	setTheme: 'bgColor',
 	prevTheme: false,
 	nextTheme: false,
-	zIndex: 1
+	zIndex: 1,
+	padded: true
 }
 
 export default Section

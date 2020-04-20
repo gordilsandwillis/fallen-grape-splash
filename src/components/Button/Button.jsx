@@ -170,7 +170,7 @@ class Button extends Component {
 	}
 
 	renderButtonContent = () => {
-		const { loading, error, success, children, icon, iconPosition } = this.props
+		const { loading, error, success, children, label, icon, iconPosition } = this.props
 		if (loading) {
 			return <ButtonContent>
 				...
@@ -186,7 +186,7 @@ class Button extends Component {
 		} else {
 			return <ButtonContent>
 				{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
-				{children}
+				{children || label}
 				{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
 			</ButtonContent>
 		}
@@ -205,6 +205,7 @@ class Button extends Component {
 			disabled,
 			onClick,
 			setTheme,
+			theme,
 			className,
 			shape,
 			size
@@ -224,7 +225,7 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={setTheme}
+					theme={theme || setTheme}
 					shape={shape}
 					size={size}
 				>
@@ -242,7 +243,7 @@ class Button extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={setTheme}
+					theme={theme || setTheme}
 					shape={shape}
 					size={size}
 				>
@@ -255,6 +256,7 @@ class Button extends Component {
 
 Button.defaultProps = {
 	setTheme: 'default',
+	theme: 'default',
 	size: 'medium'
 }
 

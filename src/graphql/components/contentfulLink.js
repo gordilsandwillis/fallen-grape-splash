@@ -8,6 +8,6 @@ export const query = graphql`
     label
     external
     theme
-    style
+    type
   }
 `

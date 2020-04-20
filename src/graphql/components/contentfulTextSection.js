@@ -1,8 +1,12 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment List on ContentfulList {
+  fragment TextSection on ContentfulTextSection {
     __typename
     id
+    text {
+    	...Text
+  	}
+    theme
   }
 `

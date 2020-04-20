@@ -15,26 +15,8 @@ export const query = graphql`
         src
       }
     }
-    defaultShareImage {
-      fixed(width: 250, quality: 100) {
-        src
-      }
-    }
-    footerSections {
-      ... on ContentfulList {
-        id
-        to
-        displayTitle
-        items {
-          ... on ContentfulLink {
-            ...Link
-          }
-        }
-      }
-    }
-    footerNewsletterTitle
-    footerNewsletterRichText {
-      json
+    defaultSeo {
+      ...Seo
     }
   }
 `

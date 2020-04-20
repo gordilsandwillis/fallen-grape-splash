@@ -1,10 +1,13 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment WideMedia on ContentfulWideMedia {
+  fragment Columns on ContentfulColumns {
     __typename
     id
-    fullWidth
     theme
+    alignment
+    columns {
+    	...Column
+    }
   }
 `

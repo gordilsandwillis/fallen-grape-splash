@@ -191,7 +191,7 @@ const TextLockup = ({
 }
 
 TextLockup.defaultProps = {
-	alignment: 'center',
+	alignment: 'inherit',
 	headlineSize: 'h3',
 	textSize: 'body'
 }

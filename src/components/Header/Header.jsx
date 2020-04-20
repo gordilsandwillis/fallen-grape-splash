@@ -94,7 +94,7 @@ const HeaderContainer = styled.div`
 		padding-bottom: 14px;
 		${ util.responsiveStyles('padding-top', 25, 18, 18, 15) }
 		${ util.responsiveStyles('padding-bottom', 25, 18, 18, 15) }
-		box-shadow: 0 -10px 40px ${ rgba(colors.textColor, 0.15) }
+		box-shadow: 0 1px 0 ${ rgba(colors.textColor, 0.05) }
 	` : `
 		${ util.responsiveStyles('padding-top', 50, 40, 30, 10) }
 		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 10) }
@@ -170,7 +170,7 @@ const MenuIcon = styled.div`
 const HeaderPlaceholder = styled.div`
 	background: transparent;
 	width: 100%;
-	${ util.responsiveStyles('height', 140, 95, 80, 80) }
+	${ util.responsiveStyles('height', 140, 130, 110, 75) }
 `
 
 class Header extends Component {

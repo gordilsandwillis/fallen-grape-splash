@@ -1,17 +1,15 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment TwoColumnText on ContentfulTwoColumnText {
+  fragment Text on ContentfulText {
     __typename
     id
-    theme
+    eyebrow
     headline
     headlineSize
     text {
-      json
+    	json
     }
-    buttons {
-      ...Link
-    }
+    textSize
   }
 `
