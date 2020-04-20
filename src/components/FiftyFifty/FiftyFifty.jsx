@@ -7,7 +7,6 @@ import ColumnRenderer from 'src/components/ColumnRenderer'
 
 const Column = styled.div``
 const ColumnContent = styled.div`
-  border: 1px solid;
   ${ ({ firstItem }) => !firstItem ? `
     margin-top: 24px;
   ` : `` }
@@ -16,33 +15,33 @@ const ColumnContent = styled.div`
 const gridSetup = {
   '50/50_margins': {
     small: "1 [12] 1",
-    medium: "1 [6] [6] 1",
-    large: "1 [6] [6] 1"
+    large: "1 [6] [6] 1",
+    larger: "1 [6] [6] 1"
   },
   '50/50_fullWidth': {
     small: "[1]",
-    medium: "[1] [1]",
-    large: "[1] [1]"
+    large: "[1] [1]",
+    larger: "[1] [1]"
   },
   '60/40_margins': {
     small: "1 [12] 1",
-    medium: "1 [8] [4] 1",
-    large: "1 [8] [4] 1"
+    large: "1 [8] [4] 1",
+    larger: "1 [8] [4] 1"
   },
   '60/40_fullWidth': {
     small: "[1]",
-    medium: "[9] [5]",
-    large: "[9] [5]"
+    large: "[9] [5]",
+    larger: "[9] [5]"
   },
   '40/60_margins': {
     small: "1 [12] 1",
-    medium: "1 [4] [8] 1",
-    large: "1 [4] [8] 1"
+    large: "1 [4] [8] 1",
+    larger: "1 [4] [8] 1"
   },
   '40/60_fullWidth': {
     small: "[1]",
-    medium: "[5] [9]",
-    large: "[5] [9]"
+    large: "[5] [9]",
+    larger: "[5] [9]"
   }
 }
 
@@ -89,8 +88,8 @@ const FiftyFifty = ({
 		>
 			<Grid
 	      small={gridSetup[layout + "_" + width].small}
-	      medium={gridSetup[layout + "_" + width].medium}
 	      large={gridSetup[layout + "_" + width].large}
+        larger={gridSetup[layout + "_" + width].larger}
 	      colGap={gutterSetup[gutters]}
 	      rowGap={["7vw", "7vw", "80px"]}
 	      vAlign={verticalAlignment}

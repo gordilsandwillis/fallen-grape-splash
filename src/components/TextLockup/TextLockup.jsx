@@ -31,10 +31,6 @@ const TextContainer = styled(ScrollEntrance)`
 		margin-left: auto;
 		margin-right: auto;
 	` }
-	${ ({ alignment }) => alignment === 'center' && `
-		margin-left: auto;
-		margin-right: auto;
-	` }
 	${ ({ alignment }) => alignment === 'right' && `
 		margin-left: auto;
 	` }
@@ -48,10 +44,6 @@ const Eyebrow = styled.h6`
 const Headline = styled.h3`
 	${ ({ headlineSize }) => `
 		${ typography[headlineSize] }
-	` }
-	${ ({ alignment }) => alignment === 'center' && `
-		margin-left: auto;
-		margin-right: auto;
 	` }
 	${ ({ alignment }) => alignment === 'center' && `
 		margin-left: auto;

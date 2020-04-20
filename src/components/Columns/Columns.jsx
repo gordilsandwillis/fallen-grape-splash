@@ -11,8 +11,7 @@ const Wrapper = styled(Section)`
 `
 
 const Column = styled.div`
-  border: 1px solid;
-  ${ mq.largeAndBelow } {
+  ${ mq.largerAndBelow } {
     ${ mq.largeAndUp } {
       ${ ({ colCount, index, alignment }) => colCount === 5 && index + 1 === 4 && alignment === 'center' ? `
         grid-column: 4 / span 4 !important;
@@ -30,36 +29,48 @@ const ColumnContent = styled.div`
   ` : `` }
 `
 
+const TextItem = styled.div`
+  p {
+    max-width: 26em;
+  }
+`
+
 const gridSetup = {
   1: {
     small: "1 [12] 1",
     medium: "2 [10] 2",
-    large: "3 [8] 3"
+    large: "3 [8] 3",
+    larger: "3 [8] 3"
   },
   2: {
     small: "1 [12] 1",
     medium: "1 [6] [6] 1",
-    large: "1 [6] [6] 1"
+    large: "1 [6] [6] 1",
+    larger: "1 [6] [6] 1"
   },
   3: {
     small: "1 [12] 1",
     medium: "1 [4] [4] [4] 1",
-    large: "1 [4] [4] [4] 1"
+    large: "1 [4] [4] [4] 1",
+    larger: "1 [4] [4] [4] 1"
   },
   4: {
     small: "1 [12] 1",
     medium: "1 [6] [6] 1",
-    large: "1 [3] [3] [3] [3] 1"
+    large: "1 [3] [3] [3] [3] 1",
+    larger: "1 [3] [3] [3] [3] 1"
   },
   5: {
     small: "1 [12] 1",
-    medium: "1 [4] [4] [4] 1",
-    large: "2 [5] [5] [5] [5] [5] 2"
+    medium: "1 [12] 1",
+    large: "1 [4] [4] [4] 1",
+    larger: "2 [5] [5] [5] [5] [5] 2"
   },
   6: {
     small: "1 [12] 1",
     medium: "1 [4] [4] [4] 1",
-    large: "1 [2] [2] [2] [2] [2] [2] 1"
+    large: "1 [2] [2] [2] [2] [2] [2] 1",
+    larger: "1 [2] [2] [2] [2] [2] [2] 1"
   }
 }
 
@@ -75,7 +86,8 @@ const Columns = ({ className, theme, prevTheme, nextTheme, columns, alignment })
       small={gridSetup[columns.length].small}
       medium={gridSetup[columns.length].medium}
       large={gridSetup[columns.length].large}
-      colGap={["16px", "30px", "40px"]}
+      larger={gridSetup[columns.length].larger}
+      colGap={["16px", "30px", "30px"]}
       rowGap={["7vw", "7vw", "80px"]}
     >
   			{columns.map((column, index) => (
@@ -85,26 +97,31 @@ const Columns = ({ className, theme, prevTheme, nextTheme, columns, alignment })
             colCount={columns.length}
             key={column.id}
           >
-            {column.content.map((item, index) => (
-              <ColumnContent
-                key={item.id}
-                firstItem={index === 0}
-                lastItem={index === column.content.length - 1}
-              >
-                {item.__typename !== 'ContentfulText' ? (
-                  <ScrollEntrance>
-                    <div>
-                      <ColumnRenderer
-                        item={item}
-                        columnCount={columns.length}
-                      />
-                    </div>
-                  </ScrollEntrance>
-                ) : (
-                  <ColumnRenderer item={item} columnCount={columns.length} />
-                )}
-              </ColumnContent>
-            ))}
+            {column.content.map((item, index) => {
+              item.alignment = alignment === null ? 'left' : alignment
+              return (
+                <ColumnContent
+                  key={item.id}
+                  firstItem={index === 0}
+                  lastItem={index === column.content.length - 1}
+                >
+                  {item.__typename !== 'ContentfulText' ? (
+                    <ScrollEntrance>
+                      <div>
+                        <ColumnRenderer
+                          item={item}
+                          columnCount={columns.length}
+                        />
+                      </div>
+                    </ScrollEntrance>
+                  ) : (
+                    <TextItem>
+                      <ColumnRenderer item={item} columnCount={columns.length} />
+                    </TextItem>
+                  )}
+                </ColumnContent>
+              )
+            })}
           </Column>
         ))}
   	</Grid>

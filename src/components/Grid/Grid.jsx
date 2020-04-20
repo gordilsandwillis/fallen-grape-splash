@@ -89,7 +89,7 @@ const gridDefToCss = gridDef => {
 			// use nth-child to define the children styles so the children
 			// don't have to
 			result = `
-				& > :nth-of-type(${ numColumns }n + ${ colCount }) {
+				& > *:nth-of-type(${ numColumns }n + ${ colCount }) {
 					grid-column: ${ colStart } / span ${ isVariableColumn ? 1 : size };
 				}
 			`
@@ -131,7 +131,7 @@ const StyledGrid = styled.div`
 	display: grid;
 	width: 100%;
 	direction: ${ ({ gridDirection }) => gridDirection };
-	${ ({ vAlign }) => vAlign && `align-items: ${ vAlign === 'bottom' ? 'end' : vAlign };` }
+	align-items: ${ ({ vAlign }) => vAlign };
 	> * {
 		direction: ltr;
 	}
@@ -141,7 +141,7 @@ const StyledGrid = styled.div`
 	${ props => ({ 'rowGap': gridGapToCss(props.rowGap, 0) }) }
 
 	${ ({ medium, colGap, rowGap }) => medium && `
-		${ mq.largeAndUp } {
+		${ mq.mediumAndUp } {
 			${ gridDefToCss(medium) }
 			column-gap: ${ gridGapToCss(colGap, 1) };
 			row-gap: ${ gridGapToCss(rowGap, 1) };
@@ -149,8 +149,16 @@ const StyledGrid = styled.div`
 	` }
 
 	${ ({ large, colGap, rowGap }) => large && `
-		${ mq.largerAndUp } {
+		${ mq.largeAndUp } {
 			${ gridDefToCss(large) }
+			column-gap: ${ gridGapToCss(colGap, 2) };
+			row-gap: ${ gridGapToCss(rowGap, 2) };
+		}
+	` }
+
+	${ ({ larger, colGap, rowGap }) => larger && `
+		${ mq.extraLargeAndUp } {
+			${ gridDefToCss(larger) }
 			column-gap: ${ gridGapToCss(colGap, 2) };
 			row-gap: ${ gridGapToCss(rowGap, 2) };
 		}
@@ -191,12 +199,21 @@ const GridOverlay = styled(StyledGrid)`
 
 class Grid extends Component {
 	render () {
-		const { small, medium, large, extraLarge, colGap, rowGap, showOverlay, children, vAlign, gridDirection, winWidth, className } = this.props
+		const { small, medium, large, larger, extraLarge, colGap, rowGap, showOverlay, children, vAlign, gridDirection, winWidth, className } = this.props
+
+		const vAlignMap = {
+			bottom: 'end',
+			top: 'start',
+			center: 'center',
+			baseline: 'baseline',
+			stretch: 'stretch'
+		}
 
 		if (showOverlay) {
 			const OverlayColumnsSmall = small ? _.range(numberOfCols(small)).map(() => { return '[1]' }).join(' ') : false
 			const OverlayColumnsMedium = medium ? _.range(numberOfCols(medium)).map(() => { return '[1]' }).join(' ') : false
 			const OverlayColumnsLarge = large ? _.range(numberOfCols(large)).map(() => { return '[1]' }).join(' ') : false
+			const OverlayColumnsLarger = larger ? _.range(numberOfCols(larger)).map(() => { return '[1]' }).join(' ') : false
 			const OverlayColumnsExtraLarge = extraLarge ? _.range(numberOfCols(extraLarge)).map(() => { return '[1]' }).join(' ') : false
 
 			return (
@@ -206,10 +223,11 @@ class Grid extends Component {
 						small={small}
 						medium={medium}
 						large={large}
+						larger={larger}
 						extraLarge={extraLarge}
 						colGap={colGap}
 						rowGap={rowGap}
-						vAlign={vAlign}
+						vAlign={vAlignMap[vAlign]}
 						gridDirection={gridDirection}
 					>
 						{children}
@@ -218,6 +236,7 @@ class Grid extends Component {
 						small={OverlayColumnsSmall}
 						medium={OverlayColumnsMedium}
 						large={OverlayColumnsLarge}
+						larger={OverlayColumnsLarger}
 						extraLarge={OverlayColumnsExtraLarge}
 						colGap={colGap}
 						rowGap={rowGap}
@@ -237,10 +256,11 @@ class Grid extends Component {
 				small={small}
 				medium={medium}
 				large={large}
+				larger={larger}
 				extraLarge={extraLarge}
 				colGap={colGap}
 				rowGap={rowGap}
-				vAlign={vAlign}
+				vAlign={vAlignMap[vAlign]}
 				gridDirection={gridDirection}
 			>
 				{children}
@@ -255,6 +275,7 @@ Grid.propTypes = {
 	large: PropTypes.string,
 	extraLarge: PropTypes.string,
 	showOverlay: PropTypes.bool,
+	vAlign: 'stretch'
 }
 
 let gridDefaults = gridSettings
