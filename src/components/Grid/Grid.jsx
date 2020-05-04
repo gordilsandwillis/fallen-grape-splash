@@ -205,6 +205,7 @@ class Grid extends Component {
 			bottom: 'end',
 			top: 'start',
 			center: 'center',
+			middle: 'center',
 			baseline: 'baseline',
 			stretch: 'stretch'
 		}

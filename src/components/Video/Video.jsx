@@ -151,7 +151,7 @@ class Video extends Component {
 	}
 
 	render () {
-		const { posterImage, video, loop, cover, muted } = this.props
+		const { posterImage, video, loop, cover, muted, className } = this.props
 		const { playing } = this.state
 		
 		if (!video || !video.file || !video.file.url) {
@@ -159,7 +159,7 @@ class Video extends Component {
 		}
 
 		return (
-			<Wrapper hasPosterImage={posterImage} cover={cover}>
+			<Wrapper hasPosterImage={posterImage} cover={cover} className={className}>
 				{posterImage && (
 					<PosterImageWrap onClick={this.openVideo}>
 						<Image image={posterImage}/>
@@ -186,7 +186,7 @@ class Video extends Component {
 						<VideoWrapper transitionStatus={transitionStatus} hasPosterImage={posterImage} cover={cover}>
 							<StyledVideo
 								cover={cover}
-								url={url}
+								url={video.file.url}
 								playing={playing}
 								loop={loop}
 								muted={muted}

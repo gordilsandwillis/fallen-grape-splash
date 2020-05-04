@@ -6,6 +6,7 @@ import TextLink from 'src/components/TextLink'
 import { MdVolumeUp as TestIcon } from 'react-icons/md'
 import { typography, themes } from 'src/styles'
 import { optionsKnob } from '@storybook/addon-knobs'
+import { MdArrowForward } from 'react-icons/md'
 
 const SpaceOut = styled.div`
 	margin: 1rem 0 4rem;
@@ -49,24 +50,13 @@ storiesOf(`Styleguide`, module)
 			<SpaceOut>
 				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } size="tiny">Tiny</Button>
 				<Button
+					icon={<MdArrowForward/>}
 					setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) }
 					size="small">Small</Button>
 				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/">Default</Button>
 				<Button
 					setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) }
 					size="large">Large</Button>
-			</SpaceOut>
-			<SpaceOut>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="square" size="tiny" icon={<TestIcon size={18}/>}/>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="square" size="small" icon={<TestIcon size={18}/>}/>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="square" icon={<TestIcon size={18}/>}/>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="square" size="large" icon={<TestIcon size={18}/>}/>
-			</SpaceOut>
-			<SpaceOut>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="circle" size="tiny" icon="check"/>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="circle" size="small" icon="check"/>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="circle" icon="check"/>
-				<Button setTheme={ optionsKnob('Theme', themeOptions, 'buttonDefault', { display: 'select' }) } to="/" shape="circle" size="large" icon="check"/>
 			</SpaceOut>
 			<hr/>
 			<h4>Button Shapes</h4>

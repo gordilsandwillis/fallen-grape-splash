@@ -17,7 +17,8 @@ class PageTemplate extends React.Component {
 		const site = this.props.data.allContentfulSiteSettings.edges.filter(edge => !edge.node.title.includes('PLACEHOLDER'))[0].node
 		const page = this.props.data.allContentfulPage.edges[0].node
 		const { sections } = page
-		const hasAtf = sections && sections[0].__typename === 'ContentfulAboveTheFold'
+		const hasAtf = sections && sections[0].__typename === 'ContentfulWideMedia' && sections[0].fullWidth
+
 		return (
 			<Fragment >
 				<SEO
@@ -35,12 +36,14 @@ class PageTemplate extends React.Component {
 				/>
 				{sections.map((section, index) => {
 					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme
+					const prevFullWidth = ((index !== 0) && sections[index - 1]) && sections[index - 1].fullWidth
 					const nextTheme = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].theme
+					const nextFullWidth = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].fullWidth
 					const lastSection = sections.length === index + 1
 					return (
 						<ComponentRenderer
-							prevTheme={prevTheme}
-							nextTheme={nextTheme}
+							prevTheme={prevFullWidth ? false : prevTheme}
+							nextTheme={nextFullWidth ? false : nextTheme}
 							lastSection={lastSection}
 							key={section.id}
 							item={section}

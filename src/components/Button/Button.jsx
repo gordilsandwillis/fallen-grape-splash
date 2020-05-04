@@ -10,16 +10,17 @@ import MaterialIcon from 'src/components/MaterialIcon'
 import Link from 'src/components/Link'
 
 const buttonSizes = {
-	tiny: '36px',
-	small: '48px',
+	tiny: '32px',
+	small: '40px',
 	medium: '50px',
-	large: '72px'
+	large: '60px'
 }
 
 const buttonSettings = {
 	radius: '0px',
 	border: '2px solid',
-	transitionSpeed: animations.mediumSpeed
+	transitionSpeed: animations.mediumSpeed,
+	verticalOffset: '1px'
 }
 
 const getState = (loading, error, success, disabled) => {
@@ -37,28 +38,33 @@ const getState = (loading, error, success, disabled) => {
 	return buttonState
 }
 
-const setButtonTheme = theme => `
-	${ theme === 'default' || !theme ? `
-		color: ${ themes.default.color };
-		background: ${ themes.default.background };
+const setButtonTheme = (theme, state) => `
+	color: ${ themes[theme].color };
+	background: ${ themes[theme].background };
+	${ theme.shadow ? `
+		box-shadow: ${ theme.shadow };
 	` : `
-		color: ${ themes[theme].color };
-		background: ${ themes[theme].background };
+		box-shadow: none;
 	` }
-	&:hover {
-		color: ${ themes[theme].hoverColor };
-		background: ${ themes[theme].hoverBackground };
-		${ themes[theme].borderHoverColor ? `
-			border-color: ${ themes[theme].borderHoverColor };
-		` : `
-			border-color: ${ themes[theme].hoverBackground };
-		` }
-	}
 	${ themes[theme].borderColor ? `
 		border-color: ${ themes[theme].borderColor };
 	` : `
 		border-color: ${ themes[theme].background };
 	` }
+	&:hover {
+		${ !state ? `
+			color: ${ themes[theme].hoverColor };
+			background: ${ themes[theme].hoverBackground };
+			${ themes[theme].borderHoverColor ? `
+				border-color: ${ themes[theme].borderHoverColor };
+			` : `
+				border-color: ${ themes[theme].hoverBackground };
+			` }
+			${ theme.hoverShadow ? `
+				box-shadow: ${ theme.hoverShadow };
+			` : `` }
+		` : ``}
+	}
 `
 
 const DisabledButtonStyles = () => `
@@ -72,26 +78,34 @@ const DisabledButtonStyles = () => `
 	}
 `
 
+const ButtonIcon = styled.div`
+	${ ({ position }) => position === 'left' ? `
+		margin-right: .5em;
+	` : `
+		margin-left: .5em;
+	` }
+	svg {
+		display: block;
+	}
+`
+
 const ButtonStyles = (state, shape, size, theme) => (`
 	appearance: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-touch-callout: none;
 	outline: none;
+	cursor: pointer;
 	display: inline-block;
 	vertical-align: middle;
 	border: ${ buttonSettings.border };
-	height: ${ buttonSizes.medium };
-	padding-top: 0;
-	padding-bottom: 2px; // offset text if necessary
-	padding-left: calc(${ buttonSizes.medium } * .6);
-	padding-right: calc(${ buttonSizes.medium } * .6);
-	cursor: pointer;
+	height: ${ buttonSizes[size] };
+	padding: 0 calc(${ buttonSizes[size] } * .5) ${ buttonSettings.verticalOffset };
+	min-width: calc(${ buttonSizes[size] } * 2);
 	text-transform: none;
 	letter-spacing: 0;
 	border-radius: ${ buttonSettings.radius };
 	${ util.responsiveStyles('font-size', 20, 16, 15, 13) }
 	text-align: center;
-	box-shadow: none;
 	${ typography.buttonStyle }
 	line-height: 1em;
 	${ util.fontSmoothing }
@@ -105,35 +119,30 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	${ state === 'loading' ? `cursor: wait;` : `` }
 	${ state === 'error' || state === 'success' ? `cursor: default;` : `` }
 
-	${ size ? `
-		padding-left: calc(${ buttonSizes[size] } * .6);
-		padding-right: calc(${ buttonSizes[size] } * .6);
-		height: ${ buttonSizes[size] };
-		min-width: calc(${ buttonSizes[size] } * 2);
-	` : `
-		min-width: calc(${ buttonSizes.medium } * 2);
-	` }
-
-	${ setButtonTheme(theme) }
-	${ state === 'disabled' ? `${ DisabledButtonStyles() }` : `` }
-
+	// Button Shapes
 	${ shape ? `
 		${ shape.includes('circle') || shape.includes('square') ? `
-			padding-top: 0;
-			padding-bottom: 0;
-			padding-left: 0;
-			padding-right: 0;
-			${ size ? `
-				width: ${ buttonSizes[size] };
-				min-width: ${ buttonSizes[size] };
-			` : `
-				width: ${ buttonSizes.medium };
-				min-width: ${ buttonSizes.medium };
-			` }
+			padding: 0;
+			width: ${ buttonSizes[size] };
+			min-width: ${ buttonSizes[size] };
+			${ ButtonIcon } {
+				margin: 0;
+			}
 		` : `` }
 	` : `` }
-
 	${ shape && shape.includes('circle') ? `border-radius: 50%;` : `` }
+
+	// Button Themes
+	${ setButtonTheme(theme, state) }
+	${ state === 'disabled' ? `${ DisabledButtonStyles() }` : `` }
+
+	// Button Size Tweaks
+	${ ({ size }) => size === 'small' ? `
+		font-size: inherit;
+	` : `` }
+	${ ({ size }) => size === 'tiny' ? `
+		font-size: inherit;
+	` : `` }
 
 `)
 
@@ -159,18 +168,18 @@ const StyledButtonElement = styled.button`
 `
 
 class Button extends Component {
-	renderIcon = icon => {
+	renderIcon = (icon, position, shape, size) => {
 		let renderedIcon = false
 		if (typeof icon === 'string') {
-			renderedIcon = <MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon>
+			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}><MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon></ButtonIcon>
 		} else {
-			renderedIcon = icon
+			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}>{icon}</ButtonIcon>
 		}
 		return renderedIcon
 	}
 
 	renderButtonContent = () => {
-		const { loading, error, success, children, label, icon, iconPosition } = this.props
+		const { loading, error, success, children, label, icon, iconPosition, shape, size } = this.props
 		if (loading) {
 			return <ButtonContent>
 				...
@@ -185,9 +194,9 @@ class Button extends Component {
 			</ButtonContent>
 		} else {
 			return <ButtonContent>
-				{icon && iconPosition !== 'right' ? this.renderIcon(icon) : false}
+				{icon && iconPosition !== 'right' ? this.renderIcon(icon, iconPosition, shape, size) : false}
 				{children || label}
-				{icon && iconPosition === 'right' ? this.renderIcon(icon) : false}
+				{icon && iconPosition === 'right' ? this.renderIcon(icon, iconPosition, shape, size) : false}
 			</ButtonContent>
 		}
 	}
@@ -257,7 +266,9 @@ class Button extends Component {
 Button.defaultProps = {
 	setTheme: 'default',
 	theme: 'default',
-	size: 'medium'
+	size: 'medium',
+	shape: 'default',
+	iconPosition: 'left'
 }
 
 export default Button

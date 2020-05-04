@@ -5,6 +5,11 @@ export const query = graphql`
     __typename
     id
     fullWidth
+    height
     theme
+    media {
+    	...GWImage
+    	...GWVideo
+  	}
   }
 `

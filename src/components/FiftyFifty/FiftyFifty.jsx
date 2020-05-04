@@ -4,8 +4,19 @@ import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import ColumnRenderer from 'src/components/ColumnRenderer'
+import { util } from 'src/styles'
 
-const Column = styled.div``
+const Column = styled.div`
+  ${ ({ vPadded }) => vPadded ? `
+    ${ util.responsiveStyles('padding-top', 91, 51, 66, 52) }
+    ${ util.responsiveStyles('padding-bottom', 91, 51, 66, 52) }
+  ` : `` }
+  ${ ({ hPadded }) => hPadded ? `
+    padding-left: ${ 100/14 }vw;
+    padding-right: ${ 100/14 }vw;
+  ` : `` }
+`
+
 const ColumnContent = styled.div`
   ${ ({ firstItem }) => !firstItem ? `
     margin-top: 24px;
@@ -13,42 +24,32 @@ const ColumnContent = styled.div`
 `
 
 const gridSetup = {
-  '50/50_margins': {
-    small: "1 [12] 1",
-    large: "1 [6] [6] 1",
-    larger: "1 [6] [6] 1"
+  '50/50': {
+    small: "[12]",
+    large: "[6] [6]",
+    larger: "[6] [6]"
   },
-  '50/50_fullWidth': {
-    small: "[1]",
-    large: "[1] [1]",
-    larger: "[1] [1]"
+  '60/40': {
+    small: "[12]",
+    large: "[8] [4]",
+    larger: "[8] [4]"
   },
-  '60/40_margins': {
-    small: "1 [12] 1",
-    large: "1 [8] [4] 1",
-    larger: "1 [8] [4] 1"
-  },
-  '60/40_fullWidth': {
-    small: "[1]",
-    large: "[9] [5]",
-    larger: "[9] [5]"
-  },
-  '40/60_margins': {
-    small: "1 [12] 1",
-    large: "1 [4] [8] 1",
-    larger: "1 [4] [8] 1"
-  },
-  '40/60_fullWidth': {
-    small: "[1]",
-    large: "[5] [9]",
-    larger: "[5] [9]"
+  '40/60': {
+    small: "[12]",
+    large: "[4] [8]",
+    larger: "[4] [8]"
   }
 }
 
 const gutterSetup = {
 	narrow: ["16px", "30px", "40px"],
-	wide: (100/14) + 'vw',
+	wide: 100/14 + 'vw',
 	none: 0
+}
+
+const marginSetup = {
+  margins: 1,
+  fullWidth: ''
 }
 
 const gridDirection = {
@@ -78,25 +79,33 @@ const FiftyFifty = ({
 	if (!verticalAlignment) { verticalAlignment = 'center' }
 	if (!columnOrder) { columnOrder = 'leftToRight' }
 
+  let padded = true
+  if (padding === 'notPadded') {
+    padded = false
+  }
+
 	return (
 		<Section
 			className={className}
 			setTheme={theme}
 			prevTheme={prevTheme}
 			nextTheme={nextTheme}
-			padded={padding === 'notPadded' ? false : true}
+			padded={padded}
 		>
 			<Grid
-	      small={gridSetup[layout + "_" + width].small}
-	      large={gridSetup[layout + "_" + width].large}
-        larger={gridSetup[layout + "_" + width].larger}
+	      small={marginSetup[width] + ' ' + gridSetup[layout].small + ' ' + marginSetup[width]}
+	      large={marginSetup[width] + ' ' + gridSetup[layout].large + ' ' + marginSetup[width]}
+        larger={marginSetup[width] + ' ' + gridSetup[layout].larger + ' ' + marginSetup[width]}
 	      colGap={gutterSetup[gutters]}
-	      rowGap={["7vw", "7vw", "80px"]}
+	      rowGap={width === 'fullWidth' ? 0 : ["7vw", "7vw", "80px"]}
 	      vAlign={verticalAlignment}
 	      gridDirection={gridDirection[columnOrder]}
 	    >
   			{columns.map((column, index) => (
-          <Column>
+          <Column
+            vPadded={column.content && !padded}
+            hPadded={column.content && gutters === 'none'}
+          >
             {column.content ? column.content.map((item, index) => (
               <ColumnContent
                 key={item.id}

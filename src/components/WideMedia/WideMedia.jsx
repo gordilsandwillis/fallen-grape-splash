@@ -7,13 +7,52 @@ import Video from 'src/components/Video'
 import ThemeSelector from 'src/components/ThemeSelector'
 import Grid from 'src/components/Grid'
 import Caption from 'src/components/Caption'
-import ConditionalRender from 'src/components/ConditionalRender'
 import { colors, mq } from 'src/styles'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 
-const WideMediaWrap = styled(ThemeSelector)`
-	position: relative;
-	z-index: 2;
+const WideMediaWrap = styled.div`
+	${ ({ setHeight }) => setHeight !== 'auto' ? `
+		position: relative;
+		z-index: 2;
+		height: setHeight };
+		min-height: 40vw;
+	` : `` }
+`
+
+const MediaImage = styled(Image)`
+	${ ({ setHeight }) => setHeight !== 'auto' ? `
+		> div {
+			height: ${ setHeight };
+			min-height: 40vw;
+			position: relative;
+		}
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+		}
+	` : `` }
+`
+
+const MediaVideo = styled(Video)`
+	${ ({ setHeight }) => setHeight !== 'auto' ? `
+		> div {
+			height: ${ setHeight };
+			min-height: 40vw;
+			position: relative;
+		}
+		video {
+			position: absolute;
+			top: 0;
+			left: 0;
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+		}
+	` : `` }
 `
 
 const CaptionOverlay = styled.div`
@@ -35,55 +74,55 @@ const CaptionOverlay = styled.div`
 const CaptionBlock = styled.div`
 `
 
-const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, nextTheme, caption }) => {
-	if (!fullWidth) {
-		return (
-			<Section
-				setTheme={theme}
-				nextTheme={nextTheme}
-				prevTheme={prevTheme}
-			>
-				<ScrollEntrance>
-					<Grid small="1 [12] 1">
-						{image && !video ? (
-							<Image
-								image={image.image}
-								small={image.small}
-								medium={image.medium}
-								large={image.large}
-								alt={image.description || image.title}
-							/>
-						) : false}
-						<ConditionalRender condition={video}>
-							<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false}/>
-						</ConditionalRender>
-						<ConditionalRender condition={caption}>
-							<Caption>{caption}</Caption>
-						</ConditionalRender>
-					</Grid>
-				</ScrollEntrance>
-			</Section>
-		)
+const WideMedia = ({
+	media,
+	fullWidth,
+	theme,
+	prevTheme,
+	nextTheme,
+	caption,
+	height
+}) => {
+	
+	const type = media[0].__typename === 'ContentfulVideo' ? 'video' : 'image'
+	media = media[0]
+
+	const heightValues = {
+		auto: 'auto',
+		fullHeight: '100vh',
+		mediumHeight: '70vh',
+		shortHeight: '50vh'
 	}
 
 	return (
-		<ScrollEntrance>
-			<WideMediaWrap setTheme={nextTheme}>
-				<div>
-					{image && !video ? (
-						<Image
-							image={image.image}
-							small={image.small}
-							medium={image.medium}
-							large={image.large}
-							alt={image.description || image.title}
+		<Section
+			setTheme={theme}
+			nextTheme={nextTheme}
+			prevTheme={prevTheme}
+			padded={!fullWidth}
+		>
+			<WideMediaWrap setHeight={heightValues[height]}>
+				<Grid small={fullWidth ? '[1]' : '1 [12] 1'}>
+					{type === 'image' ? (
+						<MediaImage
+							image={media.image}
+							small={media.small}
+							medium={media.medium}
+							large={media.large}
+							alt={media.description || media.title}
+							setHeight={heightValues[height]}
 						/>
-					) : false}
-					<ConditionalRender condition={video}>
-						<Video url={video && video.file.url} playing={true} loop={true} coverImage={image ? image.image : false} />
-					</ConditionalRender>
-				</div>
-				<ConditionalRender condition={caption}>
+					) : (
+						<MediaVideo
+							video={media.video}
+							playing={true}
+							loop={true}
+							setHeight={heightValues[height]}
+							// posterImage={media.posterImage}
+						/>
+					)}
+				</Grid>
+				{caption && (
 					<Grid small="1 [12] 1">
 						<div>
 							<CaptionBlock>
@@ -91,14 +130,15 @@ const WideMedia = ({ image, video, nextSectionBg, fullWidth, theme, prevTheme, n
 							</CaptionBlock>
 						</div>
 					</Grid>
-				</ConditionalRender>
+				)}
 			</WideMediaWrap>
-		</ScrollEntrance>
+		</Section>
 	)
 }
 
 WideMedia.defaultProps = {
-	fullWidth: false
+	fullWidth: false,
+	height: 'auto'
 }
 
 export default WideMedia
