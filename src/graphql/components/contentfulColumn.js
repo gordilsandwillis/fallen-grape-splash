@@ -4,6 +4,7 @@ export const query = graphql`
   fragment Column on ContentfulColumn {
     __typename
     id
+    type
     content {
       ...Link
       ...Text
