@@ -13,10 +13,10 @@
 The out of the box block types correspond to contentful fields. For easy setup, we have an import file that you can import to your new blank Contentful space.
 
 An import file is included in the root of repo
-`/TBD BlocksToContentful.json`
+`/TBD contentfulImport.json`
 
 #### Run Contentful Import
-Run `contentful space import --content-file [Path to BlocksToContentful.json] --space-id [SPACE_ID]` in terminal
+Run `contentful space import --content-file [Path to contentfulImport.json] --space-id [SPACE_ID]` in terminal
 
 To speed things up further, this import will also create a `Page` content model, as well as a `SiteSettings` model to be used across the site. It will also include a PLACEHOLDER version of each content model to avoid graphql problems.
 

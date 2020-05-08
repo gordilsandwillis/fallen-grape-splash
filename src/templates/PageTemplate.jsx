@@ -6,25 +6,19 @@ import SEO from 'src/components/SEO'
 import ComponentRenderer from 'src/components/ComponentRenderer'
 import Header from 'src/components/Header'
 import Footer from 'src/components/Footer'
-import ReactGA from 'react-ga'
 
 const propTypes = {
 	data: PropTypes.object.isRequired,
 }
 
 class PageTemplate extends React.Component {
-	componentDidMount () {
-		if (process.env.NODE_ENV === 'production' && process.env.GA_TRACKING_CODE) {
-	    ReactGA.initialize(process.env.GA_TRACKING_CODE);
-			ReactGA.pageview(window.location.pathname + window.location.search);
-		}
-	}
 	
 	render () {
 		const site = this.props.data.allContentfulSiteSettings.edges.filter(edge => !edge.node.title.includes('PLACEHOLDER'))[0].node
 		const page = this.props.data.allContentfulPage.edges[0].node
 		const { sections } = page
-		const hasAtf = sections && sections[0].__typename === 'ContentfulAboveTheFold'
+		const hasAtf = sections && sections[0].__typename === 'ContentfulWideMedia' && sections[0].fullWidth
+
 		return (
 			<Fragment >
 				<SEO
@@ -42,12 +36,14 @@ class PageTemplate extends React.Component {
 				/>
 				{sections.map((section, index) => {
 					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme
+					const prevFullWidth = ((index !== 0) && sections[index - 1]) && sections[index - 1].fullWidth
 					const nextTheme = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].theme
+					const nextFullWidth = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].fullWidth
 					const lastSection = sections.length === index + 1
 					return (
 						<ComponentRenderer
-							prevTheme={prevTheme}
-							nextTheme={nextTheme}
+							prevTheme={prevFullWidth ? false : prevTheme}
+							nextTheme={nextFullWidth ? false : nextTheme}
 							lastSection={lastSection}
 							key={section.id}
 							item={section}
@@ -66,31 +62,23 @@ PageTemplate.propTypes = propTypes
 export const pageQuery = graphql`
   query($id: String!) {
 		allContentfulSiteSettings(filter: {internalName: {nin: "PLACEHOLDER Site Settings"}}) {
-			edges {
-				node {
-					...SiteSettings
-				}
-			}
-		}
+	    edges {
+	      node {
+	        ...SiteSettings
+	      }
+	    }
+	  }
     allContentfulPage(filter: {id: {eq: $id}}) {
 			edges {
 				node {
 					id
-					path
 					title
-					seoDescription
-					shareImage {
-	          file {
-	            url
-	          }
-	        }
+					slug
 					sections {
-						...AboveTheFold
-						...CalloutText
+						...Columns
 						...FiftyFifty
-						...TwoColumnText
-						...WideImageVideo
-						...MultipleImages
+						...TextSection
+						...WideMedia
 					}
 				}
 			}

@@ -1,12 +1,14 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment ResponsiveImage on ContentfulResponsiveImage {
+  fragment GWImage on ContentfulImage {
     __typename
     id
-    caption
+    maxWidth
     image {
-      fluid(maxWidth: 1800, quality: 100) {
+      svgContent
+      fluid(maxWidth: 2000, quality: 100) {
+        base64
         aspectRatio
         src
         srcSet
@@ -16,7 +18,8 @@ export const query = graphql`
       }
     }
     small {
-      fluid(maxWidth: 750, quality: 100) {
+      fluid(maxWidth: 2000, quality: 100) {
+        base64
         aspectRatio
         src
         srcSet
@@ -26,7 +29,8 @@ export const query = graphql`
       }
     }
     medium {
-      fluid(maxWidth: 1200, quality: 100) {
+      fluid(maxWidth: 2000, quality: 100) {
+        base64
         aspectRatio
         src
         srcSet
@@ -35,15 +39,6 @@ export const query = graphql`
         sizes
       }
     }
-    large {
-      fluid(maxWidth: 1800, quality: 100) {
-        aspectRatio
-        src
-        srcSet
-        srcWebp
-        srcSetWebp
-        sizes
-      }
-    }
+    caption
   }
 `

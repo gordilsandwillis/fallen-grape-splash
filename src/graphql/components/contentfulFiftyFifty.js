@@ -5,24 +5,18 @@ export const query = graphql`
     __typename
     id
     theme
-    eyebrow
-    headline
-    headlineSize
-    imagePosition
-    text {
-      text
-      json
+    columns {
+    	...Column
+    	...GWImage
+        ...GWVideo
+        ...Text
+        ...List
     }
-    image {
-      ...ResponsiveImage
-    }
-    video {
-      file {
-        url
-      }
-    }
-    buttons {
-      ...Link
-    }
+    layout
+    padding
+    width
+    gutters
+    verticalAlignment
+    columnOrder
   }
 `

@@ -4,12 +4,9 @@ export const query = graphql`
   fragment List on ContentfulList {
     __typename
     id
-    internalTitle
-    displayTitle
+    type
     items {
-      ... on ContentfulLink {
-        ...Link
-      }
+    	...Link
     }
   }
 `

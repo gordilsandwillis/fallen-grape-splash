@@ -11,40 +11,28 @@ import MaterialIcon from 'src/components/MaterialIcon'
 import ScrollListener from 'src/components/ScrollListener'
 import { colors, typography, animations, mq, util } from 'src/styles'
 
+const showHide = true // show and hide header on scroll
+const headerHeight = util.responsiveStyles('height', 140, 130, 110, 75)
+const headerHeightCollapsed = util.responsiveStyles('height', 80, 70, 66, 60)
+
 const NavLinkStyle = (scrolled, active) => `
 	display: block;
 	position: relative;
 	${ typography.h6 }
 	${ util.responsiveStyles('margin-right', 60, 40, 32, 20) }
 	padding: 10px 0;
-	&:after {
-		position: absolute;
-		content: '';
-		display: block;
-		height: 2px;
-		background: ${ colors.yellow };
-		left: 0;
-		right: 0;
-		bottom: 5px;
-		transform: translate3d(0, 8px, 0);
-		opacity: 0;
-		transition: opacity ${ animations.mediumSpeed } ease-in-out, transform ${ animations.mediumSpeed } ease-in-out, background ${ animations.mediumSpeed } ease-in-out;
-	}
+	line-height: 1em;
 	&:hover {
-		&:after {
-			transform: none;
-			opacity: 1;
-		}
+		${ scrolled ? `
+			color: ${ colors.mainColor };
+		` : `
+			opacity: .5;
+		` }
 	}
 	${ active && `
+		color: ${ colors.mainColor };
 		&:hover {
-			&:after {
-				background: ${ colors.yellow };
-			}
-		}
-		&:after {
-			transform: none;
-			opacity: 1;
+			color: ${ colors.mainColor };
 		}
 	` }
 `
@@ -63,45 +51,60 @@ const Wrapper = styled.header`
 	left: 0;
 	right: 0;
 	z-index: 4;
-	transition: background ${ animations.mediumSpeed } ease-in-out, transform ${ animations.mediumSpeed } ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: stretch;
+	${ headerHeight }
+	transition: height ${ animations.mediumSpeed } ease-in-out,
+							background ${ animations.mediumSpeed } ease-in-out,
+							transform ${ animations.mediumSpeed } ease-in-out;
 	svg {
 		* {
 			fill: currentcolor;
 		}
 	}
+	${ ({ scrolled }) => scrolled ? `
+		${ headerHeightCollapsed }
+		box-shadow: 0 1px 0 ${ rgba(colors.textColor, 0.05) }
+	` : `
+		${ headerHeight }
+	` };
+
 	${ ({ scrolled, hasAtf }) => scrolled ? `
+		${ headerHeightCollapsed }
 		background: ${ colors.white };
 		color: ${ colors.textColor };
+		box-shadow: 0 1px 0 ${ rgba(colors.textColor, 0.05) };
 	` : `
 		background: transparent;
-		${ !hasAtf ? `
+		${ hasAtf ? `
+			color: ${ colors.bgColor };
+		` : `
 			color: ${ colors.textColor };
+		` }
+	` }
+	${ ({ navVisible }) => navVisible && `
+		transform: translate3d(0, -101%, 0);
+	` }
+`
+
+const HeaderContent = styled(Grid)`
+`
+
+const HeaderLogo = styled(Logo)`
+	${ util.responsiveStyles('width', 80, 50, 50, 40) }
+	height: auto;
+	transition: color ${ animations.mediumSpeed } ease-in-out, width ${ animations.mediumSpeed } ease-in-out;
+	${ ({ scrolled, hasAtf }) => scrolled ? `
+		color: ${ colors.mainColor };
+		${ util.responsiveStyles('width', 60, 40, 40, 30) }
+	` : `
+		${ !hasAtf ? `
+			color: ${ colors.mainColor };
 		` : `
 			color: ${ colors.bgColor };
 		` }
 	` }
-	${ ({ navVisible }) => navVisible && `
-			transform: translate3d(0, -101%, 0);
-	` }
-`
-
-const HeaderContainer = styled.div`
-	position: relative;
-	z-index: 2;
-	transition: padding ${ animations.mediumSpeed } ease-in-out, box-shadow ${ animations.mediumSpeed } ease-in-out;
-	${ ({ scrolled }) => scrolled ? `
-		padding-top: 18px;
-		padding-bottom: 14px;
-		${ util.responsiveStyles('padding-top', 25, 18, 18, 15) }
-		${ util.responsiveStyles('padding-bottom', 25, 18, 18, 15) }
-		box-shadow: 0 -10px 40px ${ rgba(colors.textColor, 0.15) }
-	` : `
-		${ util.responsiveStyles('padding-top', 50, 40, 30, 10) }
-		${ util.responsiveStyles('padding-bottom', 50, 40, 30, 10) }
-	` };
-`
-
-const HeaderContent = styled(Grid)`
 `
 
 const LogoCol = styled.div`
@@ -109,22 +112,6 @@ const LogoCol = styled.div`
 	a {
 		display: inline-block;
 		vertical-align: top;
-	}
-	svg {
-		${ util.responsiveStyles('width', 90, 50, 50, 40) }
-		height: auto;
-		display: block;
-		transition: color ${ animations.mediumSpeed } ease-in-out, width ${ animations.mediumSpeed } ease-in-out;
-		${ ({ scrolled, hasAtf }) => scrolled ? `
-			color: ${ colors.mainColor };
-			${ util.responsiveStyles('width', 60, 50, 50, 40) }
-		` : `
-			${ !hasAtf ? `
-				color: ${ colors.mainColor };
-			` : `
-				color: ${ colors.bgColor };
-			` }
-		` }
 	}
 `
 
@@ -136,22 +123,6 @@ const NavLinks = styled.div`
 	a:last-of-type {
 		margin-right: 0;
 	}
-	button {
-		${ util.responsiveStyles('margin-left', 60, 40, 32, 20) }
-		${ mq.mediumAndBelow } {
-			display: none;
-		}
-	}
-	${ ({ mediumHide }) => mediumHide && `
-		${ mq.mediumAndBelow } {
-			display: none;
-		}
-	` }
-	${ ({ smallHide }) => smallHide && `
-		${ mq.mediumAndBelow } {
-			display: none;
-		}
-	` }
 `
 
 const MenuIcon = styled.div`
@@ -170,7 +141,7 @@ const MenuIcon = styled.div`
 const HeaderPlaceholder = styled.div`
 	background: transparent;
 	width: 100%;
-	${ util.responsiveStyles('height', 140, 95, 80, 80) }
+	${ headerHeight }
 `
 
 class Header extends Component {
@@ -213,47 +184,44 @@ class Header extends Component {
 		      {({ scrolledToTop, scrolledToBottom, scrollY, scrolledUp, hasScrolled, pageHeight }) => {
 		      	const scrolled = !scrolledToTop && hasScrolled
 		      	return (
-							<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp && !scrolledToTop}>
-								<HeaderContainer scrolled={scrolled} hasAtf={hasAtf}>
-									<HeaderContent
-										small="1 [5] [2] [5] 1"
-										medium="1 [5] [2] [5] 1"
-										large="1 [9] [8] [9] 1"
-										vAlign="center"
-									>
-										<div>
-											<MenuIcon onClick={() => this.toggleDrawer(headerNavigation[0].id)}>
-												<MaterialIcon size="36px">menu</MaterialIcon>
-											</MenuIcon>
-											<NavLinks mediumHide>
-												{headerNavigation && headerNavigation.map(({ id, displayTitle }, index) => (
-													<NavTrigger key={index + '_' + id + 'header'} scrolled={scrolled} hasAtf={hasAtf} onClick={() => this.toggleDrawer(id)}>{displayTitle}</NavTrigger>
-												))}
-											</NavLinks>
-										</div>
-										<LogoCol scrolled={scrolled} hasAtf={hasAtf}>
-											<Link to="/" style="none">
-												<Logo />
-											</Link>
-										</LogoCol>
-										<div>
-											<NavLinks alignment="right">
-												{headerLinks && headerLinks.map(({ to, label, id }, index) => (
-													<NavLink key={index + '_' + id + 'nested-header'} scrolled={scrolled} hasAtf={hasAtf} to={to} active={pathname === to}>{label}</NavLink>
-												))}
-												{headerButtons && headerButtons.map(({ to, label, id, theme, alternateLabelSmall, alternateLabelMedium }, index) => (
-													<Button key={id + index} size="small" setTheme={theme}>
-														<ResponsiveComponent
-															small={alternateLabelSmall || label}
-															medium={alternateLabelMedium || label}
-															large={label}
-														/>
-													</Button>
-												))}
-											</NavLinks>
-										</div>
-									</HeaderContent>
-								</HeaderContainer>
+							<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp && !scrolledToTop && showHide}>
+								<HeaderContent
+									small="1 [5] [2] [5] 1"
+									medium="1 [5] [2] [5] 1"
+									large="1 [9] [8] [9] 1"
+									vAlign="center"
+									navVisible={!scrolledUp && !scrolledToTop && showHide}
+								>
+									<div>
+										<NavLinks>
+											<NavLink
+												scrolled={scrolled}
+												hasAtf={hasAtf}
+												to='/'
+												// active={pathname === to}
+											>
+												Header Link
+											</NavLink>
+										</NavLinks>
+									</div>
+									<LogoCol>
+										<Link to="/">
+											<HeaderLogo scrolled={scrolled} hasAtf={hasAtf} />
+										</Link>
+									</LogoCol>
+									<div>
+										<NavLinks alignment="right">
+											<NavLink
+												scrolled={scrolled}
+												hasAtf={hasAtf}
+												to='/'
+												// active={pathname === to}
+											>
+												Header Link
+											</NavLink>
+										</NavLinks>
+									</div>
+								</HeaderContent>
 							</Wrapper>
 						)
 					}}

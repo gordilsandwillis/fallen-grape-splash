@@ -15,7 +15,6 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 					}
 				}
 				allContentfulSiteSettings {
-					
 						nodes {
 							favicon {
 								fixed {
@@ -27,14 +26,10 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 									src
 								}
 							}
-							defaultShareImage {
-			          id
-			          file {
-			            url
-			          }
-			        }
+							defaultSeo {
+					      ...Seo
+					    }
 						}
-					
 				}
 				favicon: file(relativePath:{eq: "images/favicon.png"}) {
 					publicURL

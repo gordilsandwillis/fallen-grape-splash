@@ -1,24 +1,26 @@
 import React from 'react'
 
-import ATF from 'src/components/ATF'
-import CalloutText from 'src/components/CalloutText'
-import FiftyFifty from 'src/components/FiftyFifty'
-import TwoColumnText from 'src/components/TwoColumnText'
+import TextSection from 'src/components/TextSection'
+import Columns from 'src/components/Columns'
 import WideMedia from 'src/components/WideMedia'
-import MultipleImages from 'src/components/MultipleImages'
+import FiftyFifty from 'src/components/FiftyFifty'
 
 const componentMap = {
-	ContentfulAboveTheFold: ATF,
-	ContentfulCalloutText: CalloutText,
+	ContentfulTextSection: TextSection,
+	ContentfulColumns: Columns,
 	ContentfulFiftyFifty: FiftyFifty,
-	ContentfulTwoColumnText: TwoColumnText,
-	ContentfulWideMedia: WideMedia,
-	ContentfulMultipleImages: MultipleImages
+	ContentfulWideMedia: WideMedia
 }
 
 export default ({ item, prevTheme, nextTheme, index, lastSection }) => {
 	const Component = componentMap[item.__typename]
 	return Component ? (
-		<Component {...item} prevTheme={prevTheme} nextTheme={nextTheme} lastSection={lastSection} index={index}/>
+		<Component
+			{...item}
+			prevTheme={prevTheme}
+			nextTheme={nextTheme}
+			lastSection={lastSection}
+			index={index}
+		/>
 	) : null
 }

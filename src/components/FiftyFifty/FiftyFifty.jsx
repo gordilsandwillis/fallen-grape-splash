@@ -1,131 +1,135 @@
 import React from 'react'
+import styled from '@emotion/styled'
 import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
-import ConditionalRender from 'src/components/ConditionalRender'
-import Image from 'src/components/Image'
-import Video from 'src/components/Video'
-import TextLockup from 'src/components/TextLockup'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import { mq } from 'src/styles'
+import ColumnRenderer from 'src/components/ColumnRenderer'
+import { util } from 'src/styles'
+
+const Column = styled.div`
+  ${ ({ vPadded }) => vPadded ? `
+    ${ util.responsiveStyles('padding-top', 91, 51, 66, 52) }
+    ${ util.responsiveStyles('padding-bottom', 91, 51, 66, 52) }
+  ` : `` }
+  ${ ({ hPadded }) => hPadded ? `
+    padding-left: ${ 100/14 }vw;
+    padding-right: ${ 100/14 }vw;
+  ` : `` }
+`
+
+const ColumnContent = styled.div`
+  ${ ({ firstItem }) => !firstItem ? `
+    margin-top: 24px;
+  ` : `` }
+`
+
+const gridSetup = {
+  '50/50': {
+    small: "[12]",
+    large: "[6] [6]",
+    larger: "[6] [6]"
+  },
+  '60/40': {
+    small: "[12]",
+    large: "[8] [4]",
+    larger: "[8] [4]"
+  },
+  '40/60': {
+    small: "[12]",
+    large: "[4] [8]",
+    larger: "[4] [8]"
+  }
+}
+
+const gutterSetup = {
+	narrow: ["16px", "30px", "40px"],
+	wide: 100/14 + 'vw',
+	none: 0
+}
+
+const marginSetup = {
+  margins: 1,
+  fullWidth: ''
+}
+
+const gridDirection = {
+	leftToRight: 'ltr',
+	rightToLeft: 'rtl'
+}
 
 const FiftyFifty = ({
+	className,
 	theme,
 	prevTheme,
 	nextTheme,
-	eyebrow,
-	headline,
-	headlineSize,
-	text,
-	textSize,
-	imagePosition,
-	image,
-	video,
-	buttons,
-	additions,
-	alignment
+	columns,
+	gutters,
+	width,
+	padding,
+	layout,
+	verticalAlignment,
+	columnOrder
 }) => {
+	
+	// Set defaults if value is null
+	if (!gutters) { gutters = 'wide' }
+	if (!width) { width = 'margins' }
+	if (!padding) { padding = 'padded' }
+	if (!layout) { layout = '50/50' }
+	if (!verticalAlignment) { verticalAlignment = 'center' }
+	if (!columnOrder) { columnOrder = 'leftToRight' }
 
-	let gridSetup = {
-		small: '1 [12] 1',
-		medium: '1 [6] 1 [5] 1',
-		large: '2 [11] 2 [11] 2',
-		extraLarge: '3 [10] 2 [10] 3',
-		imagePosition: 'ltr',
-		textGrid: '[1]'
-	}
-
-	if (imagePosition === 'right') {
-		gridSetup = {
-			small: '1 [12] 1',
-			medium: '1 [6] 1 [5] 1',
-			large: '2 [11] 2 [11] 2',
-			extraLarge: '3 [10] 2 [10] 3',
-			imagePosition: 'rtl',
-			textGrid: '[1]'
-		}
-	} else if (imagePosition === 'hangLeft') {
-		gridSetup = {
-			small: '[13] 1',
-			medium: '[7] 1 [5] 1',
-			large: '[13] 2 [11] 2',
-			extraLarge: '[13] 2 [10] 3',
-			imagePosition: 'ltr',
-			textGrid: '[12] 1'
-		}
-	} else if (imagePosition === 'hangRight') {
-		gridSetup = {
-			small: '[13] 1',
-			medium: '[7] 1 [5] 1',
-			large: '[13] 2 [11] 2',
-			extraLarge: '[13] 2 [10] 3',
-			imagePosition: 'rtl',
-			textGrid: '[12] 1'
-		}
-	}
+  let padded = true
+  if (padding === 'notPadded') {
+    padded = false
+  }
 
 	return (
 		<Section
+			className={className}
 			setTheme={theme}
 			prevTheme={prevTheme}
 			nextTheme={nextTheme}
+			padded={padded}
 		>
 			<Grid
-				small={gridSetup.small}
-				medium={gridSetup.medium}
-				large={gridSetup.large}
-				extraLarge={gridSetup.extraLarge}
-				gridDirection={gridSetup.imagePosition}
-				rowGap="7vw"
-				vAlign="center"
-			>	
-				<ScrollEntrance>
-					<ConditionalRender condition={image && !video}>
-						<div>
-							<Image
-								image={image.image}
-								small={image.small}
-								medium={image.medium}
-								large={image.large}
-								alt={(image && image.description) || (image && image.title)}
-								sizes={"(max-width: " + mq.mediumBreakpoint + "px) 100vw, 50vw"}
-							/>
-						</div>
-					</ConditionalRender>
-					<ConditionalRender condition={video}>
-						<div>
-							<Video url={video && video.file.url} playing={true} loop={true}/>
-						</div>
-					</ConditionalRender>
-				</ScrollEntrance>
-				<Grid
-					small={gridSetup.textGrid}
-					medium="[1]"
-				>
-					<TextLockup
-						alignment="left"
-						specialList
-						headline={headline}
-						headlineSize={headlineSize}
-						alignment={alignment}
-						text={text}
-						textSize={textSize}
-						eyebrow={eyebrow}
-						buttons={buttons}
-						theme={theme}
-						additions={additions}
-					/>
-				</Grid>
-			</Grid>
+	      small={marginSetup[width] + ' ' + gridSetup[layout].small + ' ' + marginSetup[width]}
+	      large={marginSetup[width] + ' ' + gridSetup[layout].large + ' ' + marginSetup[width]}
+        larger={marginSetup[width] + ' ' + gridSetup[layout].larger + ' ' + marginSetup[width]}
+	      colGap={gutterSetup[gutters]}
+	      rowGap={width === 'fullWidth' ? 0 : ["7vw", "7vw", "80px"]}
+	      vAlign={verticalAlignment}
+	      gridDirection={gridDirection[columnOrder]}
+	    >
+  			{columns.map((column, index) => (
+          <Column
+            vPadded={column.content && !padded}
+            hPadded={column.content && gutters === 'none'}
+          >
+            {column.content ? column.content.map((item, index) => (
+              <ColumnContent
+                key={item.id}
+                firstItem={index === 0}
+                lastItem={index === column.content.length - 1}
+              >
+              	{item.__typename !== 'ContentfulText' ? (
+              		<ScrollEntrance>
+              			<div>
+	              			<ColumnRenderer item={item} columnCount={2} />
+              			</div>
+              		</ScrollEntrance>
+              	) : (
+	                <ColumnRenderer item={item} columnCount={2} />
+                )}
+              </ColumnContent>
+            )) : (
+            	<ColumnRenderer item={column} columnCount={2} />
+            )}
+          </Column>
+        ))}
+	  	</Grid>
 		</Section>
 	)
-}
-
-FiftyFifty.defaultProps = {
-	imagePosition: 'left',
-	additions: false,
-	headlineSize: 'h3',
-	alignment: 'left',
-	textSize: 'body'
 }
 
 export default FiftyFifty
