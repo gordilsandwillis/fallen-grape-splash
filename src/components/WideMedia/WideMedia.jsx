@@ -76,7 +76,7 @@ const CaptionBlock = styled.div`
 
 const WideMedia = ({
 	media,
-	fullWidth,
+	width,
 	theme,
 	prevTheme,
 	nextTheme,
@@ -84,6 +84,12 @@ const WideMedia = ({
 	height
 }) => {
 	
+	if (!media) {
+		return false
+	}
+
+	const fullWidth = width === 'fullWidth'
+
 	const type = media[0].__typename === 'ContentfulVideo' ? 'video' : 'image'
 	media = media[0]
 
@@ -118,7 +124,7 @@ const WideMedia = ({
 							playing={true}
 							loop={true}
 							setHeight={heightValues[height]}
-							// posterImage={media.posterImage}
+							posterImage={media.posterImage}
 						/>
 					)}
 				</Grid>
@@ -137,7 +143,7 @@ const WideMedia = ({
 }
 
 WideMedia.defaultProps = {
-	fullWidth: false,
+	width: 'margins',
 	height: 'auto'
 }
 

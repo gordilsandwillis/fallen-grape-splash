@@ -73,7 +73,7 @@ const ResponsiveImage = ({ image, small, medium, large, className, loading, cust
 	}
 }
 
-const Image = ({ image, small, medium, className, sizes, loading, maxWidth }) => (
+const Image = ({ image, small, medium, className, sizes, loading, maxWidth, style }) => (
 	<div style={{
 		width: '100%',
 		maxWidth: maxWidth ? maxWidth : '100%',
@@ -97,7 +97,8 @@ const Image = ({ image, small, medium, className, sizes, loading, maxWidth }) =>
 
 Image.defaultProps = {
 	loading: 'lazy',
-	sizes: false
+	sizes: false,
+	style: 'default'
 }
 
 export {

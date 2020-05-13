@@ -1,5 +1,5 @@
-export const margin = '6%'
-export const gutter = '2%'
+export const margin = 100/14 + 'vw'
+export const gutter = '3vw'
 
 export const containerLargeMargins = '5vw'
 export const containerMediumMargins = '5vw'

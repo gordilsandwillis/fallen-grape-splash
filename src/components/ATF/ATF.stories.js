@@ -31,7 +31,7 @@ Object.keys(themes).map((theme) => {
 	themeOptions[key] = theme
 })
 
-const stories = storiesOf(`Blocks/ATF`, module)
+const stories = storiesOf(`Blocks/ATF-deprecated`, module)
 
 stories.addDecorator(withKnobs)
 

@@ -9,8 +9,7 @@ export const query = graphql`
     	...Column
     	...GWImage
         ...GWVideo
-        ...Text
-        ...List
+        
     }
     layout
     padding

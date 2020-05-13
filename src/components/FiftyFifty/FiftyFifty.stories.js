@@ -19,39 +19,67 @@ Object.keys(themes).map((theme) => {
   themeOptions[key] = theme
 })
 
-const headlineSizeOptions = {
-	h1: 'h1',
-	h2: 'h2',
-	h3: 'h3',
-	h4: 'h4',
+const gutterOptions = {
+  narrow: 'narrow',
+  wide: 'wide',
+  none: 'none'
+}
+
+const widthOptions = {
+  margins: 'margins',
+  fullWidth : 'fullWidth'
+}
+
+const paddingOptions = {
+  padded: 'padded',
+  notPadded: 'notPadded'
+}
+
+const layoutOptions = {
+  '50/50': '50/50',
+  '60/40': '60/40',
+  '40/60': '40/60'
+}
+
+const alignmentOptions = {
+  bottom: 'bottom',
+  top: 'top',
+  center: 'center',
+  middle: 'middle',
+  baseline: 'baseline',
+  stretch: 'stretch'
+}
+
+const orderOptions = {
+  leftToRight: 'leftToRight',
+  rightToLeft: 'rightToLeft'
 }
 
 const stories = storiesOf(`Blocks/FiftyFifty`, module)
 stories.add(`Default`, () => (
   <FiftyFifty
-  	theme={ optionsKnob('Theme', themeOptions, 'bgColor', { display: 'select' }) }
-		eyebrow={text('Eyebrow', 'What is it?')}
-		headline={text('Headline', 'The Best Website in the World')}
-		headlineSize={ optionsKnob('Headline Size', headlineSizeOptions, 'h3', { display: 'select' }) }
-		text={mockCopy.contentfulRichTextShort}
-  	image={{ image: mock.PlaceholderSq }}
-  	imagePosition={ optionsKnob('Image Position', imgPositionOptions, 'left', { display: 'radio' }) }
-  />
-)).add(`With Additions`, () => (
-  <FiftyFifty
-  	theme={ optionsKnob('Theme', themeOptions, 'bgColor', { display: 'select' }) }
-		eyebrow={text('Eyebrow', 'What is it?')}
-		headline={text('Headline', 'The Best Website in the World')}
-		headlineSize={ optionsKnob('Headline Size', headlineSizeOptions, 'h3', { display: 'select' }) }
-		text={mockCopy.contentfulRichTextShort}
-  	image={{ image: mock.PlaceholderSq }}
-  	imagePosition={ optionsKnob('Image Position', imgPositionOptions, 'left', { display: 'radio' }) }
-  	additions={<div style={{ marginTop: '2em' }}>
-  		<ul>
-  			<li><p style={{ margin: '.5em' }} className="h6">This is an additional element</p></li>
-  			<li><p style={{ margin: '.5em' }} className="h6">For a custom list</p></li>
-  			<li><p style={{ margin: '.5em' }} className="h6">Or something unforeseen</p></li>
-  		</ul>
-  	</div>}
+    theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
+    columns={[
+      {
+        __typename: 'ContentfulImage',
+        image: mock.Placeholder32
+      },
+      {
+        content: [
+          {
+            __typename: 'ContentfulText',
+            eyebrow: 'eyebrow',
+            headline: 'FiftyFifty',
+            text: mockCopy.lorem
+          }
+        ]
+      }
+    ]}
+    gutters={ optionsKnob('Gutter', gutterOptions, 'wide', { display: 'select' }) }
+    width={ optionsKnob('Width', widthOptions, 'margins', { display: 'select' }) }
+    padding={ optionsKnob('Padding', paddingOptions, 'padded', { display: 'select' } )}
+    layout={ optionsKnob('Layout', layoutOptions, '50/50', { display: 'select' } )}
+    verticalAlignment={ optionsKnob('vertical Alignment', alignmentOptions, 'center', { display: 'select' } )}
+    columnOrder={ optionsKnob('Column Order', orderOptions, 'leftToRight', { display: 'select' } )}
   />
 ))

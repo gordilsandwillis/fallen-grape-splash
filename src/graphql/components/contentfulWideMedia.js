@@ -4,7 +4,7 @@ export const query = graphql`
   fragment WideMedia on ContentfulWideMedia {
     __typename
     id
-    fullWidth
+    width
     height
     theme
     media {

@@ -4,6 +4,7 @@ import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
 import ColumnRenderer from 'src/components/ColumnRenderer'
 import ScrollEntrance from 'src/components/ScrollEntrance'
+import TextLockup from 'src/components/TextLockup'
 import { mq } from 'src/styles'
 
 const Wrapper = styled(Section)`
@@ -20,18 +21,6 @@ const Column = styled.div`
         grid-column: 8 / span 4 !important;
       ` : `` }
     }
-  }
-`
-
-const ColumnContent = styled.div`
-  ${ ({ firstItem }) => !firstItem ? `
-    margin-top: 24px;
-  ` : `` }
-`
-
-const TextItem = styled.div`
-  p {
-    max-width: 26em;
   }
 `
 
@@ -90,40 +79,21 @@ const Columns = ({ className, theme, prevTheme, nextTheme, columns, alignment })
       colGap={["16px", "30px", "30px"]}
       rowGap={["7vw", "7vw", "80px"]}
     >
-  			{columns.map((column, index) => (
-          <Column
-            alignment={alignment === null ? 'left' : alignment}
-            index={index}
-            colCount={columns.length}
-            key={column.id}
-          >
-            {column.content.map((item, index) => {
-              item.alignment = alignment === null ? 'left' : alignment
-              return (
-                <ColumnContent
-                  key={item.id}
-                  firstItem={index === 0}
-                  lastItem={index === column.content.length - 1}
-                >
-                  {item.__typename !== 'ContentfulText' ? (
-                    <ScrollEntrance>
-                      <div>
-                        <ColumnRenderer
-                          item={item}
-                          columnCount={columns.length}
-                        />
-                      </div>
-                    </ScrollEntrance>
-                  ) : (
-                    <TextItem>
-                      <ColumnRenderer item={item} columnCount={columns.length} />
-                    </TextItem>
-                  )}
-                </ColumnContent>
-              )
-            })}
-          </Column>
-        ))}
+  			{columns.map((column, index) => {
+          return (
+            <Column
+              alignment={alignment === null ? 'left' : alignment}
+              index={index}
+              colCount={columns.length}
+              key={column.id}
+            >
+              <ColumnRenderer
+                delay={index}
+                items={column.content}
+              />
+            </Column>
+          )
+        })}
   	</Grid>
   </Wrapper>
 )

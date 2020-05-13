@@ -12,14 +12,15 @@ const componentMap = {
 	ContentfulWideMedia: WideMedia
 }
 
-export default ({ item, prevTheme, nextTheme, index, lastSection }) => {
+export default ({ item, prevTheme, nextTheme, index, isLastSection, isFirstSection }) => {
 	const Component = componentMap[item.__typename]
 	return Component ? (
 		<Component
 			{...item}
 			prevTheme={prevTheme}
 			nextTheme={nextTheme}
-			lastSection={lastSection}
+			isLastSection={isLastSection}
+			isFirstSection={isFirstSection}
 			index={index}
 		/>
 	) : null

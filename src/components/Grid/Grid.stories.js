@@ -187,6 +187,9 @@ storiesOf(`Styleguide`, module).add(`Grid`, () => (
 		<GridStory
 			title="Different Columns at Different Breakpoints"
 			small="m [1] g [1] g [1] m"
+			medium="m [1] g [1] g [1] m"
+			large="m [1] g [1] g [1] m"
+			larger="m [1] g [1] g [1] m"
 			notes={<p>For advanced grid usage you may also use the characters <code>m</code> or <code>g</code> to add the global margin or gutter values defined in <code>styles/gridSettings.js</code>. ei: <code>m [1] g [1] g [1] m</code></p>}
 		>
 			{_.range(6).map(i => (

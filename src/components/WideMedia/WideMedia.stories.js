@@ -11,11 +11,21 @@ Object.keys(themes).map((theme) => {
 	themeOptions[key] = theme
 })
 
+const widthOptions = {
+	margins: 'margins',
+	fullWidth: 'fullWidth'
+}
+
 const stories = storiesOf(`Blocks/Wide Media`, module)
 stories.add(`Default`, () => (
 	<WideMedia
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
-		image={{ image: mock.Placeholder169 }}
+		media={[
+			{
+				__typename: 'ContentfulImage', 
+				image: mock.Placeholder169
+			}
+		]}
 		caption="caption"
 		fullWidth={ boolean('Full Width', false) }
 	/>
@@ -24,19 +34,46 @@ stories.add(`Default`, () => (
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
 		loop={true}
 		fullWidth={ boolean('Full Width', true) }
-		video={{ file: { url: 'https://hightidesite.cdn.prismic.io/hightidesite%2F5d1b0cec-c72d-4b0b-80d7-52588efbd852_about_video.mp4' } }}
+		media={[
+			{
+				__typename: 'ContentfulVideo',
+				video: {
+					file: {
+						url: 'https://hightidesite.cdn.prismic.io/hightidesite%2F5d1b0cec-c72d-4b0b-80d7-52588efbd852_about_video.mp4'
+					}
+				}
+			}
+		]}
 	/>
 )).add(`Video Embed`, () => (
 	<WideMedia
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
 		fullWidth={ boolean('Full Width', true) }
-		video={{ file: { url: 'https://www.youtube.com/watch?v=_wUIexMVG9k' } }}
+		media={[
+			{
+				__typename: 'ContentfulVideo',
+				video: {
+					file: {
+						url: 'https://www.youtube.com/watch?v=_wUIexMVG9k'
+					}
+				}
+			}
+		]}
 	/>
 )).add(`Video Width Cover`, () => (
 	<WideMedia
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
-		image={{ image: mock.Placeholder169 }}
-		fullWidth={ boolean('Full Width', false) }
-		video={{ file: { url: 'https://www.youtube.com/watch?v=_wUIexMVG9k' } }}
+		width={ optionsKnob('Width', widthOptions, 'default', { display: 'select' }) }
+		media={[
+			{
+				__typename: 'ContentfulVideo',
+				posterImage: mock.Placeholder169,
+				video: {
+					file: {
+						url: 'https://www.youtube.com/watch?v=_wUIexMVG9k'
+					}
+				}
+			}
+		]}
 	/>
 ))

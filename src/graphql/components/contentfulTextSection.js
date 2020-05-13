@@ -6,7 +6,9 @@ export const query = graphql`
     id
     text {
     	...Text
+    	...Column
   	}
     theme
+    alignment
   }
 `

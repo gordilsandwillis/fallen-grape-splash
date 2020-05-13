@@ -104,12 +104,14 @@ const TextLockup = ({
 		icon,
 		alignment,
 		headlineElement,
-		additions
+		additions,
+		entranceDelay,
+		transitionIn
 	}) => {
 	return (
 		<Wrapper className={className} alignment={alignment}>
 			<div>
-				<TextContainer alignment={alignment}>
+				<TextContainer alignment={alignment} delay={entranceDelay} transitionIn={transitionIn}>
 					<ConditionalRender condition={icon && icon.svgContent}>
 						<div style={{ margin: 'auto', width: 50, height: 50, marginBottom: '1em' }} dangerouslySetInnerHTML={{ __html: icon && icon.svgContent }}/>
 					</ConditionalRender>
@@ -185,7 +187,9 @@ const TextLockup = ({
 TextLockup.defaultProps = {
 	alignment: 'inherit',
 	headlineSize: 'h3',
-	textSize: 'body'
+	textSize: 'body',
+	entranceDelay: 0,
+	transitionIn: true
 }
 
 export default TextLockup

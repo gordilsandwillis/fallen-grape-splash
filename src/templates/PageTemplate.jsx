@@ -36,15 +36,16 @@ class PageTemplate extends React.Component {
 				/>
 				{sections.map((section, index) => {
 					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme
-					const prevFullWidth = ((index !== 0) && sections[index - 1]) && sections[index - 1].fullWidth
+					const prevFullWidth = ((index !== 0) && sections[index - 1]) && sections[index - 1].width === 'fullWidth'
 					const nextTheme = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].theme
-					const nextFullWidth = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].fullWidth
+					const nextFullWidth = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].width === 'fullWidth'
 					const lastSection = sections.length === index + 1
 					return (
 						<ComponentRenderer
 							prevTheme={prevFullWidth ? false : prevTheme}
 							nextTheme={nextFullWidth ? false : nextTheme}
-							lastSection={lastSection}
+							isFirstSection={index === 0}
+							isLastSection={lastSection}
 							key={section.id}
 							item={section}
 							index={index}

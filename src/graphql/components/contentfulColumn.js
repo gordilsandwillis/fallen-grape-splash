@@ -6,11 +6,21 @@ export const query = graphql`
     id
     type
     content {
-      ...Link
-      ...Text
-      ...List
-      ...GWImage
-      ...GWVideo
-	  }
+      ... on ContentfulImage {
+        ...GWImage
+      }
+      ... on ContentfulLink {
+        ...Link
+      }
+      ... on ContentfulList {
+        ...List
+      }
+      ... on ContentfulText {
+        ...Text
+      }
+      ... on ContentfulVideo {
+        ...GWVideo
+      }
+    }
   }
 `

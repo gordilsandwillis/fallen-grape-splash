@@ -242,9 +242,10 @@ class Grid extends Component {
 						colGap={colGap}
 						rowGap={rowGap}
 					>
-						{small && winWidth < mq.mediumBreakpoint ? _.range(numberOfCols(small)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
-						{medium && winWidth > mq.mediumBreakpoint && winWidth < mq.largeBreakpoint ? _.range(numberOfCols(medium)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
-						{large && winWidth > mq.largeBreakpoint && winWidth < mq.extraExtraLargeBreakpoint ? _.range(numberOfCols(large)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
+						{small && winWidth < mq.smallBreakpoint ? _.range(numberOfCols(small)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
+						{medium && winWidth > mq.smallBreakpoint && winWidth < mq.largeBreakpoint ? _.range(numberOfCols(medium)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
+						{large && winWidth > mq.largeBreakpoint && winWidth < mq.largerBreakpoint ? _.range(numberOfCols(large)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
+						{larger && winWidth > mq.largerBreakpoint && winWidth < mq.extraExtraLargeBreakpoint ? _.range(numberOfCols(larger)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
 						{extraLarge && winWidth > mq.extraExtraLargeBreakpoint ? _.range(numberOfCols(extraLarge)).map((item, index) => (<div key={'overlay-col-' + index}/>)) : false}
 					</GridOverlay>
 				</div>
