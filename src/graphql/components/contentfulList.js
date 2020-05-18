@@ -7,6 +7,7 @@ export const query = graphql`
     type
     items {
     	...Link
+    	...Text
     }
   }
 `

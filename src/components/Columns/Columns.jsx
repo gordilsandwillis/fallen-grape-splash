@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Section from 'src/components/Section'
 import Grid from 'src/components/Grid'
-import ColumnRenderer from 'src/components/ColumnRenderer'
+import Column from 'src/components/Column'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import TextLockup from 'src/components/TextLockup'
 import { mq } from 'src/styles'
@@ -11,7 +11,7 @@ const Wrapper = styled(Section)`
   text-align: ${ ({ alignment }) => alignment };
 `
 
-const Column = styled.div`
+const ColumnWrapper = styled.div`
   ${ mq.largerAndBelow } {
     ${ mq.largeAndUp } {
       ${ ({ colCount, index, alignment }) => colCount === 5 && index + 1 === 4 && alignment === 'center' ? `
@@ -21,6 +21,12 @@ const Column = styled.div`
         grid-column: 8 / span 4 !important;
       ` : `` }
     }
+  }
+`
+
+const ColumnContent = styled.div`
+  p {
+    max-width: 26em;
   }
 `
 
@@ -63,7 +69,7 @@ const gridSetup = {
   }
 }
 
-const Columns = ({ className, theme, prevTheme, nextTheme, columns, alignment }) => (
+const Columns = ({ className, theme, prevTheme, nextTheme, columns, alignment, verticalAlignment }) => (
   <Wrapper
   	className={className}
   	setTheme={theme}
@@ -76,26 +82,32 @@ const Columns = ({ className, theme, prevTheme, nextTheme, columns, alignment })
       medium={gridSetup[columns.length].medium}
       large={gridSetup[columns.length].large}
       larger={gridSetup[columns.length].larger}
+      vAlign={verticalAlignment}
       colGap={["16px", "30px", "30px"]}
       rowGap={["7vw", "7vw", "80px"]}
     >
   			{columns.map((column, index) => {
           return (
-            <Column
+            <ColumnWrapper
               alignment={alignment === null ? 'left' : alignment}
               index={index}
               colCount={columns.length}
               key={column.id}
             >
-              <ColumnRenderer
+              <Column
                 delay={index}
                 items={column.content}
+                type={column.type}
               />
-            </Column>
+            </ColumnWrapper>
           )
         })}
   	</Grid>
   </Wrapper>
 )
+
+Columns.defaultProps = {
+  verticalAlignment: 'top'
+}
 
 export default Columns

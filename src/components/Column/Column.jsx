@@ -6,7 +6,9 @@ import Image from 'src/components/Image'
 import Video from 'src/components/Video'
 import List from 'src/components/List'
 import Button from 'src/components/Button'
+import Card from 'src/components/Card'
 import ScrollEntrance from 'src/components/ScrollEntrance'
+import { util, colors } from 'src/styles'
 
 const componentMap = {
 	ContentfulText: TextLockup,
@@ -17,16 +19,33 @@ const componentMap = {
 	},
 	ContentfulImage: Image,
 	ContentfulVideo: Video,
-	ContentfulList: List
+	ContentfulList: {
+		default: List,
+		horizontal: List,
+		vertical: List,
+		checkList: List
+	}
 }
 
 const ColumnContent = styled.div`
 	> div {
-		margin-top: 24px;
-	  &:first-of-type {
-	  	margin-top: 0;
+	  &:not(:first-of-type) {
+	  	${ util.responsiveStyles('margin-top', 30, 24, 20, 16) }
 	  }
   }
+  ${ ({ type }) => type.startsWith('card') ? `
+  	${ util.responsiveStyles('padding', 60, 50, 40, 16) }
+  	height: 100%;
+  ` : `` }
+
+  ${ ({ type }) => type === 'card CTA' ? `
+  	h1, h2, h3, h4 {
+  		margin: 0;
+  	}
+  	h3 {
+  		color: ${ colors.blue };
+  	}
+  ` : `` }
 `
 
 const RenderContent = ({ items, delay }) => {
@@ -39,6 +58,7 @@ const RenderContent = ({ items, delay }) => {
 					Component = componentMap[item.__typename].default
 				}
 			}
+			console.log(item)
 			return Component ? (
 				<ScrollEntrance delay={index + delay} transitionIn={item.__typename === 'ContentfulText' ? false : true}>
 					<div>
@@ -53,14 +73,22 @@ const RenderContent = ({ items, delay }) => {
 	)
 }
 
-export default ({ items, delay }) => {
+const Column = ({ items, delay, type }) => {
 	if (!items) {
 		return false
 	}
 
+	console.log(items)
+
 	return (
-		<ColumnContent>
-			<RenderContent items={items} delay={delay}></RenderContent>
+		<ColumnContent as={type.startsWith('card') ? Card : 'div'} type={type}>
+			<RenderContent items={items} delay={delay}/>
 		</ColumnContent>
 	)
 }
+
+Column.defaultProps = {
+	type: 'default'
+}
+
+export default Column

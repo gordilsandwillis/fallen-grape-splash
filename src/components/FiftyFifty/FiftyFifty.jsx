@@ -5,10 +5,12 @@ import Grid from 'src/components/Grid'
 import Image from 'src/components/Image'
 import Video from 'src/components/Video'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import ColumnRenderer from 'src/components/ColumnRenderer'
+import Column from 'src/components/Column'
 import { util, mq } from 'src/styles'
 
-const Column = styled.div`
+const FFSection = styled(Section)``
+
+const ColumnWrapper = styled.div`
   ${ ({ isMedia, vPadded, hPadded, sectionPadded, gutters, index, gridDirection }) => !isMedia ? `
     ${ vPadded ? `` : `` }
     ${ hPadded ? `
@@ -39,19 +41,22 @@ const Column = styled.div`
 const gridSetup = (layout, gutter) => {
   const layouts = {
     '50/50': {
-      medium: "[1] " + gutter + " [1]",
+      // medium: "[1] " + gutter + " [1]",
+      medium: "[1]",
       large: "[1] " + gutter + " [1]",
       larger: "[1] " + gutter + " [1]"
     },
     '60/40': {
-      medium: "[6] " + gutter + " [4]",
-      large: "[6] " + gutter + " [4]",
-      larger: "[6] " + gutter + " [4]"
+      // medium: "[6] " + gutter + " [5]",
+      medium: "[1]",
+      large: "[6] " + gutter + " [5]",
+      larger: "[6] " + gutter + " [4] 1"
     },
     '40/60': {
-      medium: "[4] " + gutter + " [6]",
-      large: "[4] " + gutter + " [6]",
-      larger: "[4] " + gutter + " [6]"
+      // medium: "[5] " + gutter + " [6]",
+      medium: "[1]",
+      large: "[5] " + gutter + " [6]",
+      larger: "1 [4] " + gutter + " [6]"
     }
   }
 
@@ -59,9 +64,9 @@ const gridSetup = (layout, gutter) => {
 }
 
 const gutterSetup = {
-	narrow: 'g',
-	wide: 'm',
-	none: ''
+  narrow: 'g',
+  wide: 'm',
+  none: ''
 }
 
 const marginSetup = {
@@ -70,31 +75,31 @@ const marginSetup = {
 }
 
 const gridDirection = {
-	leftToRight: 'ltr',
-	rightToLeft: 'rtl'
+  leftToRight: 'ltr',
+  rightToLeft: 'rtl'
 }
 
 const FiftyFifty = ({
-	className,
-	theme,
-	prevTheme,
-	nextTheme,
-	columns,
-	gutters,
-	width,
-	padding,
-	layout,
-	verticalAlignment,
-	columnOrder
+  className,
+  theme,
+  prevTheme,
+  nextTheme,
+  columns,
+  gutters,
+  width,
+  padding,
+  layout,
+  verticalAlignment,
+  columnOrder
 }) => {
-	
-	// Set defaults if value is null
-	if (!gutters) { gutters = 'wide' }
-	if (!width) { width = 'margins' }
-	if (!padding) { padding = 'padded' }
-	if (!layout) { layout = '50/50' }
-	if (!verticalAlignment) { verticalAlignment = 'center' }
-	if (!columnOrder) { columnOrder = 'leftToRight' }
+  
+  // Set defaults if value is null
+  if (!gutters) { gutters = 'wide' }
+  if (!width) { width = 'margins' }
+  if (!padding) { padding = 'padded' }
+  if (!layout) { layout = '50/50' }
+  if (!verticalAlignment) { verticalAlignment = 'center' }
+  if (!columnOrder) { columnOrder = 'leftToRight' }
 
   let fullWidth = false
   if (width === 'fullWidth') {
@@ -113,29 +118,29 @@ const FiftyFifty = ({
     padded = false
   }
 
-	return (
-		<Section
-			className={className}
-			setTheme={theme}
-			prevTheme={prevTheme}
-			nextTheme={nextTheme}
-			padded={padded}
-		>
+  return (
+    <FFSection
+      className={className}
+      setTheme={theme}
+      prevTheme={prevTheme}
+      nextTheme={nextTheme}
+      padded={padded}
+    >
       <Grid small={fullWidth ? '[1]' : '1 [12] 1'}>
-  			<Grid
-  	      small="[1]"
-  	      medium={gridSetup(layout, gutterSetup[gutters]).medium}
+        <Grid
+          small="[1]"
+          medium={gridSetup(layout, gutterSetup[gutters]).medium}
           large={gridSetup(layout, gutterSetup[gutters]).large}
           larger={gridSetup(layout, gutterSetup[gutters]).larger}
-  	      rowGap={["7vw", "7vw", "80px"]}
-  	      vAlign={verticalAlignment}
-  	      gridDirection={gridDirection[columnOrder]}
+          rowGap={["7vw", "7vw", "80px"]}
+          vAlign={verticalAlignment}
+          gridDirection={gridDirection[columnOrder]}
           // showOverlay={true}
-  	    >
-    			{columns.map((column, index) => {
+        >
+          {columns.map((column, index) => {
             const columnIndex = index
             return (
-              <Column
+              <ColumnWrapper
                 isMedia={!column.content}
                 vPadded={column.content && fullWidth}
                 hPadded={column.content && fullWidth}
@@ -145,9 +150,10 @@ const FiftyFifty = ({
                 gridDirection={gridDirection[columnOrder]}
               >
                 {column.content ? (
-                  <ColumnRenderer
+                  <Column
                     delay={index}
                     items={column.content}
+                    type={column.type}
                   />
                 ) : false }
 
@@ -165,13 +171,13 @@ const FiftyFifty = ({
                     />
                   </ScrollEntrance>
                 )}
-              </Column>
+              </ColumnWrapper>
             )
           })}
-  	  	</Grid>
+        </Grid>
       </Grid>
-		</Section>
-	)
+    </FFSection>
+  )
 }
 
 export default FiftyFifty

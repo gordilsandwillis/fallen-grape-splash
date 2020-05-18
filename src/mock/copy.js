@@ -250,3 +250,53 @@ export const contentfulRichTextShort = {
 		nodeType: 'document'
 	}
 }
+
+export const contentfulRichTextVeryShort = {
+	json: {
+		data: {},
+		content: [
+			{
+				data: {},
+				content: [
+					{
+						data: {},
+						marks: [],
+						value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quodsi ipsam honestatem undique pertectam atque absolutam. Duo Reges: constructio interrete. ',
+						nodeType: 'text'
+					},
+					{
+						data: {
+							uri: 'http://loripsum.net/'
+						},
+						content: [
+							{
+								data: {},
+								marks: [],
+								value: 'Efficiens dici potest. ',
+								nodeType: 'text'
+							}
+						],
+						nodeType: 'hyperlink'
+					},
+					{
+						data: {
+							uri: 'http://loripsum.net/'
+						},
+						content: [
+							{
+								data: {},
+								marks: [],
+								value: 'Quorum altera prosunt, nocent altera.',
+								nodeType: 'text'
+							}
+						],
+						nodeType: 'hyperlink'
+					},
+				],
+				nodeType: 'paragraph'
+			}
+		],
+		nodeType: 'document'
+	}
+}
+

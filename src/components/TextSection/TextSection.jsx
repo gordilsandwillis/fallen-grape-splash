@@ -4,7 +4,7 @@ import Section from 'src/components/Section'
 import TextLockup from 'src/components/TextLockup'
 import Grid from 'src/components/Grid'
 import ScrollEntrance from 'src/components/ScrollEntrance'
-import ColumnRenderer from 'src/components/ColumnRenderer'
+import Column from 'src/components/Column'
 
 const Wrapper = styled(Section)`
   ${ ({ alignment }) => alignment !== 'right' ? `
@@ -13,7 +13,9 @@ const Wrapper = styled(Section)`
 `
 
 const TextSection = ({ className, nextTheme, prevTheme, theme, text, alignment }) => {
-  console.log(text)
+  if (!text) {
+    return false
+  }
   const item = text[0]
   const align = {
     left: {
@@ -28,39 +30,44 @@ const TextSection = ({ className, nextTheme, prevTheme, theme, text, alignment }
     },
     right: {
       medium: "7 [6] 1",
-      large: "7 [5] 2",
+      large: "7 [6] 1",
       larger: "7 [5] 2"
     }
   }
+
+  if (!alignment || alignment === null) {
+    alignment = 'left'
+  }
+
   return (
     <Wrapper
-    	className={className}
-    	prevTheme={prevTheme}
-    	setTheme={theme}
-    	nextTheme={nextTheme}
+      className={className}
+      prevTheme={prevTheme}
+      setTheme={theme}
+      nextTheme={nextTheme}
       alignment={alignment}
     >
-    	<Grid
+      <Grid
         small="1 [12] 1"
         medium={align[alignment].medium}
         large={align[alignment].large}
         larger={align[alignment].larger}
       >
         {item.__typename === 'ContentfulText' && (
-    	  	<TextLockup
-    	  		eyebrow={item.eyebrow}
-    	  		headline={item.headline}
-    	  		text={item.text}
-    	  		headlineSize={item.headlineSize}
-    	  		textSize={item.textSize}
-    	  	/>
+          <TextLockup
+            eyebrow={item.eyebrow}
+            headline={item.headline}
+            text={item.text}
+            headlineSize={item.headlineSize}
+            textSize={item.textSize}
+          />
         )}
         {item.__typename === 'ContentfulColumn' && (
-          <ColumnRenderer
+          <Column
             items={item.content}
           />
         )}
-    	</Grid>
+      </Grid>
     </Wrapper>
   )
 }
