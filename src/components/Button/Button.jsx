@@ -84,6 +84,7 @@ const ButtonIcon = styled.div`
 	` : `
 		margin-left: .5em;
 	` }
+	span,
 	svg {
 		display: block;
 	}
@@ -122,7 +123,7 @@ const ButtonStyles = (state, shape, size, theme) => (`
 	// Button Shapes
 	${ shape ? `
 		${ shape.includes('circle') || shape.includes('square') ? `
-			padding: 0;
+			padding: 0 !important;
 			width: ${ buttonSizes[size] };
 			min-width: ${ buttonSizes[size] };
 			${ ButtonIcon } {
