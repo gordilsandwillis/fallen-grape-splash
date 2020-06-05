@@ -1,13 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
-import { rgba } from 'polished'
 import Link from 'src/components/Link'
 import Logo from 'src/components/Logo'
-import Button from 'src/components/Button'
 import Grid from 'src/components/Grid'
-import ResponsiveComponent from 'src/components/ResponsiveComponent'
 import ConditionalRender from 'src/components/ConditionalRender'
-import MaterialIcon from 'src/components/MaterialIcon'
 import ScrollListener from 'src/components/ScrollListener'
 import NotificationBanner from 'src/components/NotificationBanner'
 import { colors, typography, animations, mq, util } from 'src/styles'
@@ -21,18 +17,14 @@ const NavLinkStyle = (scrolled, active, hasAtf) => `
 	position: relative;
 	${ typography.h6 }
 	${ util.responsiveStyles('margin-right', 60, 40, 32, 20) }
-	padding: 10px 0;
+	padding: 10px 0 8px;
 	line-height: 1em;
+	border-bottom: 2px solid transparent;
 	&:hover {
-		${ scrolled ? `
-			color: ${ colors.mainColor };
-		` : `
-			opacity: .5;
-		` }
+		color: ${ colors.mainColor };
 	}
 	${ active && `
-
-		color: ${ colors.mainColor };
+		border-color: ${ colors.mainColor };
 		&:hover {
 			color: ${ colors.mainColor };
 		}
@@ -189,13 +181,21 @@ class Header extends Component {
 			}
 		]
 
+		const rightNavLinks = [
+			{
+				label: 'Link',
+				to: '/another-page',
+				id: 'link-id'
+			}
+		]
+
 		return (
 			<Fragment>
 				<ScrollListener.Consumer>
 		      {({ scrolledToTop, scrolledToBottom, scrollY, scrolledUp, hasScrolled, pageHeight }) => {
-		      	const scrolled = !scrolledToTop && hasScrolled
-		      	return (
-		      		<div>
+						const scrolled = !scrolledToTop && hasScrolled
+						return (
+							<div>
 								<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp && !scrolledToTop && showHide}>
 									<HeaderNotificationBanner
 										closeBanner={this.closeBanner}
@@ -233,8 +233,8 @@ class Header extends Component {
 											</Link>
 										</LogoCol>
 										<div>
-											<NavLinks>
-												{navLinks.map((link, index) => (
+											<NavLinks alignment="right">
+												{rightNavLinks.map((link, index) => (
 													<NavLink
 														scrolled={scrolled}
 														hasAtf={hasAtf}
