@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Logomark from 'src/assets/images/logo.svg'
+import LogoSvg from 'src/assets/images/logo.svg'
 
 import { mq } from 'src/styles'
 
-const MarkWrapper = styled.div`
+const LogoWrapper = styled.div`
 	height: auto;
 	display: inlin-block;
 	vertical-align: top;
@@ -21,9 +21,15 @@ const MarkWrapper = styled.div`
 `
 
 const Logo = ({ className }) => (
-	<MarkWrapper className={className}>
-		<Logomark />
-	</MarkWrapper>
+	<LogoWrapper className={className}>
+		<LogoSvg />
+	</LogoWrapper>
+)
+
+export const Logomark = ({ className }) => (
+	<LogoWrapper className={className}>
+		<LogoSvg />
+	</LogoWrapper>
 )
 
 export default Logo

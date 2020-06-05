@@ -74,12 +74,13 @@ class ScrollListener extends React.Component {
         this.setState({ scrolledToBottom: false })
       }
     }
-    //
-
-    const newState = {}
-    if (this.state.scrolledUp !== scrolledUp) {
-      this.setState({ scrolledUp: scrolledUp })
-    }
+    
+    // Only use if showing and hiding element 
+    // based on scroll up and down
+    // (ie: native safari bottom bar)
+    // if (this.state.scrolledUp !== scrolledUp) {
+    //   this.setState({ scrolledUp: scrolledUp })
+    // }
 
     if (!this.state.hasScrolled && this.lastScrollY > 0) {
       this.setState({ hasScrolled: true })

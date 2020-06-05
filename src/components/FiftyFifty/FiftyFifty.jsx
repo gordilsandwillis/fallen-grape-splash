@@ -90,7 +90,8 @@ const FiftyFifty = ({
   padding,
   layout,
   verticalAlignment,
-  columnOrder
+  columnOrder,
+  isFirstSection
 }) => {
   
   // Set defaults if value is null
@@ -125,6 +126,7 @@ const FiftyFifty = ({
       prevTheme={prevTheme}
       nextTheme={nextTheme}
       padded={padded}
+      isFirstSection={isFirstSection}
     >
       <Grid small={fullWidth ? '[1]' : '1 [12] 1'}>
         <Grid
@@ -167,7 +169,10 @@ const FiftyFifty = ({
                   <ScrollEntrance delay={index}>
                     <Image
                       image={column.image}
+                      medium={column.medium}
+                      small={column.small}
                       sizes={"(max-width: " + mq.smallBreakpoint + "px) 100vw, 50vw"}
+                      loading={isFirstSection ? 'eager' : 'lazy'}
                     />
                   </ScrollEntrance>
                 )}

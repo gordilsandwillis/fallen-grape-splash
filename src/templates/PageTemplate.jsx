@@ -17,7 +17,7 @@ class PageTemplate extends React.Component {
 		const site = this.props.data.allContentfulSiteSettings.edges.filter(edge => !edge.node.title.includes('PLACEHOLDER'))[0].node
 		const page = this.props.data.allContentfulPage.edges[0].node
 		const { sections } = page
-		const hasAtf = sections && sections[0].__typename === 'ContentfulWideMedia' && sections[0].fullWidth
+		const hasAtf = sections && sections[0].__typename === 'ContentfulWideMedia' && sections[0].width === 'fullWidth'
 
 		return (
 			<Fragment >
@@ -33,6 +33,8 @@ class PageTemplate extends React.Component {
 					// headerLinks={site.headerLinks}
 					// headerButtons={site.headerButtons}
 					hasAtf={hasAtf}
+					bannerText={site.bannerText}
+					bannerColor={site.bannerColor}
 				/>
 				{sections.map((section, index) => {
 					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme

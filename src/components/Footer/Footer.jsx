@@ -3,8 +3,9 @@ import styled from '@emotion/styled'
 
 import Link from 'src/components/Link'
 import Grid from 'src/components/Grid'
-import Logo from 'src/components/Logo'
+import { Logomark } from 'src/components/Logo'
 import MailchimpSignup from 'src/components/MailchimpSignup'
+import Section from 'src/components/Section'
 import ThemeSelector from 'src/components/ThemeSelector'
 import ConditionalRender from 'src/components/ConditionalRender'
 import ContentfulRichText from 'src/components/ContentfulRichText'
@@ -16,14 +17,14 @@ const Wrapper = styled(ThemeSelector)`
 	z-index: 2;
 `
 
-const FooterLogo = styled(Logo)`
+const FooterLogo = styled(Logomark)`
 	width: 30px;
 	${ mq.mediumAndBelow } {
 		width: 24px;
 	}
 `
 
-const FooterBottom = styled.div`
+const FooterBottom = styled(ThemeSelector)`
 	position: relative;
 	${ util.responsiveStyles('padding-top', 50, 40, 30, 26) }
 	${ util.responsiveStyles('padding-bottom', 50, 40, 30, 26) }
@@ -63,7 +64,27 @@ class Footer extends Component {
 		const { title } = this.props
 		return (
 			<Wrapper setTheme="lightGrey">
-				<FooterBottom>
+				<Section>
+					<Grid
+						small="1 [12] 1"
+						medium="1 [4] [4] [4] 1"
+						large="1 [4] [4] [4] 1"
+					>
+						<div>
+							<h6>List Header</h6>
+							Footer Links
+						</div>	
+						<div>
+							<h6>List Header</h6>
+							Footer Links
+						</div>	
+						<div>
+							<h6>List Header</h6>
+							Newsletter
+						</div>
+					</Grid>
+				</Section>
+				<FooterBottom setTheme="textColor">
 					<Grid
 						small="1 [7] [5] 1"
 						medium="1 [8] [4] 1"

@@ -27,7 +27,10 @@ const setInputTheme = theme => {
 			border-color: ${ themes[theme].borderColor };
 			caret-color: ${ themes[theme].color };
 			color: ${ themes[theme].color };
-			&:active, &:focus {
+			&:active,
+			&:focus,
+			&:active:hover,
+			&:focus:hover {
 				background: ${ darken(0.05, themes[theme].focusBackground) };
 				border-color: ${ themes[theme].focusBorderColor };
 			}

@@ -18,5 +18,9 @@ export const query = graphql`
     defaultSeo {
       ...Seo
     }
+    bannerText {
+      json
+    }
+    bannerColor
   }
 `

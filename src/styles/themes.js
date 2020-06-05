@@ -91,10 +91,14 @@ export const buttonThemes = {
 export const inputThemes = {
 	default: {
 		color: colors.bgColor,
-		background: colors.mainColor,
+		background: colors.transparent,
 		accentColor: colors.bgColor,
 		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.07, colors.mainColor)
+		borderColor: colors.lightTextColor,
+		hoverBorderColor: colors.textColor,
+		focusBorderColor: colors.mainColor,
+		hoverBackground: colors.transparent,
+		focusBackground: colors.transparent,
 	}
 }
 

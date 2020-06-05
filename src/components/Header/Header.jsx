@@ -9,10 +9,11 @@ import ResponsiveComponent from 'src/components/ResponsiveComponent'
 import ConditionalRender from 'src/components/ConditionalRender'
 import MaterialIcon from 'src/components/MaterialIcon'
 import ScrollListener from 'src/components/ScrollListener'
+import NotificationBanner from 'src/components/NotificationBanner'
 import { colors, typography, animations, mq, util } from 'src/styles'
 
-const showHide = true // show and hide header on scroll
-const headerHeight = util.responsiveStyles('height', 140, 130, 110, 75)
+const showHide = false // show and hide header on scroll
+const headerHeight = (additionalHeight = 0) => util.responsiveStyles('height', (140 + additionalHeight), (130 + additionalHeight), (110 + additionalHeight), (75 + additionalHeight))
 const headerHeightCollapsed = util.responsiveStyles('height', 80, 70, 66, 60)
 
 const NavLinkStyle = (scrolled, active) => `
@@ -51,31 +52,18 @@ const Wrapper = styled.header`
 	left: 0;
 	right: 0;
 	z-index: 4;
-	display: flex;
-	align-items: center;
-	justify-content: stretch;
-	${ headerHeight }
+`
+
+const HeaderContent = styled(Grid)`
 	transition: height ${ animations.mediumSpeed } ease-in-out,
 							background ${ animations.mediumSpeed } ease-in-out,
 							transform ${ animations.mediumSpeed } ease-in-out;
-	svg {
-		* {
-			fill: currentcolor;
-		}
-	}
-	${ ({ scrolled }) => scrolled ? `
-		${ headerHeightCollapsed }
-		box-shadow: 0 1px 0 ${ rgba(colors.textColor, 0.05) }
-	` : `
-		${ headerHeight }
-	` };
-
 	${ ({ scrolled, hasAtf }) => scrolled ? `
 		${ headerHeightCollapsed }
 		background: ${ colors.white };
 		color: ${ colors.textColor };
-		box-shadow: 0 1px 0 ${ rgba(colors.textColor, 0.05) };
 	` : `
+		${ headerHeight() }
 		background: transparent;
 		${ hasAtf ? `
 			color: ${ colors.bgColor };
@@ -86,9 +74,6 @@ const Wrapper = styled.header`
 	${ ({ navVisible }) => navVisible && `
 		transform: translate3d(0, -101%, 0);
 	` }
-`
-
-const HeaderContent = styled(Grid)`
 `
 
 const HeaderLogo = styled(Logo)`
@@ -141,14 +126,25 @@ const MenuIcon = styled.div`
 const HeaderPlaceholder = styled.div`
 	background: transparent;
 	width: 100%;
-	${ headerHeight }
+	transition: height 0.3s ease-in-out;
+	${ ({ hasBanner }) => hasBanner ? `
+		${ headerHeight(40) }
+	` : `
+		${ headerHeight() }
+	` }
+`
+
+const HeaderNotificationBanner = styled(NotificationBanner)`
+	position: relative;
+	z-index: 5;
 `
 
 class Header extends Component {
 	state = {
 		scrolled: false,
 		navList: false,
-		drawerOpen: false
+		drawerOpen: false,
+		bannerVisible: true
 	}
 
 	toggleDrawer = id => {
@@ -162,6 +158,10 @@ class Header extends Component {
 		}, 600) // timeout needs to match the navigation drawer exit speed
 	}
 
+	closeBanner = () => {
+		this.setState({ bannerVisible: false })
+	}
+
 	render () {
 		const {
 			location,
@@ -169,9 +169,11 @@ class Header extends Component {
 			headerNavigation,
 			headerDrawerBottomLinks,
 			headerLinks,
-			headerButtons
+			headerButtons,
+			bannerText,
+			bannerColor
 		} = this.props
-		const { scrolled, navList, drawerOpen } = this.state
+		const { scrolled, navList, drawerOpen, bannerVisible } = this.state
 
 		let pathname = '/'
 		if (location) {
@@ -184,51 +186,62 @@ class Header extends Component {
 		      {({ scrolledToTop, scrolledToBottom, scrollY, scrolledUp, hasScrolled, pageHeight }) => {
 		      	const scrolled = !scrolledToTop && hasScrolled
 		      	return (
-							<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp && !scrolledToTop && showHide}>
-								<HeaderContent
-									small="1 [5] [2] [5] 1"
-									medium="1 [5] [2] [5] 1"
-									large="1 [9] [8] [9] 1"
-									vAlign="center"
-									navVisible={!scrolledUp && !scrolledToTop && showHide}
-								>
-									<div>
-										<NavLinks>
-											<NavLink
-												scrolled={scrolled}
-												hasAtf={hasAtf}
-												to='/'
-												// active={pathname === to}
-											>
-												Header Link
-											</NavLink>
-										</NavLinks>
-									</div>
-									<LogoCol>
-										<Link to="/">
-											<HeaderLogo scrolled={scrolled} hasAtf={hasAtf} />
-										</Link>
-									</LogoCol>
-									<div>
-										<NavLinks alignment="right">
-											<NavLink
-												scrolled={scrolled}
-												hasAtf={hasAtf}
-												to='/'
-												// active={pathname === to}
-											>
-												Header Link
-											</NavLink>
-										</NavLinks>
-									</div>
-								</HeaderContent>
-							</Wrapper>
+		      		<div>
+								<Wrapper scrolled={scrolled} hasAtf={hasAtf} navVisible={!scrolledUp && !scrolledToTop && showHide}>
+									<HeaderNotificationBanner
+										closeBanner={this.closeBanner}
+										collapsed={!bannerVisible}
+										text={bannerText}
+										setTheme={bannerColor}
+									/>
+									<HeaderContent
+										small="1 [5] [2] [5] 1"
+										medium="1 [5] [2] [5] 1"
+										large="1 [9] [8] [9] 1"
+										vAlign="center"
+										navVisible={!scrolledUp && !scrolledToTop && showHide}
+										hasAtf={hasAtf}
+										scrolled={scrolled}
+										navVisible={!scrolledUp && !scrolledToTop && showHide}
+									>
+										<div>
+											<NavLinks>
+												<NavLink
+													scrolled={scrolled}
+													hasAtf={hasAtf}
+													to='/'
+													// active={pathname === to}
+												>
+													Header Link
+												</NavLink>
+											</NavLinks>
+										</div>
+										<LogoCol>
+											<Link to="/">
+												<HeaderLogo scrolled={scrolled} hasAtf={hasAtf} />
+											</Link>
+										</LogoCol>
+										<div>
+											<NavLinks alignment="right">
+												<NavLink
+													scrolled={scrolled}
+													hasAtf={hasAtf}
+													to='/'
+													// active={pathname === to}
+												>
+													Header Link
+												</NavLink>
+											</NavLinks>
+										</div>
+									</HeaderContent>
+								</Wrapper>
+							</div>
 						)
 					}}
 				</ScrollListener.Consumer>
 
 				<ConditionalRender condition={!hasAtf}>
-					<HeaderPlaceholder />
+					<HeaderPlaceholder hasBanner={bannerText && bannerVisible}/>
 				</ConditionalRender>
 
 			</Fragment>
@@ -237,7 +250,7 @@ class Header extends Component {
 }
 
 Header.defaultProps = {
-	hasAtf: true
+	hasAtf: false
 }
 
 export default Header

@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
 
 export const query = graphql`
-  fragment GWImage on ContentfulImage {
+  fragment Image on ContentfulImage {
     __typename
     id
     maxWidth

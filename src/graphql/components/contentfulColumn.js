@@ -7,7 +7,7 @@ export const query = graphql`
     type
     content {
       ... on ContentfulImage {
-        ...GWImage
+        ...Image
       }
       ... on ContentfulLink {
         ...Link
@@ -19,7 +19,7 @@ export const query = graphql`
         ...Text
       }
       ... on ContentfulVideo {
-        ...GWVideo
+        ...Video
       }
     }
   }

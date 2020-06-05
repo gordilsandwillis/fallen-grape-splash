@@ -16,6 +16,13 @@ const widthOptions = {
 	fullWidth: 'fullWidth'
 }
 
+const heightOptions = {
+	auto: 'auto',
+	fullHeight: 'fullHeight',
+	mediumHeight: 'mediumHeight',
+	shortHeight: 'shortHeight'
+}
+
 const stories = storiesOf(`Blocks/Wide Media`, module)
 stories.add(`Default`, () => (
 	<WideMedia
@@ -27,13 +34,15 @@ stories.add(`Default`, () => (
 			}
 		]}
 		caption="caption"
-		fullWidth={ boolean('Full Width', false) }
+		width={ optionsKnob('Width', widthOptions, 'default', { display: 'select' }) }
+		height={ optionsKnob('Height', heightOptions, 'auto', { display: 'select' }) }
 	/>
 )).add(`HTML5 Video`, () => (
 	<WideMedia
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
 		loop={true}
-		fullWidth={ boolean('Full Width', true) }
+		width={ optionsKnob('Width', widthOptions, 'default', { display: 'select' }) }
+		height={ optionsKnob('Height', heightOptions, 'auto', { display: 'select' }) }
 		media={[
 			{
 				__typename: 'ContentfulVideo',
@@ -48,7 +57,8 @@ stories.add(`Default`, () => (
 )).add(`Video Embed`, () => (
 	<WideMedia
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
-		fullWidth={ boolean('Full Width', true) }
+		width={ optionsKnob('Width', widthOptions, 'default', { display: 'select' }) }
+		height={ optionsKnob('Height', heightOptions, 'auto', { display: 'select' }) }
 		media={[
 			{
 				__typename: 'ContentfulVideo',
@@ -64,6 +74,7 @@ stories.add(`Default`, () => (
 	<WideMedia
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
 		width={ optionsKnob('Width', widthOptions, 'default', { display: 'select' }) }
+		height={ optionsKnob('Height', heightOptions, 'auto', { display: 'select' }) }
 		media={[
 			{
 				__typename: 'ContentfulVideo',

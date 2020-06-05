@@ -12,11 +12,10 @@ const responsiveStyles = util.responsiveStyles
 // All global styles
 export default `
   ${ fonts.MaterialIconsFont }
-  ${ fonts.TradeGothicFont }
-  ${ fonts.PortraitFont }
-  ${ fonts.PortraitItalicFont }
-  ${ fonts.PortraitBoldFont }
-  ${ fonts.PortraitBoldItalicFont }
+  ${ fonts.DmSansFont }
+  ${ fonts.DmSansItalicFont }
+  ${ fonts.DmSansBoldFont }
+  ${ fonts.DmSansBoldItalicFont }
 
   * {
     box-sizing: border-box;
@@ -49,6 +48,10 @@ export default `
 
   b, strong {
     font-weight: 600;
+  }
+
+  em, i {
+    font-style: italic;
   }
 
   h1, h2, h3, h4, h5, h6, blockquote, p, ul, ol {
@@ -122,6 +125,7 @@ export default `
 
   figcaption {
     ${ typography.bodySmall }
+    color: ${ colors.lightTextColor };
   }
 
   hr {

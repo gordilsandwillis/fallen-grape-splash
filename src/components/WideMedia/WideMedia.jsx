@@ -81,7 +81,8 @@ const WideMedia = ({
 	prevTheme,
 	nextTheme,
 	caption,
-	height
+	height,
+	isFirstSection
 }) => {
 	
 	if (!media) {
@@ -114,9 +115,10 @@ const WideMedia = ({
 							image={media.image}
 							small={media.small}
 							medium={media.medium}
-							large={media.large}
 							alt={media.description || media.title}
 							setHeight={heightValues[height]}
+							loading={isFirstSection ? 'eager' : 'lazy'}
+							critical={isFirstSection ? true : false}
 						/>
 					) : (
 						<MediaVideo
@@ -125,6 +127,7 @@ const WideMedia = ({
 							loop={true}
 							setHeight={heightValues[height]}
 							posterImage={media.posterImage}
+							autoplay={true}
 						/>
 					)}
 				</Grid>

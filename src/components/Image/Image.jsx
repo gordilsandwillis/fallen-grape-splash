@@ -6,7 +6,6 @@ import { mq } from 'src/styles'
 const SvgWrap = styled.div`
 	display: inline-block;
 	vertical-align: top;
-	color: red;
 	svg {
 		display: block;
 		width: 100%;
@@ -15,18 +14,18 @@ const SvgWrap = styled.div`
 `
 
 const StyledImage = styled(Img)`
-	${ ({ fluid }) => `
+	${ ({ small, medium }) => `
 		> div {
-			${ fluid && fluid[1] && `
+			${ medium ? `
 				${ mq.largeAndBelow } {
-					padding-bottom: ${ 100.0 / fluid[1].aspectRatio }% !important;
+					padding-bottom: ${ 100.0 / medium.aspectRatio }% !important;
 				}
-			` }
-			${ fluid && fluid[2] && `
+			` : `` }
+			${ small ? `
 				${ mq.mediumAndBelow } {
-					padding-bottom: ${ 100.0 / fluid[2].aspectRatio }% !important;
+					padding-bottom: ${ 100.0 / small.aspectRatio }% !important;
 				}
-			` }
+			` : `` }
 		}
 	` }
 	img {
@@ -34,38 +33,46 @@ const StyledImage = styled(Img)`
 	}
 `
 
-const ResponsiveImage = ({ image, small, medium, large, className, loading, customSizes }) => {
+const ResponsiveImage = ({ image, small, medium, large, className, loading, customSizes, critical }) => {
 	if (small || medium || large || image) {
-		let source = null
+		console.log(small)
+		let source = []
+
 		if (image) {
-			source = image.fluid
-			if (customSizes) {
-				source.sizes = customSizes
-			}
-		} else {
-			source = [
-				{
-					...large.fluid,
-					media: `(min-width: ${ mq.largeBreakpoint + 1 }px)`,
-				},
-				{
-					...medium.fluid,
-					media: `(min-width: ${ mq.mediumBreakpoint + 1 }px)`,
-				},
-				{
-					...small.fluid,
-					media: `(min-width: 1px)`,
-				}
-			]
+			source.push({
+				...image.fluid,
+				media: `(min-width: ${ mq.largeBreakpoint + 1 }px)`,
+				sizes: customSizes || '100vw'
+			})
 		}
+
+		if (medium) {
+			source.push({
+				...medium.fluid,
+				media: `(min-width: ${ mq.mediumBreakpoint + 1 }px)`,
+				sizes: customSizes || '100vw'
+			})
+		}
+
+		if (small) {
+			source.push({
+				...small.fluid,
+				media: `(min-width: 1px)`,
+				sizes: customSizes || '100vw'
+			})
+		}
+
 		return (
 			<StyledImage
 				className={className}
 				fluid={source}
+				small={small}
+				medium={medium}
 				placeholderStyle={{ display: 'none' }}
 				durationFadeIn={1000}
 				loading={loading}
 				customSizes={customSizes}
+				critical={critical}
 			/>
 		)
 	} else {
@@ -73,7 +80,7 @@ const ResponsiveImage = ({ image, small, medium, large, className, loading, cust
 	}
 }
 
-const Image = ({ image, small, medium, className, sizes, loading, maxWidth, style }) => (
+const Image = ({ image, small, medium, className, sizes, loading, maxWidth, style, critical }) => (
 	<div style={{
 		width: '100%',
 		maxWidth: maxWidth ? maxWidth : '100%',
@@ -90,6 +97,7 @@ const Image = ({ image, small, medium, className, sizes, loading, maxWidth, styl
 				className={className}
 				customSizes={sizes}
 				loading={loading}
+				critical={critical}
 			/>
 		)}
 	</div>
@@ -98,7 +106,8 @@ const Image = ({ image, small, medium, className, sizes, loading, maxWidth, styl
 Image.defaultProps = {
 	loading: 'lazy',
 	sizes: false,
-	style: 'default'
+	style: 'default',
+	critical: false
 }
 
 export {

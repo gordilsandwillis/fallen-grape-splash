@@ -6,12 +6,10 @@ import * as mock from 'src/mock'
 const stories = storiesOf(`Components/Image`, module)
 stories.add(`Default`, () => (
 	<Image image={mock.Placeholder169} />
-))
-
-stories.add(`responsive`, () => (
+)).add(`Responsive`, () => (
 	<Image
 		small={mock.Placeholder23}
-		medium={mock.PlaceholderSq}
-		large={mock.Placeholder169}
+		// medium={mock.PlaceholderSq}
+		image={mock.Placeholder169}
 	/>
 ))

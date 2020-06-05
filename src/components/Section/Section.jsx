@@ -8,11 +8,19 @@ import { util } from 'src/styles'
 const SectionWrapper = styled(ThemeSelector)`
 	position: relative;
 	z-index: ${ ({ zIndex }) => zIndex };
-	${ ({ padded, prevTheme, nextTheme, setTheme }) => padded !== false && `
-		${ setTheme === prevTheme ? `
-			${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
+	${ ({ padded, prevTheme, nextTheme, setTheme, isFirstSection }) => padded !== false && `
+		${ !isFirstSection ? `
+			${ setTheme === prevTheme ? `
+				${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
+			` : `
+				${ util.responsiveStyles('padding-top', 182, 102, 66, 52) }
+			` }
 		` : `
-			${ util.responsiveStyles('padding-top', 182, 102, 66, 52) }
+			${ setTheme === 'default' ? `
+				${ util.responsiveStyles('padding-top', 91, 51, 0, 0) }
+			` : `
+				${ util.responsiveStyles('padding-top', 182, 102, 0, 0) }
+			` }
 		` }
 		${ setTheme === nextTheme ? `
 			${ util.responsiveStyles('padding-bottom', 91, 51, 33, 26) }
@@ -31,7 +39,8 @@ const Section = ({
 	buttons,
 	padded,
 	sectionid,
-	className
+	className,
+	isFirstSection
 }) => {
 
 	let buttonColors = {
@@ -49,6 +58,7 @@ const Section = ({
 			nextTheme={nextTheme}
 			zIndex={zIndex}
 			padded={padded}
+			isFirstSection={isFirstSection}
 		>
 			{children}
 		</SectionWrapper>

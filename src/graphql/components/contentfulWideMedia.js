@@ -8,8 +8,8 @@ export const query = graphql`
     height
     theme
     media {
-    	...GWImage
-    	...GWVideo
+    	...Image
+    	...Video
   	}
   }
 `

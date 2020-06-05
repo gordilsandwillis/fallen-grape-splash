@@ -20,9 +20,6 @@ const Wrapper = styled.div`
 		display: block;
 		margin: 0;
 	}
-	${ ({ cover }) => cover && `
-		height: 100%;
-	` }
 `
 
 const Eyebrow = styled.h5`
@@ -59,19 +56,19 @@ const PlayButton = styled(Button)`
 `
 
 const VideoWrapper = styled.div`
-	transition: opacity .5s ease-in-out;
-	${ ({ hasPosterImage }) => hasPosterImage && `
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	` }
-	${ ({ transitionStatus }) => transitionStatus === 'entered' ? `
-		opacity: 1;
-	` : `
-		opacity: 0;
-	` }
+	// transition: opacity .5s ease-in-out;
+	// ${ ({ hasPosterImage }) => hasPosterImage && `
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	width: 100%;
+	// 	height: 100%;
+	// ` }
+	// ${ ({ transitionStatus }) => transitionStatus === 'entered' ? `
+	// 	opacity: 1;
+	// ` : `
+	// 	opacity: 0;
+	// ` }
 	${ ({ cover }) => cover && `
 		height: 100%;
 	` }
@@ -150,17 +147,60 @@ class Video extends Component {
 		this.setState({ playing: false })
 	}
 
+	componentDidMount () {
+		console.log(this.props.posterImage)
+	}
+
 	render () {
-		const { posterImage, video, loop, cover, muted, className } = this.props
+		const {
+			posterImage,
+			video,
+			loop,
+			cover,
+			muted,
+			autoplay,
+			className
+		} = this.props
 		const { playing } = this.state
 		
 		if (!video || !video.file || !video.file.url) {
 			return false
 		}
 
+		let hasPosterImage = posterImage
+		if (autoplay) {
+			hasPosterImage = false
+		}
+
 		return (
-			<Wrapper hasPosterImage={posterImage} cover={cover} className={className}>
-				{posterImage && (
+			<Wrapper className={className} cover={cover}>
+				<VideoWrapper cover={cover}>
+					<StyledVideo
+						cover={cover}
+						url={video.file.url}
+						playing={playing}
+						loop={loop}
+						muted={muted}
+						autoPlay={true}
+						config={{
+							youtube: {
+								preload: true,
+								playerVars: {
+									color: 'white',
+									controls: 1,
+									disablekb: 1,
+									modestbranding: 1
+								}
+							}
+						}}
+					/>
+				</VideoWrapper>
+			</Wrapper>
+		)
+
+		return (
+			<Wrapper hasPosterImage={hasPosterImage} cover={cover} className={className}>
+				{hasPosterImage && (
 					<PosterImageWrap onClick={this.openVideo}>
 						<Image image={posterImage}/>
 						<PlayButton>
@@ -172,7 +212,7 @@ class Video extends Component {
 				)}
 
 				<Transition
-					in={playing || !posterImage}
+					in={playing || autoplay || !hasPosterImage}
 					timeout={{
 						appear: 500,
 						enter: 0,
@@ -183,13 +223,14 @@ class Video extends Component {
 					appear={true}
 				>
 					{transitionStatus => (
-						<VideoWrapper transitionStatus={transitionStatus} hasPosterImage={posterImage} cover={cover}>
+						<VideoWrapper transitionStatus={transitionStatus} hasPosterImage={hasPosterImage} cover={cover}>
 							<StyledVideo
 								cover={cover}
 								url={video.file.url}
 								playing={playing}
 								loop={loop}
 								muted={muted}
+								autoPlay={true}
 								config={{
 									youtube: {
 										preload: true,

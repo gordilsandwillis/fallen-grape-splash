@@ -5,7 +5,7 @@ export const white = '#fff'
 
 // Site Specific Colors
 export const yellow = '#FACC02'
-export const red = '#FF4438'
+export const red = rgba(80, 130, 250, 1)
 export const green = '#00C771'
 
 // Basic Colors

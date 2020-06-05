@@ -58,9 +58,12 @@ const RenderContent = ({ items, delay }) => {
 					Component = componentMap[item.__typename].default
 				}
 			}
-			console.log(item)
 			return Component ? (
-				<ScrollEntrance delay={index + delay} transitionIn={item.__typename === 'ContentfulText' ? false : true}>
+				<ScrollEntrance
+					key={item.id}
+					delay={index + delay}
+					transitionIn={item.__typename === 'ContentfulText' ? false : true}
+				>
 					<div>
 						<Component
 							{...item}
@@ -78,7 +81,9 @@ const Column = ({ items, delay, type }) => {
 		return false
 	}
 
-	console.log(items)
+	if (type === null) {
+		type = 'default'
+	}
 
 	return (
 		<ColumnContent as={type.startsWith('card') ? Card : 'div'} type={type}>

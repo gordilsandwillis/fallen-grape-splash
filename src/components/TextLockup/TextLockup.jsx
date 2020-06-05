@@ -37,21 +37,7 @@ const TextContainer = styled(ScrollEntrance)`
 `
 
 const Eyebrow = styled.h6`
-	margin-bottom: 1.5em;
 	${ typography.eyebrow }
-`
-
-const Headline = styled.h3`
-	${ ({ headlineSize }) => `
-		${ typography[headlineSize] }
-	` }
-	${ ({ alignment }) => alignment === 'center' && `
-		margin-left: auto;
-		margin-right: auto;
-	` }
-	${ ({ alignment }) => alignment === 'right' && `
-		margin-left: auto;
-	` }
 `
 
 const Text = styled.div`
@@ -121,16 +107,6 @@ const TextLockup = ({
 						</div>
 					</ConditionalRender>
 
-					<ConditionalRender condition={headline}>
-						<div>
-							<Headline headlineSize={headlineSize} as={headlineElement} alignment={alignment}>
-								{headlineSize === 'h1' || headlineSize === 'h2' || headlineSize === 'h3' ? (
-									headline
-								) : headline}
-							</Headline>
-						</div>
-					</ConditionalRender>
-
 					{text && text.json &&
 						<Text textSize={textSize} alignment={alignment}><ContentfulRichText richText={text.json}/></Text>
 					}
@@ -186,7 +162,6 @@ const TextLockup = ({
 
 TextLockup.defaultProps = {
 	alignment: 'inherit',
-	headlineSize: 'h3',
 	textSize: 'body',
 	entranceDelay: 0,
 	transitionIn: true

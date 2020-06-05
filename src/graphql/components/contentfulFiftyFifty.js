@@ -7,8 +7,8 @@ export const query = graphql`
     theme
     columns {
     	...Column
-    	...GWImage
-        ...GWVideo
+    	...Image
+        ...Video
         
     }
     layout
