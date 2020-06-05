@@ -6,69 +6,14 @@ import ReactPlayer from 'react-player'
 
 import { MdPlayArrow } from 'react-icons/md'
 
-import MaterialIcon from 'src/components/MaterialIcon'
-import Section from 'src/components/Section'
-import Image from 'src/components/Image'
-import ScrollEntrance from 'src/components/ScrollEntrance'
-import Button from 'src/components/Button'
-
 const Wrapper = styled.div`
-	${ ({ hasPosterImage }) => hasPosterImage && `
-		position: relative;
-	`}
-	img, video {
+	video {
 		display: block;
 		margin: 0;
 	}
 `
 
-const Eyebrow = styled.h5`
-	color: ${ colors.bgColor };
-	margin: 0 0 8px;
-`
-
-const BlockTitle = styled.h5`
-	margin: 0;
-	font-weight: 400;
-	color: ${ colors.bgColor };
-`
-
-const PosterImageWrap = styled.div`
-	position: relative;
-`
-
-const PlayButton = styled(Button)`
-	cursor: pointer;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: transparent;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: background ${ animations.mediumSpeed } ease-in-out;
-	border: none;
-	&:hover {
-		background: rgba(0, 0, 0, .1);
-	}
-`
-
 const VideoWrapper = styled.div`
-	// transition: opacity .5s ease-in-out;
-	// ${ ({ hasPosterImage }) => hasPosterImage && `
-	// 	position: absolute;
-	// 	top: 0;
-	// 	left: 0;
-	// 	width: 100%;
-	// 	height: 100%;
-	// ` }
-	// ${ ({ transitionStatus }) => transitionStatus === 'entered' ? `
-	// 	opacity: 1;
-	// ` : `
-	// 	opacity: 0;
-	// ` }
 	${ ({ cover }) => cover && `
 		height: 100%;
 	` }
@@ -135,41 +80,19 @@ const StyledVideo = styled(ReactPlayer)`
 `
 
 class Video extends Component {
-	state = {
-		playing: this.props.posterImage ? false : this.props.playing
-	}
-
-	openVideo = () => {
-		this.setState({ playing: true })
-	}
-
-	closeVideo = () => {
-		this.setState({ playing: false })
-	}
-
-	componentDidMount () {
-		console.log(this.props.posterImage)
-	}
-
 	render () {
 		const {
-			posterImage,
 			video,
 			loop,
 			cover,
 			muted,
 			autoplay,
-			className
+			className,
+			playing
 		} = this.props
-		const { playing } = this.state
 		
 		if (!video || !video.file || !video.file.url) {
 			return false
-		}
-
-		let hasPosterImage = posterImage
-		if (autoplay) {
-			hasPosterImage = false
 		}
 
 		return (
@@ -181,7 +104,7 @@ class Video extends Component {
 						playing={playing}
 						loop={loop}
 						muted={muted}
-						autoPlay={true}
+						autoPlay={autoplay}
 						config={{
 							youtube: {
 								preload: true,
@@ -195,57 +118,6 @@ class Video extends Component {
 						}}
 					/>
 				</VideoWrapper>
-			</Wrapper>
-		)
-
-		return (
-			<Wrapper hasPosterImage={hasPosterImage} cover={cover} className={className}>
-				{hasPosterImage && (
-					<PosterImageWrap onClick={this.openVideo}>
-						<Image image={posterImage}/>
-						<PlayButton>
-							<Button shape="circle">
-								<MdPlayArrow size="36" onClick={this.openVideo} />
-							</Button>
-						</PlayButton>
-					</PosterImageWrap>
-				)}
-
-				<Transition
-					in={playing || autoplay || !hasPosterImage}
-					timeout={{
-						appear: 500,
-						enter: 0,
-						exit: 500
-					}}
-					mountOnEnter={true}
-					unmountOnExit={true}
-					appear={true}
-				>
-					{transitionStatus => (
-						<VideoWrapper transitionStatus={transitionStatus} hasPosterImage={hasPosterImage} cover={cover}>
-							<StyledVideo
-								cover={cover}
-								url={video.file.url}
-								playing={playing}
-								loop={loop}
-								muted={muted}
-								autoPlay={true}
-								config={{
-									youtube: {
-										preload: true,
-										playerVars: {
-											color: 'white',
-											controls: 1,
-											disablekb: 1,
-											modestbranding: 1
-										}
-									}
-								}}
-							/>
-						</VideoWrapper>
-					)}
-				</Transition>
 			</Wrapper>
 		)
 	}
