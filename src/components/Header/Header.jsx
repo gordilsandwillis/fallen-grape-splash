@@ -16,7 +16,7 @@ const showHide = false // show and hide header on scroll
 const headerHeight = (additionalHeight = 0) => util.responsiveStyles('height', (140 + additionalHeight), (130 + additionalHeight), (110 + additionalHeight), (75 + additionalHeight))
 const headerHeightCollapsed = util.responsiveStyles('height', 80, 70, 66, 60)
 
-const NavLinkStyle = (scrolled, active) => `
+const NavLinkStyle = (scrolled, active, hasAtf) => `
 	display: block;
 	position: relative;
 	${ typography.h6 }
@@ -31,6 +31,7 @@ const NavLinkStyle = (scrolled, active) => `
 		` }
 	}
 	${ active && `
+
 		color: ${ colors.mainColor };
 		&:hover {
 			color: ${ colors.mainColor };
@@ -39,11 +40,11 @@ const NavLinkStyle = (scrolled, active) => `
 `
 
 const NavLink = styled(Link)`
-	${ props => NavLinkStyle(props.scrolled, props.active) }
+	${ props => NavLinkStyle(props.scrolled, props.active, props.hasAtf) }
 `
 
 const NavTrigger = styled.a`
-	${ props => NavLinkStyle(props.scrolled, props.active) }
+	${ props => NavLinkStyle(props.scrolled, props.active, props.hasAtf) }
 `
 
 const Wrapper = styled.header`
@@ -180,6 +181,14 @@ class Header extends Component {
 			pathname = location.pathname
 		}
 
+		const navLinks = [
+			{
+				label: 'Header Link',
+				to: '/',
+				id: 'link-id'
+			}
+		]
+
 		return (
 			<Fragment>
 				<ScrollListener.Consumer>
@@ -206,14 +215,16 @@ class Header extends Component {
 									>
 										<div>
 											<NavLinks>
-												<NavLink
-													scrolled={scrolled}
-													hasAtf={hasAtf}
-													to='/'
-													// active={pathname === to}
-												>
-													Header Link
-												</NavLink>
+												{navLinks.map((link, index) => (
+													<NavLink
+														scrolled={scrolled}
+														hasAtf={hasAtf}
+														to={link.to}
+														active={pathname === link.to}
+													>
+														{link.label}
+													</NavLink>
+												))}
 											</NavLinks>
 										</div>
 										<LogoCol>
@@ -222,15 +233,17 @@ class Header extends Component {
 											</Link>
 										</LogoCol>
 										<div>
-											<NavLinks alignment="right">
-												<NavLink
-													scrolled={scrolled}
-													hasAtf={hasAtf}
-													to='/'
-													// active={pathname === to}
-												>
-													Header Link
-												</NavLink>
+											<NavLinks>
+												{navLinks.map((link, index) => (
+													<NavLink
+														scrolled={scrolled}
+														hasAtf={hasAtf}
+														to={link.to}
+														active={pathname === link.to}
+													>
+														{link.label}
+													</NavLink>
+												))}
 											</NavLinks>
 										</div>
 									</HeaderContent>

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { colors, typography } from 'src/styles'
+import { typography } from 'src/styles'
 
 const collapseSpeed = 300
 
@@ -58,7 +58,7 @@ class Collapse extends React.Component {
 		this.ItemContent = React.createRef()
 	}
 
-	componentDidUpdate(prevProps, prevState, snapshot) {
+	componentDidUpdate (prevProps, prevState, snapshot) {
 		if (this.props.collapsed !== prevProps.collapsed) {
 			this.toggleOpen(prevProps.collapsed)
 		}
@@ -68,25 +68,25 @@ class Collapse extends React.Component {
 		if (typeof window !== 'undefined') {
 			this.updateDetailsHeight(opening)
 			setTimeout(() => {
-				this.setState((prevState) => ({ open: !prevState.open }))
+				this.setState(prevState => ({ open: !prevState.open }))
 			}, 10)
 		}
   }
 
-  updateDetailsHeight = (opening) => {
-  	if (this.ItemContent && this.ItemContent.current) {
+  updateDetailsHeight = opening => {
+		if (this.ItemContent && this.ItemContent.current) {
 			const { scrollHeight } = this.ItemContent.current
 			this.setState({ contentHeight: scrollHeight + 1 + 'px' })
 		}
 		if (opening) {
 			setTimeout(() => {
-				this.setState({ contentHeight: 'auto' })	
+				this.setState({ contentHeight: 'auto' })
 			}, collapseSpeed)
 		}
   }
 
   render () {
-		const { children, title, index, collapsed, className } = this.props
+		const { children, title, className } = this.props
 		const { contentHeight } = this.state
 		let { open } = this.state
 
@@ -94,7 +94,7 @@ class Collapse extends React.Component {
 			return (
 				<InnerWrapper className={className}>
 					{title && (
-						<UnstyledButton onClick={() => this.toggleOpen(!open)} open={open} className={open ? "title open" : "title"}>
+						<UnstyledButton onClick={() => this.toggleOpen(!open)} open={open} className={open ? 'title open' : 'title'}>
 							<CollapseHeader>
 								<DisplayName hasChildren={true}>
 									<div>{title}</div>
@@ -128,4 +128,4 @@ Collapse.defaultProps = {
 	collapsed: true
 }
 
-export default Collapse;
+export default Collapse

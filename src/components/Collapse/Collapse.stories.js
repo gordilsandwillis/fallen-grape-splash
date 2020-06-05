@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { optionsKnob, number, boolean } from '@storybook/addon-knobs'
+import { boolean } from '@storybook/addon-knobs'
 import { storiesOf } from '@storybook/react'
 import Collapse from './Collapse'
-import { lorem } from 'src/mock/copy'
 import { typography } from 'src/styles'
 
 const Notes = styled.div`

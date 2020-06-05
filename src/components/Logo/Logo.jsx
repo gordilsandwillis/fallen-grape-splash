@@ -2,8 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import LogoSvg from 'src/assets/images/logo.svg'
 
-import { mq } from 'src/styles'
-
 const LogoWrapper = styled.div`
 	height: auto;
 	display: inlin-block;

@@ -62,7 +62,7 @@ const RenderContent = ({ items, delay }) => {
 				<ScrollEntrance
 					key={item.id}
 					delay={index + delay}
-					transitionIn={item.__typename === 'ContentfulText' ? false : true}
+					transitionIn={item.__typename !== 'ContentfulText'}
 				>
 					<div>
 						<Component

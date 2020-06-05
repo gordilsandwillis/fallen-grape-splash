@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-const transitionSpeed = '.3s'
+const transitionSpeed = '0.3s'
 
 const Piece = styled.div`
 	font-size: ${ ({ weight }) => weight + 'px' };
@@ -51,17 +51,17 @@ const Piece = styled.div`
 					icon === 'download' ||
 					icon === 'upload' ? `
 				top: 0;
-				transform: translate3d(0%, ${ size * .31 + 'px' }, 0) rotate(-45deg);
+				transform: translate3d(0%, ${ size * 0.31 + 'px' }, 0) rotate(-45deg);
 				width: 50%;
 			` : `` }
 			${ icon === 'arrow_right' || icon === 'arrow_up' ? `
 				top: 0;
-				transform: translate3d(100%, ${ size * .31 + 'px' }, 0) rotate(45deg);
+				transform: translate3d(100%, ${ size * 0.31 + 'px' }, 0) rotate(45deg);
 				width: 50%;
 			` : `` }
 			${ 	icon === 'download' ||
 					icon === 'upload' ? `
-				transform: translate3d(${ size * .15 + 'px' }, ${ size * .31 + 'px' }, 0) rotate(-45deg);
+				transform: translate3d(${ size * 0.15 + 'px' }, ${ size * 0.31 + 'px' }, 0) rotate(-45deg);
 			` : `` }
 			${ icon === 'close' || icon === 'plus' ? `
 				top: calc(50% - .5em);
@@ -69,8 +69,8 @@ const Piece = styled.div`
 			` : `` }
 			${ icon === 'search' ? `
 				top: calc(50% - .5em);
-				width: calc(100% - ${ size * .5 + 'px' } - ${ weight * 2 + 'px' });
-				left: calc(100% - ${ size * .5 + 'px' } + ${ weight + 'px' });
+				width: calc(100% - ${ size * 0.5 + 'px' } - ${ weight * 2 + 'px' });
+				left: calc(100% - ${ size * 0.5 + 'px' } + ${ weight + 'px' });
 			` : `` }
 			${ icon === 'bar_graph' ? `
 				width: 50%;
@@ -79,7 +79,7 @@ const Piece = styled.div`
 		// PIECE 2
 		${ piece === 'two' ? `
 			${ 	icon === 'menu' ||
-					icon === 'ellipsis' || 
+					icon === 'ellipsis' ||
 					icon === 'bar_graph' ? `
 				top: calc(50% - .5em);
 			` : `` }
@@ -104,9 +104,9 @@ const Piece = styled.div`
 			` : `` }
 			${ icon === 'search' ? `
 				top: 50%;
-				margin-top: calc((${ size * .5 + 'px' } + ${ weight / 2 + 'px' }) / -2);
-				height: calc(${ size * .5 + 'px' } + ${ weight / 2 + 'px' });
-				width: calc(${ size * .5 + 'px' } + ${ weight / 2 + 'px' });
+				margin-top: calc((${ size * 0.5 + 'px' } + ${ weight / 2 + 'px' }) / -2);
+				height: calc(${ size * 0.5 + 'px' } + ${ weight / 2 + 'px' });
+				width: calc(${ size * 0.5 + 'px' } + ${ weight / 2 + 'px' });
 				left: ${ weight / 2 + 'px' };
 				background: transparent;
 				border-width: ${ weight + 'px' };
@@ -118,7 +118,7 @@ const Piece = styled.div`
 		` : `` }
 		// PIECE 3
 		${ piece === 'three' ? `
-			${ 	icon === 'menu' || 
+			${ 	icon === 'menu' ||
 					icon === 'ellipsis' ||
 					icon === 'bar_graph' ? `
 				bottom: calc(${ size / 4 + 'px' } - ${ weight / 2 + 'px' });
@@ -128,17 +128,17 @@ const Piece = styled.div`
 					icon === 'download' ||
 					icon === 'upload' ? `
 				bottom: 0;
-				transform: translate3d(0, -${ size * .31 + 'px' }, 0) rotate(45deg);
+				transform: translate3d(0, -${ size * 0.31 + 'px' }, 0) rotate(45deg);
 				width: 50%;
 			` : `` }
 			${ icon === 'arrow_right' || icon === 'arrow_up' ? `
 				bottom: 0;
-				transform: translate3d(100%, -${ size * .31 + 'px' }, 0) rotate(-45deg);
+				transform: translate3d(100%, -${ size * 0.31 + 'px' }, 0) rotate(-45deg);
 				width: 50%;
 			` : `` }
 			${ 	icon === 'download' ||
 					icon === 'upload' ? `
-				transform: translate3d(${ size * .15 + 'px' }, -${ size * .31 + 'px' }, 0) rotate(45deg);
+				transform: translate3d(${ size * 0.15 + 'px' }, -${ size * 0.31 + 'px' }, 0) rotate(45deg);
 			` : `` }
 			${ icon === 'close' || icon === 'plus' ? `
 				bottom: calc(50% - .5em);
@@ -146,8 +146,8 @@ const Piece = styled.div`
 			` : `` }
 			${ icon === 'search' ? `
 				bottom: calc(50% - .5em);
-				width: calc(100% - ${ size * .5 + 'px' } - ${ weight * 2 + 'px' });
-				left: calc(100% - ${ size * .5 + 'px' } + ${ weight + 'px' });
+				width: calc(100% - ${ size * 0.5 + 'px' } - ${ weight * 2 + 'px' });
+				left: calc(100% - ${ size * 0.5 + 'px' } + ${ weight + 'px' });
 			` : `` }
 			${ icon === 'bar_graph' ? `
 				width: 75%;
@@ -178,12 +178,11 @@ const Wrapper = styled.div`
 	width: ${ ({ size }) => size + 'px' };
 	height: ${ ({ size }) => size + 'px' };
 	font-size: ${ ({ size }) => size + 'px' };
-	background: #ccc;
 	${ ({ icon }) => `
 		${ icon === 'menu' ? `
 			transform: none;
 		` : `` }
-		${ 	icon === 'close' || 
+		${ 	icon === 'close' ||
 				icon === 'ellipsis' ||
 				icon === 'bar_graph' ||
 				icon === 'arrow_up' ||
@@ -202,7 +201,7 @@ const Wrapper = styled.div`
 
 const AnimatedIcon = ({ size, weight, icon, className, rounded }) => {
 	return (
-	  <Wrapper size={size} icon={icon} className={className}>
+		<Wrapper size={size} icon={icon} className={className}>
 	  	<Piece piece="one" weight={weight} icon={icon} size={size} rounded={rounded} />
 	  	<Piece piece="two" weight={weight} icon={icon} size={size} rounded={rounded} />
 	  	<Piece piece="three" weight={weight} icon={icon} size={size} rounded={rounded} />

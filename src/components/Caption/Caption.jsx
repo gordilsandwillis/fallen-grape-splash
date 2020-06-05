@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { typography, colors } from 'src/styles'
 
 const Wrapper = styled.div`
 	padding-top: 1em;
@@ -18,7 +17,7 @@ const Caption = ({ className, children, bulletColor }) => (
 )
 
 Caption.defaultProps = {
-	bulletColor: "mainColor"
+	bulletColor: 'mainColor'
 }
 
 export default Caption

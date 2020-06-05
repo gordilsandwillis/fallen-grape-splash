@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { lighten, rgba } from 'polished'
+import { rgba } from 'polished'
 
 import * as util from 'src/styles/util'
 import { colors, typography, animations } from 'src/styles'
@@ -63,7 +63,7 @@ const setButtonTheme = (theme, state) => `
 			${ theme.hoverShadow ? `
 				box-shadow: ${ theme.hoverShadow };
 			` : `` }
-		` : ``}
+		` : `` }
 	}
 `
 

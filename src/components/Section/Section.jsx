@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import ThemeSelector from 'src/components/ThemeSelector'
-import Button from 'src/components/Button'
-import ConditionalRender from 'src/components/ConditionalRender'
 import { util } from 'src/styles'
 
 const SectionWrapper = styled(ThemeSelector)`
@@ -30,7 +28,7 @@ const SectionWrapper = styled(ThemeSelector)`
 	` }
 `
 
-const Section = ({ 
+const Section = ({
 	children,
 	setTheme,
 	prevTheme,
@@ -42,14 +40,6 @@ const Section = ({
 	className,
 	isFirstSection
 }) => {
-
-	let buttonColors = {
-		textColor: 'bgColor',
-		black: 'bgColor',
-		mainColor: 'bgColor',
-		bgColor: 'default'
-	}
-
 	return (
 		<SectionWrapper
 			className={className}

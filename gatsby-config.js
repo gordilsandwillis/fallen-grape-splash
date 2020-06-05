@@ -21,7 +21,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-env-variables`,
 			options: {
-			  whitelist: ['GREENHOUSE_JOB_API_HOST', 'GREENHOUSE_BOARD_TOKEN']
+				whitelist: ['GREENHOUSE_JOB_API_HOST', 'GREENHOUSE_BOARD_TOKEN']
 			}
 		},
 		{

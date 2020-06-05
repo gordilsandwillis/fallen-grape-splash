@@ -3,10 +3,9 @@ import styled from '@emotion/styled'
 import { storiesOf } from '@storybook/react'
 import Button from './Button'
 import TextLink from 'src/components/TextLink'
-import { MdVolumeUp as TestIcon } from 'react-icons/md'
+import { MdVolumeUp as TestIcon, MdArrowForward } from 'react-icons/md'
 import { typography, themes } from 'src/styles'
 import { optionsKnob } from '@storybook/addon-knobs'
-import { MdArrowForward } from 'react-icons/md'
 
 const SpaceOut = styled.div`
 	margin: 1rem 0 4rem;
@@ -21,7 +20,7 @@ const Notes = styled.div`
 `
 
 let themeOptions = {}
-Object.keys(themes.buttonThemes).map((theme) => {
+Object.keys(themes.buttonThemes).map(theme => {
   const key = theme.toString()
   themeOptions[key] = theme
 })

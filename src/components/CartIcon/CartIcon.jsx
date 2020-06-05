@@ -36,8 +36,8 @@ const CartCount = styled.span`
 
 const CartIcon = ({ className, count }) => (
   <Wrapper className={className}>
-  	{count > 0 && (<CartCount count={count}>{count}</CartCount>)}
-  	<StyledCartIcon count={count} />
+		{count > 0 && (<CartCount count={count}>{count}</CartCount>)}
+		<StyledCartIcon count={count} />
   </Wrapper>
 )
 
