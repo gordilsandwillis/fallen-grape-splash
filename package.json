@@ -14,7 +14,6 @@
     "babel-plugin-emotion": "^10.0.9",
     "contentful-migration": "^1.0.2",
     "core-js": "2",
-    "countdown": "^2.6.0",
     "emotion-theming": "^10.0.10",
     "eslint-plugin-you-dont-need-lodash-underscore": "^6.10.0",
     "gatsby": "^2.4.2",
@@ -36,7 +35,6 @@
     "gatsby-transformer-inline-svg": "0.0.1",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.19",
-    "instafeed-lite": "^1.0.10",
     "intersection-observer": "^0.7.0",
     "lodash": "^4.17.15",
     "mobile-detect": "^1.4.3",
@@ -106,9 +104,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gordilsandwillis/wah-nee"
+    "url": "https://github.com/gordilsandwillis/gw-gatsby-blocks"
   },
   "bugs": {
-    "url": "https://github.com/gordilsandwillis/wah-nee/issues"
+    "url": "https://github.com/gordilsandwillis/gw-gatsby-blocks/issues"
   }
 }
