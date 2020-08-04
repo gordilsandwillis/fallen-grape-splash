@@ -42,7 +42,7 @@ const StyledVideo = styled(ReactPlayer)`
 			object-fit: cover;
 		}
 	` }
-	${ ({ url, cover }) => url.indexOf("youtube") > -1 || url.indexOf("vimeo") > -1 ? `
+	${ ({ url, cover }) => url.indexOf('youtube') > -1 || url.indexOf('vimeo') > -1 ? `
 		padding-bottom: ${ 9 / 16 * 100 }%;
 		${ cover && `
 			position: absolute;
@@ -90,7 +90,7 @@ class Video extends Component {
 			className,
 			playing
 		} = this.props
-		
+
 		if (!video || !video.file || !video.file.url) {
 			return false
 		}

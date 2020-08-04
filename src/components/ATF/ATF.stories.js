@@ -26,7 +26,7 @@ const headerSizeOptions = {
 }
 
 let themeOptions = {}
-Object.keys(themes).map((theme) => {
+Object.keys(themes).map(theme => {
 	const key = theme.toString()
 	themeOptions[key] = theme
 })

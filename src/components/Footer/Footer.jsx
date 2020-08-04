@@ -73,11 +73,11 @@ class Footer extends Component {
 						<div>
 							<h6>List Header</h6>
 							Footer Links
-						</div>	
+						</div>
 						<div>
 							<h6>List Header</h6>
 							Footer Links
-						</div>	
+						</div>
 						<div>
 							<h6>List Header</h6>
 							Newsletter

@@ -97,7 +97,7 @@ const gridDefToCss = gridDef => {
 		}
 
 		if (isVariableColumn) {
-			colStart ++
+			colStart++
 		} else {
 			colStart += size
 		}
@@ -112,8 +112,8 @@ const gridDefToCss = gridDef => {
 	// repeat(${ gridWidth }, minmax(0, 1fr))
 	let width = ''
 
-	gridData.forEach((col) => {
-		if(col.isVariableColumn) {
+	gridData.forEach(col => {
+		if (col.isVariableColumn) {
 			width += col.size + ' '
 		} else {
 			width += 'repeat(' + col.size + ', minmax(0, 1fr)) '

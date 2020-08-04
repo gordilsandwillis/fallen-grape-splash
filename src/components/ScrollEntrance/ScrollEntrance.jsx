@@ -15,13 +15,13 @@ const EnteranceWrap = styled.div`
 			` }
 
 			${ delay > 0 ? `
-				transition-delay: ${ (speed * .115) * (delay) }ms;
+				transition-delay: ${ (speed * 0.115) * (delay) }ms;
 			` : `` }
 			
 			${ Array.isArray(items) ? `
 				${ items.map((item, index) => `
 					&:nth-of-type(${ index + 1 }) {
-						transition-delay: ${ (speed * .115) * (index + delay) }ms;
+						transition-delay: ${ (speed * 0.115) * (index + delay) }ms;
 					}
 				`) }
 			` : `` }

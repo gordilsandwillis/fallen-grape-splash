@@ -6,7 +6,7 @@ import Header from './Header'
 import themes from 'src/styles/themes'
 
 let bannerColorOptions = {}
-Object.keys(themes).map((theme) => {
+Object.keys(themes).map(theme => {
   const key = theme.toString()
   bannerColorOptions[key] = theme
 })

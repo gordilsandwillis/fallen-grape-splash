@@ -83,11 +83,11 @@ const ResponsiveImage = ({ image, small, medium, large, className, loading, cust
 const Image = ({ image, small, medium, className, sizes, loading, maxWidth, style, critical }) => (
 	<div style={{
 		width: '100%',
-		maxWidth: maxWidth ? maxWidth : '100%',
+		maxWidth: maxWidth || '100%',
 		display: 'inline-block',
 		verticalAlign: 'top'
 	}}>
-		{image.svgContent ? (
+		{image && image.svgContent ? (
 			<SvgWrap className={className} dangerouslySetInnerHTML={{ __html: image.svgContent }}/>
 		) : (
 			<ResponsiveImage

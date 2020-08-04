@@ -119,7 +119,7 @@ class PageTransition extends React.PureComponent {
       return null
     }
   }
-  
+
   render () {
     const { children, location, navVisible } = this.props
     const { overlay } = this.state

@@ -1,9 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Grid from 'src/components/Grid'
-import { colors } from 'src/styles'
+import { colors, themes } from 'src/styles'
 import Input from './Input'
-import { themes } from 'src/styles'
+
 import { optionsKnob } from '@storybook/addon-knobs'
 
 const inputs = [
@@ -50,7 +50,7 @@ const inputs = [
 ]
 
 let themeOptions = {}
-Object.keys(themes.inputThemes).map((theme) => {
+Object.keys(themes.inputThemes).map(theme => {
   const key = theme.toString()
   themeOptions[key] = theme
 })
@@ -67,7 +67,7 @@ stories.add(`Default`, () => (
 		>
 			{inputs.map(input => (
 				<div>
-					<figcaption className="small" style={{ 
+					<figcaption className="small" style={{
 						marginBottom: '2rem',
 						paddingTop: '8px',
 						borderTop: '1px solid ' + colors.hrColor,
@@ -84,7 +84,7 @@ stories.add(`Default`, () => (
 						error={input.error}
 						disabled={input.disabled}
 					/>
-					
+
 				</div>
 			))}
 		</Grid>

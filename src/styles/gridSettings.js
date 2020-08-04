@@ -1,4 +1,4 @@
-export const margin = 100/14 + 'vw'
+export const margin = 100 / 14 + 'vw'
 export const gutter = '3vw'
 
 export const containerLargeMargins = '5vw'
