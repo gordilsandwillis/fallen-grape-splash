@@ -14,7 +14,7 @@ module.exports = {
     "no-unused-vars": 1, // recommended
     "arrow-spacing": ["error", { before: true, after: true }], // recommended
     indent: 0,
-    "no-mixed-spaces-and-tabs": 1,
+    "no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
     "no-tabs": 0,
     "comma-dangle": [
       "error",
