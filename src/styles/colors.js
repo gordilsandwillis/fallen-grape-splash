@@ -5,14 +5,14 @@ export const white = '#fff'
 
 // Site Specific Colors
 export const yellow = '#FACC02'
-export const red = rgba(80, 130, 250, 1)
+export const red = '#D56B33'
 export const green = '#00C771'
 
 // Basic Colors
 export const transparent = 'transparent'
 export const currentcolor = 'currentcolor'
 export const bgColor = white
-export const mainColor = red
+export const mainColor = rgba(80, 130, 250, 1)
 export const alert = red
 export const notify = yellow
 export const success = green

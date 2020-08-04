@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Column from 'src/components/Column'
-import { typography, colors } from 'src/styles'
+import { colors } from 'src/styles'
 import { MdCheck } from 'react-icons/md'
 
 const Wrapper = styled.ul`
@@ -9,6 +9,8 @@ const Wrapper = styled.ul`
 	padding: 0;
 	${ ({ type }) => type === 'horizontal' ? `
 		letter-spacing: 0;
+		margin-left: -10px;
+		margin-right: -10px;
 		li {
 			display: inline-block;
 			padding-left: 10px;
@@ -42,16 +44,16 @@ const ListIcon = styled.div`
 
 const List = ({ className, type, items }) => (
   <Wrapper className={className} type={type}>
-  	{items.map(( item, index ) => (
-  		<ListItem type={type}>
+  	{items.map((item, index) => (
+			<ListItem type={type} key={item.index}>
   			{type === 'checklist' && (
-  				<ListIcon>
+					<ListIcon>
 	  				<MdCheck />
   				</ListIcon>
-  			)}
+				)}
 	  		<Column items={[ item ]}/>
   		</ListItem>
-  	))}
+		))}
   </Wrapper>
 )
 

@@ -14,8 +14,7 @@ const WideMediaWrap = styled.div`
 	${ ({ setHeight }) => setHeight !== 'auto' ? `
 		position: relative;
 		z-index: 2;
-		height: setHeight };
-		min-height: 40vw;
+		height: ${ setHeight };
 	` : `` }
 `
 
@@ -23,7 +22,6 @@ const MediaImage = styled(Image)`
 	${ ({ setHeight }) => setHeight !== 'auto' ? `
 		> div {
 			height: ${ setHeight };
-			min-height: 40vw;
 			position: relative;
 		}
 		img {

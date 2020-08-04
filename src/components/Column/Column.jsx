@@ -67,7 +67,8 @@ const RenderContent = ({ items, delay }) => {
 					<div>
 						<Component
 							{...item}
-							delay={index}
+							delay={index + delay}
+							entranceDelay={index + delay}
 						/>
 					</div>
 				</ScrollEntrance>

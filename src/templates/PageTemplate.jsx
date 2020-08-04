@@ -12,20 +12,21 @@ const propTypes = {
 }
 
 class PageTemplate extends React.Component {
-	
 	render () {
 		const site = this.props.data.allContentfulSiteSettings.edges.filter(edge => !edge.node.title.includes('PLACEHOLDER'))[0].node
 		const page = this.props.data.allContentfulPage.edges[0].node
 		const { sections } = page
 		const hasAtf = sections && sections[0].__typename === 'ContentfulWideMedia' && sections[0].width === 'fullWidth'
+		const seo = page.seo
 
 		return (
 			<Fragment >
 				<SEO
 					title={page.title}
-					description={page.seoDescription}
+					description={seo.description && seo.description.description}
 					siteSettings={site}
-					shareImage={page.shareImage ? 'https:' + page.shareImage.file.url : false}
+					keywords={seo.keywords}
+					shareImage={seo.shareImage && 'https:' + seo.shareImage.file.url}
 				/>
 				<Header
 					// headerNavigation={site.headerNavigation}
@@ -36,7 +37,7 @@ class PageTemplate extends React.Component {
 					bannerText={site.bannerText}
 					bannerColor={site.bannerColor}
 				/>
-				{sections.map((section, index) => {
+				{sections && sections.map((section, index) => {
 					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme
 					const prevFullWidth = ((index !== 0) && sections[index - 1]) && sections[index - 1].width === 'fullWidth'
 					const nextTheme = ((index !== sections.length - 1) && sections[index + 1]) && sections[index + 1].theme
@@ -82,6 +83,17 @@ export const pageQuery = graphql`
 						...FiftyFifty
 						...TextSection
 						...WideMedia
+					}
+					seo {
+						description {
+							description
+						}
+						keywords
+						shareImage {
+							file {
+								url
+							}
+						}
 					}
 				}
 			}

@@ -47,11 +47,20 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 
 	const metaDescription = description || site.siteMetadata.description
 	const host = process.env.HOST || process.env.GATSBY_HOST
+	const defaultSeo = allContentfulSiteSettings.nodes[0].defaultSeo
+
 	let metaShareImage = host + socialShareImage.publicURL
 	if (shareImage) {
 		metaShareImage = shareImage
-	} else if (allContentfulSiteSettings.nodes[0].defaultShareImage) {
-		metaShareImage = 'https:' + allContentfulSiteSettings.nodes[0].defaultShareImage.file.url
+	} else if (defaultSeo.shareImage) {
+		metaShareImage = 'https:' + defaultSeo.shareImage.file.url
+	}
+
+	let metaKeywords = ''
+	if (keywords) {
+		metaKeywords = keywords.join(`, `)
+	} else if (defaultSeo.keywords && keywords && keywords.length > 0) {
+		metaKeywords = defaultSeo.keywords.join(`, `)
 	}
 
 	const contentfulFavicon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
@@ -109,19 +118,14 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 					name: `twitter:description`,
 					content: metaDescription,
 				},
-			]
-				.concat(
-					keywords.length > 0
-						? {
-							name: `keywords`,
-							content: keywords.join(`, `),
-						}
-						: []
-				)
-				.concat(meta)}
+				{
+					name: `keywords`,
+					content: metaKeywords
+				}
+			]}
 			link={[
-				{ rel: 'icon', type: 'image/png', sizes: '32x32', href: contentfulFavicon },
-				{ rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120', href: contentfultouchIcon }
+				{ rel: 'icon', type: 'image/png', sizes: '32x32', href: contentfulFavicon || favicon },
+				{ rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120', href: contentfultouchIcon || appleTouchIcon }
 			]}
 		/>
 	)

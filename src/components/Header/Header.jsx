@@ -19,6 +19,7 @@ const NavLinkStyle = (scrolled, active, hasAtf) => `
 	${ util.responsiveStyles('margin-right', 60, 40, 32, 20) }
 	padding: 10px 0 8px;
 	line-height: 1em;
+	flex-shrink: 0;
 	border-bottom: 2px solid transparent;
 	&:hover {
 		color: ${ colors.mainColor };

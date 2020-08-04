@@ -12,7 +12,7 @@ const Wrapper = styled(Section)`
   ` : `` }
 `
 
-const TextSection = ({ className, nextTheme, prevTheme, theme, text, alignment }) => {
+const TextSection = ({ className, nextTheme, prevTheme, theme, text, alignment, isFirstSection }) => {
   if (!text) {
     return false
   }
@@ -46,6 +46,7 @@ const TextSection = ({ className, nextTheme, prevTheme, theme, text, alignment }
       setTheme={theme}
       nextTheme={nextTheme}
       alignment={alignment}
+      isFirstSection={isFirstSection}
     >
       <Grid
         small="1 [12] 1"

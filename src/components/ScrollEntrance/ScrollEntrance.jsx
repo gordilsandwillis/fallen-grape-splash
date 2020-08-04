@@ -20,7 +20,7 @@ const EnteranceWrap = styled.div`
 			
 			${ Array.isArray(items) ? `
 				${ items.map((item, index) => `
-					&:nth-of-type(${ index }) {
+					&:nth-of-type(${ index + 1 }) {
 						transition-delay: ${ (speed * .115) * (index + delay) }ms;
 					}
 				`) }

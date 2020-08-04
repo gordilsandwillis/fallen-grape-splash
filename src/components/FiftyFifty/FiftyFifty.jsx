@@ -6,7 +6,7 @@ import Image from 'src/components/Image'
 import Video from 'src/components/Video'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import Column from 'src/components/Column'
-import { util, mq } from 'src/styles'
+import { mq } from 'src/styles'
 
 const FFSection = styled(Section)``
 
@@ -14,25 +14,25 @@ const ColumnWrapper = styled.div`
   ${ ({ isMedia, vPadded, hPadded, sectionPadded, gutters, index, gridDirection }) => !isMedia ? `
     ${ vPadded ? `` : `` }
     ${ hPadded ? `
-      padding-left: ${ 100/14 }vw;
-      padding-right: ${ 100/14 }vw;
+      padding-left: ${ 100 / 14 }vw;
+      padding-right: ${ 100 / 14 }vw;
       ${ mq.mediumAndUp } {
         padding-left: 0;
         padding-right: 0;
         ${ index === 0 ? `
           ${ gridDirection === 'ltr' ? `
-            padding-left: ${ 100/14 }vw;
+            padding-left: ${ 100 / 14 }vw;
           ` : `
-            padding-right: ${ 100/14 }vw;
+            padding-right: ${ 100 / 14 }vw;
           ` }
-        ` : ``}
+        ` : `` }
         ${ index === 1 ? `
           ${ gridDirection === 'ltr' ? `
-            padding-right: ${ 100/14 }vw;
+            padding-right: ${ 100 / 14 }vw;
           ` : `
-            padding-left: ${ 100/14 }vw;
+            padding-left: ${ 100 / 14 }vw;
           ` }
-        ` : ``}
+        ` : `` }
       }
     ` : `` }
   ` : `` }
@@ -41,22 +41,19 @@ const ColumnWrapper = styled.div`
 const gridSetup = (layout, gutter) => {
   const layouts = {
     '50/50': {
-      // medium: "[1] " + gutter + " [1]",
-      medium: "[1]",
-      large: "[1] " + gutter + " [1]",
-      larger: "[1] " + gutter + " [1]"
+      medium: '[1]',
+      large: '[1] ' + gutter + ' [1]',
+      larger: '[1] ' + gutter + ' [1]'
     },
     '60/40': {
-      // medium: "[6] " + gutter + " [5]",
-      medium: "[1]",
-      large: "[6] " + gutter + " [5]",
-      larger: "[6] " + gutter + " [4] 1"
+      medium: '[1]',
+      large: '[6] ' + gutter + ' [5]',
+      larger: '[6] ' + gutter + ' [4] 1'
     },
     '40/60': {
-      // medium: "[5] " + gutter + " [6]",
-      medium: "[1]",
-      large: "[5] " + gutter + " [6]",
-      larger: "1 [4] " + gutter + " [6]"
+      medium: '[1]',
+      large: '[5] ' + gutter + ' [6]',
+      larger: '1 [4] ' + gutter + ' [6]'
     }
   }
 
@@ -67,11 +64,6 @@ const gutterSetup = {
   narrow: 'g',
   wide: 'm',
   none: ''
-}
-
-const marginSetup = {
-  margins: 1,
-  fullWidth: ''
 }
 
 const gridDirection = {
@@ -93,7 +85,6 @@ const FiftyFifty = ({
   columnOrder,
   isFirstSection
 }) => {
-  
   // Set defaults if value is null
   if (!gutters) { gutters = 'wide' }
   if (!width) { width = 'margins' }
@@ -134,15 +125,15 @@ const FiftyFifty = ({
           medium={gridSetup(layout, gutterSetup[gutters]).medium}
           large={gridSetup(layout, gutterSetup[gutters]).large}
           larger={gridSetup(layout, gutterSetup[gutters]).larger}
-          rowGap={["7vw", "7vw", "80px"]}
+          rowGap={['7vw', '7vw', '80px']}
           vAlign={verticalAlignment}
           gridDirection={gridDirection[columnOrder]}
           // showOverlay={true}
         >
           {columns.map((column, index) => {
-            const columnIndex = index
             return (
               <ColumnWrapper
+                key={column.id}
                 isMedia={!column.content}
                 vPadded={column.content && fullWidth}
                 hPadded={column.content && fullWidth}
@@ -171,7 +162,7 @@ const FiftyFifty = ({
                       image={column.image}
                       medium={column.medium}
                       small={column.small}
-                      sizes={"(max-width: " + mq.smallBreakpoint + "px) 100vw, 50vw"}
+                      sizes={'(max-width: ' + mq.smallBreakpoint + 'px) 100vw, 50vw'}
                       loading={isFirstSection ? 'eager' : 'lazy'}
                     />
                   </ScrollEntrance>

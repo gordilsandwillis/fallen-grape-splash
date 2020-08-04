@@ -119,9 +119,7 @@ const TextLockup = ({
 						<Text textSize={textSize} alignment={alignment}>{text}</Text>
 					}
 
-					<ConditionalRender condition={additions}>
-						{additions}
-					</ConditionalRender>
+					{additions && additions}
 
 					{buttons && (
 						<ButtonActions buttons={buttons} alignment={alignment}>
