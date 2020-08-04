@@ -19,19 +19,19 @@ const TextSection = ({ className, nextTheme, prevTheme, theme, text, alignment, 
   const item = text[0]
   const align = {
     left: {
-      medium: "1 [9] 4",
-      large: "1 [9] 4",
-      larger: "1 [9] 4"
+      medium: '1 [9] 4',
+      large: '1 [9] 4',
+      larger: '1 [9] 4'
     },
     center: {
-      medium: "2 [10] 2",
-      large: "3 [8] 3",
-      larger: "4 [6] 4"
+      medium: '2 [10] 2',
+      large: '3 [8] 3',
+      larger: '4 [6] 4'
     },
     right: {
-      medium: "7 [6] 1",
-      large: "7 [6] 1",
-      larger: "7 [5] 2"
+      medium: '7 [6] 1',
+      large: '7 [6] 1',
+      larger: '7 [5] 2'
     }
   }
 

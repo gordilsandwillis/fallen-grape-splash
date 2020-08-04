@@ -14,7 +14,7 @@ const imgPositionOptions = {
 }
 
 let themeOptions = {}
-Object.keys(themes).map((theme) => {
+Object.keys(themes).map(theme => {
   const key = theme.toString()
   themeOptions[key] = theme
 })
@@ -27,7 +27,7 @@ const gutterOptions = {
 
 const widthOptions = {
   margins: 'margins',
-  fullWidth : 'fullWidth'
+  fullWidth: 'fullWidth'
 }
 
 const paddingOptions = {
@@ -77,9 +77,9 @@ stories.add(`Default`, () => (
     ]}
     gutters={ optionsKnob('Gutter', gutterOptions, 'wide', { display: 'select' }) }
     width={ optionsKnob('Width', widthOptions, 'margins', { display: 'select' }) }
-    padding={ optionsKnob('Padding', paddingOptions, 'padded', { display: 'select' } )}
-    layout={ optionsKnob('Layout', layoutOptions, '50/50', { display: 'select' } )}
-    verticalAlignment={ optionsKnob('vertical Alignment', alignmentOptions, 'center', { display: 'select' } )}
-    columnOrder={ optionsKnob('Column Order', orderOptions, 'leftToRight', { display: 'select' } )}
+    padding={ optionsKnob('Padding', paddingOptions, 'padded', { display: 'select' })}
+    layout={ optionsKnob('Layout', layoutOptions, '50/50', { display: 'select' })}
+    verticalAlignment={ optionsKnob('vertical Alignment', alignmentOptions, 'center', { display: 'select' })}
+    columnOrder={ optionsKnob('Column Order', orderOptions, 'leftToRight', { display: 'select' })}
   />
 ))

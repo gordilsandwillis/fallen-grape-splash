@@ -74,8 +74,8 @@ class ScrollListener extends React.Component {
         this.setState({ scrolledToBottom: false })
       }
     }
-    
-    // Only use if showing and hiding element 
+
+    // Only use if showing and hiding element
     // based on scroll up and down
     // (ie: native safari bottom bar)
     // if (this.state.scrolledUp !== scrolledUp) {
@@ -85,7 +85,6 @@ class ScrollListener extends React.Component {
     if (!this.state.hasScrolled && this.lastScrollY > 0) {
       this.setState({ hasScrolled: true })
     }
-
   }
 
   scrollHandler = _.throttle(this._scrollHandler, 100);

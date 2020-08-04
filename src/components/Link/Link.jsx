@@ -5,7 +5,7 @@ import { MdArrowForward } from 'react-icons/md'
 
 import { Link as GatsbyLink } from 'gatsby'
 
-const LinkStyles = (setTheme) => `
+const LinkStyles = setTheme => `
 	font-size: inherit;
 	text-decoration: none;
 	cursor: pointer;

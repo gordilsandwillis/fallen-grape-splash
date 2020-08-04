@@ -6,7 +6,7 @@ import { boolean, optionsKnob } from '@storybook/addon-knobs'
 import themes from 'src/styles/themes'
 
 let themeOptions = {}
-Object.keys(themes).map((theme) => {
+Object.keys(themes).map(theme => {
 	const key = theme.toString()
 	themeOptions[key] = theme
 })
@@ -29,7 +29,7 @@ stories.add(`Default`, () => (
 		theme={ optionsKnob('Theme', themeOptions, 'default', { display: 'select' }) }
 		media={[
 			{
-				__typename: 'ContentfulImage', 
+				__typename: 'ContentfulImage',
 				image: mock.Placeholder169
 			}
 		]}

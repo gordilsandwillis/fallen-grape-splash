@@ -35,7 +35,7 @@ const AlignmentContainer = styled.div`
 	${ ({ fullHeight, winHeight, showArrow }) => fullHeight ? `
 		min-height: ${ winHeight };
 		padding-top: 105px;
-		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw`};
+		padding-bottom: ${ showArrow ? `calc(95px + 65px)` : `7vw` };
 	` : `
 		min-height: 56.25vw; // 16:9 Ratio
 		padding-top: 105px;

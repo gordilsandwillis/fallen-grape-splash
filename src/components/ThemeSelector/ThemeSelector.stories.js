@@ -9,7 +9,7 @@ import themes from 'src/styles/themes'
 const qbf = 'The quick brown fox jumps over the lazy dog'
 const lorem = `lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.`
 
-const Eyebrow = styled.h6 `
+const Eyebrow = styled.h6`
 	${ typography.eyebrow }
 `
 
@@ -41,7 +41,8 @@ stories.add(`ThemeSelector`, () => (
 					<p>{lorem}</p>
 					<Button size="small" setTheme={ButtonTheme}>Button</Button>
 				</ThemePreview>
-			)}
+			)
+}
 		)}
 	</Grid>
 ))

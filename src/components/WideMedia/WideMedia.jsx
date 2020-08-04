@@ -82,7 +82,6 @@ const WideMedia = ({
 	height,
 	isFirstSection
 }) => {
-	
 	if (!media) {
 		return false
 	}
@@ -116,7 +115,7 @@ const WideMedia = ({
 							alt={media.description || media.title}
 							setHeight={heightValues[height]}
 							loading={isFirstSection ? 'eager' : 'lazy'}
-							critical={isFirstSection ? true : false}
+							critical={!!isFirstSection}
 						/>
 					) : (
 						<MediaVideo
