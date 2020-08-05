@@ -11,5 +11,10 @@ export const query = graphql`
     	...Image
     	...Video
   	}
+    overlayComponent {
+      ...Column
+    }
+    overlayPlacement
+    overlayTextAlignment
   }
 `
