@@ -74,8 +74,9 @@ const CaptionBlock = styled.div`
 
 const OverlayWrapper = styled.div`
   position: absolute;
+  top: 0;
+  left: 0;
   z-index: 5;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: ${ ({ verticalPlacement }) => verticalPlacement || 'center' };
@@ -161,50 +162,54 @@ const WideMedia = ({
     >
       <WideMediaWrap setHeight={heightValues[height]}>
         <Grid small={fullWidth ? '[1]' : '1 [12] 1'}>
-        {overlayComponent
-          ? <OverlayWrapper verticalPlacement={verticalPlacement}>
-            <Section padded>
-              <Grid small={fullWidth ? '0 [12] 0' : '2 [10] 2'} {...overlayGridSettings}>
-                <Column
-                  items={overlayComponent.content}
-                  type={overlayComponent.type}
-                />
-              </Grid>
-            </Section>
-          </OverlayWrapper>
-          : ''
-        }
-          {type === 'image' ? (
-            <MediaImage
-              image={media.image}
-              small={media.small}
-              medium={media.medium}
-              alt={media.description || media.title}
-              setHeight={heightValues[height]}
-              loading={isFirstSection ? 'eager' : 'lazy'}
-              critical={!!isFirstSection}
-            />
-          ) : (
-              <MediaVideo
-                video={media.video}
-                playing={true}
-                loop={true}
+          <div>
+            {type === 'image' ? (
+              <MediaImage
+                image={media.image}
+                small={media.small}
+                medium={media.medium}
+                alt={media.description || media.title}
                 setHeight={heightValues[height]}
-                posterImage={media.posterImage}
-                autoplay={true}
+                loading={isFirstSection ? 'eager' : 'lazy'}
+                critical={!!isFirstSection}
               />
-            )}
+            ) : (
+                <MediaVideo
+                  video={media.video}
+                  playing={true}
+                  loop={true}
+                  setHeight={heightValues[height]}
+                  posterImage={media.posterImage}
+                  autoplay={true}
+                />
+              )}
+            {overlayComponent
+              ? <OverlayWrapper verticalPlacement={verticalPlacement}>
+                <Section padded={!fullWidth}>
+                  <Section padded>
+                    <Grid small={fullWidth ? '1 [12] 1' : '2 [10] 2'} {...overlayGridSettings}>
+                      <Column
+                        items={overlayComponent.content}
+                        type={overlayComponent.type}
+                      />
+                    </Grid>
+                  </Section>
+                </Section>
+              </OverlayWrapper>
+              : ''
+            }
+          </div>
         </Grid>
       </WideMediaWrap>
-        {caption && (
-          <Grid small="1 [12] 1">
-            <div>
-              <CaptionBlock>
-                <Caption>{caption}</Caption>
-              </CaptionBlock>
-            </div>
-          </Grid>
-        )}
+      {caption && (
+        <Grid small="1 [12] 1">
+          <div>
+            <CaptionBlock>
+              <Caption>{caption}</Caption>
+            </CaptionBlock>
+          </div>
+        </Grid>
+      )}
     </Section>
   )
 }
