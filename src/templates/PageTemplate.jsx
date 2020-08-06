@@ -18,7 +18,7 @@ class PageTemplate extends React.Component {
 		const { sections } = page
 		const hasAtf = sections && sections[0].__typename === 'ContentfulWideMedia' && sections[0].width === 'fullWidth'
 		const seo = page.seo
-
+    console.log(site)
 		return (
 			<Fragment >
 				<SEO
@@ -29,13 +29,10 @@ class PageTemplate extends React.Component {
 					shareImage={seo.shareImage && 'https:' + seo.shareImage.file.url}
 				/>
 				<Header
-					// headerNavigation={site.headerNavigation}
-					// headerDrawerBottomLinks={site.headerDrawerBottomLinks}
-					// headerLinks={site.headerLinks}
-					// headerButtons={site.headerButtons}
 					hasAtf={hasAtf}
 					bannerText={site.bannerText}
-					bannerColor={site.bannerColor}
+          bannerColor={site.bannerColor}
+          navigation={site.navigation}
 				/>
 				{sections && sections.map((section, index) => {
 					const prevTheme = ((index !== 0) && sections[index - 1]) && sections[index - 1].theme

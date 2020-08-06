@@ -22,5 +22,8 @@ export const query = graphql`
       json
     }
     bannerColor
+    navigation {
+      ...NavigationLink
+    }
   }
 `

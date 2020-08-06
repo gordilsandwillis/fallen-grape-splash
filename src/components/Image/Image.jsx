@@ -35,7 +35,6 @@ const StyledImage = styled(Img)`
 
 const ResponsiveImage = ({ image, small, medium, large, className, loading, customSizes, critical }) => {
 	if (small || medium || large || image) {
-		console.log(small)
 		let source = []
 
 		if (image) {
