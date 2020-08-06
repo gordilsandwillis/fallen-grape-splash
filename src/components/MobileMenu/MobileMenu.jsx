@@ -133,7 +133,6 @@ const SubLinks = styled.ul`
 `
 
 const MobileMenu = ({ open, toggleMobileMenu, navLinks, footerColumn1, footerColumn2 }) => {
-  console.log({ navLinks, open })
   return (
     <Transition
       in={open}
