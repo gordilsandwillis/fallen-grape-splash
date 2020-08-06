@@ -78,8 +78,7 @@ stories.add(`Default`, () => (
         ]
       }}
       overlayPlacement={optionsKnob('Overlay Placement', overlayPlacementOptions, 'center center', { display: 'select' })}
-      overlayTextAlignment={optionsKnob('Overlay Alignment', overlayAlignmentOptions, 'center', { display: 'select' })}
-      caption="caption"
+      overlayTextAlignment={optionsKnob('Overlay Text Alignment', overlayAlignmentOptions, 'center', { display: 'select' })}
       width={optionsKnob('Width', widthOptions, 'default', { display: 'select' })}
       height={optionsKnob('Height', heightOptions, 'auto', { display: 'select' })}
     />

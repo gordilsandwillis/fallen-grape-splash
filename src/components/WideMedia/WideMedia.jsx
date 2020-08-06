@@ -72,14 +72,21 @@ const CaptionOverlay = styled.div`
 const CaptionBlock = styled.div`
 `
 
-const OverlayWrapper = styled.div`
+const OverlaySection = styled(Section)`
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
   z-index: 5;
   display: flex;
   flex-direction: column;
-  justify-content: ${ ({ verticalPlacement }) => verticalPlacement || 'center' };
+  justify-content: ${ ({ verticalPlacement }) => {
+    if (!verticalPlacement) return 'center'
+    if (verticalPlacement === 'top') return 'flex-start'
+    if (verticalPlacement === 'bottom') return 'flex-end'
+    else return verticalPlacement
+  } };
+  text-align: ${ ({ overlayTextAlignment }) => overlayTextAlignment || 'left' };
 `
 
 function getHorizontalPlacementGridValues ({ fullWidth, horizontalPlacement }) {
@@ -132,7 +139,7 @@ const WideMedia = ({
   height,
   overlayComponent,
   overlayPlacement,
-  overlayTextAlignment = 'left',
+  overlayTextAlignment,
   isFirstSection
 }) => {
   if (!media) {
@@ -184,8 +191,7 @@ const WideMedia = ({
                 />
               )}
             {overlayComponent
-              ? <OverlayWrapper verticalPlacement={verticalPlacement}>
-                <Section padded={!fullWidth}>
+              ? <OverlaySection padded={!fullWidth} overlayTextAlignment={overlayTextAlignment} verticalPlacement={verticalPlacement}>
                   <Section padded>
                     <Grid small={fullWidth ? '1 [12] 1' : '2 [10] 2'} {...overlayGridSettings}>
                       <Column
@@ -194,8 +200,7 @@ const WideMedia = ({
                       />
                     </Grid>
                   </Section>
-                </Section>
-              </OverlayWrapper>
+                </OverlaySection>
               : ''
             }
           </div>
