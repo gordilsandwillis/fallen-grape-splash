@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
+import { rgba } from 'polished'
 import Link from 'src/components/Link'
 import Logo from 'src/components/Logo'
 import Grid from 'src/components/Grid'
@@ -334,7 +335,7 @@ class Header extends Component {
                                 />
                               </MenuIcon>
                             }
-                            medium={navigation.map((link, index) => (
+                            medium={navigation && navigation.map((link, index) => (
                               <NavLink
                                 scrolled={scrolled}
                                 hasAtf={hasAtf}
