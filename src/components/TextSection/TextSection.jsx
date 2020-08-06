@@ -18,6 +18,7 @@ const TextSection = ({ className, nextTheme, prevTheme, theme, text, alignment, 
   }
   const item = text[0]
   const align = {
+    // same as in WideMedia.jsx
     left: {
       medium: '1 [9] 4',
       large: '1 [9] 4',
