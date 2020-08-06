@@ -21,7 +21,7 @@ const Dropdown = styled.div`
   top: 100%;
   left: 0;
   min-width: 200px;
-  background: ${ colors.extraDarkBlue };
+  background: ${ colors.mainColor };
   color: ${ colors.bgColor };
   ${ typography.bodySmall };
   font-weight: 600;
@@ -98,7 +98,7 @@ const NavLinkStyle = (scrolled, active, hasAtf, dropdown) => `
   &:hover {
     ${ dropdown ? `
       color: ${ colors.bgColor };
-      background: ${ colors.extraDarkBlue };
+      background: ${ colors.mainColor };
     ` : `
       color: ${ colors.mainColor };
     ` }
@@ -199,13 +199,14 @@ const LogoCol = styled.div`
 `
 
 const NavLinks = styled.div`
-	align-items: center;
-	display: flex;
-	width: 100%;
-	justify-content: ${ ({ alignment }) => alignment === 'right' ? 'flex-end' : 'flex-start' };
-	a:last-of-type {
-		margin-right: 0;
-	}
+  align-items: baseline;
+  display: flex;
+  width: 100%;
+  justify-content: ${ ({ alignment }) =>
+    alignment === 'right' ? 'flex-end' : 'flex-start' };
+  a:last-of-type {
+    margin-right: 0;
+  }
 `
 
 const MenuIcon = styled.div`
@@ -342,7 +343,7 @@ class Header extends Component {
                                 to={link.to.slug}
                                 active={pathname === link.to.slug}
                                 key={link.to.slug}
-                                hasDropdown={link.dropdown}
+                                hasDropdown={link.dropdownLinks}
                               >
                                 {link.label}
                                 {link.dropdownLinks && (
