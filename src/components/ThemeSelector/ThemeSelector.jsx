@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import themes from 'src/styles/themes'
+import Button from 'src/components/Button'
 import { rgba } from 'polished'
 
 const ThemeWrapper = styled.div`
@@ -15,6 +16,15 @@ const ThemeWrapper = styled.div`
 		*::selection {
 	    background: ${ rgba(themes[setTheme].color, 0.9) };
 	    color: ${ themes[setTheme].background };
+	  }
+	  .button {
+	  	background: ${ themes[setTheme].color };
+	  	border-color: ${ themes[setTheme].color };
+	  	color: ${ themes[setTheme].background || colors.bgColor };
+	  	&:hover {
+	  		color: ${ themes[setTheme].color || colors.bgColor };
+	  		background: transparent;
+	  	}
 	  }
 	` : `` }
 `

@@ -37,7 +37,7 @@ stories.add(`ThemeSelector`, () => (
 			return (
 				<ThemePreview setTheme={theme}>
 					<Eyebrow>{theme}</Eyebrow>
-					<h3>{qbf}</h3>
+					<h4>{qbf}</h4>
 					<p>{lorem}</p>
 					<Button size="small" setTheme={ButtonTheme}>Button</Button>
 				</ThemePreview>

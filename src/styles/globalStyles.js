@@ -12,10 +12,11 @@ const responsiveStyles = util.responsiveStyles
 // All global styles
 export default `
   ${ fonts.MaterialIconsFont }
-  ${ fonts.DmSansFont }
-  ${ fonts.DmSansItalicFont }
-  ${ fonts.DmSansBoldFont }
-  ${ fonts.DmSansBoldItalicFont }
+  ${ fonts.FormularFont }
+  ${ fonts.FormularLightFont }
+  ${ fonts.FormularBoldFont }
+  ${ fonts.FormularMonoFont }
+  ${ fonts.CaslonFont }
 
   * {
     box-sizing: border-box;

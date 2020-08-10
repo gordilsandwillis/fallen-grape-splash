@@ -386,7 +386,7 @@ class Header extends Component {
           medium={<span />}
         />
 
-      </Fragment >
+      </Fragment>
     )
   }
 }

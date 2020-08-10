@@ -20,7 +20,7 @@ const buttonSettings = {
 	radius: '0px',
 	border: '2px solid',
 	transitionSpeed: animations.mediumSpeed,
-	verticalOffset: '1px'
+	verticalOffset: '3px'
 }
 
 const getState = (loading, error, success, disabled) => {
@@ -224,7 +224,7 @@ class Button extends Component {
 		if (to) {
 			return (
 				<StyledButtonLink
-					className={className}
+					className={'button ' + className}
 					to={to}
 					target={target}
 					external={external}
@@ -245,7 +245,7 @@ class Button extends Component {
 		} else {
 			return (
 				<StyledButtonElement
-					className={className}
+					className={'button ' + className}
 					icon={icon}
 					iconPosition={iconPosition}
 					loading={loading}
