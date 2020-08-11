@@ -15,9 +15,9 @@ import KlaviyoSignup from 'src/components/KlaviyoSignup'
 import { colors, typography } from 'src/styles'
 import ContentfulRichText from 'src/components/ContentfulRichText'
 import themes from 'src/styles/themes'
-import { MdMessage } from 'react-icons/Md'
-import { FaFacebook } from 'react-icons/Fa'
-import { IoLogoTwitter } from 'react-icons/Io'
+import { MdMessage } from 'react-icons/md'
+import { FaFacebook } from 'react-icons/fa'
+import { IoLogoTwitter } from 'react-icons/io'
 
 import { Transition } from 'react-transition-group'
 
