@@ -1,13 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
-import { rgba } from 'polished'
 import Logo from 'src/components/Logo'
 import Grid from 'src/components/Grid'
 import { colors, typography, animations, mq, util } from 'src/styles'
-
-const showHide = false // show and hide header on scroll
-const headerHeight = (additionalHeight = 0) => util.responsiveStyles('height', (140 + additionalHeight), (130 + additionalHeight), (110 + additionalHeight), (75 + additionalHeight))
-const headerHeightCollapsed = util.responsiveStyles('height', 80, 70, 66, 60)
 
 const Wrapper = styled.header`
 	position: fixed;
