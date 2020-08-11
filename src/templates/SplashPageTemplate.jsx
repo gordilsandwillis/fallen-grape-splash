@@ -102,6 +102,8 @@ class SplashPageTemplate extends React.Component {
 		const seo = page.seo
 		const { submitSuccess } = this.state
 
+		console.log(splashPages)
+
 		return (
 			<Fragment>
 				<SEO
@@ -154,16 +156,16 @@ class SplashPageTemplate extends React.Component {
 							<SuccessContent transitionStatus={transitionStatus}>
 								<Grid small='1 [12] 1' medium='3 [18] 3' larger='4 [6] 4'>
 									<ScrollEntrance delay={4}>
-									<h1 style={{ marginBottom: '16px' }}>{splashPage.successHeadline}</h1>
-									<ContentfulRichText richText={splashPage.successText.json} />
-									<h6 style={{ padding: '30px 0 1em' }}>Share on...</h6>
-									<div>
-										<ShareButtons small='[1]' medium='[1] [1] [1]' colGap="14px" rowGap="14px">
-											<div><Button size='large' icon={<MdMessage/>} iconPosition="left">Message</Button></div>
-											<div><Button size='large' icon={<IoLogoTwitter/>} iconPosition="left">Twitter</Button></div>
-											<div><Button size='large' icon={<FaFacebook/>} iconPosition="left">Facebook</Button></div>
-										</ShareButtons>
-									</div>
+										<div><h1 style={{ marginBottom: '16px' }}>{splashPage.successHeadline || 'Thank you.'}</h1></div>
+										<div><ContentfulRichText richText={splashPage.successText.json} /></div>
+										<div><h6 style={{ padding: '30px 0 1em' }}>Share on...</h6></div>
+										<div>
+											<ShareButtons small='[1]' medium='[1] [1] [1]' colGap="14px" rowGap="14px">
+												<div><Button size='large' icon={<MdMessage/>} iconPosition="left">Message</Button></div>
+												<div><Button size='large' icon={<IoLogoTwitter/>} iconPosition="left">Twitter</Button></div>
+												<div><Button size='large' icon={<FaFacebook/>} iconPosition="left">Facebook</Button></div>
+											</ShareButtons>
+										</div>
 									</ScrollEntrance>
 								</Grid>
 							</SuccessContent>
@@ -186,7 +188,7 @@ export const pageQuery = graphql`
 	      }
 	    }
 	  }
-	  allContentfulSplashPage {
+	  allContentfulSplashPage(filter: {internalName: {nin: "PLACEHOLDER Splash Page"}}) {
 	  	edges {
 	  		node {
 	  			id

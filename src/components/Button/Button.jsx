@@ -176,7 +176,7 @@ class Button extends Component {
 			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}><Spinner radius={18} color='inherit' stroke={2} /></ButtonIcon>
 		}
 		else if (typeof icon === 'string') {
-			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}><MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon></ButtonIcon>
+			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}><MaterialIcon size={this.props.size === 'tiny' ? '18px' : '24px'}>{icon}</MaterialIcon></ButtonIcon>
 		} else {
 			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}>{icon}</ButtonIcon>
 		}

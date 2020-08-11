@@ -14,22 +14,23 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 						author
 					}
 				}
-				allContentfulSiteSettings {
-						nodes {
-							favicon {
-								fixed {
-									src
-								}
+				allContentfulSiteSettings(filter: {internalName: {nin: "PLACEHOLDER Site Settings"}}) {
+					nodes {
+						title
+						favicon {
+							fixed {
+								src
 							}
-							touchIcon {
-								fixed {
-									src
-								}
-							}
-							defaultSeo {
-					      ...Seo
-					    }
 						}
+						touchIcon {
+							fixed {
+								src
+							}
+						}
+						defaultSeo {
+				      ...Seo
+				    }
+					}
 				}
 				favicon: file(relativePath:{eq: "images/favicon.png"}) {
 					publicURL
@@ -65,6 +66,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 
 	const contentfulFavicon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
 	const contentfultouchIcon = allContentfulSiteSettings.nodes[0].touchIcon.fixed.src
+	const contentfulSiteTitle = allContentfulSiteSettings.nodes[0].title
 
 	return (
 		<Helmet
@@ -72,7 +74,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				lang,
 			}}
 			title={title}
-			titleTemplate={`%s | ${ site.siteMetadata.title }`}
+			titleTemplate={`%s | ${ contentfulSiteTitle || site.siteMetadata.title }`}
 			meta={[
 				{
 					name: `viewport`,
@@ -84,7 +86,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					property: `og:title`,
-					content: `${ title } | ${ site.siteMetadata.title }`,
+					content: `${ title } | ${ contentfulSiteTitle || site.siteMetadata.title }`,
 				},
 				{
 					property: `og:type`,
@@ -112,7 +114,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					name: `twitter:title`,
-					content: `${ title } | ${ site.siteMetadata.title }`,
+					content: `${ title } | ${ contentfulSiteTitle || site.siteMetadata.title }`,
 				},
 				{
 					name: `twitter:description`,
