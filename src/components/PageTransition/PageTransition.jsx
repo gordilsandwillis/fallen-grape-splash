@@ -89,7 +89,7 @@ const TransitionOverlay = styled.div`
 `
 
 const transitionColors = [
-  colors.bgColor
+  colors.offWhite
 ]
 
 // var overlayColor = transitionColors[Math.floor(Math.random() * transitionColors.length)];

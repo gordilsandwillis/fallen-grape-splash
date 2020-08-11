@@ -9,6 +9,12 @@ export const themes = {
 		hoverColor: colors.mainColor,
 		hoverBackground: darken(0.07, colors.mainColor)
 	},
+	bgColor: {
+		color: colors.textColor,
+		background: colors.bgColor,
+		hoverColor: colors.mainColor,
+		hoverBackground: darken(0.07, colors.mainColor)
+	},
 	offWhite: {
 		color: colors.textColor,
 		background: colors.lightGrey,
@@ -67,6 +73,54 @@ export const buttonThemes = {
 		hoverColor: colors.bgColor,
 		hoverBackground: lighten(0.07, colors.mainColor)
 	},
+	yellow: {
+		color: colors.green,
+		background: colors.yellow,
+		hoverColor: colors.bgColor,
+		hoverBackground: lighten(0.2, colors.textColor)
+	},
+	pink: {
+		color: colors.maroon,
+		background: colors.pink,
+		hoverColor: colors.textColor,
+		hoverBackground: lighten(0.2, colors.textColor)
+	},
+	green: {
+		color: colors.lightGreen,
+		background: colors.green,
+		hoverColor: colors.offWhite,
+		hoverBackground: lighten(0.2, colors.textColor)
+	},
+	maroon: {
+		color: colors.blue,
+		background: colors.maroon,
+		hoverColor: colors.offWhite,
+		hoverBackground: lighten(0.2, colors.textColor)
+	},
+	brown: {
+		color: colors.bgColor,
+		background: colors.textColor,
+		hoverColor: colors.bgColor,
+		hoverBackground: lighten(0.2, colors.textColor)
+	},
+	blue: {
+		color: colors.maroon,
+		background: colors.blue,
+		hoverColor: colors.maroon,
+		hoverBackground: lighten(0.2, colors.textColor)
+	},
+	offWhite: {
+		color: colors.textColor,
+		background: colors.offWhite,
+		hoverColor: colors.blue,
+		hoverBackground: colors.white
+	},
+	lightGreen: {
+		color: colors.green,
+		background: colors.lightGreen,
+		hoverColor: colors.green,
+		hoverBackground: darken(0.07, colors.lightGreen)
+	},
 	black: {
 		color: colors.bgColor,
 		background: colors.black,
@@ -84,12 +138,6 @@ export const buttonThemes = {
 		background: colors.mainColor,
 		hoverColor: colors.bgColor,
 		hoverBackground: lighten(0.07, colors.mainColor)
-	},
-	lightGrey: {
-		color: colors.textColor,
-		background: colors.lightGrey,
-		hoverColor: colors.textColor,
-		hoverBackground: darken(0.07, colors.lightGrey)
 	},
 	mainColor: {
 		color: colors.bgColor,

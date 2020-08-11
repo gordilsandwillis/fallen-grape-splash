@@ -9,21 +9,21 @@ const SectionWrapper = styled(ThemeSelector)`
 	${ ({ padded, prevTheme, nextTheme, setTheme, isFirstSection }) => padded !== false && `
 		${ !isFirstSection ? `
 			${ setTheme === prevTheme ? `
-				${ util.responsiveStyles('padding-top', 91, 51, 33, 26) }
+				${ util.responsiveStyles('padding-top', 50, 30, 33, 26) }
 			` : `
-				${ util.responsiveStyles('padding-top', 182, 102, 66, 52) }
+				${ util.responsiveStyles('padding-top', 100, 60, 66, 52) }
 			` }
 		` : `
 			${ setTheme === 'default' ? `
-				${ util.responsiveStyles('padding-top', 91, 51, 0, 0) }
+				${ util.responsiveStyles('padding-top', 50, 30, 0, 0) }
 			` : `
-				${ util.responsiveStyles('padding-top', 182, 102, 0, 0) }
+				${ util.responsiveStyles('padding-top', 100, 60, 0, 0) }
 			` }
 		` }
 		${ setTheme === nextTheme ? `
-			${ util.responsiveStyles('padding-bottom', 91, 51, 33, 26) }
+			${ util.responsiveStyles('padding-bottom', 50, 30, 33, 26) }
 		` : `
-			${ util.responsiveStyles('padding-bottom', 182, 102, 66, 52) }
+			${ util.responsiveStyles('padding-bottom', 100, 60, 66, 52) }
 		` }
 	` }
 `

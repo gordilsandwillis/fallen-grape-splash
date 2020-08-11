@@ -6,6 +6,7 @@ import * as util from 'src/styles/util'
 import { colors, typography, animations } from 'src/styles'
 import { buttonThemes as themes } from 'src/styles/themes'
 import MaterialIcon from 'src/components/MaterialIcon'
+import Spinner from 'react-spinner-material'
 
 import Link from 'src/components/Link'
 
@@ -169,9 +170,12 @@ const StyledButtonElement = styled.button`
 `
 
 class Button extends Component {
-	renderIcon = (icon, position, shape, size) => {
+	renderIcon = (icon, position, shape, size, loading) => {
 		let renderedIcon = false
-		if (typeof icon === 'string') {
+		if (loading) {
+			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}><Spinner radius={18} color='inherit' stroke={2} /></ButtonIcon>
+		}
+		else if (typeof icon === 'string') {
 			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}><MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon></ButtonIcon>
 		} else {
 			renderedIcon = <ButtonIcon size={size} position={position} shape={shape}>{icon}</ButtonIcon>
@@ -181,11 +185,7 @@ class Button extends Component {
 
 	renderButtonContent = () => {
 		const { loading, error, success, children, label, icon, iconPosition, shape, size } = this.props
-		if (loading) {
-			return <ButtonContent>
-				...
-			</ButtonContent>
-		} else if (error) {
+		if (error) {
 			return <ButtonContent>
 				big ole error
 			</ButtonContent>
@@ -195,9 +195,9 @@ class Button extends Component {
 			</ButtonContent>
 		} else {
 			return <ButtonContent>
-				{icon && iconPosition !== 'right' ? this.renderIcon(icon, iconPosition, shape, size) : false}
+				{icon && iconPosition !== 'right' ? this.renderIcon(icon, iconPosition, shape, size, loading) : false}
 				{children || label}
-				{icon && iconPosition === 'right' ? this.renderIcon(icon, iconPosition, shape, size) : false}
+				{icon && iconPosition === 'right' ? this.renderIcon(icon, iconPosition, shape, size, loading) : false}
 			</ButtonContent>
 		}
 	}
@@ -266,7 +266,6 @@ class Button extends Component {
 
 Button.defaultProps = {
 	setTheme: 'default',
-	theme: 'default',
 	size: 'medium',
 	shape: 'default',
 	iconPosition: 'left'

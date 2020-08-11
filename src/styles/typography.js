@@ -14,7 +14,7 @@ export const medium = 600
 export const bold = 600
 
 export const bodyLarge = `
-	${ responsiveStyles('font-size', 24, 22, 20, 18) }
+	${ responsiveStyles('font-size', 22, 20, 20, 18) }
 	line-height: 1.5em;
 	font-family: ${ primaryFont };
 	letter-spacing: -.02em;
@@ -110,7 +110,6 @@ export const eyebrow = `
 
 export const buttonStyle = `
 	${ body }
-	${ responsiveStyles('font-size', 14, 14, 14, 13) }
 	font-weight: ${ bold };
 	line-height: 1em;
 `

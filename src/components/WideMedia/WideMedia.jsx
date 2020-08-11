@@ -20,6 +20,7 @@ const WideMediaWrap = styled.div`
 
 const MediaImage = styled(Image)`
 	${ ({ setHeight }) => setHeight !== 'auto' ? `
+    height: ${ setHeight };
 		> div {
 			height: ${ setHeight };
 			position: relative;
@@ -37,7 +38,8 @@ const MediaImage = styled(Image)`
 
 const MediaVideo = styled(Video)`
 	${ ({ setHeight }) => setHeight !== 'auto' ? `
-		> div {
+		height: ${ setHeight };
+    > div {
 			height: ${ setHeight };
 			min-height: 40vw;
 			position: relative;
@@ -72,8 +74,9 @@ const CaptionOverlay = styled.div`
 const CaptionBlock = styled.div`
 `
 
-const OverlaySection = styled(Section)`
+const OverlaySection = styled.div`
   position: absolute;
+  width: 100%;
   top: 0;
   left: 0;
   height: 100%;
@@ -93,9 +96,8 @@ function getHorizontalPlacementGridValues ({ fullWidth, horizontalPlacement }) {
   if (!fullWidth) {
     return {
       left: {
-        medium: '2 [8] 4',
-        large: '2 [8] 4',
-        larger: '2 [8] 4'
+        medium: '1 [12] 1',
+        large: '1 [24] 1',
       },
       center: {
         medium: '2 [10] 2',
@@ -111,9 +113,8 @@ function getHorizontalPlacementGridValues ({ fullWidth, horizontalPlacement }) {
   } else {
     return {
       left: {
-        medium: '1 [9] 4',
-        large: '1 [9] 4',
-        larger: '1 [9] 4'
+        medium: '1 [12] 1',
+        large: '1 [24] 1',
       },
       center: {
         medium: '2 [10] 2',
@@ -181,33 +182,35 @@ const WideMedia = ({
                 critical={!!isFirstSection}
               />
             ) : (
-                <MediaVideo
-                  video={media.video}
-                  playing={true}
-                  loop={true}
-                  setHeight={heightValues[height]}
-                  posterImage={media.posterImage}
-                  autoplay={true}
-                />
-              )}
-            {overlayComponent
-              ? <OverlaySection padded={!fullWidth} overlayTextAlignment={overlayTextAlignment} verticalPlacement={verticalPlacement}>
-                  <Section padded>
-                    <Grid small={fullWidth ? '1 [12] 1' : '2 [10] 2'} {...overlayGridSettings}>
-                      <Column
-                        items={overlayComponent.content}
-                        type={overlayComponent.type}
-                      />
-                    </Grid>
-                  </Section>
-                </OverlaySection>
-              : ''
-            }
+              <MediaVideo
+                video={media.video}
+                playing={true}
+                loop={true}
+                setHeight={heightValues[height]}
+                posterImage={media.posterImage}
+                autoplay={true}
+              />
+            )}
+            {overlayComponent && (
+              <OverlaySection padded={!fullWidth} overlayTextAlignment={overlayTextAlignment} verticalPlacement={verticalPlacement}>
+                <Section padded>
+                  <Grid
+                    small={fullWidth ? '1 [12] 1' : '1 [10] 1'}
+                    {...overlayGridSettings}
+                  >
+                    <Column
+                      items={overlayComponent.content}
+                      type={overlayComponent.type}
+                    />
+                  </Grid>
+                </Section>
+              </OverlaySection>
+            )}
           </div>
         </Grid>
       </WideMediaWrap>
       {caption && (
-        <Grid small="1 [12] 1">
+        <Grid small="1 [24] 1">
           <div>
             <CaptionBlock>
               <Caption>{caption}</Caption>
