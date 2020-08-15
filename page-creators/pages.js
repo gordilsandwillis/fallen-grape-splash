@@ -19,7 +19,7 @@ const createPages = (graphql, createPage) => new Promise((resolve, reject) => {
 			reject(result.errors)
 		}
 
-		const template = path.resolve('./src/templates/PageTemplate.jsx')
+		const template = path.resolve('./src/templates/SplashPageTemplate.jsx')
 
 		result.data.allContentfulPage.edges
 			.filter(edge => !edge.node.internalName.includes('PLACEHOLDER'))

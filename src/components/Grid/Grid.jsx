@@ -277,7 +277,7 @@ Grid.propTypes = {
 	large: PropTypes.string,
 	extraLarge: PropTypes.string,
 	showOverlay: PropTypes.bool,
-	vAlign: 'stretch'
+	vAlign: PropTypes.string
 }
 
 let gridDefaults = gridSettings
@@ -287,7 +287,7 @@ Grid.defaultProps = gridDefaults
 
 const sizesToProps = ({ width, height }) => ({
 	winWidth: width,
-	winHeight: height
+	winHeight: height,
 })
 
 // export withSizes(sizesToProps)({

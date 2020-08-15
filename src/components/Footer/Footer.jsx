@@ -63,7 +63,7 @@ class Footer extends Component {
 	render () {
 		const { title } = this.props
 		return (
-			<Wrapper setTheme="lightGrey">
+			<Wrapper setTheme="brown">
 				<Section>
 					<Grid
 						small="1 [12] 1"

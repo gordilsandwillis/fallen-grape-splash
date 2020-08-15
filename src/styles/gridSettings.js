@@ -15,7 +15,8 @@ const rowSpacingLarge = colSpacingLarge
 
 const gridSettings = {
 	colGap: [colSpacingSmall, colSpacingMedium, colSpacingLarge],
-	rowGap: [rowSpacingSmall, rowSpacingMedium, rowSpacingLarge]
+	rowGap: [rowSpacingSmall, rowSpacingMedium, rowSpacingLarge],
+	vAlign: 'center'
 }
 
 export default gridSettings

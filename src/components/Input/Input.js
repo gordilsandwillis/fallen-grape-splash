@@ -9,10 +9,10 @@ import { isEmoji } from 'src/utils/validations'
 import { inputThemes as themes } from 'src/styles/themes'
 
 const inputVars = {
-	tiny: '36px',
-	small: '48px',
+	tiny: '32px',
+	small: '40px',
 	medium: '50px',
-	large: '72px',
+	large: '60px',
 	borderWidth: '2px',
 	backgroundColor: 'transparent',
 	borderRadius: '0px',
