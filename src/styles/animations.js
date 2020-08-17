@@ -10,6 +10,12 @@ export const transformIn = keyframes`
   }
 `
 
+export const autofillAnimation = keyframes`
+  0%, 100% {
+    background: transparent !important;
+  }
+`
+
 export const bounce = keyframes`
   from,
   20%,

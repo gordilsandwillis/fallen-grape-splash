@@ -100,7 +100,7 @@ const CustomForm = ({
         		// onClick={submit}
         		onClick={setSuccessState}
         		loading={status === 'sending'}
-        		disabled={status === 'sending'}
+        		disabled={status === 'sending' || !validateEmail(email)}
         		setTheme={buttonTheme}
         		iconPosition='right'
         		icon='arrow_forward'

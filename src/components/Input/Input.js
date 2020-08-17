@@ -39,11 +39,17 @@ const setInputTheme = theme => {
 				border-color: ${ themes[theme].hoverBorderColor };
 			}
 			&:-internal-autofill-selected,
-			&:-webkit-autofill {
-				background: ${ darken(0.05, themes[theme].background) } !important;
-				border-color: ${ themes[theme].borderColor };
+			&:-webkit-autofill,
+			&:-internal-autofill-selected:hover,
+			&:-webkit-autofill:hover,
+			&:-internal-autofill-selected:focus,
+			&:-webkit-autofill:focus,
+			&:-internal-autofill-selected:active,
+			&:-webkit-autofill:active {
+				border-color: ${ themes[theme].borderColor } !important;
 				-webkit-text-fill-color: ${ themes[theme].color } !important;
 				color: ${ themes[theme].color } !important;
+			  transition: background-color 5000s ease-in-out 0s;
 			}
 			::placeholder {
 				color: ${ rgba(themes[theme].color, 1) };

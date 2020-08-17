@@ -28,7 +28,7 @@ const getState = (loading, error, success, disabled) => {
 	let buttonState = ''
 	if (error) {
 		buttonState = 'error'
-	} else if (loading) {
+	} else if (loading === 'true') {
 		buttonState = 'loading'
 	} else if (success) {
 		buttonState = 'success'
@@ -71,11 +71,14 @@ const setButtonTheme = (theme, state) => `
 const DisabledButtonStyles = () => `
 	&[disabled],
 	&:disabled {
-		opacity: .25;
-		background: ${ colors.textColor };
-		border-color: ${ colors.textColor };
-		color: ${ rgba(colors.bgColor, 0.6) };
+		opacity: .6;
+		// background: ${ colors.textColor };
+		// border-color: ${ colors.textColor };
+		// color: ${ rgba(colors.bgColor, 0.6) };
 		cursor: not-allowed;
+		> div {
+			opacity: .5;
+		}
 	}
 `
 
@@ -214,11 +217,13 @@ class Button extends Component {
 			success,
 			disabled,
 			onClick,
+			href,
 			setTheme,
 			theme,
 			className,
 			shape,
-			size
+			size,
+			htmlElement
 		} = this.props
 
 		if (to) {
@@ -226,11 +231,12 @@ class Button extends Component {
 				<StyledButtonLink
 					className={'button ' + className}
 					to={to}
+					as={htmlElement}
 					target={target}
 					external={external}
 					icon={icon}
 					iconPosition={iconPosition}
-					loading={loading}
+					loading={loading ? loading.toString() : 'false'}
 					error={error}
 					success={success}
 					disabled={disabled}
@@ -245,14 +251,16 @@ class Button extends Component {
 		} else {
 			return (
 				<StyledButtonElement
+					as={htmlElement}
 					className={'button ' + className}
 					icon={icon}
 					iconPosition={iconPosition}
-					loading={loading}
+					loading={loading ? loading.toString() : 'false'}
 					error={error}
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
+					href={href}
 					theme={theme || setTheme}
 					shape={shape}
 					size={size}

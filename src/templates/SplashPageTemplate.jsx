@@ -15,9 +15,15 @@ import KlaviyoSignup from 'src/components/KlaviyoSignup'
 import { colors, typography } from 'src/styles'
 import ContentfulRichText from 'src/components/ContentfulRichText'
 import themes from 'src/styles/themes'
-import { MdMessage } from 'react-icons/md'
+import { MdMessage, MdMail } from 'react-icons/md'
 import { FaFacebook } from 'react-icons/fa'
 import { IoLogoTwitter } from 'react-icons/io'
+
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+} from 'react-share'
 
 import { Transition } from 'react-transition-group'
 
@@ -72,11 +78,8 @@ const ShareButtons = styled(Grid)`
 	max-width: 500px;
 	margin-left: auto;
 	margin-right: auto;
-	button {
+	button, a {
 		width: 100%;
-		icon {
-			color: red;
-		}
 	}
 `
 
@@ -102,8 +105,6 @@ class SplashPageTemplate extends React.Component {
 		const seo = page.seo
 		const { submitSuccess } = this.state
 
-		console.log(splashPages)
-
 		return (
 			<Fragment>
 				<SEO
@@ -121,9 +122,11 @@ class SplashPageTemplate extends React.Component {
 					overlayTextAlignment='left'
 					overlayComponent={{
 		        __typename: 'ContentfulColumn',
+		        id: 'splash-overlay-content',
 		        content: [
 		          {
 		            __typename: 'ContentfulText',
+		            id: 'splash-overlay-text',
 		            text: <div style={{ color: colors[splashPage.textColor] }}>
 		            	<h1>{splashPage.largeText}</h1>
 		            	<p>{splashPage.smallText || 'Find out when you can take control of your skincare.'}</p>
@@ -161,9 +164,33 @@ class SplashPageTemplate extends React.Component {
 										<div><h6 style={{ padding: '30px 0 1em' }}>Share on...</h6></div>
 										<div>
 											<ShareButtons small='[1]' medium='[1] [1] [1]' colGap="14px" rowGap="14px">
-												<div><Button size='large' icon={<MdMessage/>} iconPosition="left">Message</Button></div>
-												<div><Button size='large' icon={<IoLogoTwitter/>} iconPosition="left">Twitter</Button></div>
-												<div><Button size='large' icon={<FaFacebook/>} iconPosition="left">Facebook</Button></div>
+												<div>
+													<EmailShareButton
+														subject={splashPage.emailSubject}
+														body={splashPage.emailBody}
+													>
+														<Button htmlElement='a' size='large' icon={<MdMail/>} iconPosition="left">Email</Button>
+													</EmailShareButton>
+												</div>
+												<div>
+													<TwitterShareButton
+														title={splashPage.twitterShareText}
+														hashtags={splashPage.twitterShareTags || []}
+														url='https://atticus.vercel.app/'
+														style={{ outline: 'none' }}
+													>
+														<Button htmlElement='a' size='large' icon={<IoLogoTwitter/>} iconPosition="left">Twitter</Button>
+													</TwitterShareButton>
+												</div>
+												<div>
+													<FacebookShareButton
+														quote={splashPage.facebookShareText}
+														url='https://atticus.vercel.app/'
+														style={{ outline: 'none' }}
+													>
+														<Button htmlElement='a' size='large' icon={<FaFacebook/>} iconPosition="left">Facebook</Button>
+													</FacebookShareButton>
+												</div>
 											</ShareButtons>
 										</div>
 									</ScrollEntrance>
@@ -203,6 +230,11 @@ export const pageQuery = graphql`
 					buttonText
 					successTheme
 					successHeadline
+					emailSubject
+					emailBody
+					twitterShareText
+					twitterShareTags
+					facebookShareText
 					successText {
 						json
 					}
