@@ -66,6 +66,20 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-facebook-pixel`,
+			options: {
+				pixelId: process.env.FACEBOOK_PIXEL_ID
+			}
+		},
+		{
+			resolve: 'gatsby-plugin-google-tagmanager',
+			options: {
+				id: process.env.GA_TAG_MANAGER_ID,
+				includeInDevelopment: false,
+				defaultDataLayer: { platform: 'gatsby' }
+			}
+		},
+		{
 			resolve: `gatsby-plugin-google-analytics`,
 			options: {
         trackingId: process.env.GA_TRACKING_CODE,
