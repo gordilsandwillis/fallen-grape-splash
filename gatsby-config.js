@@ -78,14 +78,6 @@ module.exports = {
 				includeInDevelopment: false,
 				defaultDataLayer: { platform: 'gatsby' }
 			}
-		},
-		{
-			resolve: `gatsby-plugin-google-analytics`,
-			options: {
-        trackingId: process.env.GA_TRACKING_CODE,
-        head: false,
-        pageTransitionDelay: 700
-      },
-    }
+		}
 	],
 }
