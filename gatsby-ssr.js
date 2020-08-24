@@ -7,8 +7,10 @@
 import React from 'react'
 
 export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
+	const klaviyoCompanyId = process.env.GATSBY_KLAVIYO_COMPANY_ID
+
   if (process.env.NODE_ENV === `production`) {
-    return setHeadComponents([
+    setHeadComponents([
       <script
 				async
 				type="text/javascript"
@@ -16,5 +18,14 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
 				src='https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=BSUQI7PBAFSQRGNC8D00'
 			/>
     ])
+
+    setPostBodyComponents([
+			<script
+				async
+				type="text/javascript"
+				key={`gatsby-plugin-klaviyo`}
+				src={`//static.klaviyo.com/onsite/js/klaviyo.js?company_id=${ klaviyoCompanyId }`}
+			/>
+  	])
   }
 }
