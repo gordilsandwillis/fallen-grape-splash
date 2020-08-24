@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import * as PropTypes from 'prop-types'
 
 import SEO from 'src/components/SEO'
-import ComponentRenderer from 'src/components/ComponentRenderer'
+import Link from 'src/components/Link'
 import SplashHeader from 'src/components/SplashHeader'
 import WideMedia from 'src/components/WideMedia'
 import Button from 'src/components/Button'
@@ -12,17 +12,17 @@ import Grid from 'src/components/Grid'
 import ThemeSelector from 'src/components/ThemeSelector'
 import ScrollEntrance from 'src/components/ScrollEntrance'
 import KlaviyoSignup from 'src/components/KlaviyoSignup'
-import { colors, typography } from 'src/styles'
+import { colors, typography, mq, util } from 'src/styles'
 import ContentfulRichText from 'src/components/ContentfulRichText'
 import themes from 'src/styles/themes'
-import { MdMessage, MdMail } from 'react-icons/md'
+import { MdMail } from 'react-icons/md'
 import { FaFacebook } from 'react-icons/fa'
 import { IoLogoTwitter } from 'react-icons/io'
 
 import {
   EmailShareButton,
   FacebookShareButton,
-  TwitterShareButton,
+  TwitterShareButton
 } from 'react-share'
 
 import { Transition } from 'react-transition-group'
@@ -33,6 +33,25 @@ const timingFunction = 'cubic-bezier(0.710, 0.005, 1.000, 0.995)'
 const propTypes = {
 	data: PropTypes.object.isRequired,
 }
+
+const PPLink = styled(Link)`
+	margin-top: 20px;
+	display: inline-block;
+	font-weight: 600;
+	font-size: 12px;
+	border-bottom: 1px solid currentColor;
+	padding-bottom: .1em;
+	line-height: 1em;
+	opacity: .75;
+	&:hover {
+		opacity: 1;
+	}
+	${ mq.largeAndUp } {
+		position: fixed;
+		${ util.responsiveStyles('bottom', 100, 60, 66, 52) }
+		right: ${ 100 / 26 }vw;
+	}
+`
 
 const StyledKlaviyoSignup = styled(KlaviyoSignup)`
 	margin-top: 16px;
@@ -138,6 +157,7 @@ class SplashPageTemplate extends React.Component {
 										listId={process.env.GATSBY_KLAVIYO_LIST_ID}
 										setSuccessState={this.setSuccessState}
 									/>
+									<PPLink to='/privacy-policy'>Privacy Policy</PPLink>
 		            </div>
 		          },
 		        ]

@@ -35,7 +35,7 @@ const SubmitButton = styled(Button)`
 	width: 100%;
 	> div {
 		justify-content: space-between;
-		${ typography.bodyMedium }
+		${ typography.h6 }
 	}
 `
 

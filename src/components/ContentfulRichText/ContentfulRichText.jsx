@@ -8,6 +8,24 @@ const RichTextWrapper = styled.div`
 	* {
 		white-space: pre-wrap;
 	}
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: .75em;
+	}
+	li {
+		p {
+			margin-top: .75em;
+			margin-bottom: 0;
+			&:first-of-type {
+				margin-top: 0;
+			}
+			&:last-of-type {
+				margin-bottom: 1.5em;
+			}
+		}
+		ul {
+			padding-left: 1.2em;
+		}
+	}
 `
 const adjustSpace = (first, last) => {
 	let style = {}

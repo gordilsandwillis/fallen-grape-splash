@@ -62,7 +62,7 @@ export default `
 
   h1, h2, h3, h4, h5, h6, blockquote {
     b, strong {
-      font-weight: 600;
+      font-weight: normal;
     }
   }
 
@@ -80,8 +80,7 @@ export default `
       ${ typography.bodyLarge }
     }
     a {
-      border-bottom: 1px solid ${ colors.hrColor };
-      padding-bottom: .2em;
+      border-bottom: 1px solid currentColor;
       &:hover {
         border-color: ${ colors.mainColor };
       }

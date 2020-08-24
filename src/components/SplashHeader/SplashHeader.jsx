@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import styled from '@emotion/styled'
 import Logo from 'src/components/Logo'
 import Grid from 'src/components/Grid'
+import Link from 'src/components/Link'
 import { colors, typography, animations, mq, util } from 'src/styles'
 
 const Wrapper = styled.header`
@@ -82,7 +83,9 @@ class Header extends Component {
                 vAlign="center"
               >
                 <LogoCol>
-                  <HeaderLogo />
+                  <Link to='/'>
+                    <HeaderLogo />
+                  </Link>
                 </LogoCol>
                 <div>
                   <p className="medium" style={{ textAlign: 'right', margin: 0 }}><b>Coming Soon</b></p>
