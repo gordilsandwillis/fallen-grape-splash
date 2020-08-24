@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 	img {
 		width: 80% !important;
 		max-width: 200px !important;
+		margin: 0 auto;
 	}
 	button {
 		border-radius: 0 !important;
