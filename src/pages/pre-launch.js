@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
+import SEO from 'src/components/SEO'
 
 const Wrapper = styled.div`
 	background: #F7F7F1;
