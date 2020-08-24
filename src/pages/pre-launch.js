@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import SEO from 'src/components/SEO'
+import { colors } from 'src/styles'
 
 const Wrapper = styled.div`
 	background: #F7F7F1;
@@ -18,8 +19,8 @@ const Wrapper = styled.div`
 		border-radius: 0 !important;
 	}
 	img {
-		width: 80%;
-		max-width: 200px;
+		width: 80% !important;
+		max-width: 200px !important;
 	}
 	button {
 		border-radius: 0 !important;
@@ -27,6 +28,10 @@ const Wrapper = styled.div`
 		text-transform: uppercase;
 		letter-spacing: .075em !important;
 		font-size: 12px !important;
+		background: ${ colors.maroon };
+		&:hover {
+			background: ${ colors.blue };
+		}
 	}
 `
 
