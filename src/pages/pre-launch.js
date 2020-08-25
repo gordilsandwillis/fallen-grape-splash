@@ -10,8 +10,7 @@ const Wrapper = styled.div`
 	}
 	padding: 4vw 0 7vw;
 	circle,
-	rect,
-	input {
+	rect {
 		fill: transparent !important;
 		font-family: inherit !important;
 	}
