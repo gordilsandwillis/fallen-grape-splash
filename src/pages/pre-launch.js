@@ -6,13 +6,13 @@ import { colors } from 'src/styles'
 const Wrapper = styled.div`
 	background: #F7F7F1;
 	* {
-		font-family: inherit !important;
+		font-family: 'Formular', sans-serif !important;
 	}
 	padding: 4vw 0 7vw;
 	circle,
-	rect {
-		fill: transparent !important;
-		font-family: inherit !important;
+	rect,
+	input {
+		font-family: 'Formular', sans-serif !important;
 	}
 	input {
 		border-radius: 0 !important;
