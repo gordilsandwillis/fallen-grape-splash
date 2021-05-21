@@ -1,43 +1,43 @@
-import React, { useState, Component } from 'react'
-import styled from '@emotion/styled'
-import withSizes from 'react-sizes'
-import { subscribe } from 'klaviyo-subscribe'
+import React, { useState, Component } from "react"
+import styled from "@emotion/styled"
+import withSizes from "react-sizes"
+import { subscribe } from "klaviyo-subscribe"
+import Arrow from "src/assets/images/arrow-right.svg"
 
-import { validateEmail } from 'src/utils/validations'
+import { validateEmail } from "src/utils/validations"
 
-import Button from 'src/components/Button'
-import Input from 'src/components/Input'
-import Grid from 'src/components/Grid'
-import MaterialIcon from 'src/components/MaterialIcon'
+import Button from "src/components/Button"
+import Input from "src/components/Input"
 
-import { mq, typography } from 'src/styles'
+import { mq, typography } from "src/styles"
 
 const FormWrapper = styled.div`
-	color: inherit;
+  color: inherit;
+  position: relative;
 `
 
 const SplashInput = styled(Input)`
-	color: inherit;
-	input {
-		color: inherit;
-		border-color: currentcolor;
-		&:focus, &:hover, &:focus:hover {
-			border-color: currentcolor;
-		}
-	}
-	label.focused {
-		color: inherit;
-	}
+  color: inherit;
+  input {
+    color: inherit;
+    padding-right: 76px;
+    &:focus,
+    &:hover,
+    &:focus:hover {
+      border-color: currentcolor;
+    }
+  }
 `
 
 const SubmitButton = styled(Button)`
-	padding-left: 1.2em;
-	padding-right: ${ ({ loading }) => loading ? `1.3em` : `1em` };
-	width: 100%;
-	> div {
-		justify-content: space-between;
-		${ typography.h6 }
-	}
+  position: absolute;
+  top: 0;
+  right: 12px;
+`
+
+const ButtonArrow = styled(Arrow)`
+  width: 44px;
+  height: 18px;
 `
 
 const CustomForm = ({
@@ -50,124 +50,117 @@ const CustomForm = ({
   buttonTheme,
   id,
   buttonText,
-  setSuccessState
+  setSuccessState,
 }) => {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState("")
 
   const submit = () => {
     email && validateEmail(email) && onSubmit(email)
     // run setSuccessState() to put the page into the success state
   }
 
-  const renderButtonText = buttonStatus => {
-    let text = 'Submit'
-    if (buttonStatus === 'sending') {
+  const renderButtonText = (buttonStatus) => {
+    let text = "Submit"
+    if (buttonStatus === "sending") {
       // text = <Loader />
-      text = 'Sending'
-    } else if (buttonStatus === 'success') {
-      text = 'Thank You'
-    } else if (buttonStatus === 'error') {
-      text = 'Oh No!'
+      text = "Sending"
+    } else if (buttonStatus === "success") {
+      text = "Thank You"
+    } else if (buttonStatus === "error") {
+      text = "Oh No!"
     } else {
-      text = 'Submit'
+      text = "Submit"
     }
     return text
   }
 
   return (
-
     <FormWrapper className={className}>
-      <Grid
-        small='[1]'
-        medium='[8] [4]'
-        large='[11] [7] 6'
-        larger='[8] [5] 11'
-        rowGap='16px'
-        colGap='16px'
-      >
+      <div>
         <div>
           <SplashInput
-            label={label || 'Enter email'}
+            label={label || "Enter email"}
             type="email"
             name="email"
             size={size}
             value={email}
-            onChange={event => setEmail(event.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </div>
         <div>
           <SubmitButton
             onClick={submit}
-            loading={status === 'sending'}
-            disabled={status === 'sending' || !validateEmail(email)}
-            setTheme={buttonTheme}
-            iconPosition='right'
-            icon='arrow_forward'
+            loading={status === "sending"}
+            disabled={status === "sending" || !validateEmail(email)}
+            setTheme="transparent"
+            iconPosition="right"
+            icon={<ButtonArrow />}
+            shape="square"
             size={size}
-            type='submit'
-          >
-            {buttonText || 'Let me know'}
-          </SubmitButton>
+            type="submit"
+          />
         </div>
-      </Grid>
+      </div>
     </FormWrapper>
   )
 }
 
 class KlaviyoSignup extends Component {
   state = {
-    status: null
+    status: null,
   }
 
-  handleSubscribe = email => {
+  handleSubscribe = (email) => {
     const { listId } = this.props
     console.log({ listId, email })
-    subscribe(listId, email
+    subscribe(
+      listId,
+      email
       // { any optional traits }
-    ).then(response => {
+    ).then((response) => {
       console.log({ response })
       if (response && response.success) {
-        this.setState({ status: 'success' })
+        this.setState({ status: "success" })
         this.props.setSuccessState()
       } else {
-        this.setState({ status: 'error' })
+        this.setState({ status: "error" })
       }
     })
 
     // const data = {
-    // 	$fields: '$source,$email,$consent_method,$consent_form_id,$consent_form_version',
-    // 	email: email,
-    // 	g: listId,
-    // 	$consent_method: 'Klaviyo Form',
-    // 	$source: 'Newsletter Signup',
-    // 	$consent_form_id: 'Y2pnRT',
-    // 	$consent_form_version: 1108660
+    //  $fields: '$source,$email,$consent_method,$consent_form_id,$consent_form_version',
+    //  email: email,
+    //  g: listId,
+    //  $consent_method: 'Klaviyo Form',
+    //  $source: 'Newsletter Signup',
+    //  $consent_form_id: 'Y2pnRT',
+    //  $consent_form_version: 1108660
     // }
 
     // const params = new URLSearchParams(data).toString()
     // const endpoint = `https://a.klaviyo.com/ajax/subscriptions/subscribe`
 
     // const options = {
-    // 	headers: {
-    // 		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    // 	},
-    // 	method: 'POST',
-    // 	body: params
+    //  headers: {
+    //    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    //  },
+    //  method: 'POST',
+    //  body: params
     // }
 
     // fetch(endpoint, options).then(res => {
-    // 	return res.json()
+    //  return res.json()
     // }).then(json => {
-    // 	if (json.errors.length === 0) {
+    //  if (json.errors.length === 0) {
     //     this.setState({ status: 'success' })
     //     this.props.setSuccessState()
-    // 	} else {
-    // 		this.setState({ status: 'error' })
-    // 	}
+    //  } else {
+    //    this.setState({ status: 'error' })
+    //  }
     // })
   }
 
-  render () {
+  render() {
     const {
       buttonTheme,
       className,
@@ -176,7 +169,7 @@ class KlaviyoSignup extends Component {
       label,
       placeholder,
       buttonText,
-      setSuccessState
+      setSuccessState,
     } = this.props
 
     const { message, status } = this.state
@@ -185,7 +178,7 @@ class KlaviyoSignup extends Component {
       <div>
         <CustomForm
           id="klaviyo-subscribe"
-          buttonTheme={buttonTheme || 'default'}
+          buttonTheme="default"
           status={status}
           message={message}
           onSubmit={this.handleSubscribe}
@@ -194,17 +187,16 @@ class KlaviyoSignup extends Component {
           label={label}
           buttonText={buttonText}
           setSuccessState={setSuccessState}
-          size={size || 'small'}
+          size={size || "small"}
         />
         {/* <div class="klaviyo-form-Y2pnRT"></div> */}
       </div>
-
     )
   }
 }
 
 const sizesToProps = ({ width, height }) => ({
-  winWidth: width
+  winWidth: width,
 })
 
 export default KlaviyoSignup

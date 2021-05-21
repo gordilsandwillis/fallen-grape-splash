@@ -1,26 +1,24 @@
-import { lighten, darken, rgba } from 'polished'
+import { lighten, darken, rgba } from "polished"
 
-export const black = '#000'
-export const white = '#fff'
+export const black = "#000"
+export const white = "#fff"
 
 // Site Specific Colors
-export const yellow = '#B2A15B'
-export const red = '#D14F26'
-export const maroon = '#8C291D'
-export const green = '#425C3D'
-export const blue = '#668EA3'
-export const lightGreen = '#C2CCB5'
-export const offWhite = '#F2F2ED'
-export const pink = '#ECD0C0'
-export const beige = '#E4DCD0'
-export const brown = '#636357'
+export const yellow = "#F2AA1E"
+export const orange = "#F7880C" //"#F47521"
+export const orange2 = "#F45617"
+export const lightBrown = "#8C5E44"
+export const green = "#35815A"
+export const purple = "#D2BFFF"
+export const offWhite = "#F4F1EC"
+export const brown = "#442500"
 
 // Basic Colors
-export const transparent = 'transparent'
-export const currentcolor = 'currentcolor'
-export const bgColor = white
-export const mainColor = brown
-export const alert = red
+export const transparent = "transparent"
+export const currentcolor = "currentcolor"
+export const bgColor = offWhite
+export const mainColor = orange
+export const alert = orange2
 export const notify = yellow
 export const success = green
 export const textColor = brown

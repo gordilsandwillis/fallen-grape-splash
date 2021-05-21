@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react'
-import withSizes from 'react-sizes'
-import { mediaQueries } from 'src/styles'
+import React, { Fragment } from "react"
+import withSizes from "react-sizes"
+import { mediaQueries } from "src/styles"
 
 const widthToRenderer = (winWidth, small, medium, large) => {
 	if (large && winWidth > mediaQueries.largeBreakpoint) {
 		return large
 	}
 
-	if (medium && winWidth > mediaQueries.mediumBreakpoint) {
+	if (medium && winWidth > mediaQueries.smallBreakpoint) {
 		return medium
 	}
 
@@ -15,18 +15,11 @@ const widthToRenderer = (winWidth, small, medium, large) => {
 }
 
 const ResponsiveComponent = ({ winWidth, small, medium, large }) => (
-	<Fragment>
-		{widthToRenderer(
-			winWidth,
-			small,
-			medium,
-			large
-		)}
-	</Fragment>
+	<Fragment>{widthToRenderer(winWidth, small, medium, large)}</Fragment>
 )
 
 const sizesToProps = ({ width, height }) => ({
-	winWidth: width
+	winWidth: width,
 })
 
 export default withSizes(sizesToProps)(ResponsiveComponent)

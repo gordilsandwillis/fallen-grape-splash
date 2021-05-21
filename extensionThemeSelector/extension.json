@@ -1,8 +1,0 @@
-{
-  "id": "extensionThemeSelector",
-  "name": "extensionThemeSelector",
-  "srcdoc": "./build/index.html",
-  "fieldTypes": [
-    "Symbol"
-  ]
-}

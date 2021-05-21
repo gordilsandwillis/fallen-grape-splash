@@ -1,5 +1,5 @@
-import * as colors from './colors'
-import { lighten, darken, rgba } from 'polished'
+import * as colors from "./colors"
+import { lighten, darken, rgba } from "polished"
 
 // Themes (ThemeSelector Component)
 export const themes = {
@@ -7,165 +7,54 @@ export const themes = {
 		color: colors.textColor,
 		background: colors.bgColor,
 		hoverColor: colors.mainColor,
-		hoverBackground: darken(0.07, colors.mainColor)
+		hoverBackground: darken(0.07, colors.mainColor),
 	},
-	bgColor: {
-		color: colors.textColor,
-		background: colors.bgColor,
+	orange: {
+		color: colors.offWhite,
+		background: colors.orange,
 		hoverColor: colors.mainColor,
-		hoverBackground: darken(0.07, colors.mainColor)
+		hoverBackground: darken(0.07, colors.mainColor),
 	},
-	offWhite: {
-		color: colors.textColor,
-		background: colors.lightGrey,
-		hoverColor: colors.textColor,
-		hoverBackground: darken(0.07, colors.lightGrey)
-	},
-	brown: {
-		color: colors.bgColor,
-		background: colors.textColor,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	green: {
-		color: colors.lightGreen,
-		background: colors.green,
-		hoverColor: colors.offWhite,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	lightGreen: {
-		color: colors.green,
-		background: colors.lightGreen,
-		hoverColor: colors.green,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	pink: {
-		color: colors.maroon,
-		background: colors.pink,
-		hoverColor: colors.textColor,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	yellow: {
-		color: colors.green,
-		background: colors.yellow,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	maroon: {
-		color: colors.blue,
-		background: colors.maroon,
-		hoverColor: colors.offWhite,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	blue: {
-		color: colors.maroon,
-		background: colors.blue,
-		hoverColor: colors.maroon,
-		hoverBackground: lighten(0.2, colors.textColor)
-	}
 }
 
 // Button Themes
 export const buttonThemes = {
+	// default: {
+	// 	color: colors.orange,
+	// 	background: colors.textColor,
+	// 	hoverColor: colors.textColor,
+	// 	hoverBackground: colors.offWhite,
+	// 	borderHoverColor: colors.offWhite,
+	// },
 	default: {
-		color: colors.offWhite,
-		background: colors.textColor,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.07, colors.mainColor)
-	},
-	yellow: {
-		color: colors.green,
-		background: colors.yellow,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	pink: {
-		color: colors.maroon,
-		background: colors.pink,
-		hoverColor: colors.textColor,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	green: {
-		color: colors.lightGreen,
-		background: colors.green,
-		hoverColor: colors.offWhite,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	maroon: {
-		color: colors.blue,
-		background: colors.maroon,
-		hoverColor: colors.offWhite,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	brown: {
-		color: colors.bgColor,
-		background: colors.textColor,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	blue: {
-		color: colors.maroon,
-		background: colors.blue,
-		hoverColor: colors.maroon,
-		hoverBackground: lighten(0.2, colors.textColor)
-	},
-	offWhite: {
 		color: colors.textColor,
-		background: colors.offWhite,
-		hoverColor: colors.blue,
-		hoverBackground: colors.white
+		background: "transparent",
+		borderColor: colors.textColor,
+		hoverColor: colors.offWhite,
+		hoverBackground: colors.textColor,
+		borderHoverColor: colors.textColor,
 	},
-	lightGreen: {
-		color: colors.green,
-		background: colors.lightGreen,
-		hoverColor: colors.green,
-		hoverBackground: darken(0.07, colors.lightGreen)
-	},
-	black: {
-		color: colors.bgColor,
-		background: colors.black,
-		hoverColor: colors.mainColor,
-		hoverBackground: darken(0.07, colors.mainColor)
-	},
-	white: {
+	transparent: {
 		color: colors.textColor,
-		background: colors.white,
-		hoverColor: colors.mainColor,
-		hoverBackground: colors.lightGrey
+		background: "transparent",
+		hoverColor: colors.orange,
+		hoverBackground: "transparent",
 	},
-	buttonDefault: {
-		color: colors.bgColor,
-		background: colors.mainColor,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.07, colors.mainColor)
-	},
-	mainColor: {
-		color: colors.bgColor,
-		background: colors.mainColor,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.07, colors.mainColor)
-	},
-	textColor: {
-		color: colors.bgColor,
-		background: colors.textColor,
-		hoverColor: colors.bgColor,
-		hoverBackground: lighten(0.2, colors.textColor)
-	}
 }
 
 // Input Themes
 export const inputThemes = {
 	default: {
-		color: colors.bgColor,
-		background: colors.transparent,
-		accentColor: colors.bgColor,
-		hoverColor: colors.bgColor,
-		borderColor: colors.lightTextColor,
+		color: colors.textColor,
+		background: "transparent",
+		accentColor: colors.mainColor,
+		hoverColor: colors.textColor,
+		borderColor: colors.textColor,
 		hoverBorderColor: colors.textColor,
 		focusBorderColor: colors.mainColor,
-		hoverBackground: colors.transparent,
-		focusBackground: colors.transparent,
-	}
+		hoverBackground: "transparent",
+		focusBackground: "transparent",
+	},
 }
 
 export default themes

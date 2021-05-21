@@ -1,19 +1,24 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
+import React from "react"
+import styled from "@emotion/styled"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types"
 
 const RichTextWrapper = styled.div`
 	white-space: pre-wrap;
 	* {
 		white-space: pre-wrap;
 	}
-	h1, h2, h3, h4, h5, h6 {
-		margin-top: .75em;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-top: 0.75em;
 	}
 	li {
 		p {
-			margin-top: .75em;
+			margin-top: 0.75em;
 			margin-bottom: 0;
 			&:first-of-type {
 				margin-top: 0;
@@ -38,10 +43,10 @@ const adjustSpace = (first, last) => {
 	return style
 }
 
-const options = linkInNewTab => {
+const options = (linkInNewTab) => {
 	const textOptions = {
 		renderMark: {
-			[MARKS.BOLD]: text => <b>{text}</b>,
+			[MARKS.BOLD]: (text) => <b>{text}</b>,
 		},
 		renderNode: {
 			[BLOCKS.PARAGRAPH]: (node, children) => (
@@ -75,10 +80,12 @@ const options = linkInNewTab => {
 				<li style={adjustSpace(node.first, node.last)}>{children}</li>
 			),
 			[BLOCKS.QUOTE]: (node, children) => (
-				<blockquote style={adjustSpace(node.first, node.last)}>{children}</blockquote>
+				<blockquote style={adjustSpace(node.first, node.last)}>
+					{children}
+				</blockquote>
 			),
 			[BLOCKS.HR]: (node, children) => (
-				<hr style={adjustSpace(node.first, node.last)}/>
+				<hr style={adjustSpace(node.first, node.last)} />
 			),
 			[BLOCKS.EMBEDDED_ENTRY]: (node, children) => (
 				<div style={adjustSpace(node.first, node.last)}>{children}</div>
@@ -87,8 +94,10 @@ const options = linkInNewTab => {
 				<div style={adjustSpace(node.first, node.last)}>{children}</div>
 			),
 			[INLINES.HYPERLINK]: (node, children) => (
-				<a href={node.data.uri} target={linkInNewTab ? '_blank' : ''}>{children}</a>
-			)
+				<a href={node.data.uri} target={linkInNewTab ? "_blank" : ""}>
+					{children}
+				</a>
+			),
 		},
 	}
 	return textOptions
@@ -100,7 +109,10 @@ const ContentfulRichText = ({ richText, className, linkInNewTab }) => {
 	// let renderer know which is the first item
 	text[0].first = true
 
-	if (text[text.length - 1].content[0].value === '' && text[text.length - 1].content.length === 1) {
+	if (
+		text[text.length - 1].content[0].value === "" &&
+		text[text.length - 1].content.length === 1
+	) {
 		// remove last item if empty
 		text.pop()
 		// let renderer know which is the last item

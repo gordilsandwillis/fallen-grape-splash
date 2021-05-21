@@ -1,22 +1,19 @@
-import * as typography from './typography'
-import * as mediaQueries from './mediaQueries'
-import * as colors from './colors'
-import * as animations from './animations'
-import * as util from './util'
-import * as fonts from './fonts'
-import { slick } from './slick'
-import { rgba } from 'polished'
+import * as typography from "./typography"
+import * as mq from "./mediaQueries"
+import * as colors from "./colors"
+import * as animations from "./animations"
+import * as util from "./util"
+import * as fonts from "./fonts"
+import { slick } from "./slick"
+import { rgba } from "polished"
 
 const responsiveStyles = util.responsiveStyles
 
 // All global styles
 export default `
-  ${ fonts.MaterialIconsFont }
-  ${ fonts.FormularFont }
-  ${ fonts.FormularLightFont }
-  ${ fonts.FormularBoldFont }
-  ${ fonts.FormularMonoFont }
-  ${ fonts.CaslonFont }
+  ${fonts.MaterialIconsFont}
+  ${fonts.ArialNarrowFont}
+  ${fonts.RomieFont}
 
   * {
     box-sizing: border-box;
@@ -24,14 +21,17 @@ export default `
 
   html {
     font-display: block;
-    background: ${ colors.bgColor };
-    color: ${ colors.textColor };
-    ${ util.fontSmoothing }
+    background: ${colors.bgColor};
+    color: ${colors.textColor};
+    ${util.fontSmoothing}
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
     padding: 0;
     margin: 0;
     background-attachment: fixed;
+    ${mq.largerAndUp} {
+      overflow: hidden;
+    }
     &.page-lock {
       position: relative;
       overflow: hidden;
@@ -40,15 +40,15 @@ export default `
   }
 
   body {
-    ${ typography.body }
-    color: ${ colors.textColor };
-    background: ${ colors.bgColor };
+    ${typography.body}
+    color: ${colors.textColor};
+    background: ${colors.bgColor};
     padding: 0;
     margin: 0;
   }
 
   b, strong {
-    font-weight: 600;
+    font-weight: ${typography.bold};
   }
 
   em, i {
@@ -67,92 +67,92 @@ export default `
   }
 
   p {
-    ${ typography.body }
+    ${typography.body}
     margin-top: 1em;
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
     &.small {
-      ${ typography.bodySmall }
+      ${typography.bodySmall}
     }
     &.medium {
-      ${ typography.bodyMedium }
+      ${typography.bodyMedium}
     }
     &.large {
-      ${ typography.bodyLarge }
+      ${typography.bodyLarge}
     }
     a {
       border-bottom: 1px solid currentColor;
       &:hover {
-        border-color: ${ colors.mainColor };
+        border-color: ${colors.mainColor};
       }
     }
   }
 
   h1, .h1 {
-    ${ typography.h1 }
-    ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 12, 10, 8, 8) }
+    ${typography.h1}
+    ${responsiveStyles("margin-top", 10, 10, 10, 8)}
+    ${responsiveStyles("margin-bottom", 12, 10, 8, 8)}
   }
 
   h2, .h2 {
-    ${ typography.h2 }
-    ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 10, 10, 8, 8) }
+    ${typography.h2}
+    ${responsiveStyles("margin-top", 10, 10, 10, 8)}
+    ${responsiveStyles("margin-bottom", 10, 10, 8, 8)}
   }
 
   h3, .h3 {
-    ${ typography.h3 }
-    ${ responsiveStyles('margin-top', 10, 10, 10, 8) }
-    ${ responsiveStyles('margin-bottom', 14, 12, 12, 10) }
+    ${typography.h3}
+    ${responsiveStyles("margin-top", 10, 10, 10, 8)}
+    ${responsiveStyles("margin-bottom", 14, 12, 12, 10)}
   }
 
   h4, .h4 {
-    ${ typography.h4 }
-    ${ responsiveStyles('margin-top', 24, 16, 16, 8) }
-    ${ responsiveStyles('margin-bottom', 14, 12, 12, 10) }
+    ${typography.h4}
+    ${responsiveStyles("margin-top", 24, 16, 16, 8)}
+    ${responsiveStyles("margin-bottom", 14, 12, 12, 10)}
   }
 
   h5, .h5 {
-    ${ typography.h5 }
-    ${ responsiveStyles('margin-top', 24, 16, 16, 8) }
+    ${typography.h5}
+    ${responsiveStyles("margin-top", 24, 16, 16, 8)}
     margin-bottom: 0;
   }
 
   h6, .h6 {
-    ${ typography.h6 }
+    ${typography.h6}
     margin-top: 0;
-    ${ responsiveStyles('margin-bottom', 24, 16, 16, 8) }
+    ${responsiveStyles("margin-bottom", 24, 16, 16, 8)}
   }
 
   figcaption {
-    ${ typography.bodySmall }
-    color: ${ colors.lightTextColor };
+    ${typography.bodySmall}
+    color: ${colors.lightTextColor};
   }
 
   hr {
     margin: 2em auto;
     border: 0;
     display: block;
-    border-bottom: 1px solid ${ colors.hrColor };
+    border-bottom: 1px solid ${colors.hrColor};
   }
 
   a {
     color: inherit;
     cursor: pointer;
     text-decoration: none;
-    transition:   color ${ animations.mediumSpeed } ease-in-out,
-                  border ${ animations.mediumSpeed } ease-in-out,
-                  background ${ animations.mediumSpeed } ease-in-out,
-                  opacity ${ animations.mediumSpeed } ease-in-out,
-                  transform ${ animations.mediumSpeed } ease-in-out;
+    transition:   color ${animations.mediumSpeed} ease-in-out,
+                  border ${animations.mediumSpeed} ease-in-out,
+                  background ${animations.mediumSpeed} ease-in-out,
+                  opacity ${animations.mediumSpeed} ease-in-out,
+                  transform ${animations.mediumSpeed} ease-in-out;
     &.text-link {
       font-size: 14px;
       line-height: 16px;
       font-weight: bold;
       text-decoration: none;
       letter-spacing: 1.75px;
-      border-bottom: 1px solid ${ colors.mainColor };
+      border-bottom: 1px solid ${colors.mainColor};
       text-transform: uppercase;
-      color: ${ colors.mainColor };
+      color: ${colors.mainColor};
       padding-bottom: 3px;
     }
   }
@@ -163,7 +163,7 @@ export default `
   }
 
   blockquote {
-    ${ typography.blockquote };
+    ${typography.blockquote};
   }
 
   img {
@@ -173,14 +173,14 @@ export default `
   }
 
   time {
-    ${ typography.bodySmall };
+    ${typography.bodySmall};
   }
 
   ::selection {
-    background: ${ rgba(colors.mainColor, 0.9) };
-    color: ${ colors.bgColor };
+    background: ${rgba(colors.mainColor, 0.9)};
+    color: ${colors.bgColor};
   }
   
-  ${ slick }
+  ${slick}
 
 `

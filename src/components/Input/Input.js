@@ -1,87 +1,94 @@
-import React, { Component } from 'react'
-import styled from '@emotion/styled'
+import React, { Component } from "react"
+import styled from "@emotion/styled"
+import { darken } from "polished"
+import { colors, typography, animations, util } from "src/styles"
+import MaterialIcon from "src/components/MaterialIcon"
+import { isEmoji } from "src/utils/validations"
+import { inputThemes as themes } from "src/styles/themes"
+import { baseBorderRadius } from "src/styles/globals"
 
-import { lighten, darken, rgba } from 'polished'
-import { colors, typography, animations, util } from 'src/styles'
-import ConditionalRender from 'src/components/ConditionalRender'
-import MaterialIcon from 'src/components/MaterialIcon'
-import { isEmoji } from 'src/utils/validations'
-import { inputThemes as themes } from 'src/styles/themes'
-
-const inputVars = {
-	tiny: '32px',
-	small: '40px',
-	medium: '50px',
-	large: '60px',
-	borderWidth: '2px',
-	backgroundColor: 'transparent',
-	borderRadius: '0px',
-	hPadding: '1em'
+const uiElementSizes = {
+	tiny: 32,
+	small: 40,
+	medium: 50,
+	large: 60,
 }
 
-const setInputTheme = theme => {
+export const inputVars = {
+	tiny: uiElementSizes.tiny,
+	small: uiElementSizes.small,
+	medium: uiElementSizes.medium,
+	large: uiElementSizes.large,
+	borderWidth: 2,
+	backgroundColor: "transparent",
+	borderRadius: baseBorderRadius,
+}
+
+export const setInputTheme = (theme) => {
 	return `
-		color: ${ themes[theme].color };
-		input {
-			background: ${ themes[theme].background };
-			border-color: ${ themes[theme].borderColor };
-			caret-color: ${ themes[theme].color };
-			color: ${ themes[theme].color };
+		color: ${themes[theme].color};
+		input, select, .mock-input {
+			background: ${themes[theme].background};
+			border-color: ${themes[theme].borderColor};
+			caret-color: ${themes[theme].color};
+			color: ${themes[theme].color};
 			&:active,
 			&:focus,
 			&:active:hover,
 			&:focus:hover {
-				background: ${ darken(0.05, themes[theme].focusBackground) };
-				border-color: ${ themes[theme].focusBorderColor };
+				background: ${darken(0.05, themes[theme].focusBackground)};
+				border-color: ${themes[theme].focusBorderColor};
 			}
 			&:hover {
-				background: ${ darken(0.05, themes[theme].hoverBackground) };
-				border-color: ${ themes[theme].hoverBorderColor };
+				background: ${darken(0.05, themes[theme].hoverBackground)};
+				border-color: ${themes[theme].hoverBorderColor};
+			}
+			&:-webkit-autofill {
+				transition: background-color 5000s ease-in-out 0s;
+				-webkit-text-fill-color: ${themes[theme].color} !important;
+				color: ${themes[theme].color} !important;
 			}
 			&:-internal-autofill-selected,
 			&:-webkit-autofill,
-			&:-internal-autofill-selected:hover,
-			&:-webkit-autofill:hover,
-			&:-internal-autofill-selected:focus,
-			&:-webkit-autofill:focus,
-			&:-internal-autofill-selected:active,
-			&:-webkit-autofill:active {
-				border-color: ${ themes[theme].borderColor } !important;
-				-webkit-text-fill-color: ${ themes[theme].color } !important;
-				color: ${ themes[theme].color } !important;
-			  transition: background-color 5000s ease-in-out 0s;
+			&:-internal-autofill:hover,
+			&:-webkit-autofill:focus {
+				background: ${darken(0.05, themes[theme].background)} !important;
+				border-color: ${themes[theme].borderColor};
+				-webkit-text-fill-color: ${themes[theme].color} !important;
+				color: ${themes[theme].color} !important;
 			}
 			::placeholder {
-				color: ${ rgba(themes[theme].color, 1) };
+				color: ${themes[theme].placeholderColor};
 			}
 		}
 	`
 }
 
-const getState = (loading, error, success, disabled) => {
-	let buttonState = ''
+export const getState = (loading, error, success, disabled) => {
+	let buttonState = ""
 	if (error) {
-		buttonState = 'error'
+		buttonState = "error"
 	} else if (loading) {
-		buttonState = 'loading'
+		buttonState = "loading"
 	} else if (success) {
-		buttonState = 'success'
+		buttonState = "success"
 	} else if (disabled) {
-		buttonState = 'disabled'
+		buttonState = "disabled"
 	}
 
 	return buttonState
 }
 
-const InputWrap = styled.div`
+export const InputWrap = styled.div`
 	position: relative;
 	display: inline-block;
 	width: 100%;
-	${ typography.smallCaps }
-	${ ({ theme }) => setInputTheme(theme) }
+	${typography.body}
+	font-weight: ${typography.normal};
+	${({ theme }) => setInputTheme(theme)}
 `
 
-const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
+export const InputStyles = (state, size, icon, iconPosition, theme, label) => `
   appearance: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-touch-callout: none;
@@ -89,13 +96,20 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
   display: inline-block;
   width: 100%;
   vertical-align: middle;
-  background: ${ inputVars.backgroundColor };
-  border: ${ inputVars.borderWidth } solid;
-  height: ${ inputVars.medium };
+  background: ${inputVars.backgroundColor};
+  border: ${inputVars.borderWidth + "px"} solid;
+  height: ${inputVars[size]};
+  ${util.responsiveStyles(
+		"height",
+		inputVars[size] * 1.3,
+		inputVars[size],
+		inputVars[size],
+		inputVars[size]
+	)}
   line-height: 1em;
   text-transform: inherit;
   letter-spacing: 0;
-  border-radius: ${ inputVars.borderRadius };
+  border-radius: ${inputVars.borderRadius}px;
   color: inherit;
   font-style: inherit;
   font-size: inherit;
@@ -104,55 +118,45 @@ const InputStyles = (state, size, icon, iconPosition, theme, label) => (`
   line-height: inherit;
   text-align: left;
   box-shadow: none;
-  padding: 2px ${ inputVars.hPadding } 0;
-  ${ icon ? `
-		padding-${ iconPosition }: ${ inputVars.medium };
-		${ size === 'tiny' ? `
-			${ util.responsiveStyles('font-size', 16, 14, 13, 13) }
-			padding-${ iconPosition }: ${ inputVars.tiny };
-		` : `` }
-		${ size === 'small' ? `
-			padding-${ iconPosition }: ${ inputVars.small };
-		` : `` }
-		${ size === 'large' ? `
-			padding-${ iconPosition }: ${ inputVars.medium };
-		` : `` }
-	` : `` }
+  padding: 0 ${inputVars[size] * 0.3 + "px"} 0;
+  ${
+		icon &&
+		`
+  	${util.responsiveStyles(
+			"padding-" + iconPosition,
+			inputVars[size] * 1.3,
+			inputVars[size],
+			inputVars[size],
+			inputVars[size]
+		)}
+	`
+	}
   padding-bottom: 1px;
-  ${ util.fontSmoothing }
-  transition: background ${ animations.mediumSpeed } ease-in-out,
-              color ${ animations.mediumSpeed } ease-in-out,
-              border ${ animations.mediumSpeed } ease-in-out,
-              box-shadow ${ animations.mediumSpeed } ease-in-out,
-              transform ${ animations.mediumSpeed } ease-in-out,
-              opacity ${ animations.mediumSpeed } ease-in-out;
+  ${util.fontSmoothing}
+  transition: background ${animations.mediumSpeed} ease-in-out,
+              color ${animations.mediumSpeed} ease-in-out,
+              border ${animations.mediumSpeed} ease-in-out,
+              box-shadow ${animations.mediumSpeed} ease-in-out,
+              transform ${animations.mediumSpeed} ease-in-out,
+              opacity ${animations.mediumSpeed} ease-in-out;
 	// Input States
 	::placeholder {
-		color: ${ colors.lightTextColor };
+		color: ${colors.lightTextColor};
 	}
-	${ state === 'disabled' ? `cursor: not-allowed;` : `` }
-	${ state === 'loading' ? `cursor: wait;` : `` }
-	${ state === 'error' ? `
-		border-color: ${ colors.alert };
-	` : `` }
-
-	${ size === 'tiny' ? `
-		height: ${ inputVars.tiny };
-		${ util.responsiveStyles('font-size', 16, 14, 13, 13) }
-	` : `` }
-	${ size === 'small' ? `
-		height: ${ inputVars.small };
-	` : `` }
-	${ size === 'large' ? `
-		height: ${ inputVars.large };
-	` : `` }
-
-	${ label ? `${ util.responsiveStyles('padding-top', 18, 16, 16, 14) }` : `` }
-
-`)
+	${state === "disabled" ? "cursor: not-allowed;" : ""}
+	${state === "loading" ? "cursor: wait;" : ""}
+	${
+		state === "error"
+			? `
+		border-color: ${colors.alert};
+	`
+			: ``
+	}
+	${label && `${util.responsiveStyles("padding-top", 18, 16, 16, 14)}`}
+`
 
 const StyledInput = styled.input`
-	${ ({
+	${({
 		loading,
 		error,
 		success,
@@ -163,10 +167,18 @@ const StyledInput = styled.input`
 		label,
 		theme,
 		style,
-	}) => InputStyles(getState(loading, error, success, disabled), size, icon, iconPosition, theme, label) }
+	}) =>
+		InputStyles(
+			getState(loading, error, success, disabled),
+			size,
+			icon,
+			iconPosition,
+			theme,
+			label
+		)}
 `
 
-const InputIcon = styled.div`
+export const InputIcon = styled.div`
 	position: absolute;
 	display: flex;
 	align-items: center;
@@ -174,121 +186,154 @@ const InputIcon = styled.div`
 	top: 0;
 	pointer-events: none;
 	overflow: hidden;
-	${ ({ emojiIcon }) => emojiIcon && `
+	${({ emojiIcon }) =>
+		emojiIcon &&
+		`
 		padding-top: .3em;
 		font-size: 18px;
 		line-height: 1em;
-	` }
-	${ ({ iconPosition }) => iconPosition }: ${ inputVars.borderWidth };
-	width: ${ inputVars.medium };
-	height: ${ inputVars.medium };
-	${ ({ size }) => size === 'tiny' ? `
-		width: ${ inputVars.tiny };
-		height: ${ inputVars.tiny };
-	` : `` }
-	${ ({ size }) => size === 'small' ? `
-		width: ${ inputVars.small };
-		height: ${ inputVars.small };
-	` : `` }
-	${ ({ size }) => size === 'large' ? `
-		width: ${ inputVars.medium };
-		height: ${ inputVars.large };
-	` : `` }
+	`}
+	${({ iconPosition }) => iconPosition}: ${inputVars.borderWidth + "px"};
+	${({ size }) => `
+		${util.responsiveStyles(
+			"width",
+			inputVars[size] * 1.3,
+			inputVars[size],
+			inputVars[size],
+			inputVars[size]
+		)}
+		${util.responsiveStyles(
+			"height",
+			inputVars[size] * 1.3,
+			inputVars[size],
+			inputVars[size],
+			inputVars[size]
+		)}
+	`}
 	span, svg {
 		display: block;
 	}
 `
 
-const InputLabel = styled.label`
+export const InputLabel = styled.label`
 	position: absolute;
 	font-style: inherit;
-  font-size: inherit;
-  font-family: inherit;
-  font-weight: inherit;
-  line-height: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	line-height: inherit;
 	top: 0;
-	left: ${ inputVars.borderWidth };
+	left: ${inputVars.borderWidth + "px"};
 	height: 100%;
 	display: flex;
 	align-items: center;
 	pointer-events: none;
-	margin: 0 ${ inputVars.hPadding };
-	color: ${ ({ error }) => error ? `${ colors.alert }` : `inherit` };
-	transition: transform ${ animations.mediumSpeed } ease-in-out, color ${ animations.mediumSpeed } ease-in-out;
+	margin: 0 ${({ size }) => inputVars[size] * 0.3 + "px"};
+	color: ${({ error }) => (error ? `${colors.alert}` : "inherit")};
+	transition: transform ${animations.mediumSpeed} ease-in-out,
+		color ${animations.mediumSpeed} ease-in-out;
 	transform-origin: 0% 50%;
-	${ props => props.placeholder || props.value || props.focused ? `
-		transform: translate3d(0, -10px, 0) scale(.75);
-	` : `` }
-	${ props => props.focused ? `
-		color: ${ themes[props.theme].color };
-	` : `` }
-	${ ({ icon, iconPosition, size }) => icon ? `
-		margin-${ iconPosition }: ${ inputVars.medium };
-		${ size === 'tiny' ? `
-			height: ${ inputVars.tiny };
-			${ util.responsiveStyles('font-size', 16, 14, 13, 13) }
-			margin-${ iconPosition }: ${ inputVars.tiny };
-		` : `` }
-		${ size === 'small' ? `
-			height: ${ inputVars.small };
-			margin-${ iconPosition }: ${ inputVars.small };
-		` : `` }
-		${ size === 'large' ? `
-			height: ${ inputVars.large };
-			margin-${ iconPosition }: ${ inputVars.large };
-		` : `` }
-	` : `` }
+	${(props) =>
+		(props.placeholder || props.value || props.focused) &&
+		`
+		transform: translate3d(0, -.65em, 0) scale(.6);
+	`}
+	${(props) =>
+		props.focused &&
+		`
+		color: ${themes[props.theme].color};
+	`}
+	${({ icon, iconPosition, size }) =>
+		icon &&
+		`
+		${util.responsiveStyles(
+			"height",
+			inputVars[size] * 1.3,
+			inputVars[size],
+			inputVars[size],
+			inputVars[size]
+		)}
+		${util.responsiveStyles(
+			"margin-" + iconPosition,
+			inputVars[size] * 1.3,
+			inputVars[size],
+			inputVars[size],
+			inputVars[size]
+		)}
+	`}
 `
 
 class Input extends Component {
 	state = {
 		focused: false,
-		hasValue: false
+		hasValue: false,
 	}
 
 	renderIcon = (icon, size, iconPosition, theme) => {
 		let renderedIcon = false
-		let isEmojiIcon = isEmoji(icon)
-		if (isEmojiIcon) {
-			renderedIcon = <InputIcon size={size} iconPosition={iconPosition} theme={theme} emojiIcon>{icon}</InputIcon>
-		} else if (typeof icon === 'string') {
-			renderedIcon = <InputIcon size={size} iconPosition={iconPosition} theme={theme}><MaterialIcon size={this.props.size === 'tiny' && '18px'}>{icon}</MaterialIcon></InputIcon>
+		if (typeof icon === "string") {
+			const isEmojiIcon = isEmoji(icon)
+			if (isEmojiIcon) {
+				renderedIcon = (
+					<InputIcon
+						size={size}
+						iconPosition={iconPosition}
+						theme={theme}
+						emojiIcon
+					>
+						{icon}
+					</InputIcon>
+				)
+			} else {
+				renderedIcon = (
+					<InputIcon size={size} iconPosition={iconPosition} theme={theme}>
+						<MaterialIcon size={this.props.size === "tiny" && "18px"}>
+							{icon}
+						</MaterialIcon>
+					</InputIcon>
+				)
+			}
 		} else {
-			renderedIcon = <InputIcon size={size} iconPosition={iconPosition} theme={theme}>{icon}</InputIcon>
+			renderedIcon = (
+				<InputIcon size={size} iconPosition={iconPosition} theme={theme}>
+					{icon}
+				</InputIcon>
+			)
 		}
 		return renderedIcon
 	}
 
-	setFocus = status => {
+	setFocus = (status) => {
 		this.setState({ focused: status })
 	}
 
-	render () {
+	render() {
 		const {
 			value,
-			type,
+			type = "text",
 			icon,
-			iconPosition,
+			iconPosition = "left",
 			loading,
 			error,
 			success,
 			disabled,
 			onClick,
-			theme,
+			theme = "default",
+			setTheme = false,
 			className,
 			shape,
-			size,
+			size = "medium",
 			placeholder,
 			label,
-			spellcheck,
+			spellcheck = false,
 			name,
-			onChange
+			onChange = () => {},
 		} = this.props
 
 		const { focused } = this.state
 
 		return (
-			<InputWrap className={className} theme={theme}>
+			<InputWrap className={className} theme={setTheme || theme}>
 				<StyledInput
 					type={type}
 					placeholder={placeholder}
@@ -299,7 +344,7 @@ class Input extends Component {
 					success={success}
 					disabled={disabled}
 					onClick={onClick}
-					theme={theme}
+					theme={setTheme || theme}
 					shape={shape}
 					size={size}
 					onFocus={() => this.setFocus(true)}
@@ -308,38 +353,33 @@ class Input extends Component {
 					value={value}
 					label={label}
 					name={name}
+					id={name}
 					spellCheck={spellcheck}
 				/>
-				<ConditionalRender condition={label}>
+				{label && (
 					<InputLabel
 						icon={icon}
 						iconPosition={iconPosition}
 						size={size}
 						error={error}
-						theme={theme}
+						theme={setTheme || theme}
 						value={value}
 						htmlFor={name}
 						focused={focused}
 						placeholder={placeholder}
-						className={placeholder || value || focused ? 'focused' : 'unfocused' /* to select from styled component */}
+						className={
+							placeholder || value || focused
+								? "focused"
+								: "unfocused" /* to select from styled component */
+						}
 					>
 						{label}
 					</InputLabel>
-				</ConditionalRender>
-				{icon && (
-					this.renderIcon(icon, size, iconPosition, theme)
 				)}
+				{icon && this.renderIcon(icon, size, iconPosition, theme)}
 			</InputWrap>
 		)
 	}
-}
-
-Input.defaultProps = {
-	type: 'text',
-	iconPosition: 'left',
-	theme: 'default',
-	spellcheck: false,
-	onChange: () => {}
 }
 
 export default Input

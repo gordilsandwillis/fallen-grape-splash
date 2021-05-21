@@ -1,6 +1,7 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import LogoSvg from 'src/assets/images/logo.svg'
+import React from "react"
+import styled from "@emotion/styled"
+import LogoSvg from "src/assets/images/logo.svg"
+import GriffinSvg from "src/assets/images/griffin.svg"
 
 const LogoWrapper = styled.div`
 	height: auto;
@@ -26,7 +27,7 @@ const Logo = ({ className }) => (
 
 export const Logomark = ({ className }) => (
 	<LogoWrapper className={className}>
-		<LogoSvg />
+		<GriffinSvg />
 	</LogoWrapper>
 )
 
