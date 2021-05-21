@@ -321,8 +321,6 @@ const SplashPageTemplate = () => {
 		</Header>
 	)
 
-	return <div />
-
 	return (
 		<>
 			<SEO
