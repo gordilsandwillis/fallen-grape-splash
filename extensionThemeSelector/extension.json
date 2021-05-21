@@ -1,0 +1,18 @@
+{
+  "id": "extensionThemeSelector",
+  "name": "Theme Selector",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Symbol"
+  ],
+  "parameters": {
+  	"installation": [
+  		{
+				"id": "themeOptions",
+  			"name": "themeOptions",
+  			"type": "Symbol"
+  		}
+  	],
+  	"instance": []
+  }
+}

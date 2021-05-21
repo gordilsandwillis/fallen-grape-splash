@@ -1,0 +1,8 @@
+{
+  "id": "extensionAlignment",
+  "name": "Positioning",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Symbol"
+  ]
+}

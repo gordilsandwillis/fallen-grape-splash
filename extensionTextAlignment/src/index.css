@@ -1,0 +1,58 @@
+:root {
+  --color-element-light: #e5ebed;
+  --color-primary: #2E75D4;
+  --color-text-lightest: #6B7888;
+  --color-element-dark: #c3cfd5;
+  --color-text-base: #283848;
+}
+
+html,
+body,
+div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+.wrapper {
+	color: var(--color-element-light);
+	background: var(--color-element-light);
+	position: relative;
+	margin-top: 10px;
+	box-sizing: border-box;
+	display: inline-flex;
+	border-radius: 8px;
+	padding-right: 3px;
+}
+
+.wrapper input {
+	display: none;
+}
+
+.wrapper input:checked + label {
+	color: white;
+	background: var(--color-primary);
+}
+
+.wrapper label {
+	z-index: 2;
+	width: 60px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	cursor: pointer;
+	border-radius: 6px;
+	margin: 3px 0 3px 3px;
+	color: var(--color-text-lightest);
+	transition: background .2s ease-in-out, color .2s ease-in-out;
+}
+
+.wrapper label:hover {
+	background: var(--color-element-dark);
+	color: var(--color-text-base);
+}

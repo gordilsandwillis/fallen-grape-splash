@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby'
+import { graphql } from "gatsby"
 
 export const query = graphql`
   fragment SiteSettings on ContentfulSiteSettings {
@@ -22,8 +22,5 @@ export const query = graphql`
       json
     }
     bannerColor
-    navigation {
-      ...NavigationLink
-    }
   }
 `

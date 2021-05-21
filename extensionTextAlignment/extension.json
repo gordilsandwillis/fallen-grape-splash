@@ -1,0 +1,8 @@
+{
+  "id": "extensionTextAlignment",
+  "name": "Text Alignment",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Symbol"
+  ]
+}
