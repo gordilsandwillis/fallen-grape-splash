@@ -473,7 +473,6 @@ const SplashPageTemplate = () => {
 							<ScrollEntrance
 								speed={750}
 								css={css`
-									background: #ccc;
 									padding-bottom: 40px;
 									margin-bottom: -40px;
 								`}
