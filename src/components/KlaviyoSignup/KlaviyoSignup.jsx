@@ -9,7 +9,7 @@ import { validateEmail } from "src/utils/validations"
 import Button from "src/components/Button"
 import Input from "src/components/Input"
 
-import { mq, typography } from "src/styles"
+import { mq, typography, colors } from "src/styles"
 
 const FormWrapper = styled.div`
   color: inherit;
@@ -18,6 +18,9 @@ const FormWrapper = styled.div`
 
 const SplashInput = styled(Input)`
   color: inherit;
+  label {
+    ${({ validEmail }) => (validEmail ? `color: ${colors.orange2};` : ``)}
+  }
   input {
     color: inherit;
     padding-right: 76px;
@@ -33,6 +36,12 @@ const SubmitButton = styled(Button)`
   position: absolute;
   top: 0;
   right: 12px;
+  &[disabled],
+  &:disabled {
+    opacity: 0;
+    transform-origin: 0% 50%;
+    transform: translateX(-10px);
+  }
 `
 
 const ButtonArrow = styled(Arrow)`
@@ -85,6 +94,7 @@ const CustomForm = ({
             size={size}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+            validEmail={validateEmail(email)}
           />
         </div>
         <div>

@@ -32,7 +32,7 @@ export const bodyMedium = `
 `
 export const bodySmall = `
 	${body}
-	${responsiveStyles("font-size", 22, 20, 17, 14)}
+	${responsiveStyles("font-size", 22, 20, 17, 15)}
 `
 
 export const h1 = `

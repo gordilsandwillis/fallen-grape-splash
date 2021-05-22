@@ -124,8 +124,10 @@ const SignupCol = styled.div`
 `
 
 const SplashContent = styled(Grid)`
-	min-height: ${({ height }) => height};
 	padding: ${100 / 14}vw;
+	${mq.largeAndUp} {
+		min-height: ${({ height }) => height};
+	}
 	${mq.largerAndUp} {
 		padding: ${100 / 32}vw;
 	}
@@ -468,7 +470,14 @@ const SplashPageTemplate = () => {
 					/>
 					<ResponsiveComponent
 						small={
-							<ScrollEntrance speed={750}>
+							<ScrollEntrance
+								speed={750}
+								css={css`
+									background: #ccc;
+									padding-bottom: 40px;
+									margin-bottom: -40px;
+								`}
+							>
 								<Logo />
 							</ScrollEntrance>
 						}
@@ -531,9 +540,6 @@ const SplashPageTemplate = () => {
 													40,
 													46
 												)}
-												p {
-													${typography.bodyMedium}
-												}
 											`}
 											richText={splashPage.successText.json}
 										/>
