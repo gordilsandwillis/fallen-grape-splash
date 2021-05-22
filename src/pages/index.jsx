@@ -79,6 +79,7 @@ const Header = styled.div`
 const BottleCanvas = styled.div`
 	position: relative;
 	height: 100%;
+	transform: translate3d(0, 0, 0);
 	${mq.smallAndBelow} {
 		z-index: 0;
 		height: auto;
@@ -292,8 +293,9 @@ const SplashPageTemplate = () => {
 
 	console.log(splashPage)
 
-	const winHeight = use100vh()
-	const fullHeight = winHeight ? winHeight + "px" : "100vh"
+	// const winHeight = use100vh()
+	// const fullHeight = winHeight ? winHeight + "px" : "100vh"
+	const fullHeight = "100vh"
 
 	const RenderHeader = (mobile) => (
 		<Header mobile={mobile}>
@@ -357,12 +359,10 @@ const SplashPageTemplate = () => {
 						<BackgroundImage
 							fluid={splashPage.mediaBackground.fluid}
 							loading="eager"
-							fadeIn={false}
 						/>
 						<BottleImage
 							fluid={splashPage.mediaForeground.fluid}
 							loading="eager"
-							fadeIn={false}
 						/>
 					</BottleCanvas>
 					<ResponsiveComponent
