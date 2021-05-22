@@ -324,7 +324,7 @@ const SplashPageTemplate = () => {
 	return (
 		<>
 			<SEO
-				title={splashPage.title || page.title}
+				title={splashPage.title}
 				description={seo.description && seo.description.description}
 				siteSettings={site}
 				keywords={seo.keywords}
@@ -524,22 +524,19 @@ const SplashPageTemplate = () => {
 									<div>
 										<ContentfulRichText
 											css={css`
+												${util.responsiveStyles(
+													"margin-bottom",
+													52,
+													42,
+													40,
+													46
+												)}
 												p {
 													${typography.bodyMedium}
 												}
 											`}
 											richText={splashPage.successText.json}
 										/>
-									</div>
-									<div>
-										<p
-											css={css`
-												margin: 0 0 16px 0;
-												${util.responsiveStyles("margin-top", 40, 36, 34, 40)}
-											`}
-										>
-											Share on...
-										</p>
 									</div>
 									<div>
 										<ShareButtons
