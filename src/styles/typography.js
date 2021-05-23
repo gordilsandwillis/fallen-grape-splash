@@ -14,25 +14,30 @@ export const medium = "normal"
 export const bold = "normal"
 
 export const body = `
-	${responsiveStyles("font-size", 28, 23, 20, 18)}
-	line-height: 1.2em;
+	${responsiveStyles("font-size", 30, 26, 24, 22)}
+	line-height: 1.3em;
 	font-family: ${primaryFont};
 	letter-spacing: -.02em;
-	text-transform: uppercase;
 	font-weight: normal;
 `
 
 export const bodyLarge = `
 	${body}
+	text-transform: uppercase;
+	line-height: 1.2em;
 	${responsiveStyles("font-size", 22, 20, 20, 18)}
 `
 export const bodyMedium = `
 	${body}
+	text-transform: uppercase;
+	line-height: 1.2em;
 	${responsiveStyles("font-size", 34, 26, 23, 22)}
 `
 export const bodySmall = `
 	${body}
-	${responsiveStyles("font-size", 22, 20, 17, 14)}
+	text-transform: uppercase;
+	line-height: 1.2em;
+	${responsiveStyles("font-size", 22, 20, 17, 15)}
 `
 
 export const h1 = `

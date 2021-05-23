@@ -1,10 +1,24 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
+import React from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import { useStaticQuery, graphql } from "gatsby"
 
-function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettings }) {
-	const { site, favicon, appleTouchIcon, socialShareImage, allContentfulSiteSettings } = useStaticQuery(
+function SEO({
+	description,
+	lang,
+	meta,
+	keywords,
+	title,
+	shareImage,
+	siteSettings,
+}) {
+	const {
+		site,
+		favicon,
+		appleTouchIcon,
+		socialShareImage,
+		allContentfulSiteSettings,
+	} = useStaticQuery(
 		graphql`
 			query {
 				site {
@@ -14,7 +28,9 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 						author
 					}
 				}
-				allContentfulSiteSettings(filter: {internalName: {nin: "PLACEHOLDER Site Settings"}}) {
+				allContentfulSiteSettings(
+					filter: { internalName: { nin: "PLACEHOLDER Site Settings" } }
+				) {
 					nodes {
 						title
 						favicon {
@@ -28,11 +44,11 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 							}
 						}
 						defaultSeo {
-				      ...Seo
-				    }
+							...Seo
+						}
 					}
 				}
-				favicon: file(relativePath:{eq: "images/favicon.png"}) {
+				favicon: file(relativePath: { eq: "images/favicon.png" }) {
 					publicURL
 				}
 				appleTouchIcon: file(relativePath: { eq: "images/touch-icon.png" }) {
@@ -54,10 +70,10 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 	if (shareImage) {
 		metaShareImage = shareImage
 	} else if (defaultSeo.shareImage) {
-		metaShareImage = 'https:' + defaultSeo.shareImage.file.url
+		metaShareImage = "https:" + defaultSeo.shareImage.file.url
 	}
 
-	let metaKeywords = ''
+	let metaKeywords = ""
 	if (keywords) {
 		metaKeywords = keywords.join(`, `)
 	} else if (defaultSeo.keywords && keywords && keywords.length > 0) {
@@ -65,7 +81,8 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 	}
 
 	const contentfulFavicon = allContentfulSiteSettings.nodes[0].favicon.fixed.src
-	const contentfultouchIcon = allContentfulSiteSettings.nodes[0].touchIcon.fixed.src
+	const contentfultouchIcon =
+		allContentfulSiteSettings.nodes[0].touchIcon.fixed.src
 	const contentfulSiteTitle = allContentfulSiteSettings.nodes[0].title
 
 	return (
@@ -74,7 +91,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				lang,
 			}}
 			title={title}
-			titleTemplate={`%s | ${ contentfulSiteTitle || site.siteMetadata.title }`}
+			titleTemplate={`%s | ${contentfulSiteTitle || site.siteMetadata.title}`}
 			meta={[
 				{
 					name: `viewport`,
@@ -86,7 +103,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					property: `og:title`,
-					content: `${ title } | ${ contentfulSiteTitle || site.siteMetadata.title }`,
+					content: `${title}`,
 				},
 				{
 					property: `og:type`,
@@ -94,7 +111,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					property: `og:image`,
-					content: `${ metaShareImage }`
+					content: `${metaShareImage}`,
 				},
 				{
 					property: `og:description`,
@@ -102,7 +119,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					name: `twitter:image`,
-					content: `${ metaShareImage }`
+					content: `${metaShareImage}`,
 				},
 				{
 					name: `twitter:card`,
@@ -114,7 +131,7 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					name: `twitter:title`,
-					content: `${ title } | ${ contentfulSiteTitle || site.siteMetadata.title }`,
+					content: `${title}`,
 				},
 				{
 					name: `twitter:description`,
@@ -122,12 +139,22 @@ function SEO ({ description, lang, meta, keywords, title, shareImage, siteSettin
 				},
 				{
 					name: `keywords`,
-					content: metaKeywords
-				}
+					content: metaKeywords,
+				},
 			]}
 			link={[
-				{ rel: 'icon', type: 'image/png', sizes: '32x32', href: contentfulFavicon || favicon },
-				{ rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120', href: contentfultouchIcon || appleTouchIcon }
+				{
+					rel: "icon",
+					type: "image/png",
+					sizes: "32x32",
+					href: contentfulFavicon || favicon,
+				},
+				{
+					rel: "apple-touch-icon",
+					type: "image/png",
+					sizes: "120x120",
+					href: contentfultouchIcon || appleTouchIcon,
+				},
 			]}
 		/>
 	)
@@ -138,7 +165,7 @@ SEO.defaultProps = {
 	meta: [],
 	keywords: [],
 	description: ``,
-	shareImage: ``
+	shareImage: ``,
 }
 
 SEO.propTypes = {
@@ -146,7 +173,7 @@ SEO.propTypes = {
 	lang: PropTypes.string,
 	meta: PropTypes.arrayOf(PropTypes.object),
 	keywords: PropTypes.arrayOf(PropTypes.string),
-	title: PropTypes.string.isRequired
+	title: PropTypes.string.isRequired,
 }
 
 export default SEO

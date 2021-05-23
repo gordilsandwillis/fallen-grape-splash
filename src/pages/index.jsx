@@ -48,13 +48,13 @@ const Header = styled.div`
 		margin: 0 -10px 0 0;
 		transform: translateY(-40px);
 		opacity: 0;
-		animation: ${animations.transformIn} 1s 3.6s
+		animation: ${animations.transformIn} 0.8s 1.6s
 			cubic-bezier(0.44, 0.24, 0.16, 1) forwards;
 	}
 	> div.vertical-text {
 		opacity: 0;
 		transform: rotate(-90deg) translateX(40px);
-		animation: ${verticalTextIn} 1s 3.4s cubic-bezier(0.44, 0.24, 0.16, 1)
+		animation: ${verticalTextIn} 0.8s 1.6s cubic-bezier(0.44, 0.24, 0.16, 1)
 			forwards;
 	}
 	${mq.largeAndBelow} {
@@ -79,6 +79,7 @@ const Header = styled.div`
 const BottleCanvas = styled.div`
 	position: relative;
 	height: 100%;
+	transform: translate3d(0, 0, 0);
 	${mq.smallAndBelow} {
 		z-index: 0;
 		height: auto;
@@ -124,8 +125,10 @@ const SignupCol = styled.div`
 `
 
 const SplashContent = styled(Grid)`
-	min-height: ${({ height }) => height};
 	padding: ${100 / 14}vw;
+	${mq.largeAndUp} {
+		min-height: ${({ height }) => height};
+	}
 	${mq.largerAndUp} {
 		padding: ${100 / 32}vw;
 	}
@@ -290,8 +293,9 @@ const SplashPageTemplate = () => {
 
 	console.log(splashPage)
 
-	const winHeight = use100vh()
-	const fullHeight = winHeight ? winHeight + "px" : "100vh"
+	// const winHeight = use100vh()
+	// const fullHeight = winHeight ? winHeight + "px" : "100vh"
+	const fullHeight = "100vh"
 
 	const RenderHeader = (mobile) => (
 		<Header mobile={mobile}>
@@ -321,12 +325,10 @@ const SplashPageTemplate = () => {
 		</Header>
 	)
 
-	return <div />
-
 	return (
 		<>
 			<SEO
-				title={splashPage.title || page.title}
+				title={splashPage.title}
 				description={seo.description && seo.description.description}
 				siteSettings={site}
 				keywords={seo.keywords}
@@ -354,24 +356,41 @@ const SplashPageTemplate = () => {
 					rowGap={0}
 				>
 					<BottleCanvas>
-						<BackgroundImage fluid={splashPage.mediaBackground.fluid} />
-						<BottleImage fluid={splashPage.mediaForeground.fluid} />
+						<BackgroundImage
+							fluid={splashPage.mediaBackground.fluid}
+							loading="eager"
+						/>
+						<BottleImage
+							fluid={splashPage.mediaForeground.fluid}
+							loading="eager"
+						/>
 					</BottleCanvas>
 					<ResponsiveComponent
 						medium={<span style={{ display: "none" }} />}
 						small={
 							<StaggeredHeadline>
-								<HeadlineRow offset={0.25} delay={3} speed={1000}>
+								<HeadlineRow
+									offset={0.25}
+									delay={3}
+									css={css`
+										flex-grow: 0;
+									`}
+								>
 									<div>You're a</div>
 								</HeadlineRow>
-								<HeadlineRow offset={0.8} delay={5} speed={1000}>
+								<HeadlineRow offset={0.8} delay={4}>
 									<div>natural</div>
 								</HeadlineRow>
-								<HeadlineRow></HeadlineRow>
-								<HeadlineRow offset={0} delay={20} speed={1000}>
+								<HeadlineRow
+									offset={0.25}
+									delay={5}
+									css={css`
+										flex-grow: 0;
+									`}
+								>
 									<div>So are</div>
 								</HeadlineRow>
-								<HeadlineRow offset={1} lastItem delay={22} speed={1000}>
+								<HeadlineRow offset={0.6} lastItem delay={6}>
 									<div>we</div>
 								</HeadlineRow>
 							</StaggeredHeadline>
@@ -382,37 +401,36 @@ const SplashPageTemplate = () => {
 							small={<span style={{ display: "none" }} />}
 							medium={
 								<StaggeredHeadline>
-									<HeadlineRow delay={3} speed={1000}>
+									<HeadlineRow delay={3} speed={750}>
 										<div>You're a</div>
 									</HeadlineRow>
 									<HeadlineRow
 										offset={1}
-										delay={5}
-										speed={1000}
+										delay={4}
+										speed={750}
 										css={css`
 											flex-grow: 0.4;
 										`}
 									>
 										<div>natural</div>
 									</HeadlineRow>
-									<HeadlineRow></HeadlineRow>
 									<HeadlineRow
 										offset={0.4}
 										delay={20}
-										speed={1000}
+										speed={750}
 										css={css`
 											flex-grow: 0;
 										`}
 									>
 										<div>So are</div>
 									</HeadlineRow>
-									<HeadlineRow offset={0.8} lastItem delay={21} speed={1000}>
+									<HeadlineRow offset={0.8} lastItem delay={21} speed={750}>
 										<div>we</div>
 									</HeadlineRow>
 								</StaggeredHeadline>
 							}
 						/>
-						<ScrollEntrance delay={30} speed={1000}>
+						<ScrollEntrance delay={18} speed={750}>
 							<div
 								css={css`
 									${mq.smallAndBelow} {
@@ -423,7 +441,13 @@ const SplashPageTemplate = () => {
 								<p style={{ marginTop: 0 }}>
 									<BalanceText>{splashPage.smallText}</BalanceText>
 								</p>
-								<p style={{ marginBottom: "10px" }}>
+								<p
+									css={css`
+										margin-bottom: 10px;
+										${typography.bodySmall}
+										${util.responsiveStyles("font-size", 28, 23, 20, 18)}
+									`}
+								>
 									{splashPage.inputCtaText}
 								</p>
 							</div>
@@ -452,12 +476,18 @@ const SplashPageTemplate = () => {
 					/>
 					<ResponsiveComponent
 						small={
-							<ScrollEntrance speed={1000}>
+							<ScrollEntrance
+								speed={750}
+								css={css`
+									padding-bottom: 40px;
+									margin-bottom: -40px;
+								`}
+							>
 								<Logo />
 							</ScrollEntrance>
 						}
 						large={
-							<ScrollEntrance delay={30} speed={1000}>
+							<ScrollEntrance delay={16} speed={750}>
 								<Logo />
 							</ScrollEntrance>
 						}
@@ -508,22 +538,16 @@ const SplashPageTemplate = () => {
 									<div>
 										<ContentfulRichText
 											css={css`
-												p {
-													${typography.bodyMedium}
-												}
+												${util.responsiveStyles(
+													"margin-bottom",
+													52,
+													42,
+													40,
+													46
+												)}
 											`}
 											richText={splashPage.successText.json}
 										/>
-									</div>
-									<div>
-										<p
-											css={css`
-												margin: 0 0 16px 0;
-												${util.responsiveStyles("margin-top", 40, 36, 34, 40)}
-											`}
-										>
-											Share on...
-										</p>
 									</div>
 									<div>
 										<ShareButtons
