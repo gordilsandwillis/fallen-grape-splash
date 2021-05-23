@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react"
+import React, { useEffect, useState, Component } from "react"
 import styled from "@emotion/styled"
 import withSizes from "react-sizes"
 import { subscribe } from "klaviyo-subscribe"

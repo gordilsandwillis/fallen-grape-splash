@@ -441,7 +441,13 @@ const SplashPageTemplate = () => {
 								<p style={{ marginTop: 0 }}>
 									<BalanceText>{splashPage.smallText}</BalanceText>
 								</p>
-								<p style={{ marginBottom: "10px" }}>
+								<p
+									css={css`
+										margin-bottom: 10px;
+										${typography.bodySmall}
+										${util.responsiveStyles("font-size", 28, 23, 20, 18)}
+									`}
+								>
 									{splashPage.inputCtaText}
 								</p>
 							</div>

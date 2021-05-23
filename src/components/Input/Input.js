@@ -84,6 +84,8 @@ export const InputWrap = styled.div`
 	display: inline-block;
 	width: 100%;
 	${typography.body}
+	text-transform: uppercase;
+	${util.responsiveStyles("font-size", 28, 23, 20, 18)}
 	font-weight: ${typography.normal};
 	${({ theme }) => setInputTheme(theme)}
 `
