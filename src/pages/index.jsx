@@ -20,9 +20,10 @@ import ContentfulRichText from "src/components/ContentfulRichText"
 import themes from "src/styles/themes"
 import { AiFillMail } from "react-icons/ai"
 import { FaFacebook } from "react-icons/fa"
-import { IoLogoTwitter } from "react-icons/io"
+import { IoLogoTwitter, IoIosText } from "react-icons/io"
 import { use100vh } from "react-div-100vh"
 import BalanceText from "react-balance-text"
+import MobileDetect from "mobile-detect"
 
 import {
 	EmailShareButton,
@@ -119,7 +120,7 @@ const SignupCol = styled.div`
 	position: relative;
 	z-index: 3;
 	${mq.smallAndBelow} {
-		z-index: 10;
+		z-index: 99;
 		padding-bottom: ${100 / 14}vw;
 	}
 `
@@ -187,7 +188,7 @@ const SuccessContent = styled.div`
 `
 
 const ShareButtons = styled(Grid)`
-	max-width: 650px;
+	max-width: 700px;
 	margin-left: auto;
 	margin-right: auto;
 	button,
@@ -291,11 +292,25 @@ const SplashPageTemplate = () => {
 	// Select random of the splash pages
 	const seo = allContentfulSiteSettings.edges[0].node
 
-	console.log(splashPage)
-
 	// const winHeight = use100vh()
 	// const fullHeight = winHeight ? winHeight + "px" : "100vh"
 	const fullHeight = "100vh"
+
+	const sendSms = (event) => {
+		const md = new MobileDetect(window.navigator.userAgent)
+		const url = process.env.GATSBY_HOST
+		const body = encodeURIComponent(
+			`Check out Fallen Grape Wine Co. Coming soon! ${url}`
+		)
+
+		if (md.is("AndroidOS")) {
+			window.open(`sms:?body=${body}`, "_self")
+		} else if (md.is("iOS")) {
+			window.open(`sms:&body=${body}`, "_self")
+		} else {
+			window.open(`sms:?&body=${url}`, "_self")
+		}
+	}
 
 	const RenderHeader = (mobile) => (
 		<Header mobile={mobile}>
@@ -512,23 +527,29 @@ const SplashPageTemplate = () => {
 									<div>
 										<Logomark
 											css={css`
-												width: 90px;
+												${util.responsiveStyles("width", 96, 90, 70, 70)}
 												display: inline-block;
 												vertical-align: top;
 												margin-right: -8px;
-												margin-top: -40px;
+												${util.responsiveStyles(
+													"margin-top",
+													-40,
+													-36,
+													-34,
+													-20
+												)}
 												color: ${colors.textColor};
 											`}
 										/>
 										<h1
 											css={css`
-												${util.responsiveStyles("margin-top", 40, 36, 34, 40)}
+												${util.responsiveStyles("margin-top", 40, 36, 34, 20)}
 												${util.responsiveStyles(
 													"margin-bottom",
 													40,
 													36,
 													34,
-													40
+													20
 												)}
 											`}
 										>
@@ -538,12 +559,15 @@ const SplashPageTemplate = () => {
 									<div>
 										<ContentfulRichText
 											css={css`
+												p {
+													margin-top: 0;
+												}
 												${util.responsiveStyles(
 													"margin-bottom",
 													52,
 													42,
 													40,
-													46
+													26
 												)}
 											`}
 											richText={splashPage.successText.json}
@@ -552,10 +576,22 @@ const SplashPageTemplate = () => {
 									<div>
 										<ShareButtons
 											small="[1]"
-											medium="[1] [1] [1]"
-											colGap="16px"
-											rowGap="16px"
+											medium="[1] [1]"
+											large="[1] [1] [1] [1]"
+											colGap="14px"
+											rowGap="14px"
 										>
+											<div>
+												<Button
+													htmlElement="a"
+													size="large"
+													onClick={sendSms}
+													icon={<IoIosText size="1em" />}
+													iconPosition="left"
+												>
+													Message
+												</Button>
+											</div>
 											<div>
 												<EmailShareButton
 													subject={splashPage.emailSubject}

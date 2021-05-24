@@ -41,7 +41,7 @@ export const bodySmall = `
 `
 
 export const h1 = `
-	${responsiveStyles("font-size", 140, 100, 70, 70)}
+	${responsiveStyles("font-size", 140, 100, 70, 60)}
 	line-height: .85em;
 	font-family: ${secondaryFont};
 	font-weight: normal;
