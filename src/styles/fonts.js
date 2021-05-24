@@ -29,7 +29,7 @@ export const MaterialIconsFont = fontFace(
 	MaterialIconsWoff2
 )
 
-export const ArialNarrow = "ArialNarrow"
+export const ArialNarrow = "Arial Narrow"
 export const ArialNarrowFont = fontFace(
 	ArialNarrow,
 	ArialNarrowWoff,
